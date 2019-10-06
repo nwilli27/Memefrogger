@@ -10,10 +10,9 @@ namespace FroggerStarter.Model
     internal class Vehicle : GameObject
     {
 
-        public Vehicle(VehicleType vehicleType, int speed)
+        public Vehicle(VehicleType vehicleType)
         {
             this.createVehicleFromType(vehicleType);
-            SetSpeed(speed, 0);
         }
 
         private void createVehicleFromType(VehicleType vehicleType)

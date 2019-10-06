@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model;
@@ -7,7 +8,7 @@ namespace FroggerStarter.Controller
 {
     /// <summary>
     ///     Manages all aspects of the game play including moving the player,
-    ///     the vehicles as well as lives and score.
+    ///     the Vehicles as well as lives and score.
     /// </summary>
     public class GameManager
     {
@@ -22,7 +23,9 @@ namespace FroggerStarter.Controller
         private readonly double backgroundWidth;
         private Canvas gameCanvas;
         private Frog player;
+        private LaneManager laneManager;
         private DispatcherTimer timer;
+        private DispatcherTimer vehicleSpeedTimer;
 
         #endregion
 
@@ -54,6 +57,7 @@ namespace FroggerStarter.Controller
             this.backgroundWidth = backgroundWidth;
 
             this.setupGameTimer();
+            this.setupVehicleSpeedTimer();
         }
 
         #endregion
@@ -66,6 +70,14 @@ namespace FroggerStarter.Controller
             this.timer.Tick += this.timerOnTick;
             this.timer.Interval = new TimeSpan(0, 0, 0, 0, 15);
             this.timer.Start();
+        }
+
+        private void setupVehicleSpeedTimer()
+        {
+            this.vehicleSpeedTimer = new DispatcherTimer();
+            this.vehicleSpeedTimer.Tick += this.speedTimerOnTick;
+            this.vehicleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
+            this.vehicleSpeedTimer.Start();
         }
 
         /// <summary>
@@ -81,6 +93,7 @@ namespace FroggerStarter.Controller
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
 
             this.createAndPlacePlayer();
+            this.createAndPlaceVehicles();
         }
 
         private void createAndPlacePlayer()
@@ -88,6 +101,18 @@ namespace FroggerStarter.Controller
             this.player = new Frog();
             this.gameCanvas.Children.Add(this.player.Sprite);
             this.setPlayerToCenterOfBottomLane();
+        }
+
+        private void createAndPlaceVehicles()
+        {
+            this.laneManager = new LaneManager((int) this.backgroundWidth); //TODO had to cast int here, maybe not best route
+            foreach (var currentLane in this.laneManager)
+            {
+                foreach (Vehicle currentVehicle in currentLane)
+                {
+                    this.gameCanvas.Children.Add(currentVehicle.Sprite);
+                }
+            }
         }
 
         private void setPlayerToCenterOfBottomLane()
@@ -98,14 +123,20 @@ namespace FroggerStarter.Controller
 
         private void timerOnTick(object sender, object e)
         {
-            
-            // TODO Update game state, e.g., move vehicles, check for collision, etc.
+            // TODO Update game state, e.g., move Vehicles, check for collision, etc.
+
+            this.laneManager.MoveAllVehicles();
+        }
+
+        private void speedTimerOnTick(object sender, object e)
+        {
+            this.laneManager.IncreaseSpeedOfVehicles();
         }
 
         /// <summary>
         ///     Moves the player to the left.
         ///     Precondition: none
-        ///     Postcondition: player.X = player.X@prev - player.Width
+        ///     Post-condition: player.X = player.X@prev - player.Width
         /// </summary>
         public void MovePlayerLeft()
         {
@@ -119,7 +150,7 @@ namespace FroggerStarter.Controller
         /// <summary>
         ///     Moves the player to the right.
         ///     Precondition: none
-        ///     Postcondition: player.X = player.X@prev + player.Width
+        ///     Post-condition: player.X = player.X@prev + player.Width
         /// </summary>
         public void MovePlayerRight()
         {
@@ -133,7 +164,7 @@ namespace FroggerStarter.Controller
         /// <summary>
         ///     Moves the player up.
         ///     Precondition: none
-        ///     Postcondition: player.Y = player.Y@prev - player.Height
+        ///     Post-condition: player.Y = player.Y@prev - player.Height
         /// </summary>
         public void MovePlayerUp()
         {
@@ -147,7 +178,7 @@ namespace FroggerStarter.Controller
         /// <summary>
         ///     Moves the player down.
         ///     Precondition: none
-        ///     Postcondition: player.Y = player.Y@prev + player.Height
+        ///     Post-condition: player.Y = player.Y@prev + player.Height
         /// </summary>
         public void MovePlayerDown()
         {
