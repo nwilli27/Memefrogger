@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace FroggerStarter.View.Sprites
 {
-    public sealed partial class SemiTruckSprite : UserControl
+    public sealed partial class SemiTruckSprite
     {
         public SemiTruckSprite()
         {

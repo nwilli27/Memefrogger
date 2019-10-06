@@ -18,6 +18,8 @@ namespace FroggerStarter.View
 
         private readonly double applicationHeight = (double) Application.Current.Resources["AppHeight"];
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
+        //TODO maybe use this to set top boundary?
+        private readonly double highRoadYLocation = (double) Application.Current.Resources["HighRoadYLocation"];
         private readonly GameManager gameManager;
 
         #endregion

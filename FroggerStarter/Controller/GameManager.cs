@@ -14,6 +14,10 @@ namespace FroggerStarter.Controller
         #region Data members
 
         private const int BottomLaneOffset = 5;
+
+        //TODO rename this to something maybe more descriptive?
+        private const int TopLaneOffset = 50;
+
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
         private Canvas gameCanvas;
@@ -68,18 +72,14 @@ namespace FroggerStarter.Controller
         ///     Initializes the game working with appropriate classes to play frog
         ///     and vehicle on game screen.
         ///     Precondition: background != null
-        ///     Postcondition: Game is initialized and ready for play.
+        ///     Post-condition: Game is initialized and ready for play.
         /// </summary>
         /// <param name="gamePage">The game page.</param>
         /// <exception cref="ArgumentNullException">gameCanvas</exception>
         public void InitializeGame(Canvas gamePage)
         {
-            if (gamePage == null)
-            {
-                throw new ArgumentNullException(nameof(gamePage));
-            }
+            this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
 
-            this.gameCanvas = gamePage;
             this.createAndPlacePlayer();
         }
 
@@ -98,6 +98,7 @@ namespace FroggerStarter.Controller
 
         private void timerOnTick(object sender, object e)
         {
+            
             // TODO Update game state, e.g., move vehicles, check for collision, etc.
         }
 
@@ -108,7 +109,11 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerLeft()
         {
-            this.player.MoveLeft();
+            //TODO maybe refactor movement boundary better
+            if (this.player.X - this.player.SpeedX >= 0)
+            {
+                this.player.MoveLeft();
+            }
         }
 
         /// <summary>
@@ -118,7 +123,11 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerRight()
         {
-            this.player.MoveRight();
+            //TODO maybe refactor movement boundary better
+            if (this.player.X + this.player.SpeedX < this.backgroundWidth)
+            {
+                this.player.MoveRight();
+            }
         }
 
         /// <summary>
@@ -128,7 +137,11 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerUp()
         {
-            this.player.MoveUp();
+            //TODO maybe refactor movement boundary better
+            if (this.player.Y - this.player.SpeedY - TopLaneOffset >= 0)
+            {
+                this.player.MoveUp();
+            }
         }
 
         /// <summary>
@@ -138,7 +151,11 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerDown()
         {
-            this.player.MoveDown();
+            //TODO maybe refactor movement boundary better
+            if (this.player.Y + this.player.SpeedY + BottomLaneOffset < this.backgroundHeight)
+            {
+                this.player.MoveDown();
+            }
         }
 
         #endregion

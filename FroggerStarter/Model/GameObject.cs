@@ -126,7 +126,7 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Moves the game object down.
         ///     Precondition: None
-        ///     Postcondition: Y == Y@prev + SpeedY
+        ///     Post-condition: Y == Y@prev + SpeedY
         /// </summary>
         public void MoveDown()
         {
@@ -151,7 +151,7 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Sets the speed of the game object.
         ///     Precondition: speedX >= 0 AND speedY >=0
-        ///     Postcondition: SpeedX == speedX AND SpeedY == speedY
+        ///     Post-condition: SpeedX == speedX AND SpeedY == speedY
         /// </summary>
         /// <param name="speedX">The speed x.</param>
         /// <param name="speedY">The speed y.</param>

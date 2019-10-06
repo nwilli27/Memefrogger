@@ -122,6 +122,11 @@
     <Compile Include="Model\Frog.cs" />
     <Compile Include="Controller\GameManager.cs" />
     <Compile Include="Model\GameObject.cs" />
+    <Compile Include="Model\LaneDirection.cs" />
+    <Compile Include="Model\Vehicle.cs" />
+    <Compile Include="Model\Lane.cs" />
+    <Compile Include="Model\LaneManager.cs" />
+    <Compile Include="Model\VehicleType.cs" />
     <Compile Include="View\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
