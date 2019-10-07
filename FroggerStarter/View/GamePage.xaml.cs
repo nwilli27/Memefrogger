@@ -18,7 +18,6 @@ namespace FroggerStarter.View
 
         private readonly double applicationHeight = (double) Application.Current.Resources["AppHeight"];
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
-        //TODO maybe use this to set top boundary?
         private readonly double highRoadYLocation = (double) Application.Current.Resources["HighRoadYLocation"];
         private readonly GameManager gameManager;
 
@@ -37,7 +36,7 @@ namespace FroggerStarter.View
                            .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
-            this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth);
+            this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation);
             this.gameManager.InitializeGame(this.canvas);
         }
 

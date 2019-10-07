@@ -17,10 +17,10 @@ namespace FroggerStarter.Controller
         private const int BottomLaneOffset = 5;
 
         //TODO rename this to something maybe more descriptive?
-        private const int TopLaneOffset = 50;
 
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
+        private readonly double highRoadYLocation;
         private Canvas gameCanvas;
         private Frog player;
         private LaneManager laneManager;
@@ -41,8 +41,9 @@ namespace FroggerStarter.Controller
         ///     or
         ///     backgroundWidth &lt;= 0
         /// </exception>
-        public GameManager(double backgroundHeight, double backgroundWidth)
+        public GameManager(double backgroundHeight, double backgroundWidth, double highRoadYLocation)
         {
+            //TODO precondition check
             if (backgroundHeight <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(backgroundHeight));
@@ -55,6 +56,7 @@ namespace FroggerStarter.Controller
 
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
+            this.highRoadYLocation = highRoadYLocation;
 
             this.setupGameTimer();
             this.setupVehicleSpeedTimer();
@@ -75,7 +77,7 @@ namespace FroggerStarter.Controller
         private void setupVehicleSpeedTimer()
         {
             this.vehicleSpeedTimer = new DispatcherTimer();
-            this.vehicleSpeedTimer.Tick += this.speedTimerOnTick;
+            this.vehicleSpeedTimer.Tick += this.vehicleSpeedTimerOnTick;
             this.vehicleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 10, 0);
             this.vehicleSpeedTimer.Start();
         }
@@ -184,10 +186,11 @@ namespace FroggerStarter.Controller
         {
             // TODO Update game state, e.g., move Vehicles, check for collision, etc.
             this.laneManager.MoveAllVehicles();
+            this.hasPlayerMadeItToTheHighRoad();
 
         }
 
-        private void speedTimerOnTick(object sender, object e)
+        private void vehicleSpeedTimerOnTick(object sender, object e)
         {
             this.laneManager.IncreaseSpeedOfVehicles();
         }
@@ -219,7 +222,13 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerUp()
         {
-            this.player.MoveUpWithBoundaryCheck(TopLaneOffset);
+            if (this.hasPlayerMadeItToTheHighRoad())
+            {
+                this.setPlayerToCenterOfBottomLane();
+            } else
+            {
+                this.player.MoveUpWithBoundaryCheck(this.highRoadYLocation);
+            }
         }
 
         /// <summary>
@@ -230,6 +239,11 @@ namespace FroggerStarter.Controller
         public void MovePlayerDown()
         {
             this.player.MoveDownWithBoundaryCheck(this.backgroundHeight - BottomLaneOffset);
+        }
+
+        private bool hasPlayerMadeItToTheHighRoad()
+        {
+            return this.player.Y - this.player.SpeedY == this.highRoadYLocation;
         }
 
         #endregion
