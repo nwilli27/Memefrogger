@@ -76,7 +76,7 @@ namespace FroggerStarter.Controller
         {
             this.vehicleSpeedTimer = new DispatcherTimer();
             this.vehicleSpeedTimer.Tick += this.speedTimerOnTick;
-            this.vehicleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
+            this.vehicleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 10, 0);
             this.vehicleSpeedTimer.Start();
         }
 
@@ -93,7 +93,7 @@ namespace FroggerStarter.Controller
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
 
             this.createAndPlacePlayer();
-            this.createAndPlaceVehicles();
+            this.createAndPlaceVehiclesInLanes();
         }
 
         private void createAndPlacePlayer()
@@ -103,16 +103,75 @@ namespace FroggerStarter.Controller
             this.setPlayerToCenterOfBottomLane();
         }
 
-        private void createAndPlaceVehicles()
+        private void createAndPlaceVehiclesInLanes()
         {
-            this.laneManager = new LaneManager((int) this.backgroundWidth); //TODO had to cast int here, maybe not best route
-            foreach (var currentLane in this.laneManager)
+            this.laneManager = new LaneManager();
+
+            //TODO do something about the hard coded 305, 255, etc.
+            var lane1 = new Lane(305, this.backgroundWidth, 1, LaneDirection.Left);
+            var lane2 = new Lane(255, this.backgroundWidth, 2, LaneDirection.Right);
+            var lane3 = new Lane(205, this.backgroundWidth, 3, LaneDirection.Left);
+            var lane4 = new Lane(155, this.backgroundWidth, 4, LaneDirection.Left);
+            var lane5 = new Lane(105, this.backgroundWidth, 5, LaneDirection.Right);
+
+            this.laneManager.Add(lane1);
+            this.laneManager.Add(lane2);
+            this.laneManager.Add(lane3);
+            this.laneManager.Add(lane4);
+            this.laneManager.Add(lane5);
+
+            var vehicle1Lane1 = new Vehicle(VehicleType.Car);
+            var vehicle2Lane1 = new Vehicle(VehicleType.Car);
+            lane1.Add(vehicle1Lane1);
+            lane1.Add(vehicle2Lane1);
+            this.gameCanvas.Children.Add(vehicle1Lane1.Sprite);
+            this.gameCanvas.Children.Add(vehicle2Lane1.Sprite);
+
+            var semitruck1Lane2 = new Vehicle(VehicleType.SemiTruck);
+            var semitruck2Lane2 = new Vehicle(VehicleType.SemiTruck);
+            var semitruck3Lane2 = new Vehicle(VehicleType.SemiTruck); 
+            lane2.Add(semitruck1Lane2);
+            lane2.Add(semitruck2Lane2);
+            lane2.Add(semitruck3Lane2);
+            this.gameCanvas.Children.Add(semitruck1Lane2.Sprite);
+            this.gameCanvas.Children.Add(semitruck2Lane2.Sprite);
+            this.gameCanvas.Children.Add(semitruck3Lane2.Sprite);
+
+            var vehicle1Lane3 = new Vehicle(VehicleType.Car);
+            var vehicle2Lane3 = new Vehicle(VehicleType.Car);
+            var vehicle3Lane3 = new Vehicle(VehicleType.Car);
+            lane3.Add(vehicle1Lane3);
+            lane3.Add(vehicle2Lane3);
+            lane3.Add(vehicle3Lane3);
+            this.gameCanvas.Children.Add(vehicle1Lane3.Sprite);
+            this.gameCanvas.Children.Add(vehicle2Lane3.Sprite);
+            this.gameCanvas.Children.Add(vehicle3Lane3.Sprite);
+
+            var semitruck1Lane4 = new Vehicle(VehicleType.SemiTruck);
+            var semitruck2Lane4 = new Vehicle(VehicleType.SemiTruck);
+            lane4.Add(semitruck1Lane4);
+            lane4.Add(semitruck2Lane4);
+            this.gameCanvas.Children.Add(semitruck1Lane4.Sprite);
+            this.gameCanvas.Children.Add(semitruck2Lane4.Sprite);
+
+            var vehicle1Lane5 = new Vehicle(VehicleType.Car);
+            var vehicle2Lane5 = new Vehicle(VehicleType.Car);
+            var vehicle3Lane5 = new Vehicle(VehicleType.Car);
+            lane5.Add(vehicle1Lane5);
+            lane5.Add(vehicle2Lane5);
+            lane5.Add(vehicle3Lane5);
+            this.gameCanvas.Children.Add(vehicle1Lane5.Sprite);
+            this.gameCanvas.Children.Add(vehicle2Lane5.Sprite);
+            this.gameCanvas.Children.Add(vehicle3Lane5.Sprite);
+
+            //TODO had to cast int here, maybe not best route
+            /*foreach (Lane currentLane in this.laneManager)
             {
                 foreach (Vehicle currentVehicle in currentLane)
                 {
                     this.gameCanvas.Children.Add(currentVehicle.Sprite);
                 }
-            }
+            }*/
         }
 
         private void setPlayerToCenterOfBottomLane()
@@ -124,8 +183,8 @@ namespace FroggerStarter.Controller
         private void timerOnTick(object sender, object e)
         {
             // TODO Update game state, e.g., move Vehicles, check for collision, etc.
-
             this.laneManager.MoveAllVehicles();
+
         }
 
         private void speedTimerOnTick(object sender, object e)
@@ -140,13 +199,9 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerLeft()
         {
-            //TODO maybe refactor movement boundary better
-            if (this.player.X - this.player.SpeedX >= 0)
-            {
-                this.player.MoveLeft();
-            }
+            this.player.MoveLeftWithBoundaryCheck(0);
         }
-
+        
         /// <summary>
         ///     Moves the player to the right.
         ///     Precondition: none
@@ -154,11 +209,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerRight()
         {
-            //TODO maybe refactor movement boundary better
-            if (this.player.X + this.player.SpeedX < this.backgroundWidth)
-            {
-                this.player.MoveRight();
-            }
+            this.player.MoveRightWithBoundaryCheck(this.backgroundWidth);
         }
 
         /// <summary>
@@ -168,11 +219,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerUp()
         {
-            //TODO maybe refactor movement boundary better
-            if (this.player.Y - this.player.SpeedY - TopLaneOffset >= 0)
-            {
-                this.player.MoveUp();
-            }
+            this.player.MoveUpWithBoundaryCheck(TopLaneOffset);
         }
 
         /// <summary>
@@ -182,11 +229,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerDown()
         {
-            //TODO maybe refactor movement boundary better
-            if (this.player.Y + this.player.SpeedY + BottomLaneOffset < this.backgroundHeight)
-            {
-                this.player.MoveDown();
-            }
+            this.player.MoveDownWithBoundaryCheck(this.backgroundHeight - BottomLaneOffset);
         }
 
         #endregion

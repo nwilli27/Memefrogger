@@ -8,21 +8,28 @@ using System.Threading.Tasks;
 
 namespace FroggerStarter.Model
 {
-    internal class Lane : IEnumerable
+    internal class Lane
     {
+        #region Properties
 
-        private const int LaneHeight = 50;
+
+
+        #endregion
 
         #region Data Members
 
         //TODO maybe this should be a list? and need to wrap this around the lane
-        public IList<Vehicle> Vehicles { get; }
-
-
+        private readonly ICollection<Vehicle> vehicles;
         private readonly LaneDirection laneDirection;
         private readonly int laneStartingYPoint;
-        private readonly int laneWidth;
+        private readonly double laneWidth;
         private readonly int initialSpeed;
+
+        #endregion
+
+        #region Constants
+
+        private const int LaneHeight = 50;
 
         #endregion
 
@@ -31,15 +38,16 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="Lane"/> class.
         ///     Precondition: spaceBetweenVehicles gt;= 0
-        ///     Post-condition: this.Vehicles.Count == 0
+        ///     Post-condition: this.vehicles.Count == 0
         ///                     this.SpaceBetweenVehicles = spaceBetweenVehicles
         /// </summary>
         /// <param name="laneDirection"></param>
         /// <param name="laneStartingYPoint"></param>
         /// <param name="laneWidth"></param>
-        public Lane(LaneDirection laneDirection, int laneStartingYPoint, int laneWidth, int initialSpeed)
+        /// <param name="initialSpeed"></param>
+        public Lane(int laneStartingYPoint, double laneWidth, int initialSpeed, LaneDirection laneDirection)
         {
-            this.Vehicles = new List<Vehicle>();
+            this.vehicles = new Collection<Vehicle>();
             this.laneDirection = laneDirection;
             this.laneStartingYPoint = laneStartingYPoint;
             this.laneWidth = laneWidth;
@@ -54,24 +62,38 @@ namespace FroggerStarter.Model
         ///     Adds the vehicle to lane.
         /// </summary>
         /// <param name="vehicle">The vehicle.</param>
-        public void AddVehicle(Vehicle vehicle)
+        public void Add(Vehicle vehicle)
         {
-            vehicle.Y = this.laneStartingYPoint;
+            vehicle.Y = this.alignCarVerticallyInLane(vehicle);
             vehicle.SpeedX = this.initialSpeed;
-            this.Vehicles.Add(vehicle);
 
+            switch (this.laneDirection)
+            {
+                case LaneDirection.Left:
+                    this.vehicles.Add(vehicle);
+                    break;
+
+                case LaneDirection.Right:
+                    vehicle.FlipSpriteHorizontally();
+                    this.vehicles.Add(vehicle);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             //TODO sequential coupling?
             this.readjustSpaceBetweenVehicles();
         }
 
         public void MoveVehicles()
         {
-            foreach (var currentVehicle in this.Vehicles)
+            foreach (var currentVehicle in this.vehicles)
             {
                 switch (this.laneDirection)
                 {
                     case LaneDirection.Left:
-                        if (currentVehicle.X - currentVehicle.SpeedX < -50)
+
+                        if (currentVehicle.X + currentVehicle.SpeedX < -currentVehicle.Width)
                         {
                             currentVehicle.X = this.laneWidth;
                         }
@@ -79,6 +101,10 @@ namespace FroggerStarter.Model
                         break;
 
                     case LaneDirection.Right:
+                        if (currentVehicle.X + currentVehicle.SpeedX > this.laneWidth)
+                        {
+                            currentVehicle.X = -currentVehicle.Width;
+                        }
                         currentVehicle.MoveRight();
                         break;
 
@@ -90,7 +116,7 @@ namespace FroggerStarter.Model
 
         public void IncreaseSpeedOfVehicles()
         {
-            foreach (var currentVehicle in this.Vehicles)
+            foreach (var currentVehicle in this.vehicles)
             {
                 currentVehicle.SpeedX += 1;
             }
@@ -102,28 +128,26 @@ namespace FroggerStarter.Model
 
         private void readjustSpaceBetweenVehicles()
         {
-            var startingVehicleXPoint = 0;
+            var startingVehicleXPoint = 0.0;
 
-            foreach (var currentVehicle in this.Vehicles)
+            foreach (var currentVehicle in this.vehicles)
             {
                 currentVehicle.X = startingVehicleXPoint;
                 startingVehicleXPoint += this.getSpacingBetweenVehicles();
             }
         }
 
-        private int getSpacingBetweenVehicles()
+        private double getSpacingBetweenVehicles()
         {
-            //TODO remove need for lanewidth and do vehicle size * # of Vehicles for spacing
-            return this.laneWidth / this.Vehicles.Count;
+            //TODO remove need for lanewidth and do vehicle size * # of vehicles for spacing
+            return this.laneWidth / this.vehicles.Count;
         }
 
-
+        private double alignCarVerticallyInLane(Vehicle vehicle)
+        {
+            return ((50 - vehicle.Height) / 2) + this.laneStartingYPoint;
+        }
 
         #endregion
-
-        public IEnumerator GetEnumerator()
-        {
-            return this.Vehicles.GetEnumerator();
-        }
     }
 }

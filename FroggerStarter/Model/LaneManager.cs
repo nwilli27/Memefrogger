@@ -8,24 +8,35 @@ using System.Threading.Tasks;
 namespace FroggerStarter.Model
 {
 
-    class LaneManager : IEnumerable<Lane>
+    class LaneManager
     {
-        //TODO encapsulate this to be the wrapper collection
-        public IList<Lane> Lanes { get; }
+        #region Properties
 
-        public LaneManager(int laneWidth)
+        //TODO what should this be? Property, const?
+        public const int LaneHeight = 50;
+
+        #endregion
+
+        #region Data Members
+
+        private IList<Lane> lanes;
+
+        #endregion
+
+        #region Constructors
+
+        public LaneManager()
         {
-            this.Lanes = new List<Lane>();
-            var lane1 = new Lane(LaneDirection.Left, 305, laneWidth, 1);
-            lane1.AddVehicle(new Vehicle(VehicleType.Car));
-            lane1.AddVehicle(new Vehicle(VehicleType.Car));
-
-            this.Lanes.Add(lane1);
+            this.lanes = new List<Lane>();
         }
+
+        #endregion
+
+        #region Methods
 
         public void MoveAllVehicles()
         {
-            foreach (var currentLane in this.Lanes)
+            foreach (var currentLane in this.lanes)
             {
                 currentLane.MoveVehicles();
             }
@@ -33,20 +44,17 @@ namespace FroggerStarter.Model
 
         public void IncreaseSpeedOfVehicles()
         {
-            foreach (var currentLane in this.Lanes)
+            foreach (var currentLane in this.lanes)
             {
                 currentLane.IncreaseSpeedOfVehicles();
             }
         }
 
-        public IEnumerator<Lane> GetEnumerator()
+        public void Add(Lane lane)
         {
-            return this.Lanes.GetEnumerator();
+            this.lanes.Add(lane);
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.Lanes.GetEnumerator();
-        }
+        #endregion
     }
 }

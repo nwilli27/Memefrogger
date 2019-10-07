@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.Foundation;
+using Windows.UI.Xaml.Media;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model
@@ -131,6 +132,13 @@ namespace FroggerStarter.Model
         public void MoveDown()
         {
             this.moveY(this.SpeedY);
+        }
+
+        //TODO make comment
+        public void FlipSpriteHorizontally()
+        {
+            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
         }
 
         private void moveX(int x)

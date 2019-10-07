@@ -26,6 +26,38 @@ namespace FroggerStarter.Model
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
 
+        public void MoveLeftWithBoundaryCheck(double leftBoundary)
+        {
+            if (this.X - this.SpeedX >= leftBoundary)
+            {
+                this.MoveLeft();
+            }
+        }
+
+        public void MoveRightWithBoundaryCheck(double rightBoundary)
+        {
+            if (this.X + this.SpeedX < rightBoundary)
+            {
+                this.MoveRight();
+            }
+        }
+
+        public void MoveUpWithBoundaryCheck(double topBoundary)
+        {
+            if (this.Y - this.SpeedY >= topBoundary)
+            {
+                this.MoveUp();
+            }
+        }
+
+        public void MoveDownWithBoundaryCheck(double bottomBoundary)
+        {
+            if (this.Y + this.SpeedY < bottomBoundary)
+            {
+                this.MoveDown();
+            }
+        }
+
         #endregion
     }
 }
