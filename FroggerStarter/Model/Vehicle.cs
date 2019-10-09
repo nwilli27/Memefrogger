@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Windows.Foundation;
 using FroggerStarter.View.Sprites;
+using Windows.UI.Xaml.Media;
 
 namespace FroggerStarter.Model
 {
@@ -30,6 +28,13 @@ namespace FroggerStarter.Model
                 default:
                     throw new ArgumentOutOfRangeException(nameof(vehicleType), vehicleType, null);
             }
+        }
+
+        //TODO make comment
+        public void FlipSpriteHorizontally()
+        {
+            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
         }
     }
 }

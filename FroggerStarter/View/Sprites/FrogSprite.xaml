@@ -10,7 +10,7 @@
     Width="50">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="FrogColor" Color="DarkOliveGreen"/>
+        <SolidColorBrush x:Key="FrogColor" x:Name="frogColor" Color="DarkOliveGreen"/>
         <SolidColorBrush x:Key="EyeColor" Color="Orange"/>
         <SolidColorBrush x:Key="DesignColor" Color="Black"/>
     </UserControl.Resources>

@@ -56,7 +56,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The speed x.
         /// </value>
-        public int SpeedX { get; set; }
+        public double SpeedX { get; set; }
 
         /// <summary>
         ///     Gets the y speed of the game object.
@@ -64,7 +64,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The speed y.
         /// </value>
-        public int SpeedY { get; private set; }
+        public double SpeedY { get; private set; }
 
         /// <summary>
         ///     Gets the width of the game object.
@@ -134,19 +134,12 @@ namespace FroggerStarter.Model
             this.moveY(this.SpeedY);
         }
 
-        //TODO make comment
-        public void FlipSpriteHorizontally()
-        {
-            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-            this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
-        }
-
-        private void moveX(int x)
+        private void moveX(double x)
         {
             this.X += x;
         }
 
-        private void moveY(int y)
+        private void moveY(double y)
         {
             this.Y += y;
         }
@@ -163,7 +156,7 @@ namespace FroggerStarter.Model
         /// </summary>
         /// <param name="speedX">The speed x.</param>
         /// <param name="speedY">The speed y.</param>
-        protected void SetSpeed(int speedX, int speedY)
+        protected void SetSpeed(double speedX, double speedY)
         {
             if (speedX < 0)
             {
