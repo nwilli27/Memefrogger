@@ -156,8 +156,7 @@ namespace FroggerStarter.Controller
             {
                 foreach (Vehicle currentVehicle in currentLane)
                 {
-                    if (CollisionDetection.HasPlayerCollidedWithVehicle(this.player, currentVehicle))
-                    {
+                    if (this.player.HasCollidedWith(currentVehicle)) {
                         this.setPlayerToCenterOfBottomLane();
                         this.roadManager.SetAllVehiclesToDefaultSpeed();
                     }

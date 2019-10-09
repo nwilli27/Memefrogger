@@ -134,6 +134,44 @@ namespace FroggerStarter.Model
             this.moveY(this.SpeedY);
         }
 
+        /// <summary>
+        ///     Determines whether [has collided with] [the specified other game object].
+        ///     Precondition: otherGameObject != null
+        ///     Post-condition: none
+        /// </summary>
+        /// <param name="otherGameObject">The other game object.</param>
+        /// <returns>
+        ///   <c>true</c> if [has collided with] [the specified other game object]; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasCollidedWith(GameObject otherGameObject)
+        {
+            if (otherGameObject == null)
+            {
+                throw new NullReferenceException();
+            }
+            return this.hasIntersectedOtherObjectXBoundary(otherGameObject) &&
+                   this.containsSameYCoordinatesAsOtherObject(otherGameObject);
+        }
+
+        private bool hasIntersectedOtherObjectXBoundary(GameObject otherGameObject)
+        {
+            var thisObjectRightSide = this.X + this.Width;
+            var otherObjectRightSide = otherGameObject.X + otherGameObject.Width;
+
+            var doesObjectIntersectFromRight = thisObjectRightSide > otherGameObject.X && thisObjectRightSide < otherObjectRightSide;
+            var doesObjectIntersectFromLeft = this.X > otherGameObject.X && this.X < otherObjectRightSide;
+
+            return doesObjectIntersectFromRight || doesObjectIntersectFromLeft;
+        }
+
+        private bool containsSameYCoordinatesAsOtherObject(GameObject otherGameObject)
+        {
+            var thisBottomSide = this.Y + this.Height;
+            var otherObjectBottomSide = otherGameObject.Y + otherGameObject.Height;
+
+            return this.Y <= otherGameObject.Y && thisBottomSide >= otherObjectBottomSide;
+        }
+
         private void moveX(double x)
         {
             this.X += x;
