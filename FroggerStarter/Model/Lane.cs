@@ -5,6 +5,11 @@ using System.Collections.ObjectModel;
 
 namespace FroggerStarter.Model
 {
+    //TODO make this class generic for any lane of game objects
+    /// <summary>
+    ///     A row of moving objects of type GameObject.
+    /// </summary>
+    /// <seealso cref="System.Collections.IEnumerable" />
     internal class Lane : IEnumerable
     {
 
@@ -21,15 +26,14 @@ namespace FroggerStarter.Model
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Lane"/> class.
-        ///     Precondition: laneWidth gt; 0
-        ///                   defaultSpeed gt; 0
+        ///     Precondition: none
         ///     Post-condition: this.vehicles.Count == 0
-        ///                     this.laneDirection =
-        /// </summary>
-        /// <param name="laneDirection"></param>
-        /// <param name="laneStartingYPoint"></param>
-        /// <param name="laneWidth"></param>
-        /// <param name="defaultSpeed"></param>
+        ///                     this.laneDirection = laneDirection
+        ///                     this.defaultSpeed = defaultSpeed
+        /// </summary> 
+        /// <param name="laneDirection">The direction the game objects are moving in the lane</param>
+        /// <param name="laneWidth">The width of the lane</param>
+        /// <param name="defaultSpeed">The default speed of all game objects</param>
         public Lane(double laneWidth, double defaultSpeed, LaneDirection laneDirection)
         {
             this.vehicles = new Collection<Vehicle>();
@@ -42,6 +46,13 @@ namespace FroggerStarter.Model
 
         #region Methods
 
+        /// <summary>
+        ///     Adds a specified number of vehicles to the lane of a specified vehicle type.
+        ///     Precondition: none
+        ///     Post-condition: this.vehicles.Count == numberOfVehicles
+        /// </summary>
+        /// <param name="vehicleType">Type of the vehicle</param>
+        /// <param name="numberOfVehicles">The number of vehicles</param>
         public void AddVehicles(VehicleType vehicleType, int numberOfVehicles)
         {
             for (var i = 0; i < numberOfVehicles; i++)
@@ -51,6 +62,13 @@ namespace FroggerStarter.Model
             this.readjustSpaceBetweenVehicles();
         }
 
+        /// <summary>
+        ///     Moves all game objects according to which direction the lane is going.
+        ///     If the object moves past the lane boundary, its placed back on the other end of the lane.
+        ///     Precondition: none
+        ///     Post-condition: @each in this.vehicles.X +- vehicle.SpeedX
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">When lane direction isn't available</exception>
         public void MoveVehicles()
         {
             foreach (var currentVehicle in this.vehicles)
@@ -81,7 +99,12 @@ namespace FroggerStarter.Model
             }
         }
 
-        public void IncreaseSpeedOfVehicles()
+        /// <summary>
+        ///     Increases the speed of all vehicles by 0.5.
+        ///     Precondition: none
+        ///     Post-condition: @each in this.vehicles : vehicle.SpeedX += 0.5
+        /// </summary>  
+        public void IncreaseSpeedOfVehiclesByOneHalf()
         {
             foreach (var currentVehicle in this.vehicles)
             {
@@ -89,6 +112,11 @@ namespace FroggerStarter.Model
             }
         }
 
+        /// <summary>
+        ///     Sets the vehicles to default speed of the lane.
+        ///     Precondition: none
+        ///     Post-condition: @each vehicle in this.vehicles : vehicle.SpeedX == this.defaultSpeed
+        /// </summary>
         public void SetVehiclesToDefaultSpeed()
         {
             foreach (var currentVehicle in this.vehicles)
@@ -97,28 +125,51 @@ namespace FroggerStarter.Model
             }
         }
 
+        /// <summary>
+        ///     Sets all vehicles to the specified yLocation and are aligned
+        ///     vertically within the height of the lane.
+        ///     Precondition: heightOfLane gt; 0
+        ///     Post-condition: @each vehicle in this.vehicles : vehicle.Y == verticalYAlignment
+        /// </summary>
+        /// <param name="yLocation">The y location.</param>
+        /// <param name="heightOfLane">The height of lane.</param>
         public void SetVehiclesToLaneYLocation(double yLocation, double heightOfLane)
         {
+            if (heightOfLane <= 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
             foreach (var currentVehicle in this.vehicles)
             {
-                var verticalYAlignment = this.alignCarVerticallyInLane(currentVehicle, yLocation, heightOfLane);
+                var verticalYAlignment = this.getCenteredYLocationOfLane(currentVehicle, yLocation, heightOfLane);
                 currentVehicle.Y = verticalYAlignment;
             }
+        }
+
+        /// <summary>
+        ///     Returns an enumerator that iterates through the collection of game objects.
+        ///     Precondition: none
+        ///     Post-condition: none
+        /// </summary>
+        /// <returns>
+        ///     An <see cref="T:System.Collections.IEnumerator"></see> object that can 
+        ///     be used to iterate through the collection of game objects.
+        /// </returns>
+        public IEnumerator GetEnumerator()
+        {
+            return this.vehicles.GetEnumerator();
         }
 
         #endregion
 
         #region Private Helpers
 
-        private double alignCarVerticallyInLane(Vehicle vehicle, double yLocation, double heightOfLane)
+        private double getCenteredYLocationOfLane(Vehicle vehicle, double yLocation, double heightOfLane)
         {
             return ((heightOfLane - vehicle.Height) / 2) + yLocation;
         }
 
-        /// <summary>
-        ///     Adds the vehicle to lane.
-        /// </summary>
-        /// <param name="vehicle">The vehicle.</param>
         private void add(Vehicle vehicle)
         {
             vehicle.SpeedX = this.defaultSpeed;
@@ -152,15 +203,8 @@ namespace FroggerStarter.Model
 
         private double getSpacingBetweenVehicles()
         {
-            //TODO remove need for lanewidth and do vehicle size * # of vehicles for spacing
             return this.laneWidth / this.vehicles.Count;
         }
-
-        public IEnumerator GetEnumerator()
-        {
-            return this.vehicles.GetEnumerator();
-        }
-
 
         #endregion
     }

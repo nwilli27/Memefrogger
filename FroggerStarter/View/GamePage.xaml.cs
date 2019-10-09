@@ -19,7 +19,7 @@ namespace FroggerStarter.View
         private readonly double applicationHeight = (double) Application.Current.Resources["AppHeight"];
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
         private readonly double highRoadYLocation = (double) Application.Current.Resources["HighRoadYLocation"];
-        private readonly double roadShoulderHeight = (double)Application.Current.Resources["RoadShoulderHeight"];
+        private readonly double roadShoulderHeight = (double) Application.Current.Resources["RoadShoulderHeight"];
         private readonly GameManager gameManager;
 
         #endregion
