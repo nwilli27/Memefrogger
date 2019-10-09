@@ -135,6 +135,17 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
+        ///     Flips the sprite horizontally.
+        ///     Precondition: none
+        ///     Post-condition: none
+        /// </summary>
+        public void FlipSpriteHorizontally()
+        {
+            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
+        }
+
+        /// <summary>
         ///     Determines whether [has collided with] [the specified other game object].
         ///     Precondition: otherGameObject != null
         ///     Post-condition: none

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace FroggerStarter.Model
 {
+    /// <summary>
+    ///     Class to hold and manage a collection of Lanes.
+    /// </summary>
+    /// <seealso cref="System.Collections.Generic.IEnumerable{FroggerStarter.Model.Lane}" />
     internal class RoadManager : IEnumerable<Lane>
     {
 
@@ -15,24 +19,44 @@ namespace FroggerStarter.Model
         private readonly IList<Lane> lanes;
         private readonly double width;
         private readonly double startingYLocation;
-        private double laneHeight;
+        private double roadHeight;
 
         #endregion
 
         #region Constructors
 
-        public RoadManager(double width, double startingYLocation, double endingYLocation, int numberOfLanes)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="RoadManager"/> class
+        ///     Precondition: width > 0
+        ///                   startingYLocation < endingYLocation;
+        ///                   numberOfLanes &gt= 0
+        /// 
+        ///     Post-condition: this.lanes.Count() == 0
+        ///                     this.width == width
+        ///                     this.startingYLocation == startingYLocation
+        ///                     this.laneHeight += @prev
+        /// </summary>
+        /// <param name="width">The width.</param>
+        /// <param name="startingYLocation">The starting y location.</param>
+        /// <param name="endingYLocation">The ending y location.</param>
+        /// <param name="numberOfLanes">The number of lanes.</param>
+        public RoadManager(double width, double startingYLocation, double endingYLocation)
         {
-            this.lanes = new List<Lane>();
+            this.startingYLocation = startingYLocation < endingYLocation ? startingYLocation : throw new ArgumentOutOfRangeException();
             this.width = width;
-            this.startingYLocation = startingYLocation;
-            this.setHeightOfEachLane(startingYLocation, endingYLocation, numberOfLanes);
+            this.lanes = new List<Lane>();
+            this.roadHeight = endingYLocation - startingYLocation;
         }
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        ///     Moves all vehicles in all lanes.
+        ///     Precondition: none
+        ///     Post-condition: @each vehicle in this.lanes moveLeft() || moveRight()
+        /// </summary>
         public void MoveAllVehicles()
         {
             foreach (var currentLane in this.lanes)
@@ -41,6 +65,11 @@ namespace FroggerStarter.Model
             }
         }
 
+        /// <summary>
+        ///     Increases the speed of all vehicles in all lanes.
+        ///     Precondition: none
+        ///     Post-condition: @each vehicle in this.lanes.SpeedX += 0.5
+        /// </summary>
         public void IncreaseSpeedOfVehicles()
         {
             foreach (var currentLane in this.lanes)
@@ -49,6 +78,10 @@ namespace FroggerStarter.Model
             }
         }
 
+        /// <summary>
+        ///     Sets all vehicles to default speed of there corresponding lane.
+        ///     Precondition: n
+        /// </summary>
         public void SetAllVehiclesToDefaultSpeed()
         {
             foreach (var currentLane in this.lanes)
@@ -59,27 +92,24 @@ namespace FroggerStarter.Model
 
         public void AddLaneOfVehicles(LaneDirection laneDirection, double defaultSpeed, VehicleType vehicleType, int numberOfVehicles)
         {
-            var lane = new Lane(this.getNextYLocationForLane(), this.width, defaultSpeed, laneDirection);
+            var lane = new Lane(this.width, defaultSpeed, laneDirection);
             lane.AddVehicles(vehicleType, numberOfVehicles);
             this.lanes.Add(lane);
+            this.adjustSpacingOfVehiclesInLanes();
         }
 
         #endregion
 
         #region Private Helpers
 
-        private void setHeightOfEachLane(double roadStartingY, double roadEndingY, int numberOfLanes)
+        private void adjustSpacingOfVehiclesInLanes()
         {
-            this.laneHeight = (roadEndingY - roadStartingY) / (numberOfLanes - 1);
-        }
-
-        private double getNextYLocationForLane()
-        {
-            if (this.lanes.Count == 0)
+            var heightOfEachLane = this.roadHeight / this.lanes.Count;
+            for (int i = 0; i < this.lanes.Count; i++)
             {
-                return this.startingYLocation;
+                var yLocation = this.startingYLocation + (heightOfEachLane * i);
+                this.lanes[i].SetVehiclesToLaneYLocation(yLocation, heightOfEachLane);
             }
-            return (this.lanes.Count * this.laneHeight) + this.startingYLocation;
         }
 
         public IEnumerator<Lane> GetEnumerator()

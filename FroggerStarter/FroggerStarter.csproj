@@ -126,7 +126,6 @@
     <Compile Include="Model\Vehicle.cs" />
     <Compile Include="Model\Lane.cs" />
     <Compile Include="Model\RoadManager.cs" />
-    <Compile Include="Model\VehicleCreator.cs" />
     <Compile Include="Model\VehicleType.cs" />
     <Compile Include="View\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>

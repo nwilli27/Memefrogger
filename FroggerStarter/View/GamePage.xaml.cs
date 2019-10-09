@@ -19,6 +19,7 @@ namespace FroggerStarter.View
         private readonly double applicationHeight = (double) Application.Current.Resources["AppHeight"];
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
         private readonly double highRoadYLocation = (double) Application.Current.Resources["HighRoadYLocation"];
+        private readonly double roadShoulderHeight = (double)Application.Current.Resources["RoadShoulderHeight"];
         private readonly GameManager gameManager;
 
         #endregion
@@ -36,7 +37,7 @@ namespace FroggerStarter.View
                            .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
-            this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation);
+            this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation, this.roadShoulderHeight);
             this.gameManager.InitializeGame(this.canvas);
         }
 

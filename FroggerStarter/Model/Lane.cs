@@ -7,18 +7,11 @@ namespace FroggerStarter.Model
 {
     internal class Lane : IEnumerable
     {
-        #region Properties
-
-
-
-        #endregion
 
         #region Data Members
 
-        //TODO maybe this should be a list? and need to wrap this around the lane
         private readonly ICollection<Vehicle> vehicles;
         private readonly LaneDirection laneDirection;
-        private readonly double laneStartingYPoint;
         private readonly double laneWidth;
         private readonly double defaultSpeed;
 
@@ -28,19 +21,19 @@ namespace FroggerStarter.Model
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Lane"/> class.
-        ///     Precondition: spaceBetweenVehicles gt;= 0
+        ///     Precondition: laneWidth gt; 0
+        ///                   defaultSpeed gt; 0
         ///     Post-condition: this.vehicles.Count == 0
-        ///                     this.SpaceBetweenVehicles = spaceBetweenVehicles
+        ///                     this.laneDirection =
         /// </summary>
         /// <param name="laneDirection"></param>
         /// <param name="laneStartingYPoint"></param>
         /// <param name="laneWidth"></param>
         /// <param name="defaultSpeed"></param>
-        public Lane(double laneStartingYPoint, double laneWidth, double defaultSpeed, LaneDirection laneDirection)
+        public Lane(double laneWidth, double defaultSpeed, LaneDirection laneDirection)
         {
             this.vehicles = new Collection<Vehicle>();
             this.laneDirection = laneDirection;
-            this.laneStartingYPoint = laneStartingYPoint;
             this.laneWidth = laneWidth;
             this.defaultSpeed = defaultSpeed;
         }
@@ -104,9 +97,23 @@ namespace FroggerStarter.Model
             }
         }
 
+        public void SetVehiclesToLaneYLocation(double yLocation, double heightOfLane)
+        {
+            foreach (var currentVehicle in this.vehicles)
+            {
+                var verticalYAlignment = this.alignCarVerticallyInLane(currentVehicle, yLocation, heightOfLane);
+                currentVehicle.Y = verticalYAlignment;
+            }
+        }
+
         #endregion
 
         #region Private Helpers
+
+        private double alignCarVerticallyInLane(Vehicle vehicle, double yLocation, double heightOfLane)
+        {
+            return ((heightOfLane - vehicle.Height) / 2) + yLocation;
+        }
 
         /// <summary>
         ///     Adds the vehicle to lane.
@@ -114,7 +121,6 @@ namespace FroggerStarter.Model
         /// <param name="vehicle">The vehicle.</param>
         private void add(Vehicle vehicle)
         {
-            vehicle.Y = this.alignCarVerticallyInLane(vehicle);
             vehicle.SpeedX = this.defaultSpeed;
 
             switch (this.laneDirection)
@@ -148,11 +154,6 @@ namespace FroggerStarter.Model
         {
             //TODO remove need for lanewidth and do vehicle size * # of vehicles for spacing
             return this.laneWidth / this.vehicles.Count;
-        }
-
-        private double alignCarVerticallyInLane(Vehicle vehicle)
-        {
-            return ((50 - vehicle.Height) / 2) + this.laneStartingYPoint;
         }
 
         public IEnumerator GetEnumerator()

@@ -15,19 +15,23 @@ namespace FroggerStarter.Controller
     {
         #region Data members
 
-        private const int BottomLaneOffset = 5;
-
-        //TODO rename this to something maybe more descriptive?
-
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
         private readonly double highRoadYLocation;
+        private readonly double roadShoulderHeight;
+        private readonly double bottomRoadYLocation;
 
         private Canvas gameCanvas;
         private Frog player;
         private RoadManager roadManager;
         private DispatcherTimer timer;
         private DispatcherTimer vehicleSpeedTimer;
+
+        #endregion
+
+        #region Constants
+
+        private const int BottomLaneOffset = 5;
 
         #endregion
 
@@ -43,7 +47,7 @@ namespace FroggerStarter.Controller
         ///     or
         ///     backgroundWidth &lt;= 0
         /// </exception>
-        public GameManager(double backgroundHeight, double backgroundWidth, double highRoadYLocation)
+        public GameManager(double backgroundHeight, double backgroundWidth, double highRoadYLocation, double roadShoulderHeight)
         {
             //TODO precondition check
             if (backgroundHeight <= 0)
@@ -59,6 +63,9 @@ namespace FroggerStarter.Controller
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
             this.highRoadYLocation = highRoadYLocation;
+            this.bottomRoadYLocation = roadShoulderHeight;
+
+            //this.heightOfBottomRoad = this.backgroundHeight - (this.bottomRoadYLocation + BottomLaneOffset);
 
             this.setupGameTimer();
             this.setupVehicleSpeedTimer();
@@ -110,8 +117,8 @@ namespace FroggerStarter.Controller
         private void createAndPlaceVehiclesInLanes()
         {
             //TODO do something with starting/ending y locations.
-            this.roadManager = new RoadManager(this.backgroundWidth, 105, 305, 5);
-            
+            this.roadManager = new RoadManager(this.backgroundWidth, 105, 355);
+
             this.roadManager.AddLaneOfVehicles(LaneDirection.Right, 2.5, VehicleType.Car, 3);
             this.roadManager.AddLaneOfVehicles(LaneDirection.Left, 2.0, VehicleType.SemiTruck, 2);
             this.roadManager.AddLaneOfVehicles(LaneDirection.Left, 1.5, VehicleType.Car, 3);
@@ -173,7 +180,7 @@ namespace FroggerStarter.Controller
         {
             this.player.MoveLeftWithBoundaryCheck(0);
         }
-        
+
         /// <summary>
         ///     Moves the player to the right.
         ///     Precondition: none

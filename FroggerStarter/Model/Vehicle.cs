@@ -5,9 +5,20 @@ using Windows.UI.Xaml.Media;
 
 namespace FroggerStarter.Model
 {
+    /// <summary>
+    ///     A Vehicle sprite object of type GameObject.
+    /// </summary>
+    /// <seealso cref="FroggerStarter.Model.GameObject" />
     internal class Vehicle : GameObject
     {
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Vehicle"/> class.
+        ///     Creates the vehicle sprite according to the type of vehicle passed in.
+        ///     Precondition: none
+        ///     Post-condition: none
+        /// </summary>
+        /// <param name="vehicleType">Type of the vehicle to create.</param>
         public Vehicle(VehicleType vehicleType)
         {
             this.createVehicleFromType(vehicleType);
@@ -28,13 +39,6 @@ namespace FroggerStarter.Model
                 default:
                     throw new ArgumentOutOfRangeException(nameof(vehicleType), vehicleType, null);
             }
-        }
-
-        //TODO make comment
-        public void FlipSpriteHorizontally()
-        {
-            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-            this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
         }
     }
 }
