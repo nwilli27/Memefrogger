@@ -17,6 +17,7 @@
 
 
     <Canvas Margin="0,-1,0,1">
+        
         <!--BODY-->
         <Ellipse Width="21" Height="36" Fill="{StaticResource FrogColor}" Canvas.Left="14" Canvas.Top="3" />
 

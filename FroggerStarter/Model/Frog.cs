@@ -63,6 +63,8 @@ namespace FroggerStarter.Model
             this.SpeedX = 0;
             this.SpeedY = 0;
         }
+
+
         
         #endregion
     }
