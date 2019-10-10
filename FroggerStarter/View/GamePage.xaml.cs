@@ -1,9 +1,11 @@
-﻿using Windows.Foundation;
+﻿using System;
+using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using FroggerStarter.Controller;
+using FroggerStarter.Model;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -20,6 +22,7 @@ namespace FroggerStarter.View
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
         private readonly double highRoadYLocation = (double) Application.Current.Resources["HighRoadYLocation"];
         private readonly double roadShoulderHeight = (double) Application.Current.Resources["RoadShoulderHeight"];
+
         private readonly GameManager gameManager;
 
         #endregion
@@ -37,8 +40,12 @@ namespace FroggerStarter.View
                            .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
+
             this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation, this.roadShoulderHeight);
             this.gameManager.InitializeGame(this.canvas);
+            this.gameManager.LifeLoss += this.onLifeLost;
+            this.gameManager.ScoreIncremented += this.onPointScored;
+            this.gameManager.GameOver += this.onGameOver;
         }
 
         #endregion
@@ -62,6 +69,21 @@ namespace FroggerStarter.View
                     this.gameManager.MovePlayerDown();
                     break;
             }
+        }
+
+        private void onLifeLost(object sender, LiveLossEventArgs e)
+        {
+            this.numberLives.Text = e.Lives.ToString();
+        }
+
+        private void onPointScored(object sender, ScoreUpdatedEventArgs e)
+        {
+            this.scoreValue.Text = e.Score.ToString();
+        }
+
+        private void onGameOver(object sender, GameOverEventArgs e)
+        {
+            this.gameOver.Text = e.GameOver.ToString();
         }
 
         #endregion

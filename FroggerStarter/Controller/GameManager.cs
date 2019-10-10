@@ -15,6 +15,10 @@ namespace FroggerStarter.Controller
     {
         #region Data members
 
+        public EventHandler<LiveLossEventArgs> LifeLoss;
+        public EventHandler<ScoreUpdatedEventArgs> ScoreIncremented;
+        public EventHandler<GameOverEventArgs> GameOver;
+
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
         private readonly double highRoadYLocation;
@@ -22,6 +26,7 @@ namespace FroggerStarter.Controller
 
         private Canvas gameCanvas;
         private Frog player;
+        private Player thePlayer;
         private RoadManager roadManager;
         private DispatcherTimer timer;
         private DispatcherTimer vehicleSpeedTimer;
@@ -63,6 +68,8 @@ namespace FroggerStarter.Controller
             this.backgroundWidth = backgroundWidth;
             this.highRoadYLocation = highRoadYLocation;
             this.roadShoulderHeight = roadShoulderHeight;
+
+            this.thePlayer = new Player();
 
             //this.heightOfBottomRoad = this.backgroundHeight - (this.bottomRoadYLocation + BottomLaneOffset);
 
@@ -120,6 +127,7 @@ namespace FroggerStarter.Controller
             if (this.hasPlayerMadeItToTheHighRoad())
             {
                 this.setPlayerToCenterOfBottomLane();
+                this.pointScored();
             }
             else
             {
@@ -215,8 +223,19 @@ namespace FroggerStarter.Controller
                 {
                     if (this.player.HasCollidedWith(currentVehicle))
                     {
-                        this.setPlayerToCenterOfBottomLane();
-                        this.roadManager.SetAllVehiclesToDefaultSpeed();
+                        this.lifeLost();
+
+                        if (this.thePlayer.isOutOfLives())
+                        {
+                            this.timer.Stop();
+                            this.player.stopFrogMovement();
+                            this.gameOver();
+                        }
+                        else
+                        {
+                            this.setPlayerToCenterOfBottomLane();
+                            this.roadManager.SetAllVehiclesToDefaultSpeed();
+                        }
                     }
                 }
             }
@@ -237,7 +256,48 @@ namespace FroggerStarter.Controller
             return this.backgroundHeight - this.roadShoulderHeight - BottomLaneOffset;
         }
 
-        #endregion
+        private void lifeLost()
+        {
+            this.thePlayer.decrementLivesByOne();
+            var life = new LiveLossEventArgs() { Lives = this.thePlayer.Lives };
+            this.LifeLoss?.Invoke(this, life);
+        }
 
+        private void pointScored()
+        {
+            this.thePlayer.incrementScoreByOne();
+            var score = new ScoreUpdatedEventArgs() {Score = this.thePlayer.Score};
+            this.ScoreIncremented?.Invoke(this, score);
+
+            if (this.thePlayer.scoredThreePoints())
+            {
+                this.timer.Stop();
+                this.player.stopFrogMovement();
+                this.gameOver();
+            }
+        }
+
+        private void gameOver()
+        {
+            var gameOver = new GameOverEventArgs() { GameOver = "GAME OVER" };
+            this.GameOver?.Invoke(this, gameOver);
+        }
+
+        #endregion
+    }
+
+    public class LiveLossEventArgs : EventArgs
+    {
+        public int Lives { get; set; }
+    }
+
+    public class ScoreUpdatedEventArgs : EventArgs
+    {
+        public int Score { get; set; }
+    }
+
+    public class GameOverEventArgs : EventArgs
+    {
+        public string GameOver { get; set; }
     }
 }

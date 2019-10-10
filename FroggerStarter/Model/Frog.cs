@@ -58,6 +58,12 @@ namespace FroggerStarter.Model
             }
         }
 
+        public void stopFrogMovement()
+        {
+            this.SpeedX = 0;
+            this.SpeedY = 0;
+        }
+        
         #endregion
     }
 }

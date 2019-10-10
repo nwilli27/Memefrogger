@@ -64,7 +64,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The speed y.
         /// </value>
-        public double SpeedY { get; private set; }
+        public double SpeedY { get; set; }
 
         /// <summary>
         ///     Gets the width of the game object.
