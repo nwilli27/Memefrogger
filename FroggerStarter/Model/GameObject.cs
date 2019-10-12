@@ -1,7 +1,10 @@
 ﻿using System;
-using Windows.Foundation;
+using System.Drawing;
+using System.Numerics;
+using Windows.UI.Composition.Scenes;
 using Windows.UI.Xaml.Media;
 using FroggerStarter.View.Sprites;
+using Point = Windows.Foundation.Point;
 
 namespace FroggerStarter.Model
 {
@@ -97,7 +100,7 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Moves the game object right.
         ///     Precondition: None
-        ///     Postcondition: X == X@prev + SpeedX
+        ///     Post-condition: X == X@prev + SpeedX
         /// </summary>
         public void MoveRight()
         {
@@ -107,7 +110,7 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Moves the game object left.
         ///     Precondition: None
-        ///     Postcondition: X == X@prev + SpeedX
+        ///     Post-condition: X == X@prev + SpeedX
         /// </summary>
         public void MoveLeft()
         {
@@ -117,7 +120,7 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Moves the game object up.
         ///     Precondition: None
-        ///     Postcondition: Y == Y@prev - SpeedY
+        ///     Post-condition: Y == Y@prev - SpeedY
         /// </summary>
         public void MoveUp()
         {
@@ -160,27 +163,22 @@ namespace FroggerStarter.Model
             {
                 throw new NullReferenceException();
             }
-            return this.hasIntersectedOtherObjectXBoundary(otherGameObject) &&
-                   this.containsSameYCoordinatesAsOtherObject(otherGameObject);
-        }
 
-        private bool hasIntersectedOtherObjectXBoundary(GameObject otherGameObject)
-        {
-            var thisObjectRightSide = this.X + this.Width;
-            var otherObjectRightSide = otherGameObject.X + otherGameObject.Width;
+            var otherObjectBoundary = new Rectangle(
+                (int)otherGameObject.X,
+                (int)otherGameObject.Y,
+                (int)otherGameObject.Width,
+                (int)otherGameObject.Height
+            );
 
-            var doesObjectIntersectFromRight = thisObjectRightSide > otherGameObject.X && thisObjectRightSide < otherObjectRightSide;
-            var doesObjectIntersectFromLeft = this.X > otherGameObject.X && this.X < otherObjectRightSide;
+            var thisObjectBoundary = new Rectangle(
+                (int)this.X,
+                (int)this.Y,
+                (int)this.Width,
+                (int)this.Height
+            );
 
-            return doesObjectIntersectFromRight || doesObjectIntersectFromLeft;
-        }
-
-        private bool containsSameYCoordinatesAsOtherObject(GameObject otherGameObject)
-        {
-            var thisBottomSide = this.Y + this.Height;
-            var otherObjectBottomSide = otherGameObject.Y + otherGameObject.Height;
-
-            return this.Y <= otherGameObject.Y && thisBottomSide >= otherObjectBottomSide;
+            return thisObjectBoundary.IntersectsWith(otherObjectBoundary);
         }
 
         private void moveX(double x)
@@ -205,7 +203,7 @@ namespace FroggerStarter.Model
         /// </summary>
         /// <param name="speedX">The speed x.</param>
         /// <param name="speedY">The speed y.</param>
-        protected void SetSpeed(double speedX, double speedY)
+        public void SetSpeed(double speedX, double speedY)
         {
             if (speedX < 0)
             {

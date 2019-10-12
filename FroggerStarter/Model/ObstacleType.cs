@@ -3,9 +3,9 @@
 namespace FroggerStarter.Model
 {
     /// <summary>
-    ///     Holds the different types of Vehicles.
+    ///     Holds the different types of Obstacles.
     /// </summary>
-    public enum VehicleType
+    public enum ObstacleType
     {
         /// <summary>
         ///     The car sprite type

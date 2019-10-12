@@ -11,6 +11,7 @@
     Width= "97.875">
 
     <Canvas Margin="0,-2,2,2">
+        
         <Rectangle Height="33" Width="68" Fill="White" Canvas.Left="30" Canvas.Top="3"/>
         <Rectangle Height="28" Width="16" Fill="DarkBlue" Canvas.Left="11" Canvas.Top="8"/>
         <Rectangle Height="26.25" Width="16" Fill="DarkBlue" Canvas.Left="5.751" Canvas.Top="14.875" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
@@ -151,19 +152,16 @@
                 <CompositeTransform Rotation="-90"/>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <TextBlock Text="DEAD FROGS" FontSize="11" Canvas.Left="38" Canvas.Top="7" FontFamily="Impact"></TextBlock>
-        <TextBlock Text="Incorporated" FontSize="6" Canvas.Left="38" Canvas.Top="18" Height="12"></TextBlock>
-        <Ellipse Height="4" Width="4" Fill="Black" Canvas.Left="73" Canvas.Top="19"/>
-        <Ellipse Height="3.608" Width="3.602" Fill="White" Canvas.Left="73.199" Canvas.Top="19.596" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Height="26.643" Width="26.643" Fill="red" Canvas.Left="51.04" Canvas.Top="6.665" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-18.848"/>
+                <CompositeTransform Rotation="30.357" TranslateX="0.014" TranslateY="-0.006"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <TextBlock Text="TM" FontSize="2" Canvas.Left="73.625" Canvas.Top="19.75" Height="12" Width="4" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <TextBlock.RenderTransform>
-                <CompositeTransform Rotation="-0.918"/>
-            </TextBlock.RenderTransform>
-        </TextBlock>
+        <Ellipse Height="22.706" Width="22.667" Fill="White" Canvas.Left="53.092" Canvas.Top="8.698" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-6.09" TranslateX="-0.041" TranslateY="-0.029"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
         <Rectangle Height="5" Width="3.874" Fill="Black" Canvas.Top="23" RenderTransformOrigin="0.5,0.5" Canvas.Left="0.625" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Rectangle.RenderTransform>
                 <CompositeTransform Rotation="179.752"/>
@@ -191,6 +189,11 @@
             </Ellipse.RenderTransform>
         </Ellipse>
         <Rectangle Height="2" Width="68" Fill="Silver" Canvas.Left="30" Canvas.Top="3"/>
+        <Rectangle Height="2" Width="24.802" Fill="Red" Canvas.Left="52.279" Canvas.Top="18.901" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-42.036"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
 
     </Canvas>
 </local:BaseSprite>

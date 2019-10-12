@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace FroggerStarter.Model
 {
     /// <summary>
-    ///     Enums that specifies the direction of traffic is going in the lane
+    ///     Enums that specifies the direction of a lane
     /// </summary>
     public enum LaneDirection
     {

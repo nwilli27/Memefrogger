@@ -8,15 +8,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Canvas x:Name="canvas" Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Background="Black">
-        <TextBlock x:Name="gameOver" Text="" Canvas.ZIndex="1"  Foreground="White" FontSize="50" FontFamily="Berlin Sans FB" Canvas.Left="186" Canvas.Top="185"/>
+        <TextBlock x:Name="gameOver" Text="GAME OVER" Canvas.ZIndex="1" Visibility="Collapsed" Foreground="White" FontSize="50" FontFamily="Berlin Sans FB" Canvas.Left="186" Canvas.Top="185"/>
 
         <TextBlock x:Name="gameName" Text="Frogger" Foreground="LimeGreen" FontSize="25" FontFamily="Showcard Gothic" Canvas.Left="269" Canvas.Top="9"/>
         <TextBlock x:Name="livesLabel" Text="Lives:" Foreground="White" FontSize="22" FontFamily="Berlin Sans FB" Canvas.Left="13" Canvas.Top="15"/>
         <TextBlock x:Name="numberLives" Text="3" Foreground="White" FontSize="22" FontFamily="Berlin Sans FB" Canvas.Left="68" Canvas.Top="15"/>
 
-        <TextBlock x:Name="scoreLabel" Text="Score:" Foreground="White" FontSize="22" FontFamily="Berlin Sans FB" Canvas.Left="564" Canvas.Top="16"/>
-        <TextBlock x:Name="scoreValue" Text="0" Foreground="White" FontSize="22" FontFamily="Berlin Sans FB" Canvas.Left="621" Canvas.Top="16"/>
-        
+        <TextBlock x:Name="scoreLabel" Text="Score:" Foreground="White" FontSize="22" FontFamily="Berlin Sans FB" Canvas.Left="564" Canvas.Top="14"/>
+        <TextBlock x:Name="scoreValue" Text="0" Foreground="White" FontSize="22" FontFamily="Berlin Sans FB" Canvas.Left="621" Canvas.Top="14"/>
+
         <Rectangle Canvas.Top="55" Fill="Gray" Width="{StaticResource AppWidth}" Height="50" />
 
         <Rectangle Canvas.Top="355" Fill="Gray" Width="{StaticResource AppWidth}" Height="55" />

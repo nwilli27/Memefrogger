@@ -1,9 +1,10 @@
-﻿using System;
+﻿
 using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using FroggerStarter.Controller;
 using FroggerStarter.Model;
 
@@ -21,7 +22,6 @@ namespace FroggerStarter.View
         private readonly double applicationHeight = (double) Application.Current.Resources["AppHeight"];
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
         private readonly double highRoadYLocation = (double) Application.Current.Resources["HighRoadYLocation"];
-        private readonly double roadShoulderHeight = (double) Application.Current.Resources["RoadShoulderHeight"];
 
         private readonly GameManager gameManager;
 
@@ -41,7 +41,7 @@ namespace FroggerStarter.View
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
 
-            this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation, this.roadShoulderHeight);
+            this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation);
             this.gameManager.InitializeGame(this.canvas);
             this.gameManager.LifeLoss += this.onLifeLost;
             this.gameManager.ScoreIncremented += this.onPointScored;
@@ -83,7 +83,10 @@ namespace FroggerStarter.View
 
         private void onGameOver(object sender, GameOverEventArgs e)
         {
-            this.gameOver.Text = e.GameOver.ToString();
+            if (e.GameOver)
+            {
+                this.gameOver.Visibility = Visibility.Visible;
+            }
         }
 
         #endregion

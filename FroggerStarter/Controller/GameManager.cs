@@ -1,41 +1,44 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model;
-using System.Collections.Generic;
 
 namespace FroggerStarter.Controller
 {
     /// <summary>
     ///     Manages all aspects of the game play including moving the player,
-    ///     the Vehicles as well as lives and score.
+    ///     the obstacles as well as lives and score.
     /// </summary>
     public class GameManager
     {
         #region Data members
 
-        public EventHandler<LiveLossEventArgs> LifeLoss;
-        public EventHandler<ScoreUpdatedEventArgs> ScoreIncremented;
-        public EventHandler<GameOverEventArgs> GameOver;
-
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
         private readonly double highRoadYLocation;
-        private readonly double roadShoulderHeight;
 
         private Canvas gameCanvas;
         private Frog player;
-        private Player thePlayer;
-        private RoadManager roadManager;
+        private LaneManager laneManager;
+        private readonly PlayerStats playerStats;
         private DispatcherTimer timer;
-        private DispatcherTimer vehicleSpeedTimer;
+        private DispatcherTimer obstacleSpeedTimer;
+
+        #endregion
+
+        #region Events
+
+        public EventHandler<LiveLossEventArgs> LifeLoss;
+        public EventHandler<ScoreUpdatedEventArgs> ScoreIncremented;
+        public EventHandler<GameOverEventArgs> GameOver;
 
         #endregion
 
         #region Constants
 
         private const int BottomLaneOffset = 5;
+        private const int MaxScore = 3;
+        private const int RoadShoulderOffset = 50;
 
         #endregion
 
@@ -43,17 +46,23 @@ namespace FroggerStarter.Controller
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="GameManager" /> class.
-        ///     Precondition: none
-        ///     Post-condition: none
+        ///     Precondition: backgroundHeight > 0
+        ///                   backgroundWidth > 0
+        ///     Post-condition: this.backgroundHeight == backgroundHeight
+        ///                     this.backgroundWidth == backgroundWidth
+        ///                     this.highShouldYLocation == highRoadYLocation
+        ///                     
+        ///                     obstacleSpeedTimer.Start()
+        ///                     gameTimer.Start()
+        ///     
         /// </summary>
         /// <param name="backgroundHeight">Height of the background.</param>
         /// <param name="backgroundWidth">Width of the background.</param>
         /// <param name="highRoadYLocation">The high road y location.</param>
-        /// <param name="roadShoulderHeight">Height of the road shoulder.</param>
         /// <exception cref="ArgumentOutOfRangeException">backgroundHeight &lt;= 0
         /// or
         /// backgroundWidth &lt;= 0</exception>
-        public GameManager(double backgroundHeight, double backgroundWidth, double highRoadYLocation, double roadShoulderHeight)
+        public GameManager(double backgroundHeight, double backgroundWidth, double highRoadYLocation)
         {
             if (backgroundHeight <= 0)
             {
@@ -67,14 +76,10 @@ namespace FroggerStarter.Controller
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
             this.highRoadYLocation = highRoadYLocation;
-            this.roadShoulderHeight = roadShoulderHeight;
-
-            this.thePlayer = new Player();
-
-            //this.heightOfBottomRoad = this.backgroundHeight - (this.bottomRoadYLocation + BottomLaneOffset);
+            this.playerStats = new PlayerStats();
 
             this.setupGameTimer();
-            this.setupVehicleSpeedTimer();
+            this.setupObstacleSpeedTimer();
         }
 
         #endregion
@@ -82,8 +87,8 @@ namespace FroggerStarter.Controller
         #region Methods
 
         /// <summary>
-        ///     Initializes the game working with appropriate classes to play frog
-        ///     and vehicle on game screen.
+        ///     Initializes the game working with appropriate classes to place frog
+        ///     and obstacles on game screen.
         ///     Precondition: background != null
         ///     Post-condition: Game is initialized and ready for play.
         /// </summary>
@@ -94,13 +99,13 @@ namespace FroggerStarter.Controller
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
 
             this.createAndPlacePlayer();
-            this.createAndPlaceVehiclesInLanes();
+            this.createAndPlaceObstaclesInLanes();
         }
 
         /// <summary>
         ///     Moves the player to the left.
         ///     Precondition: none
-        ///     Post-condition: player.X = player.X@prev - player.Width
+        ///     Post-condition: player.X = player.X - player.SpeedX
         /// </summary>
         public void MovePlayerLeft()
         {
@@ -110,7 +115,7 @@ namespace FroggerStarter.Controller
         /// <summary>
         ///     Moves the player to the right.
         ///     Precondition: none
-        ///     Post-condition: player.X = player.X@prev + player.Width
+        ///     Post-condition: player.X = player.X + player.SpeedX
         /// </summary>
         public void MovePlayerRight()
         {
@@ -120,11 +125,11 @@ namespace FroggerStarter.Controller
         /// <summary>
         ///     Moves the player up.
         ///     Precondition: none
-        ///     Post-condition: player.Y = player.Y@prev - player.Height
+        ///     Post-condition: player.Y = player.Y - player.SpeedY
         /// </summary>
         public void MovePlayerUp()
         {
-            if (this.hasPlayerMadeItToTheHighRoad())
+            if (this.hasPlayerMadeItToHighRoad())
             {
                 this.setPlayerToCenterOfBottomLane();
                 this.pointScored();
@@ -138,7 +143,7 @@ namespace FroggerStarter.Controller
         /// <summary>
         ///     Moves the player down.
         ///     Precondition: none
-        ///     Post-condition: player.Y = player.Y@prev + player.Height
+        ///     Post-condition: player.Y = player.Y + player.SpeedY
         /// </summary>
         public void MovePlayerDown()
         {
@@ -157,12 +162,12 @@ namespace FroggerStarter.Controller
             this.timer.Start();
         }
 
-        private void setupVehicleSpeedTimer()
+        private void setupObstacleSpeedTimer()
         {
-            this.vehicleSpeedTimer = new DispatcherTimer();
-            this.vehicleSpeedTimer.Tick += this.vehicleSpeedTimerOnTick;
-            this.vehicleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
-            this.vehicleSpeedTimer.Start();
+            this.obstacleSpeedTimer = new DispatcherTimer();
+            this.obstacleSpeedTimer.Tick += this.obstacleSpeedTimerOnTick;
+            this.obstacleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
+            this.obstacleSpeedTimer.Start();
         }
 
         private void createAndPlacePlayer()
@@ -172,28 +177,24 @@ namespace FroggerStarter.Controller
             this.setPlayerToCenterOfBottomLane();
         }
 
-        private void createAndPlaceVehiclesInLanes()
+        private void createAndPlaceObstaclesInLanes()
         {
-            //TODO do something with starting/ending y locations.
-            this.roadManager = new RoadManager(this.backgroundWidth, this.getRoadStartingYLocation(), this.getRoadEndingYLocation());
+            this.laneManager = new LaneManager(this.backgroundWidth, this.getRoadStartingYLocation(), this.getRoadEndingYLocation());
 
-            this.roadManager.AddLaneOfVehicles(LaneDirection.Right, 2.5, VehicleType.Car, 3);
-            this.roadManager.AddLaneOfVehicles(LaneDirection.Left, 2.0, VehicleType.SemiTruck, 2);
-            this.roadManager.AddLaneOfVehicles(LaneDirection.Left, 1.5, VehicleType.Car, 3);
-            this.roadManager.AddLaneOfVehicles(LaneDirection.Right, 1.0, VehicleType.SemiTruck, 3);
-            this.roadManager.AddLaneOfVehicles(LaneDirection.Left, 0.5, VehicleType.Car, 2);
+            this.laneManager.AddLaneOfObstacles(LaneDirection.Right, 2.5, ObstacleType.Car, 3);
+            this.laneManager.AddLaneOfObstacles(LaneDirection.Left, 2.0, ObstacleType.SemiTruck, 2);
+            this.laneManager.AddLaneOfObstacles(LaneDirection.Left, 1.5, ObstacleType.Car, 3);
+            this.laneManager.AddLaneOfObstacles(LaneDirection.Right, 1.0, ObstacleType.SemiTruck, 3);
+            this.laneManager.AddLaneOfObstacles(LaneDirection.Left, 0.5, ObstacleType.Car, 2);
 
-            this.placeVehiclesOnCanvas();
+            this.placeObstaclesOnCanvas();
         }
 
-        private void placeVehiclesOnCanvas()
+        private void placeObstaclesOnCanvas()
         {
-            foreach (var currentLane in this.roadManager)
+            foreach (var currentObstacle in this.laneManager.Obstacles)
             {
-                foreach (Vehicle currentVehicle in currentLane)
-                {
-                    this.gameCanvas.Children.Add(currentVehicle.Sprite);
-                }
+                this.gameCanvas.Children.Add(currentObstacle.Sprite);
             }
         }
 
@@ -205,100 +206,100 @@ namespace FroggerStarter.Controller
 
         private void timerOnTick(object sender, object e)
         {
-            // TODO Update game state, e.g., move Vehicles, check for collision, etc.
-            this.roadManager.MoveAllVehicles();
-            this.checkForPlayerToVehicleCollision();
+            this.laneManager.MoveAllObstacles();
+            this.checkForPlayerToObstacleCollision();
         }
 
-        private void vehicleSpeedTimerOnTick(object sender, object e)
+        private void obstacleSpeedTimerOnTick(object sender, object e)
         {
-            this.roadManager.IncreaseSpeedOfVehicles();
+            this.laneManager.IncreaseSpeedOfObstacles(0.5);
         }
 
-        private void checkForPlayerToVehicleCollision()
+        private void resetObstaclesSpeedTimer()
         {
-            foreach (var currentLane in this.roadManager)
+            this.obstacleSpeedTimer.Stop();
+            this.obstacleSpeedTimer.Start();
+        }
+
+        private void checkForPlayerToObstacleCollision()
+        {
+            foreach (var currentObstacle in this.laneManager.Obstacles)
             {
-                foreach (Vehicle currentVehicle in currentLane)
+                if (this.player.HasCollidedWith(currentObstacle))
                 {
-                    if (this.player.HasCollidedWith(currentVehicle))
-                    {
-                        this.lifeLost();
+                    this.lifeLost();
 
-                        if (this.thePlayer.isOutOfLives())
-                        {
-                            this.timer.Stop();
-                            this.player.stopFrogMovement();
-                            this.gameOver();
-                        }
-                        else
-                        {
-                            this.setPlayerToCenterOfBottomLane();
-                            this.roadManager.SetAllVehiclesToDefaultSpeed();
-                        }
+                    if (this.playerStats.Lives == 0)
+                    {
+                        this.stopGamePlayAndShowGameOver();
+                    }
+                    else
+                    {
+                        this.setPlayerToCenterOfBottomLane();
+                        this.laneManager.SetAllObstaclesToDefaultSpeed();
+                        this.resetObstaclesSpeedTimer();
                     }
                 }
             }
         }
 
-        private bool hasPlayerMadeItToTheHighRoad()
+        private void stopGamePlayAndShowGameOver()
+        {
+            this.timer.Stop();
+            this.player.StopMovement();
+            this.gameOver();
+        }
+
+        private bool hasPlayerMadeItToHighRoad()
         {
             return this.player.Y - this.player.SpeedY <= this.highRoadYLocation;
         }
 
         private double getRoadStartingYLocation()
         {
-            return this.highRoadYLocation + this.roadShoulderHeight;
+            return this.highRoadYLocation + RoadShoulderOffset;
         }
 
         private double  getRoadEndingYLocation()
         {
-            return this.backgroundHeight - this.roadShoulderHeight - BottomLaneOffset;
+            return this.backgroundHeight - RoadShoulderOffset - BottomLaneOffset;
         }
 
         private void lifeLost()
         {
-            this.thePlayer.decrementLivesByOne();
-            var life = new LiveLossEventArgs() { Lives = this.thePlayer.Lives };
+            this.playerStats.decrementLivesByOne();
+            var life = new LiveLossEventArgs() { Lives = this.playerStats.Lives };
             this.LifeLoss?.Invoke(this, life);
         }
 
         private void pointScored()
         {
-            this.thePlayer.incrementScoreByOne();
-            var score = new ScoreUpdatedEventArgs() {Score = this.thePlayer.Score};
+            this.playerStats.incrementScoreByOne();
+            var score = new ScoreUpdatedEventArgs() {Score = this.playerStats.Score};
             this.ScoreIncremented?.Invoke(this, score);
 
-            if (this.thePlayer.scoredThreePoints())
+            if (this.playerStats.Score == MaxScore)
             {
-                this.timer.Stop();
-                this.player.stopFrogMovement();
-                this.gameOver();
+                this.stopGamePlayAndShowGameOver();
             }
         }
 
         private void gameOver()
         {
-            var gameOver = new GameOverEventArgs() { GameOver = "GAME OVER" };
+            var gameOver = new GameOverEventArgs() { GameOver = true };
             this.GameOver?.Invoke(this, gameOver);
         }
 
         #endregion
     }
 
-    public class LiveLossEventArgs : EventArgs
-    {
-        public int Lives { get; set; }
-    }
-
-    public class ScoreUpdatedEventArgs : EventArgs
-    {
-        public int Score { get; set; }
-    }
-
+    /// <summary>
+    ///     Holds the Game Over display for the game over event.
+    /// </summary>
+    /// <seealso cref="System.EventArgs" />
     public class GameOverEventArgs : EventArgs
     {
-        public string GameOver { get; set; }
+        public bool GameOver { get; set; }
     }
 
 }
