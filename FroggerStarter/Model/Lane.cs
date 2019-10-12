@@ -46,7 +46,8 @@ namespace FroggerStarter.Model
         #region Methods
 
         /// <summary>
-        ///     Adds a specified number of obstacles to the lane of a specified obstacle type.
+        ///     Adds a specified number of obstacles to the lane of a specified obstacle type, then
+        ///     readjusts their X coordinate spacing accordingly.
         ///     Precondition: none
         ///     Post-condition: this.obstacles.Count == numberOfObstacles
         /// </summary>
@@ -75,20 +76,11 @@ namespace FroggerStarter.Model
                 switch (this.laneDirection)
                 {
                     case LaneDirection.Left:
-
-                        if (hasObstacleMovedOffLeftSide(currentObstacle))
-                        {
-                            currentObstacle.X = this.laneWidth;
-                        }
-                        currentObstacle.MoveLeft();
+                        this.moveObstacleToTheLeft(currentObstacle);
                         break;
 
                     case LaneDirection.Right:
-                        if (this.hasObstacleMovedOffRightSide(currentObstacle))
-                        {
-                            currentObstacle.X = -currentObstacle.Width;
-                        }
-                        currentObstacle.MoveRight();
+                        this.moveObstacleToTheRight(currentObstacle);
                         break;
 
                     default:
@@ -176,6 +168,26 @@ namespace FroggerStarter.Model
 
         #region Private Helpers
 
+        private void moveObstacleToTheRight(GameObject currentObstacle)
+        {
+            if (this.hasObstacleMovedOffRightSide(currentObstacle))
+            {
+                currentObstacle.X = -currentObstacle.Width;
+            }
+
+            currentObstacle.MoveRight();
+        }
+
+        private void moveObstacleToTheLeft(GameObject currentObstacle)
+        {
+            if (hasObstacleMovedOffLeftSide(currentObstacle))
+            {
+                currentObstacle.X = this.laneWidth;
+            }
+
+            currentObstacle.MoveLeft();
+        }
+
         private bool hasObstacleMovedOffRightSide(GameObject currentObstacle)
         {
             return currentObstacle.X + currentObstacle.SpeedX > this.laneWidth;
@@ -202,7 +214,7 @@ namespace FroggerStarter.Model
                     break;
 
                 case LaneDirection.Right:
-                    obstacle.FlipSpriteHorizontally();
+                    obstacle.FlipObstacleSpriteHorizontally();
                     this.obstacles.Add(obstacle);
                     break;
 

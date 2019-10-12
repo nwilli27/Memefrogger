@@ -15,6 +15,11 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     The semi truck sprite type
         /// </summary>
-        SemiTruck
+        SemiTruck,
+
+        /// <summary>
+        ///     The toad truck sprite type
+        /// </summary>
+        ToadTruck
     }
 }

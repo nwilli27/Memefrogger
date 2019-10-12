@@ -13,7 +13,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The score.
         /// </value>
-        public int Score { get; private set; }
+        public int Score { get; set; }
 
         /// <summary>
         ///     Gets the lives.
@@ -21,27 +21,8 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The lives.
         /// </value>
-        public int Lives { get; private set; } = 3;
+        public int Lives { get; set; }
 
-        /// <summary>
-        ///     Decrements the lives by one.
-        ///     Precondition: none
-        ///     Post-condition: this.Lives--
-        /// </summary>
-        public void decrementLivesByOne()
-        {
-            this.Lives--;
-        }
-
-        /// <summary>
-        ///     Increments the score by one
-        ///     Precondition: none
-        ///     Post-condition: this.Score++
-        /// </summary>
-        public void incrementScoreByOne()
-        {
-            this.Score++;
-        }
     }
 
     /// <summary>

@@ -11,8 +11,6 @@
     Width= "97.875">
 
     <Canvas Margin="0,-2,2,2">
-        
-        <Rectangle Height="33" Width="68" Fill="White" Canvas.Left="30" Canvas.Top="3"/>
         <Rectangle Height="28" Width="16" Fill="DarkBlue" Canvas.Left="11" Canvas.Top="8"/>
         <Rectangle Height="26.25" Width="16" Fill="DarkBlue" Canvas.Left="5.751" Canvas.Top="14.875" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Rectangle.RenderTransform>
@@ -26,7 +24,7 @@
             </Ellipse.RenderTransform>
         </Ellipse>
 
-
+        <Rectangle Height="31" Width="68" Fill="White" Canvas.Left="30" Canvas.Top="5"/>
 
 
         <Ellipse Width="11" Height="11" Fill="Black" Canvas.Left="5" Canvas.Top="31"/>
@@ -62,6 +60,7 @@
                 <CompositeTransform Rotation="-3.902" TranslateX="-0.018" TranslateY="-0.011"/>
             </Ellipse.RenderTransform>
         </Ellipse>
+
         <Ellipse Width="3.44" Height="4.257" Fill="White" Canvas.Left="16.545" Canvas.Top="10.25" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
                 <CompositeTransform Rotation="-83.909"/>
@@ -152,16 +151,6 @@
                 <CompositeTransform Rotation="-90"/>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Ellipse Height="26.643" Width="26.643" Fill="red" Canvas.Left="51.04" Canvas.Top="6.665" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="30.357" TranslateX="0.014" TranslateY="-0.006"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Height="22.706" Width="22.667" Fill="White" Canvas.Left="53.092" Canvas.Top="8.698" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-6.09" TranslateX="-0.041" TranslateY="-0.029"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
         <Rectangle Height="5" Width="3.874" Fill="Black" Canvas.Top="23" RenderTransformOrigin="0.5,0.5" Canvas.Left="0.625" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Rectangle.RenderTransform>
                 <CompositeTransform Rotation="179.752"/>
@@ -189,11 +178,101 @@
             </Ellipse.RenderTransform>
         </Ellipse>
         <Rectangle Height="2" Width="68" Fill="Silver" Canvas.Left="30" Canvas.Top="3"/>
-        <Rectangle Height="2" Width="24.802" Fill="Red" Canvas.Left="52.279" Canvas.Top="18.901" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Rectangle Height="2" Width="20" Fill="Black" Canvas.Left="54.45" Canvas.Top="25.459" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-42.036"/>
+                <CompositeTransform Rotation="-28.234"/>
             </Rectangle.RenderTransform>
         </Rectangle>
+        <Rectangle Height="2" Width="21" Fill="Black" Canvas.Left="53.395" Canvas.Top="25.199" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-149.653"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Ellipse Height="3" Width="4" Fill="Black" Canvas.Left="53.742" Canvas.Top="19.504" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="72.574" TranslateX="-0.041" TranslateY="-0.029" ScaleY="1.073" ScaleX="0.932" SkewX="-2.359"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Height="3" Width="4" Fill="Black" Canvas.Left="52.278" Canvas.Top="21.539" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-20.616" TranslateX="-0.041" TranslateY="-0.029" ScaleY="1.01" ScaleX="0.99" SkewX="3.068"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Height="3" Width="4" Fill="Black" Canvas.Left="53.761" Canvas.Top="29.534" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-146.644" TranslateX="-1.355" TranslateY="-0.081" ScaleY="1.022" ScaleX="0.978" SkewY="-3.908"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Height="3" Width="4" Fill="Black" Canvas.Left="52.453" Canvas.Top="31.157" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-91.958" TranslateX="1.273" TranslateY="0.023" ScaleY="1.08" ScaleX="0.926" SkewY="-0.325"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Height="3" Width="4" Fill="Black" Canvas.Left="72.063" Canvas.Top="19.99" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-150.604" TranslateX="0.225" TranslateY="1.831" ScaleY="1.018" ScaleX="0.983" SkewY="-3.607"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Height="3" Width="4" Fill="Black" Canvas.Left="71.316" Canvas.Top="21.701" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="113.113" TranslateX="-0.307" TranslateY="-1.889" ScaleY="1.066" ScaleX="0.938" SkewY="3.344"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Height="3" Width="4" Fill="Black" Canvas.Left="70.643" Canvas.Top="29.744" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-83.137" TranslateX="-1.11" TranslateY="1.753"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Height="3" Width="4" Fill="Black" Canvas.Left="69.428" Canvas.Top="30.372" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-45.145" TranslateX="1.832" TranslateY="-1.495"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Rectangle Height="2" Width="20" Fill="Black" Canvas.Left="53.355" Canvas.Top="26.715" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-147.7" ScaleY="1.021" ScaleX="0.979" SkewY="-3.834"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Height="2" Width="19" Fill="Black" Canvas.Left="55.325" Canvas.Top="26.502" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-26.44" ScaleY="1.016" ScaleX="0.984" SkewX="3.665"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Height="2" Width="19" Fill="Black" Canvas.Left="54.789" Canvas.Top="25.483" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-27.529" ScaleY="1.018" ScaleX="0.983" SkewX="3.759"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Height="2" Width="19" Fill="Black" Canvas.Left="54.908" Canvas.Top="25.843" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="27.407" ScaleY="1.017" ScaleX="0.983" SkewX="-3.749"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Ellipse Width="18" Height="12" Fill="Black" Canvas.Left="55" Canvas.Top="6"/>
+        <Rectangle Height="6" Width="10" Fill="Black" Canvas.Left="59" Canvas.Top="15"/>
+        <Ellipse Width="5" Height="4" Fill="White" Canvas.Left="58" Canvas.Top="10"/>
+        <Ellipse Width="5" Height="4" Fill="White" Canvas.Left="65" Canvas.Top="10"/>
+        <Rectangle Height="1" Width="2" Fill="White" Canvas.Left="59.873" Canvas.Top="19.567" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-90" ScaleY="-1"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Height="1" Width="2" Fill="White" Canvas.Left="66.313" Canvas.Top="19.567" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-90" ScaleY="-1"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Height="1" Width="2" Fill="White" Canvas.Left="64.073" Canvas.Top="19.567" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-90" ScaleY="-1"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Height="1" Width="2" Fill="White" Canvas.Left="61.973" Canvas.Top="19.567" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-90" ScaleY="-1"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
 
     </Canvas>
 </local:BaseSprite>

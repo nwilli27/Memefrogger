@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Numerics;
-using Windows.UI.Composition.Scenes;
-using Windows.UI.Xaml.Media;
 using FroggerStarter.View.Sprites;
 using Point = Windows.Foundation.Point;
 
@@ -138,17 +135,6 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        ///     Flips the sprite horizontally.
-        ///     Precondition: none
-        ///     Post-condition: none
-        /// </summary>
-        public void FlipSpriteHorizontally()
-        {
-            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-            this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
-        }
-
-        /// <summary>
         ///     Determines whether [has collided with] [the specified other game object].
         ///     Precondition: otherGameObject != null
         ///     Post-condition: none
@@ -194,29 +180,6 @@ namespace FroggerStarter.Model
         private void render()
         {
             this.Sprite.RenderAt(this.X, this.Y);
-        }
-
-        /// <summary>
-        ///     Sets the speed of the game object.
-        ///     Precondition: speedX >= 0 AND speedY >=0
-        ///     Post-condition: SpeedX == speedX AND SpeedY == speedY
-        /// </summary>
-        /// <param name="speedX">The speed x.</param>
-        /// <param name="speedY">The speed y.</param>
-        public void SetSpeed(double speedX, double speedY)
-        {
-            if (speedX < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(speedX));
-            }
-
-            if (speedY < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(speedY));
-            }
-
-            this.SpeedX = speedX;
-            this.SpeedY = speedY;
         }
 
         #endregion

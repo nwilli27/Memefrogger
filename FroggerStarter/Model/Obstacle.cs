@@ -1,4 +1,6 @@
 ﻿using System;
+using Windows.Foundation;
+using Windows.UI.Xaml.Media;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model
@@ -34,9 +36,24 @@ namespace FroggerStarter.Model
                     Sprite = new SemiTruckSprite();
                     break;
 
+                case ObstacleType.ToadTruck:
+                    Sprite = new ToadTruckSprite();
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(obstacleType), obstacleType, null);
             }
+        }
+
+        /// <summary>
+        ///     Flips the game object horizontally.
+        ///     Precondition: none
+        ///     Post-condition: none
+        /// </summary>
+        public void FlipObstacleSpriteHorizontally()
+        {
+            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
         }
     }
 }

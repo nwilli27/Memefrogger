@@ -1,5 +1,4 @@
 ﻿
-using System;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model
@@ -28,7 +27,8 @@ namespace FroggerStarter.Model
         public Frog()
         {
             Sprite = new FrogSprite();
-            SetSpeed(SpeedXDirection, SpeedYDirection);
+            this.SpeedX = SpeedXDirection;
+            this.SpeedY = SpeedYDirection;
         }
 
         /// <summary>

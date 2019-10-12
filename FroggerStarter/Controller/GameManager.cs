@@ -38,6 +38,7 @@ namespace FroggerStarter.Controller
 
         private const int BottomLaneOffset = 5;
         private const int MaxScore = 3;
+        private const int TotalNumberOfLives = 3;
         private const int RoadShoulderOffset = 50;
 
         #endregion
@@ -76,7 +77,11 @@ namespace FroggerStarter.Controller
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
             this.highRoadYLocation = highRoadYLocation;
-            this.playerStats = new PlayerStats();
+
+            this.playerStats = new PlayerStats() {
+                Score = 0,
+                Lives = TotalNumberOfLives
+            };
 
             this.setupGameTimer();
             this.setupObstacleSpeedTimer();
@@ -166,7 +171,7 @@ namespace FroggerStarter.Controller
         {
             this.obstacleSpeedTimer = new DispatcherTimer();
             this.obstacleSpeedTimer.Tick += this.obstacleSpeedTimerOnTick;
-            this.obstacleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
+            this.obstacleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 2, 0);
             this.obstacleSpeedTimer.Start();
         }
 
@@ -185,7 +190,7 @@ namespace FroggerStarter.Controller
             this.laneManager.AddLaneOfObstacles(LaneDirection.Left, 2.0, ObstacleType.SemiTruck, 2);
             this.laneManager.AddLaneOfObstacles(LaneDirection.Left, 1.5, ObstacleType.Car, 3);
             this.laneManager.AddLaneOfObstacles(LaneDirection.Right, 1.0, ObstacleType.SemiTruck, 3);
-            this.laneManager.AddLaneOfObstacles(LaneDirection.Left, 0.5, ObstacleType.Car, 2);
+            this.laneManager.AddLaneOfObstacles(LaneDirection.Left, 0.5, ObstacleType.ToadTruck, 2);
 
             this.placeObstaclesOnCanvas();
         }
@@ -212,7 +217,7 @@ namespace FroggerStarter.Controller
 
         private void obstacleSpeedTimerOnTick(object sender, object e)
         {
-            this.laneManager.IncreaseSpeedOfObstacles(0.5);
+            this.laneManager.IncreaseSpeedOfObstacles(0.25);
         }
 
         private void resetObstaclesSpeedTimer()
@@ -267,15 +272,15 @@ namespace FroggerStarter.Controller
 
         private void lifeLost()
         {
-            this.playerStats.decrementLivesByOne();
+            this.playerStats.Lives--;
             var life = new LiveLossEventArgs() { Lives = this.playerStats.Lives };
             this.LifeLoss?.Invoke(this, life);
         }
 
         private void pointScored()
         {
-            this.playerStats.incrementScoreByOne();
-            var score = new ScoreUpdatedEventArgs() {Score = this.playerStats.Score};
+            this.playerStats.Score++;
+            var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
             this.ScoreIncremented?.Invoke(this, score);
 
             if (this.playerStats.Score == MaxScore)

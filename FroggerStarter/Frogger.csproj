@@ -142,6 +142,9 @@
       <DependentUpon>FrogSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\ISpriteRenderer.cs" />
+    <Compile Include="View\Sprites\ToadTruckSprite.xaml.cs">
+      <DependentUpon>ToadTruckSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\SemiTruckSprite.xaml.cs">
       <DependentUpon>SemiTruckSprite.xaml</DependentUpon>
     </Compile>
@@ -181,6 +184,10 @@
     <Page Include="View\Sprites\FrogSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\ToadTruckSprite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Sprites\SemiTruckSprite.xaml">
       <SubType>Designer</SubType>
