@@ -7,7 +7,7 @@ namespace FroggerStarter.Controller
 {
     /// <summary>
     ///     Manages all aspects of the game play including moving the player,
-    ///     the obstacles as well as lives and score.
+    ///     the obstacles, lives, and score.
     /// </summary>
     public class GameManager
     {
@@ -20,7 +20,7 @@ namespace FroggerStarter.Controller
         private Canvas gameCanvas;
         private Frog player;
         private LaneManager laneManager;
-        private readonly PlayerStats playerStats;
+        private PlayerStats playerStats;
         private DispatcherTimer timer;
         private DispatcherTimer obstacleSpeedTimer;
 
@@ -28,8 +28,8 @@ namespace FroggerStarter.Controller
 
         #region Events
 
-        public EventHandler<LiveLossEventArgs> LifeLoss;
-        public EventHandler<ScoreUpdatedEventArgs> ScoreIncremented;
+        public EventHandler<LivesUpdatedEventArgs> LifeLoss;
+        public EventHandler<ScoreUpdatedEventArgs> ScoreUpdated;
         public EventHandler<GameOverEventArgs> GameOver;
 
         #endregion
@@ -37,9 +37,9 @@ namespace FroggerStarter.Controller
         #region Constants
 
         private const int BottomLaneOffset = 5;
-        private const int MaxScore = 3;
-        private const int TotalNumberOfLives = 3;
         private const int RoadShoulderOffset = 50;
+        private const int TotalNumberOfLives = 3;
+        private const int MaxScore = 3;
 
         #endregion
 
@@ -78,11 +78,6 @@ namespace FroggerStarter.Controller
             this.backgroundWidth = backgroundWidth;
             this.highRoadYLocation = highRoadYLocation;
 
-            this.playerStats = new PlayerStats() {
-                Score = 0,
-                Lives = TotalNumberOfLives
-            };
-
             this.setupGameTimer();
             this.setupObstacleSpeedTimer();
         }
@@ -105,6 +100,7 @@ namespace FroggerStarter.Controller
 
             this.createAndPlacePlayer();
             this.createAndPlaceObstaclesInLanes();
+            this.setupPlayerStatsAndHud();
         }
 
         /// <summary>
@@ -171,7 +167,7 @@ namespace FroggerStarter.Controller
         {
             this.obstacleSpeedTimer = new DispatcherTimer();
             this.obstacleSpeedTimer.Tick += this.obstacleSpeedTimerOnTick;
-            this.obstacleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 2, 0);
+            this.obstacleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
             this.obstacleSpeedTimer.Start();
         }
 
@@ -217,7 +213,7 @@ namespace FroggerStarter.Controller
 
         private void obstacleSpeedTimerOnTick(object sender, object e)
         {
-            this.laneManager.IncreaseSpeedOfObstacles(0.25);
+            this.laneManager.IncreaseSpeedOfObstacles(0.15);
         }
 
         private void resetObstaclesSpeedTimer()
@@ -265,7 +261,7 @@ namespace FroggerStarter.Controller
             return this.highRoadYLocation + RoadShoulderOffset;
         }
 
-        private double  getRoadEndingYLocation()
+        private double getRoadEndingYLocation()
         {
             return this.backgroundHeight - RoadShoulderOffset - BottomLaneOffset;
         }
@@ -273,7 +269,7 @@ namespace FroggerStarter.Controller
         private void lifeLost()
         {
             this.playerStats.Lives--;
-            var life = new LiveLossEventArgs() { Lives = this.playerStats.Lives };
+            var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
             this.LifeLoss?.Invoke(this, life);
         }
 
@@ -281,7 +277,7 @@ namespace FroggerStarter.Controller
         {
             this.playerStats.Score++;
             var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
-            this.ScoreIncremented?.Invoke(this, score);
+            this.ScoreUpdated?.Invoke(this, score);
 
             if (this.playerStats.Score == MaxScore)
             {
@@ -295,6 +291,20 @@ namespace FroggerStarter.Controller
             this.GameOver?.Invoke(this, gameOver);
         }
 
+        private void setupPlayerStatsAndHud()
+        {
+            this.playerStats = new PlayerStats()
+            {
+                Score = 0,
+                Lives = TotalNumberOfLives,
+            };
+
+            var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
+            this.ScoreUpdated?.Invoke(this, score);
+            var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
+            this.LifeLoss?.Invoke(this, life);
+        }
+
         #endregion
     }
 
@@ -304,6 +314,12 @@ namespace FroggerStarter.Controller
     /// <seealso cref="System.EventArgs" />
     public class GameOverEventArgs : EventArgs
     {
+        /// <summary>
+        ///     Gets or sets a value indicating whether [game over].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [game over]; otherwise, <c>false</c>.
+        /// </value>
         public bool GameOver { get; set; }
     }
 

@@ -50,6 +50,7 @@ namespace FroggerStarter.Model
         ///     readjusts their X coordinate spacing accordingly.
         ///     Precondition: none
         ///     Post-condition: this.obstacles.Count == numberOfObstacles
+        ///                     @each obstacle.X is spaced accordingly on lane
         /// </summary>
         /// <param name="obstacleType">Type of the obstacle.</param>
         /// <param name="numberOfObstacles">The number of obstacles.</param>
@@ -66,7 +67,7 @@ namespace FroggerStarter.Model
         ///     Moves all obstacles according to which direction the lane is going.
         ///     If the object moves past the lane boundary, its placed back on the other end of the lane.
         ///     Precondition: none
-        ///     Post-condition: @each in this.obstacles.X +- obstacle.SpeedX
+        ///     Post-condition: @each in this.obstacles.X +/- obstacle.SpeedX
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">When lane direction isn't available</exception>
         public void MoveObstacles()
@@ -90,9 +91,9 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        ///     Increases the speed of all obstacles by 0.5.
+        ///     Increases the speed of all obstacles by [speed]
         ///     Precondition: none
-        ///     Post-condition: @each in this.obstacles : obstacle.SpeedX += 0.5
+        ///     Post-condition: @each in this.obstacles : obstacle.SpeedX += [speed]
         /// </summary>  
         public void IncreaseSpeedOfObstacles(double speed)
         {
@@ -118,18 +119,13 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Sets all obstacles to the specified yLocation and are aligned
         ///     vertically within the height of the lane.
-        ///     Precondition: heightOfLane gt; 0
+        ///     Precondition: none
         ///     Post-condition: @each obstacle in this.obstacles : obstacle.Y == verticalYAlignment
         /// </summary>
         /// <param name="yLocation">The y location.</param>
         /// <param name="heightOfLane">The height of lane.</param>
         public void SetObstaclesToLaneYLocation(double yLocation, double heightOfLane)
         {
-            if (heightOfLane <= 0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
             foreach (var currentObstacle in this.obstacles)
             {
                 var verticalYAlignment = getCenteredYLocationOfLane(currentObstacle, yLocation, heightOfLane);
@@ -174,7 +170,6 @@ namespace FroggerStarter.Model
             {
                 currentObstacle.X = -currentObstacle.Width;
             }
-
             currentObstacle.MoveRight();
         }
 
@@ -184,7 +179,6 @@ namespace FroggerStarter.Model
             {
                 currentObstacle.X = this.laneWidth;
             }
-
             currentObstacle.MoveLeft();
         }
 
@@ -193,12 +187,12 @@ namespace FroggerStarter.Model
             return currentObstacle.X + currentObstacle.SpeedX > this.laneWidth;
         }
 
-        private static bool hasObstacleMovedOffLeftSide(GameObject currentObstacle)
+        private bool hasObstacleMovedOffLeftSide(GameObject currentObstacle)
         {
             return currentObstacle.X + currentObstacle.SpeedX < -currentObstacle.Width;
         }
 
-        private static double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)
+        private double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)
         {
             return ((heightOfLane - obstacle.Height) / 2) + yLocation;
         }

@@ -73,12 +73,16 @@ namespace FroggerStarter.Model
 
         /// <summary>
         ///     Increases the speed of all obstacles in all lanes by the set speed.
-        ///     Precondition: none
+        ///     Precondition: speed > 0
         ///     Post-condition: @each obstacle in this.lanes.SpeedX += speed
         /// </summary>
         /// <param name="speed">The speed to increase by.</param>
         public void IncreaseSpeedOfObstacles(double speed)
         {
+            if (speed <= 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
             foreach (var currentLane in this.lanes)
             {
                 currentLane.IncreaseSpeedOfObstacles(speed);

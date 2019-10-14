@@ -41,10 +41,10 @@ namespace FroggerStarter.View
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
 
             this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation);
-            this.gameManager.InitializeGame(this.canvas);
-            this.gameManager.LifeLoss += this.onLifeLost;
-            this.gameManager.ScoreIncremented += this.onPointScored;
+            this.gameManager.LifeLoss += this.onLivesUpdated;
+            this.gameManager.ScoreUpdated += this.onScoreUpdated;
             this.gameManager.GameOver += this.onGameOver;
+            this.gameManager.InitializeGame(this.canvas);
         }
 
         #endregion
@@ -70,12 +70,12 @@ namespace FroggerStarter.View
             }
         }
 
-        private void onLifeLost(object sender, LiveLossEventArgs e)
+        private void onLivesUpdated(object sender, LivesUpdatedEventArgs e)
         {
             this.numberLives.Text = e.Lives.ToString();
         }
 
-        private void onPointScored(object sender, ScoreUpdatedEventArgs e)
+        private void onScoreUpdated(object sender, ScoreUpdatedEventArgs e)
         {
             this.scoreValue.Text = e.Score.ToString();
         }

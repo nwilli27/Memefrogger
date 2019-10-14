@@ -29,8 +29,14 @@ namespace FroggerStarter.Model
     ///     Holds the numbers of lives for the life update event.
     /// </summary>
     /// <seealso cref="System.EventArgs" />
-    public class LiveLossEventArgs : EventArgs
+    public class LivesUpdatedEventArgs : EventArgs
     {
+        /// <summary>
+        ///     Gets or sets the lives.
+        /// </summary>
+        /// <value>
+        ///     The lives.
+        /// </value>
         public int Lives { get; set; }
     }
 
@@ -40,6 +46,12 @@ namespace FroggerStarter.Model
     /// <seealso cref="System.EventArgs" />
     public class ScoreUpdatedEventArgs : EventArgs
     {
+        /// <summary>
+        ///     Gets or sets the score.
+        /// </summary>
+        /// <value>
+        ///     The score.
+        /// </value>
         public int Score { get; set; }
     }
 
