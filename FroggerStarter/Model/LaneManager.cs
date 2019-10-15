@@ -112,11 +112,11 @@ namespace FroggerStarter.Model
         ///                     lane.obstacles.Count += numberOfObstacles
         ///                     @each lane yLocation readjusts accordingly
         /// </summary>
-        /// <param name="laneDirection">The lane direction.</param>
+        /// <param name="direction">The lane direction.</param>
         /// <param name="defaultSpeed">The default speed.</param>
         /// <param name="obstacleType">Type of the obstacle.</param>
         /// <param name="numberOfObstacles">The number of obstacles.</param>
-        public void AddLaneOfObstacles(LaneDirection laneDirection, double defaultSpeed, ObstacleType obstacleType, int numberOfObstacles)
+        public void AddLaneOfObstacles(Direction direction, double defaultSpeed, ObstacleType obstacleType, int numberOfObstacles)
         {
             if (numberOfObstacles <= 0)
             {
@@ -127,7 +127,7 @@ namespace FroggerStarter.Model
                 throw new ArgumentOutOfRangeException();
             }
 
-            var lane = new Lane(this.width, defaultSpeed, laneDirection);
+            var lane = new Lane(this.width, defaultSpeed, direction);
             lane.AddObstacles(obstacleType, numberOfObstacles);
             this.lanes.Add(lane);
             this.updateYLocationOfLanes();

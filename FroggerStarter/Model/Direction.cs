@@ -3,18 +3,18 @@
 namespace FroggerStarter.Model
 {
     /// <summary>
-    ///     Enums that specifies the direction of a lane
+    ///     Enums that specifies the direction of anything
     /// </summary>
-    public enum LaneDirection
+    public enum Direction
     {
 
         /// <summary>
-        ///     The direction of the lane is going right
+        ///     The direction is going right
         /// </summary>
         Right,
 
         /// <summary>
-        ///     The direction of the lane is going left
+        ///     The direction is going left
         /// </summary>
         Left
     }

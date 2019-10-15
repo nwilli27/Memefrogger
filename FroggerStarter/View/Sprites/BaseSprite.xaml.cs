@@ -25,6 +25,8 @@ namespace FroggerStarter.View.Sprites
 
         #region Methods
 
+        #endregion
+
         /// <summary>
         /// Renders user control at the specified (x,y) location in relation
         /// to the top, left part of the canvas.
@@ -36,7 +38,5 @@ namespace FroggerStarter.View.Sprites
             Canvas.SetLeft(this, x);
             Canvas.SetTop(this, y);
         }
-
-        #endregion
     }
 }

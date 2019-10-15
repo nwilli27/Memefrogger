@@ -50,7 +50,7 @@ namespace FroggerStarter.Model
         ///     Precondition: none
         ///     Post-condition: none
         /// </summary>
-        public void FlipObstacleSpriteHorizontally()
+        public void FlipSpriteHorizontally()
         {
             this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
             this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };

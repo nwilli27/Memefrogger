@@ -182,11 +182,11 @@ namespace FroggerStarter.Controller
         {
             this.laneManager = new LaneManager(this.backgroundWidth, this.getRoadStartingYLocation(), this.getRoadEndingYLocation());
 
-            this.laneManager.AddLaneOfObstacles(LaneDirection.Right, 2.5, ObstacleType.Car, 3);
-            this.laneManager.AddLaneOfObstacles(LaneDirection.Left, 2.0, ObstacleType.SemiTruck, 2);
-            this.laneManager.AddLaneOfObstacles(LaneDirection.Left, 1.5, ObstacleType.Car, 3);
-            this.laneManager.AddLaneOfObstacles(LaneDirection.Right, 1.0, ObstacleType.SemiTruck, 3);
-            this.laneManager.AddLaneOfObstacles(LaneDirection.Left, 0.5, ObstacleType.ToadTruck, 2);
+            this.laneManager.AddLaneOfObstacles(Direction.Right, 2.5, ObstacleType.Car, 3);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 2.0, ObstacleType.SemiTruck, 2);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.5, ObstacleType.Car, 3);
+            this.laneManager.AddLaneOfObstacles(Direction.Right, 1.0, ObstacleType.SemiTruck, 3);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 0.5, ObstacleType.ToadTruck, 2);
 
             this.placeObstaclesOnCanvas();
         }

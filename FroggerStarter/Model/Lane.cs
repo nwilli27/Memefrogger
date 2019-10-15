@@ -15,8 +15,8 @@ namespace FroggerStarter.Model
         #region Data Members
 
         private readonly ICollection<Obstacle> obstacles;
-        private readonly LaneDirection laneDirection;
-        private readonly double laneWidth;
+        private readonly Direction direction;
+        private readonly double width;
         private readonly double defaultSpeed;
 
         #endregion
@@ -27,17 +27,18 @@ namespace FroggerStarter.Model
         ///     Initializes a new instance of the <see cref="Lane"/> class.
         ///     Precondition: none
         ///     Post-condition: this.obstacles.Count == 0
-        ///                     this.laneDirection = laneDirection
+        ///                     this.width = width
+        ///                     this.direction = direction
         ///                     this.defaultSpeed = defaultSpeed
         /// </summary> 
-        /// <param name="laneDirection">The direction the obstacles are moving in the lane</param>
-        /// <param name="laneWidth">The width of the lane</param>
+        /// <param name="direction">The direction the obstacles are moving in the lane</param>
+        /// <param name="width">The width of the lane</param>
         /// <param name="defaultSpeed">The default speed of all obstacles</param>
-        public Lane(double laneWidth, double defaultSpeed, LaneDirection laneDirection)
+        public Lane(double width, double defaultSpeed, Direction direction)
         {
             this.obstacles = new Collection<Obstacle>();
-            this.laneDirection = laneDirection;
-            this.laneWidth = laneWidth;
+            this.direction = direction;
+            this.width = width;
             this.defaultSpeed = defaultSpeed;
         }
 
@@ -74,13 +75,13 @@ namespace FroggerStarter.Model
         {
             foreach (var currentObstacle in this.obstacles)
             {
-                switch (this.laneDirection)
+                switch (this.direction)
                 {
-                    case LaneDirection.Left:
+                    case Direction.Left:
                         this.moveObstacleToTheLeft(currentObstacle);
                         break;
 
-                    case LaneDirection.Right:
+                    case Direction.Right:
                         this.moveObstacleToTheRight(currentObstacle);
                         break;
 
@@ -175,16 +176,16 @@ namespace FroggerStarter.Model
 
         private void moveObstacleToTheLeft(GameObject currentObstacle)
         {
-            if (hasObstacleMovedOffLeftSide(currentObstacle))
+            if (this.hasObstacleMovedOffLeftSide(currentObstacle))
             {
-                currentObstacle.X = this.laneWidth;
+                currentObstacle.X = this.width;
             }
             currentObstacle.MoveLeft();
         }
 
         private bool hasObstacleMovedOffRightSide(GameObject currentObstacle)
         {
-            return currentObstacle.X + currentObstacle.SpeedX > this.laneWidth;
+            return currentObstacle.X + currentObstacle.SpeedX > this.width;
         }
 
         private bool hasObstacleMovedOffLeftSide(GameObject currentObstacle)
@@ -192,7 +193,7 @@ namespace FroggerStarter.Model
             return currentObstacle.X + currentObstacle.SpeedX < -currentObstacle.Width;
         }
 
-        private double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)
+        private static double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)
         {
             return ((heightOfLane - obstacle.Height) / 2) + yLocation;
         }
@@ -201,14 +202,14 @@ namespace FroggerStarter.Model
         {
             obstacle.SpeedX = this.defaultSpeed;
 
-            switch (this.laneDirection)
+            switch (this.direction)
             {
-                case LaneDirection.Left:
+                case Direction.Left:
                     this.obstacles.Add(obstacle);
                     break;
 
-                case LaneDirection.Right:
-                    obstacle.FlipObstacleSpriteHorizontally();
+                case Direction.Right:
+                    obstacle.FlipSpriteHorizontally();
                     this.obstacles.Add(obstacle);
                     break;
 
@@ -230,7 +231,7 @@ namespace FroggerStarter.Model
 
         private double getSpacingBetweenObstacles()
         {
-            return this.laneWidth / this.obstacles.Count;
+            return this.width / this.obstacles.Count;
         }
 
         #endregion
