@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.Foundation;
 using Windows.UI.Xaml.Media;
+using FroggerStarter.Factory;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model
@@ -21,28 +22,7 @@ namespace FroggerStarter.Model
         /// <param name="obstacleType">Type of obstacle to create.</param>
         public Obstacle(ObstacleType obstacleType)
         {
-            this.createObstacleFrom(obstacleType);
-        }
-
-        private void createObstacleFrom(ObstacleType obstacleType)
-        {
-            switch (obstacleType)
-            {
-                case ObstacleType.Car:
-                    Sprite = new CarSprite();
-                    break;
-
-                case ObstacleType.SemiTruck:
-                    Sprite = new SemiTruckSprite();
-                    break;
-
-                case ObstacleType.ToadTruck:
-                    Sprite = new ToadTruckSprite();
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(obstacleType), obstacleType, null);
-            }
+            Sprite = ObstacleFactory.CreateObstacleSprite(obstacleType);
         }
 
         /// <summary>
