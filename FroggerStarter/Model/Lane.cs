@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace FroggerStarter.Model
 {
@@ -14,7 +14,7 @@ namespace FroggerStarter.Model
     {
         #region Data Members
 
-        private readonly List<Obstacle> obstacles;
+        private readonly IList<Obstacle> obstacles;
         private readonly Direction direction;
         private readonly double horizontalWidth;
         private readonly double defaultSpeed;
@@ -73,7 +73,7 @@ namespace FroggerStarter.Model
         /// <exception cref="ArgumentOutOfRangeException">When lane direction isn't available</exception>
         public void MoveObstacles()
         {
-            this.obstacles.ForEach(obstacle => obstacle.MoveForward(this.horizontalWidth));
+            this.obstacles.ToList().ForEach(obstacle => obstacle.MoveForward(this.horizontalWidth));
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace FroggerStarter.Model
         /// </summary>  
         public void IncreaseSpeedOfObstacles(double speed)
         {
-            this.obstacles.ForEach(obstacle => obstacle.SpeedX += speed);
+            this.obstacles.ToList().ForEach(obstacle => obstacle.SpeedX += speed);
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace FroggerStarter.Model
         /// </summary>
         public void SetObstaclesToDefaultSpeed()
         {
-            this.obstacles.ForEach(obstacle => obstacle.SpeedX = this.defaultSpeed);
+            this.obstacles.ToList().ForEach(obstacle => obstacle.SpeedX = this.defaultSpeed);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace FroggerStarter.Model
         /// <param name="heightOfLane">The height of lane.</param>
         public void SetObstaclesToLaneYLocation(double yLocation, double heightOfLane)
         {
-            this.obstacles.ForEach(obstacle => 
+            this.obstacles.ToList().ForEach(obstacle => 
                 obstacle.Y = getCenteredYLocationOfLane(obstacle, yLocation, heightOfLane));
         }
 

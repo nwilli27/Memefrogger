@@ -38,8 +38,6 @@ namespace FroggerStarter.Controller
 
         private const int BottomLaneOffset = 5;
         private const int RoadShoulderOffset = 50;
-        private const int TotalNumberOfLives = 3;
-        private const int MaxScore = 3;
 
         #endregion
 
@@ -289,7 +287,7 @@ namespace FroggerStarter.Controller
             var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
             this.ScoreUpdated?.Invoke(this, score);
 
-            if (this.playerStats.Score == MaxScore)
+            if (this.playerStats.Score == GameSettings.MaxScore)
             {
                 this.stopGamePlayAndShowGameOver();
             }
@@ -306,7 +304,7 @@ namespace FroggerStarter.Controller
             this.playerStats = new PlayerStats()
             {
                 Score = 0,
-                Lives = TotalNumberOfLives,
+                Lives = GameSettings.TotalNumberOfLives,
             };
 
             var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
