@@ -192,8 +192,8 @@ namespace FroggerStarter.Controller
         }
 
         private void placeObstaclesOnCanvas()
-        {
-            foreach (var currentObstacle in this.laneManager.Obstacles)
+        { 
+            foreach (var currentObstacle in this.laneManager)
             {
                 this.gameCanvas.Children.Add(currentObstacle.Sprite);
             }
@@ -224,7 +224,7 @@ namespace FroggerStarter.Controller
 
         private void checkForPlayerToObstacleCollision()
         {
-            foreach (var currentObstacle in this.laneManager.Obstacles)
+            foreach (var currentObstacle in this.laneManager)
             {
                 if (this.player.HasCollidedWith(currentObstacle))
                 {

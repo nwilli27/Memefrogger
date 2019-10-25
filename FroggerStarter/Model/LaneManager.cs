@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,19 +10,8 @@ namespace FroggerStarter.Model
     ///     Class to hold and manage a collection of Lanes.
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IEnumerable{Lane}" />
-    internal class LaneManager
+    internal class LaneManager : IEnumerable<Obstacle>
     {
-        #region Properties
-
-        /// <summary>
-        ///     Gets the obstacles of all lanes.
-        /// </summary>
-        /// <value>
-        ///     The obstacles of all lanes.
-        /// </value>
-        public IEnumerable<Obstacle> Obstacles => this.lanes.SelectMany(lane => lane);
-
-        #endregion
 
         #region Data Members
 
@@ -131,6 +121,28 @@ namespace FroggerStarter.Model
             lane.AddObstacles(obstacleType, numberOfObstacles);
             this.lanes.Add(lane);
             this.updateYLocationOfLanes();
+        }
+
+        /// <summary>
+        ///     Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        ///     An enumerator that can be used to iterate through the collection.
+        /// </returns>
+        public IEnumerator<Obstacle> GetEnumerator()
+        {
+            return this.lanes.SelectMany(lane => lane).GetEnumerator();
+        }
+
+        /// <summary>
+        ///     Returns an enumerator that iterates through a collection.
+        /// </summary>
+        /// <returns>
+        ///     An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.
+        /// </returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.lanes.SelectMany(lane => lane).GetEnumerator();
         }
 
         #endregion

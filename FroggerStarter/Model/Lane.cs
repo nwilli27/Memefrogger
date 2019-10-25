@@ -16,7 +16,7 @@ namespace FroggerStarter.Model
 
         private readonly ICollection<Obstacle> obstacles;
         private readonly Direction direction;
-        private readonly double width;
+        private readonly double horizontalWidth;
         private readonly double defaultSpeed;
 
         #endregion
@@ -27,18 +27,18 @@ namespace FroggerStarter.Model
         ///     Initializes a new instance of the <see cref="Lane"/> class.
         ///     Precondition: none
         ///     Post-condition: this.obstacles.Count == 0
-        ///                     this.width = width
+        ///                     this.horizontalWidth = horizontalWidth
         ///                     this.direction = direction
         ///                     this.defaultSpeed = defaultSpeed
         /// </summary> 
         /// <param name="direction">The direction the obstacles are moving in the lane</param>
-        /// <param name="width">The width of the lane</param>
+        /// <param name="horizontalWidth">The horizontalWidth of the lane</param>
         /// <param name="defaultSpeed">The default speed of all obstacles</param>
-        public Lane(double width, double defaultSpeed, Direction direction)
+        public Lane(double horizontalWidth, double defaultSpeed, Direction direction)
         {
             this.obstacles = new Collection<Obstacle>();
             this.direction = direction;
-            this.width = width;
+            this.horizontalWidth = horizontalWidth;
             this.defaultSpeed = defaultSpeed;
         }
 
@@ -178,14 +178,14 @@ namespace FroggerStarter.Model
         {
             if (this.hasObstacleMovedOffLeftSide(currentObstacle))
             {
-                currentObstacle.X = this.width;
+                currentObstacle.X = this.horizontalWidth;
             }
             currentObstacle.MoveLeft();
         }
 
         private bool hasObstacleMovedOffRightSide(GameObject currentObstacle)
         {
-            return currentObstacle.X + currentObstacle.SpeedX > this.width;
+            return currentObstacle.X + currentObstacle.SpeedX > this.horizontalWidth;
         }
 
         private bool hasObstacleMovedOffLeftSide(GameObject currentObstacle)
@@ -231,7 +231,7 @@ namespace FroggerStarter.Model
 
         private double getSpacingBetweenObstacles()
         {
-            return this.width / this.obstacles.Count;
+            return this.horizontalWidth / this.obstacles.Count;
         }
 
         #endregion
