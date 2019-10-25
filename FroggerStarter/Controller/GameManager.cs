@@ -22,8 +22,7 @@ namespace FroggerStarter.Controller
         private LaneManager laneManager;
         private PlayerStats playerStats;
         private DispatcherTimer timer;
-        private DispatcherTimer obstacleSpeedTimer;
-
+        
         #endregion
 
         #region Events
@@ -77,7 +76,6 @@ namespace FroggerStarter.Controller
             this.highRoadYLocation = highRoadYLocation;
 
             this.setupGameTimer();
-            this.setupObstacleSpeedTimer();
         }
 
         #endregion
@@ -161,14 +159,6 @@ namespace FroggerStarter.Controller
             this.timer.Start();
         }
 
-        private void setupObstacleSpeedTimer()
-        {
-            this.obstacleSpeedTimer = new DispatcherTimer();
-            this.obstacleSpeedTimer.Tick += this.obstacleSpeedTimerOnTick;
-            this.obstacleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
-            this.obstacleSpeedTimer.Start();
-        }
-
         private void createAndPlacePlayer()
         {
             this.player = new Frog();
@@ -209,17 +199,6 @@ namespace FroggerStarter.Controller
             this.checkForPlayerToObstacleCollision();
         }
 
-        private void obstacleSpeedTimerOnTick(object sender, object e)
-        {
-            this.laneManager.IncreaseSpeedOfObstacles(0.15);
-        }
-
-        private void resetObstaclesSpeedTimer()
-        {
-            this.obstacleSpeedTimer.Stop();
-            this.obstacleSpeedTimer.Start();
-        }
-
         private void checkForPlayerToObstacleCollision()
         {
             foreach (var currentObstacle in this.laneManager)
@@ -249,7 +228,7 @@ namespace FroggerStarter.Controller
         {
             this.setPlayerToCenterOfBottomLane();
             this.laneManager.SetAllObstaclesToDefaultSpeed();
-            this.resetObstaclesSpeedTimer();
+            this.laneManager.ResetObstaclesSpeedTimer();
         }
 
         private void stopGamePlayAndShowGameOver()

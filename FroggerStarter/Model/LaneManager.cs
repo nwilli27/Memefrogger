@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using Windows.UI.Xaml;
 
 namespace FroggerStarter.Model
 {
@@ -19,6 +19,14 @@ namespace FroggerStarter.Model
         private readonly double width;
         private readonly double startingYLocation;
         private readonly double height;
+
+        private DispatcherTimer obstacleSpeedTimer;
+
+        #endregion
+
+        #region Constants
+
+        private const double SpeedIncrease = 0.15;
 
         #endregion
 
@@ -42,6 +50,8 @@ namespace FroggerStarter.Model
             this.width = width;
             this.lanes = new List<Lane>();
             this.height = endingYLocation - startingYLocation;
+
+            this.setupObstacleSpeedTimer();
         }
 
         #endregion
@@ -56,21 +66,6 @@ namespace FroggerStarter.Model
         public void MoveAllObstacles()
         {
             this.lanes.ToList().ForEach(lane => lane.MoveObstacles());
-        }
-
-        /// <summary>
-        ///     Increases the speed of all obstacles in all lanes by the set speed.
-        ///     Precondition: speed > 0
-        ///     Post-condition: @each obstacle in this.lanes.SpeedX += speed
-        /// </summary>
-        /// <param name="speed">The speed to increase by.</param>
-        public void IncreaseSpeedOfObstacles(double speed)
-        {
-            if (speed <= 0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-            this.lanes.ToList().ForEach(lane => lane.IncreaseSpeedOfObstacles(speed));
         }
 
         /// <summary>
@@ -136,9 +131,38 @@ namespace FroggerStarter.Model
             return this.lanes.SelectMany(lane => lane).GetEnumerator();
         }
 
+        /// <summary>
+        ///     Resets the obstacles speed timer.
+        ///     Precondition: none
+        ///     Post-condition: obstacleSpeedTimer.Start()
+        /// </summary>
+        public void ResetObstaclesSpeedTimer()
+        {
+            this.obstacleSpeedTimer.Stop();
+            this.obstacleSpeedTimer.Start();
+        }
+
         #endregion
 
         #region Private Helpers
+
+        private void setupObstacleSpeedTimer()
+        {
+            this.obstacleSpeedTimer = new DispatcherTimer();
+            this.obstacleSpeedTimer.Tick += this.obstacleSpeedTimerOnTick;
+            this.obstacleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            this.obstacleSpeedTimer.Start();
+        }
+
+        private void obstacleSpeedTimerOnTick(object sender, object e)
+        {
+            this.increaseSpeedOfObstacles(SpeedIncrease);
+        }
+
+        private void increaseSpeedOfObstacles(double speed)
+        {
+            this.lanes.ToList().ForEach(lane => lane.IncreaseSpeedOfObstacles(speed));
+        }
 
         private void updateYLocationOfLanes()
         {
