@@ -59,7 +59,7 @@ namespace FroggerStarter.Model
         {
             for (var i = 0; i < numberOfObstacles; i++)
             {
-                this.add(new Obstacle(obstacleType));
+                this.add(new Obstacle(obstacleType, this.direction));
             }
             this.readjustSpaceBetweenObstacles();
         }
@@ -75,19 +75,7 @@ namespace FroggerStarter.Model
         {
             foreach (var currentObstacle in this.obstacles)
             {
-                switch (this.direction)
-                {
-                    case Direction.Left:
-                        this.moveObstacleToTheLeft(currentObstacle);
-                        break;
-
-                    case Direction.Right:
-                        this.moveObstacleToTheRight(currentObstacle);
-                        break;
-
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                currentObstacle.MoveForward(this.horizontalWidth);
             }
         }
 
@@ -165,34 +153,6 @@ namespace FroggerStarter.Model
 
         #region Private Helpers
 
-        private void moveObstacleToTheRight(GameObject currentObstacle)
-        {
-            if (this.hasObstacleMovedOffRightSide(currentObstacle))
-            {
-                currentObstacle.X = -currentObstacle.Width;
-            }
-            currentObstacle.MoveRight();
-        }
-
-        private void moveObstacleToTheLeft(GameObject currentObstacle)
-        {
-            if (this.hasObstacleMovedOffLeftSide(currentObstacle))
-            {
-                currentObstacle.X = this.horizontalWidth;
-            }
-            currentObstacle.MoveLeft();
-        }
-
-        private bool hasObstacleMovedOffRightSide(GameObject currentObstacle)
-        {
-            return currentObstacle.X + currentObstacle.SpeedX > this.horizontalWidth;
-        }
-
-        private bool hasObstacleMovedOffLeftSide(GameObject currentObstacle)
-        {
-            return currentObstacle.X + currentObstacle.SpeedX < -currentObstacle.Width;
-        }
-
         private static double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)
         {
             return ((heightOfLane - obstacle.Height) / 2) + yLocation;
@@ -201,21 +161,7 @@ namespace FroggerStarter.Model
         private void add(Obstacle obstacle)
         {
             obstacle.SpeedX = this.defaultSpeed;
-
-            switch (this.direction)
-            {
-                case Direction.Left:
-                    this.obstacles.Add(obstacle);
-                    break;
-
-                case Direction.Right:
-                    obstacle.FlipSpriteHorizontally();
-                    this.obstacles.Add(obstacle);
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            this.obstacles.Add(obstacle);
         }
 
         private void readjustSpaceBetweenObstacles()
