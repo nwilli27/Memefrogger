@@ -228,20 +228,30 @@ namespace FroggerStarter.Controller
             {
                 if (this.player.HasCollidedWith(currentObstacle))
                 {
-                    this.lifeLost();
-
-                    if (this.playerStats.Lives == 0)
-                    {
-                        this.stopGamePlayAndShowGameOver();
-                    }
-                    else
-                    {
-                        this.setPlayerToCenterOfBottomLane();
-                        this.laneManager.SetAllObstaclesToDefaultSpeed();
-                        this.resetObstaclesSpeedTimer();
-                    }
+                    this.decrementLivesAndResetGame();
                 }
             }
+        }
+
+        private void decrementLivesAndResetGame()
+        {
+            this.lifeLost();
+
+            if (this.playerStats.Lives == 0)
+            {
+                this.stopGamePlayAndShowGameOver();
+            }
+            else
+            {
+                this.resetPlayerAndObstacles();
+            }
+        }
+
+        private void resetPlayerAndObstacles()
+        {
+            this.setPlayerToCenterOfBottomLane();
+            this.laneManager.SetAllObstaclesToDefaultSpeed();
+            this.resetObstaclesSpeedTimer();
         }
 
         private void stopGamePlayAndShowGameOver()
