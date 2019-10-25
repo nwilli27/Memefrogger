@@ -15,7 +15,7 @@ namespace FroggerStarter.Model
 
         #region Data Members
 
-        private readonly IList<Lane> lanes;
+        private readonly List<Lane> lanes;
         private readonly double width;
         private readonly double startingYLocation;
         private readonly double height;
@@ -55,10 +55,7 @@ namespace FroggerStarter.Model
         /// </summary>
         public void MoveAllObstacles()
         {
-            foreach (var currentLane in this.lanes)
-            {
-                currentLane.MoveObstacles();
-            }
+            this.lanes.ForEach(lane => lane.MoveObstacles());
         }
 
         /// <summary>
@@ -73,10 +70,7 @@ namespace FroggerStarter.Model
             {
                 throw new ArgumentOutOfRangeException();
             }
-            foreach (var currentLane in this.lanes)
-            {
-                currentLane.IncreaseSpeedOfObstacles(speed);
-            }
+            this.lanes.ForEach(lane => lane.IncreaseSpeedOfObstacles(speed));
         }
 
         /// <summary>
@@ -86,10 +80,7 @@ namespace FroggerStarter.Model
         /// </summary>
         public void SetAllObstaclesToDefaultSpeed()
         {
-            foreach (var currentLane in this.lanes)
-            {
-                currentLane.SetObstaclesToDefaultSpeed();
-            }
+            this.lanes.ForEach(lane => lane.SetObstaclesToDefaultSpeed());
         }
 
         /// <summary>

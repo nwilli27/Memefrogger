@@ -14,7 +14,7 @@ namespace FroggerStarter.Model
     {
         #region Data Members
 
-        private readonly ICollection<Obstacle> obstacles;
+        private readonly List<Obstacle> obstacles;
         private readonly Direction direction;
         private readonly double horizontalWidth;
         private readonly double defaultSpeed;
@@ -36,7 +36,7 @@ namespace FroggerStarter.Model
         /// <param name="defaultSpeed">The default speed of all obstacles</param>
         public Lane(double horizontalWidth, double defaultSpeed, Direction direction)
         {
-            this.obstacles = new Collection<Obstacle>();
+            this.obstacles = new List<Obstacle>();
             this.direction = direction;
             this.horizontalWidth = horizontalWidth;
             this.defaultSpeed = defaultSpeed;
@@ -73,10 +73,7 @@ namespace FroggerStarter.Model
         /// <exception cref="ArgumentOutOfRangeException">When lane direction isn't available</exception>
         public void MoveObstacles()
         {
-            foreach (var currentObstacle in this.obstacles)
-            {
-                currentObstacle.MoveForward(this.horizontalWidth);
-            }
+            this.obstacles.ForEach(obstacle => obstacle.MoveForward(this.horizontalWidth));
         }
 
         /// <summary>
@@ -86,10 +83,7 @@ namespace FroggerStarter.Model
         /// </summary>  
         public void IncreaseSpeedOfObstacles(double speed)
         {
-            foreach (var currentObstacle in this.obstacles)
-            {
-                currentObstacle.SpeedX += speed;
-            }
+            this.obstacles.ForEach(obstacle => obstacle.SpeedX += speed);
         }
 
         /// <summary>
@@ -99,10 +93,7 @@ namespace FroggerStarter.Model
         /// </summary>
         public void SetObstaclesToDefaultSpeed()
         {
-            foreach (var currentObstacle in this.obstacles)
-            {
-                currentObstacle.SpeedX = this.defaultSpeed;
-            }
+            this.obstacles.ForEach(obstacle => obstacle.SpeedX = this.defaultSpeed);
         }
 
         /// <summary>
@@ -115,11 +106,8 @@ namespace FroggerStarter.Model
         /// <param name="heightOfLane">The height of lane.</param>
         public void SetObstaclesToLaneYLocation(double yLocation, double heightOfLane)
         {
-            foreach (var currentObstacle in this.obstacles)
-            {
-                var verticalYAlignment = getCenteredYLocationOfLane(currentObstacle, yLocation, heightOfLane);
-                currentObstacle.Y = verticalYAlignment;
-            }
+            this.obstacles.ForEach(obstacle => 
+                obstacle.Y = getCenteredYLocationOfLane(obstacle, yLocation, heightOfLane));
         }
 
         /// <summary>

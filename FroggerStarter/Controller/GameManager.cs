@@ -192,7 +192,7 @@ namespace FroggerStarter.Controller
         }
 
         private void placeObstaclesOnCanvas()
-        { 
+        {
             foreach (var currentObstacle in this.laneManager)
             {
                 this.gameCanvas.Children.Add(currentObstacle.Sprite);
