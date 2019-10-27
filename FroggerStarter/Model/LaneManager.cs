@@ -91,7 +91,7 @@ namespace FroggerStarter.Model
         /// <param name="direction">The lane direction.</param>
         /// <param name="defaultSpeed">The default speed.</param>
         /// <param name="obstacleType">Type of the obstacle.</param>
-        /// <param name="numberOfObstacles">The number of obstacles.</param>
+        /// <param name="maxNumberObstacles">The max number of obstacles.</param>
         public void AddLaneOfObstacles(Direction direction, double defaultSpeed, ObstacleType obstacleType, int maxNumberObstacles)
         {
             if (maxNumberObstacles <= 0)

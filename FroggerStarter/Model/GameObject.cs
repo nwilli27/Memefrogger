@@ -167,26 +167,6 @@ namespace FroggerStarter.Model
             return thisObjectBoundary.IntersectsWith(otherObjectBoundary);
         }
 
-        //TODO should this be here or obstacle class?
-        public bool IsWithinXRange(double otherGameObjectX, int xRange)
-        {
-            var otherObjectBoundary = new Rectangle(
-                (int)otherGameObjectX,
-                (int)this.Y,
-                (int)this.Width,
-                (int)this.Height
-            );
-
-            var thisObjectBoundaryWithRange = new Rectangle(
-                (int)this.X - xRange,
-                (int)this.Y,
-                (int)this.Width + xRange,
-                (int)this.Height
-            );
-
-            return thisObjectBoundaryWithRange.IntersectsWith(otherObjectBoundary);
-        }
-
         private void moveX(double x)
         {
             this.X += x;

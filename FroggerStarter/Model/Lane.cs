@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Windows.ApplicationModel.Calls.Background;
-using Windows.UI.Xaml;
 
 namespace FroggerStarter.Model
 {
@@ -62,14 +60,14 @@ namespace FroggerStarter.Model
         ///                     @each obstacle.X is spaced accordingly on lane
         /// </summary>
         /// <param name="obstacleType">Type of the obstacle.</param>
-        /// <param name="numberOfObstacles">The number of obstacles.</param>
+        /// <param name="maxNumberObstacles">The max number of obstacles.</param>
         public void AddObstacles(ObstacleType obstacleType, int maxNumberObstacles)
         {
             for (var i = 0; i < maxNumberObstacles; i++)
             {
                 if (i == 0)
                 {
-                    var obstacle = new Obstacle(obstacleType, this.direction) {IsMoving = true};
+                    var obstacle = new Obstacle(obstacleType, this.direction) {IsActive = true};
                     this.add(obstacle);
                 }
                 else
@@ -90,15 +88,12 @@ namespace FroggerStarter.Model
         /// <exception cref="ArgumentOutOfRangeException">When lane direction isn't available</exception>
         public void MoveObstacles()
         {
-            foreach (var currentObstacle in this.obstacles)
-            {
-                if (currentObstacle.IsMoving)
-                {
-                    currentObstacle.MoveForward(this.horizontalWidth);
-                }
-            }
+            var activeObstacles = this.obstacles.ToList().Where(obstacle => obstacle.IsActive);
 
-            //this.obstacles.ToList().ForEach(obstacle => obstacle.MoveForward(this.horizontalWidth));
+            foreach (var obstacle in activeObstacles)
+            {
+                obstacle.MoveForward(this.horizontalWidth);
+            }
         }
 
         /// <summary>
@@ -111,54 +106,19 @@ namespace FroggerStarter.Model
             this.obstacles.ToList().ForEach(obstacle => obstacle.SpeedX = this.defaultSpeed);
         }
 
+        /// <summary>
+        ///     Moves the next obstacle that isn't active.
+        ///     Precondition: none
+        ///     Post-condition: @activeObstacles++
+        /// </summary>
         public void MoveNextAvailableObstacle()
         {
-            var nextObstacle = this.obstacles.FirstOrDefault(obstacle => !obstacle.IsMoving);
+            var nextObstacle = this.obstacles.FirstOrDefault(obstacle => !obstacle.IsActive);
             if (nextObstacle != null)
             {
                 this.adjustNextObstacleXLocation(nextObstacle);
-                nextObstacle.IsMoving = true;
+                nextObstacle.IsActive = true;
             }
-        }
-
-        private void adjustNextObstacleXLocation(GameObject nextObstacle)
-        {
-            while (this.checkForEqualSpacingBetweenObstacles(nextObstacle))
-            {
-                this.adjustXSpacingForObstacle(nextObstacle, nextObstacle.Width);
-            }
-        }
-
-        private bool checkForEqualSpacingBetweenObstacles(GameObject nextObstacle)
-        {
-            var obstacleTopRange = this.getRangeBasedOnObstacleSize(nextObstacle).TopRange;
-            var obstacleBottomRange = this.getRangeBasedOnObstacleSize(nextObstacle).BottomRange;
-
-            var movingObstacles = this.obstacles.Where(obstacle => obstacle.IsMoving);
-            var movingObstaclesInvertedXLocations = movingObstacles.Select(this.getObstacleInvertedLaneLocation);
-
-            
-            var obstacleSpacing = movingObstaclesInvertedXLocations.Where(xLocation => xLocation >= obstacleBottomRange && xLocation <= obstacleTopRange);
-
-            return obstacleSpacing.Any();
-        }
-
-        private (double TopRange, double BottomRange) getRangeBasedOnObstacleSize(GameObject obstacle)
-        {
-            var obstacleTopRange =
-                obstacle.Width >= 70 ? obstacle.X + obstacle.Width : obstacle.X + obstacle.Width * 2;
-
-            var obstacleBottomRange =
-                obstacle.Width >= 70 ? obstacle.X - obstacle.Width : obstacle.X - obstacle.Width * 2;
-
-            return (TopRange: obstacleTopRange, BottomRange: obstacleBottomRange);
-        }
-
-        private bool checkCollisionWithObstacles(GameObject obstacle)
-        {
-            var hasCollided = false;
-            this.obstacles.ToList().ForEach(currentObstacle => hasCollided = currentObstacle.HasCollidedWith(obstacle));
-            return hasCollided;
         }
 
         /// <summary>
@@ -206,48 +166,26 @@ namespace FroggerStarter.Model
 
         #region Private Helpers
 
-        //TODO move this to obstacle class
-        private void adjustXSpacingForObstacle(GameObject obstacle, double amountOfSpace)
+        private void adjustNextObstacleXLocation(Obstacle nextObstacle)
         {
-            switch (this.direction)
+            while (this.checkForEqualSpacingBetweenObstacles(nextObstacle))
             {
-                case Direction.Left:
-                    obstacle.X += amountOfSpace;
-                    break;
-
-                case Direction.Right:
-                    obstacle.X -= amountOfSpace;
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
+                nextObstacle.AdjustXSpacingForObstacle(nextObstacle.Width);
             }
+        }
+
+        private bool checkForEqualSpacingBetweenObstacles(Obstacle nextObstacle)
+        {
+            var movingObstacleWithinRangeOfNextObstacle = this.obstacles
+                                                              .Where(obstacle => obstacle.IsActive)
+                                                              .Where(obstacle => nextObstacle.IsWithinXRangeOnInvertedLaneSide(obstacle, this.horizontalWidth, 10));
+
+            return movingObstacleWithinRangeOfNextObstacle.Any();
         }
 
         private static double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)
         {
             return ((heightOfLane - obstacle.Height) / 2) + yLocation;
-        }
-
-        private double getObstacleInvertedLaneLocation(GameObject obstacle)
-        {
-            switch (this.direction)
-            {
-                case Direction.Left:
-
-                    return obstacle.X + obstacle.Width >= this.horizontalWidth
-                        ? obstacle.X + obstacle.Width
-                        : obstacle.X + obstacle.Width + this.horizontalWidth;
-
-                case Direction.Right:
-
-                    return obstacle.X <= 0
-                        ? obstacle.X + obstacle.Width
-                        : obstacle.X - this.horizontalWidth;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
 
         private void add(Obstacle obstacle)
@@ -269,22 +207,6 @@ namespace FroggerStarter.Model
             }
 
             this.obstacles.Add(obstacle);
-        }
-
-        private void readjustSpaceBetweenObstacles()
-        {
-            var startingObstacleXPoint = 0.0;
-
-            foreach (var currentObstacle in this.obstacles)
-            {
-                currentObstacle.X = startingObstacleXPoint;
-                startingObstacleXPoint += this.getSpacingBetweenObstacles();
-            }
-        }
-
-        private double getSpacingBetweenObstacles()
-        {
-            return this.horizontalWidth / this.obstacles.Count;
         }
 
         #endregion
