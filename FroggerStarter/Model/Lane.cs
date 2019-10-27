@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.ApplicationModel.Calls.Background;
+using Windows.UI.Xaml;
 
 namespace FroggerStarter.Model
 {
@@ -12,6 +14,12 @@ namespace FroggerStarter.Model
     /// <seealso cref="System.Collections.IEnumerable" />
     internal class Lane : IEnumerable<Obstacle>
     {
+        #region Properties
+
+
+
+        #endregion
+
         #region Data Members
 
         private readonly IList<Obstacle> obstacles;
@@ -55,13 +63,22 @@ namespace FroggerStarter.Model
         /// </summary>
         /// <param name="obstacleType">Type of the obstacle.</param>
         /// <param name="numberOfObstacles">The number of obstacles.</param>
-        public void AddObstacles(ObstacleType obstacleType, int numberOfObstacles)
+        public void AddObstacles(ObstacleType obstacleType, int maxNumberObstacles)
         {
-            for (var i = 0; i < numberOfObstacles; i++)
+            for (var i = 0; i < maxNumberObstacles; i++)
             {
-                this.add(new Obstacle(obstacleType, this.direction));
+                if (i == 0)
+                {
+                    var obstacle = new Obstacle(obstacleType, this.direction) {IsMoving = true};
+                    this.add(obstacle);
+                }
+                else
+                {
+                    this.add(new Obstacle(obstacleType, this.direction));
+                }
             }
-            this.readjustSpaceBetweenObstacles();
+
+            //this.readjustSpaceBetweenObstacles();
         }
 
         /// <summary>
@@ -73,17 +90,15 @@ namespace FroggerStarter.Model
         /// <exception cref="ArgumentOutOfRangeException">When lane direction isn't available</exception>
         public void MoveObstacles()
         {
-            this.obstacles.ToList().ForEach(obstacle => obstacle.MoveForward(this.horizontalWidth));
-        }
+            foreach (var currentObstacle in this.obstacles)
+            {
+                if (currentObstacle.IsMoving)
+                {
+                    currentObstacle.MoveForward(this.horizontalWidth);
+                }
+            }
 
-        /// <summary>
-        ///     Increases the speed of all obstacles by [speed]
-        ///     Precondition: none
-        ///     Post-condition: @each in this.obstacles : obstacle.SpeedX += [speed]
-        /// </summary>  
-        public void IncreaseSpeedOfObstacles(double speed)
-        {
-            this.obstacles.ToList().ForEach(obstacle => obstacle.SpeedX += speed);
+            //this.obstacles.ToList().ForEach(obstacle => obstacle.MoveForward(this.horizontalWidth));
         }
 
         /// <summary>
@@ -94,6 +109,56 @@ namespace FroggerStarter.Model
         public void SetObstaclesToDefaultSpeed()
         {
             this.obstacles.ToList().ForEach(obstacle => obstacle.SpeedX = this.defaultSpeed);
+        }
+
+        public void MoveNextAvailableObstacle()
+        {
+            var nextObstacle = this.obstacles.FirstOrDefault(obstacle => !obstacle.IsMoving);
+            if (nextObstacle != null)
+            {
+                this.adjustNextObstacleXLocation(nextObstacle);
+                nextObstacle.IsMoving = true;
+            }
+        }
+
+        private void adjustNextObstacleXLocation(GameObject nextObstacle)
+        {
+            while (this.checkForEqualSpacingBetweenObstacles(nextObstacle))
+            {
+                this.adjustXSpacingForObstacle(nextObstacle, nextObstacle.Width);
+            }
+        }
+
+        private bool checkForEqualSpacingBetweenObstacles(GameObject nextObstacle)
+        {
+            var obstacleTopRange = this.getRangeBasedOnObstacleSize(nextObstacle).TopRange;
+            var obstacleBottomRange = this.getRangeBasedOnObstacleSize(nextObstacle).BottomRange;
+
+            var movingObstacles = this.obstacles.Where(obstacle => obstacle.IsMoving);
+            var movingObstaclesInvertedXLocations = movingObstacles.Select(this.getObstacleInvertedLaneLocation);
+
+            
+            var obstacleSpacing = movingObstaclesInvertedXLocations.Where(xLocation => xLocation >= obstacleBottomRange && xLocation <= obstacleTopRange);
+
+            return obstacleSpacing.Any();
+        }
+
+        private (double TopRange, double BottomRange) getRangeBasedOnObstacleSize(GameObject obstacle)
+        {
+            var obstacleTopRange =
+                obstacle.Width >= 70 ? obstacle.X + obstacle.Width : obstacle.X + obstacle.Width * 2;
+
+            var obstacleBottomRange =
+                obstacle.Width >= 70 ? obstacle.X - obstacle.Width : obstacle.X - obstacle.Width * 2;
+
+            return (TopRange: obstacleTopRange, BottomRange: obstacleBottomRange);
+        }
+
+        private bool checkCollisionWithObstacles(GameObject obstacle)
+        {
+            var hasCollided = false;
+            this.obstacles.ToList().ForEach(currentObstacle => hasCollided = currentObstacle.HasCollidedWith(obstacle));
+            return hasCollided;
         }
 
         /// <summary>
@@ -141,14 +206,68 @@ namespace FroggerStarter.Model
 
         #region Private Helpers
 
+        //TODO move this to obstacle class
+        private void adjustXSpacingForObstacle(GameObject obstacle, double amountOfSpace)
+        {
+            switch (this.direction)
+            {
+                case Direction.Left:
+                    obstacle.X += amountOfSpace;
+                    break;
+
+                case Direction.Right:
+                    obstacle.X -= amountOfSpace;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private static double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)
         {
             return ((heightOfLane - obstacle.Height) / 2) + yLocation;
         }
 
+        private double getObstacleInvertedLaneLocation(GameObject obstacle)
+        {
+            switch (this.direction)
+            {
+                case Direction.Left:
+
+                    return obstacle.X + obstacle.Width >= this.horizontalWidth
+                        ? obstacle.X + obstacle.Width
+                        : obstacle.X + obstacle.Width + this.horizontalWidth;
+
+                case Direction.Right:
+
+                    return obstacle.X <= 0
+                        ? obstacle.X + obstacle.Width
+                        : obstacle.X - this.horizontalWidth;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private void add(Obstacle obstacle)
         {
             obstacle.SpeedX = this.defaultSpeed;
+
+            switch (this.direction)
+            {
+                case Direction.Left:
+                    obstacle.X = this.horizontalWidth;
+                    break;
+
+                case Direction.Right:
+                    obstacle.X = -obstacle.Width;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
             this.obstacles.Add(obstacle);
         }
 

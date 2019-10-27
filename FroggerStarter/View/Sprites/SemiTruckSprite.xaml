@@ -71,7 +71,7 @@
                 <CompositeTransform Rotation="-83.909"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <Rectangle Width="4.078" Height=".5" Fill="Black" Canvas.Left="15.547" Canvas.Top="10.498" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Rectangle Width="4.078" Height=".5" Fill="Gray" Canvas.Left="15.547" Canvas.Top="10.498" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Rectangle.RenderTransform>
                 <CompositeTransform Rotation="-29.081" TranslateX="0.013" TranslateY="0.028" ScaleY="-1"/>
             </Rectangle.RenderTransform>

@@ -12,6 +12,8 @@ namespace FroggerStarter.Model
     /// <seealso cref="FroggerStarter.Model.GameObject" />
     internal class Obstacle : GameObject
     {
+        public bool IsMoving { get; set; } = false;
+
         #region Data Members
 
         private readonly Direction direction;

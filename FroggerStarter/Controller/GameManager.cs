@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model;
@@ -170,21 +171,23 @@ namespace FroggerStarter.Controller
         {
             this.laneManager = new LaneManager(this.backgroundWidth, this.getRoadStartingYLocation(), this.getRoadEndingYLocation());
 
-            this.laneManager.AddLaneOfObstacles(Direction.Right, 2.5, ObstacleType.Car, 3);
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 2.0, ObstacleType.SemiTruck, 2);
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.5, ObstacleType.Car, 3);
-            this.laneManager.AddLaneOfObstacles(Direction.Right, 1.0, ObstacleType.SemiTruck, 3);
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 0.5, ObstacleType.ToadTruck, 2);
+            this.laneManager.AddLaneOfObstacles(
+                (Direction)GameSettings.Lane5[0],
+                (double)GameSettings.Lane5[1],
+                (ObstacleType)GameSettings.Lane5[2],
+                (int)GameSettings.Lane5[3]);
+
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.75, ObstacleType.SemiTruck, 3);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.5, ObstacleType.Car, 4);
+            this.laneManager.AddLaneOfObstacles(Direction.Right, 1.25, ObstacleType.SemiTruck, 2);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.0, ObstacleType.ToadTruck, 3);
 
             this.placeObstaclesOnCanvas();
         }
 
         private void placeObstaclesOnCanvas()
         {
-            foreach (var currentObstacle in this.laneManager)
-            {
-                this.gameCanvas.Children.Add(currentObstacle.Sprite);
-            }
+            this.laneManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
         }
 
         private void setPlayerToCenterOfBottomLane()
@@ -203,7 +206,7 @@ namespace FroggerStarter.Controller
         {
             foreach (var currentObstacle in this.laneManager)
             {
-                if (this.player.HasCollidedWith(currentObstacle))
+                if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.Sprite.Visibility == Visibility.Visible)
                 {
                     this.decrementLivesAndResetGame();
                 }

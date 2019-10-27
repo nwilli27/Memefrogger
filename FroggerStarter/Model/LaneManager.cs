@@ -92,9 +92,9 @@ namespace FroggerStarter.Model
         /// <param name="defaultSpeed">The default speed.</param>
         /// <param name="obstacleType">Type of the obstacle.</param>
         /// <param name="numberOfObstacles">The number of obstacles.</param>
-        public void AddLaneOfObstacles(Direction direction, double defaultSpeed, ObstacleType obstacleType, int numberOfObstacles)
+        public void AddLaneOfObstacles(Direction direction, double defaultSpeed, ObstacleType obstacleType, int maxNumberObstacles)
         {
-            if (numberOfObstacles <= 0)
+            if (maxNumberObstacles <= 0)
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -104,7 +104,7 @@ namespace FroggerStarter.Model
             }
 
             var lane = new Lane(this.width, defaultSpeed, direction);
-            lane.AddObstacles(obstacleType, numberOfObstacles);
+            lane.AddObstacles(obstacleType, maxNumberObstacles);
             this.lanes.Add(lane);
             this.updateYLocationOfLanes();
         }
@@ -150,18 +150,13 @@ namespace FroggerStarter.Model
         {
             this.obstacleSpeedTimer = new DispatcherTimer();
             this.obstacleSpeedTimer.Tick += this.obstacleSpeedTimerOnTick;
-            this.obstacleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            this.obstacleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
             this.obstacleSpeedTimer.Start();
         }
 
         private void obstacleSpeedTimerOnTick(object sender, object e)
         {
-            this.increaseSpeedOfObstacles(SpeedIncrease);
-        }
-
-        private void increaseSpeedOfObstacles(double speed)
-        {
-            this.lanes.ToList().ForEach(lane => lane.IncreaseSpeedOfObstacles(speed));
+            this.lanes.ToList().ForEach(lane => lane.MoveNextAvailableObstacle());
         }
 
         private void updateYLocationOfLanes()
