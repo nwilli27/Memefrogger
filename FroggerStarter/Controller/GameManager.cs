@@ -180,15 +180,15 @@ namespace FroggerStarter.Controller
             this.laneManager = new LaneManager(getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
 
             this.laneManager.AddLaneOfObstacles(
-                (Direction)    GameSettings.Lane5[0],
-                (double)       GameSettings.Lane5[1],
-                (ObstacleType) GameSettings.Lane5[2],
-                (int)          GameSettings.Lane5[3]);
+                (Direction)GameSettings.Lane5[0],
+                (double)GameSettings.Lane5[1],
+                (ObstacleType)GameSettings.Lane5[2],
+                (int)GameSettings.Lane5[3]);
 
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.75, ObstacleType.SemiTruck, 3);
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.5, ObstacleType.Car, 4);
-            this.laneManager.AddLaneOfObstacles(Direction.Right, 1.25, ObstacleType.SemiTruck, 2);
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.0, ObstacleType.ToadTruck, 3);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.75, ObstacleType.SemiTruck, 10);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.5, ObstacleType.Car, 13);
+            this.laneManager.AddLaneOfObstacles(Direction.Right, 1.25, ObstacleType.SemiTruck, 5);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.0, ObstacleType.ToadTruck, 5);
 
             this.placeObstaclesOnCanvas();
         }

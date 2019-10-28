@@ -4,6 +4,7 @@ using Windows.UI.Xaml.Media;
 using FroggerStarter.Controller;
 using FroggerStarter.Factory;
 using Point = Windows.Foundation.Point;
+using System.Collections.Generic;
 
 namespace FroggerStarter.Model
 {
@@ -54,7 +55,7 @@ namespace FroggerStarter.Model
             switch (this.direction)
             {
                 case Direction.Left:
-                    this.moveObstacleToTheLeft(GameBoard.BackgroundWidth);
+                    this.moveObstacleToTheLeft();
                     break;
 
                 case Direction.Right:
@@ -77,7 +78,7 @@ namespace FroggerStarter.Model
         public bool IsWithinXRangeOnInvertedLaneSide(Obstacle otherGameObject, int xRange)
         {
             var otherObjectBoundary = new Rectangle(
-                (int)otherGameObject.getInvertedXLocationOnLane(GameBoard.BackgroundWidth),
+                (int)otherGameObject.GetInvertedXLocationOnLane(),
                 (int)otherGameObject.Y,
                 (int)otherGameObject.Width,
                 (int)otherGameObject.Height
@@ -113,7 +114,7 @@ namespace FroggerStarter.Model
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
+        } 
 
         #region Private Helpers
 
@@ -122,23 +123,23 @@ namespace FroggerStarter.Model
             return location < 0 ? location - range : location + range;
         }
 
-        private double getInvertedXLocationOnLane(double horizontalLaneWidth)
+        public double GetInvertedXLocationOnLane()
         {
             switch (this.direction)
             {
                 case Direction.Left:
 
-                    if (this.isOffRightSideLaneBoundary(horizontalLaneWidth))
+                    if (this.isOffRightSideLaneBoundary(GameBoard.BackgroundWidth))
                     {
                         return this.X;
                     }
                     else if (this.isOffLeftSideLaneBoundary())
                     {
-                        return horizontalLaneWidth - this.X;
+                        return GameBoard.BackgroundWidth - this.X;
                     }
                     else
                     {
-                        return this.X + horizontalLaneWidth;
+                        return this.X + GameBoard.BackgroundWidth;
                     }
 
                 case Direction.Right:
@@ -149,7 +150,7 @@ namespace FroggerStarter.Model
                     }
                     else
                     {
-                        return this.X - horizontalLaneWidth;
+                        return this.X - GameBoard.BackgroundWidth;
                     }
 
                 default:
@@ -176,11 +177,11 @@ namespace FroggerStarter.Model
             this.MoveRight();
         }
 
-        private void moveObstacleToTheLeft(double horizontalLaneWidth)
+        private void moveObstacleToTheLeft()
         {
             if (this.hasObstacleMovedOffLeftSide())
             {
-                this.X = horizontalLaneWidth;
+                this.X = GameBoard.BackgroundWidth + this.Width;
             }
             this.MoveLeft();
         }

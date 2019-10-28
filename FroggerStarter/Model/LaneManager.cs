@@ -142,7 +142,7 @@ namespace FroggerStarter.Model
         {
             this.obstacleSpawnTimer = new DispatcherTimer();
             this.obstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;
-            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, 3, 0);
+            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, 4, 0);
             this.obstacleSpawnTimer.Start();
         }
 

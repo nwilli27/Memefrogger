@@ -91,11 +91,24 @@ namespace FroggerStarter.Model
         public void MoveObstacles()
         {
             var activeObstacles = this.obstacles.ToList().Where(obstacle => obstacle.IsActive);
+            var collidedList = new List<Obstacle>();
 
             foreach (var obstacle in activeObstacles)
-            {
+            {   
+                var firstCollision = activeObstacles.FirstOrDefault(currentObstacle => obstacle.HasCollidedWith(currentObstacle) && !currentObstacle.Equals(obstacle));
+                if (firstCollision != null)
+                {
+                    collidedList.Add(firstCollision);
+                }
                 obstacle.MoveForward();
             }
+
+            var firstCollidedObstacle = collidedList.FirstOrDefault(obstacle => obstacle.X + obstacle.Width > GameBoard.BackgroundWidth);
+            if (firstCollidedObstacle != null)
+            {
+                firstCollidedObstacle.AdjustXSpacingForObstacle(50);
+            }
+
         }
 
         /// <summary>
@@ -108,7 +121,7 @@ namespace FroggerStarter.Model
             var nextObstacle = this.obstacles.FirstOrDefault(obstacle => !obstacle.IsActive);
             if (nextObstacle != null)
             {
-                this.adjustNextObstacleXLocation(nextObstacle);
+                //this.adjustNextObstacleXLocation(nextObstacle);
                 nextObstacle.IsActive = true;
             }
         }
@@ -166,11 +179,58 @@ namespace FroggerStarter.Model
 
         private void adjustNextObstacleXLocation(Obstacle nextObstacle)
         {
-            while (this.checkForEqualSpacingBetweenObstacles(nextObstacle))
-            {
-                nextObstacle.AdjustXSpacingForObstacle(nextObstacle.Width);
-            }
+            //this.setObstacleToNextAvailableSpot(nextObstacle);
+            this.getNextOpenRange();
+            var pad = 0;
+            
+            //while (this.checkForEqualSpacingBetweenObstacles(nextObstacle))
+            //{
+            //    nextObstacle.AdjustXSpacingForObstacle(nextObstacle.Width);
+            //}
         }
+
+        private void getNextOpenRange() {
+            
+            
+            
+            
+        }
+
+        //private void setObstacleToNextAvailableSpot(Obstacle nextObstacle)
+        //{
+
+        //    var activeObstacles = this.obstacles.Where(obstacle => obstacle.IsActive).OrderBy(obstacle => obstacle.GetInvertedXLocationOnLane());
+        //    var invertedXCoordinates = this.obstacles.ToList()
+        //        .Where(obstacle => obstacle.IsActive)
+        //        .Select(obstacle => obstacle.GetInvertedXLocationOnLane());
+
+
+        //    for (var i = 0; i < activeObstacles.ToList().Count - 1; i++)
+        //    {
+
+        //        var currentBottomRange = activeObstacles.ToList()[i].GetInvertedXLocationOnLane();
+        //        var currentTopRange = currentBottomRange + activeObstacles.ToList()[i].Width;
+
+        //        var minimumBottomRange = activeObstacles.Min(obstacle => obstacle.GetInvertedXLocationOnLane());
+
+        //        if (activeObstacles.Min(obstacle => obstacle.GetInvertedXLocationOnLane() > nextObstacle.X + nextObstacle.Width))
+        //        {
+        //            break;
+        //        }
+
+        //        var nextBottomRange = activeObstacles.ToList()[i + 1].GetInvertedXLocationOnLane();
+
+        //        var centerAlignment = ((nextBottomRange - currentTopRange) / 2) + currentTopRange;
+
+        //        //TODO can add padding here.
+        //        if (nextBottomRange - currentTopRange > nextObstacle.Width)
+        //        {
+        //            nextObstacle.X = centerAlignment;
+        //            break;
+        //        }
+        //    }
+        //}
+
 
         private bool checkForEqualSpacingBetweenObstacles(Obstacle nextObstacle)
         {
