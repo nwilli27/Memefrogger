@@ -10,8 +10,9 @@ namespace FroggerStarter.Model
     ///     A Obstacle sprite object of type GameObject.
     /// </summary>
     /// <seealso cref="FroggerStarter.Model.GameObject" />
-    internal class Obstacle : GameObject
+    internal class Obstacle : MovingObject
     {
+
         /// <summary>
         ///     Gets or sets a value indicating whether the obstacle is active (moving).
         /// </summary>
