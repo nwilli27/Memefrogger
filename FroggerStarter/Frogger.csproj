@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controller\GameBoardConstants.cs" />
     <Compile Include="Controller\GameSettings.cs" />
     <Compile Include="Factory\ObstacleFactory.cs" />
     <Compile Include="Model\Frog.cs" />
@@ -140,6 +141,9 @@
     </Compile>
     <Compile Include="View\Sprites\CarSprite.xaml.cs">
       <DependentUpon>CarSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\HomeSprite.xaml.cs">
+      <DependentUpon>HomeSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\FrogSprite.xaml.cs">
       <DependentUpon>FrogSprite.xaml</DependentUpon>
@@ -183,6 +187,10 @@
     <Page Include="View\Sprites\CarSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\HomeSprite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Sprites\FrogSprite.xaml">
       <SubType>Designer</SubType>

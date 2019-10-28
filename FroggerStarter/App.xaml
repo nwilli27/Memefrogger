@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <x:Double x:Key="AppHeight">460</x:Double>
-            <x:Double x:Key="AppWidth">650</x:Double>
+            <x:Double x:Key="AppWidth">750</x:Double>
             <x:Double x:Key="HighRoadYLocation">55</x:Double>
             <x:Double x:Key="BottomRoadYLocation">355</x:Double>
         </ResourceDictionary>
