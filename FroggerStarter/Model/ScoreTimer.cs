@@ -27,6 +27,14 @@ namespace FroggerStarter.Model
         /// </value>
         public static bool IsTimeUp => ScoreTick <= 0.0;
 
+        /// <summary>
+        ///     Resets the score tick back to the specified amount
+        ///     of time in 'GameSettings.ScoreTime'
+        /// </summary>
+        public static void ResetScoreTick()
+        {
+            ScoreTick = GameSettings.ScoreTime;
+        }
     }
 
     /// <summary>

@@ -133,7 +133,8 @@ namespace FroggerStarter.Controller
             if (this.hasPlayerMadeItToHighRoad())
             {
                 this.setPlayerToCenterOfBottomLane();
-                this.pointScored();
+                this.increaseScoreBasedOnTime();
+                ScoreTimer.ResetScoreTick();
             }
             else
             {
@@ -177,7 +178,7 @@ namespace FroggerStarter.Controller
             if (ScoreTimer.IsTimeUp)
             {
                 this.lifeLost();
-                ScoreTimer.ScoreTick = 20.0;
+                ScoreTimer.ResetScoreTick();
             }
             this.ScoreTimerTick?.Invoke(this, scoreTick);
         }
@@ -191,7 +192,8 @@ namespace FroggerStarter.Controller
 
         private void createAndPlaceObstaclesInLanes()
         {
-            this.laneManager = new LaneManager(this.backgroundWidth, this.getRoadStartingYLocation(), this.getRoadEndingYLocation());
+            //TOdO FIX HARDCORE 355
+            this.laneManager = new LaneManager(this.backgroundWidth, this.getRoadStartingYLocation(), 355);
 
             this.laneManager.AddLaneOfObstacles(
                 (Direction)GameSettings.Lane5[0],
@@ -285,9 +287,9 @@ namespace FroggerStarter.Controller
             this.LifeLoss?.Invoke(this, life);
         }
 
-        private void pointScored()
+        private void increaseScoreBasedOnTime()
         {
-            this.playerStats.Score++;
+            this.playerStats.Score += (int) ScoreTimer.ScoreTick;
             var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
             this.ScoreUpdated?.Invoke(this, score);
 
