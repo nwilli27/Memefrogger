@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Windows.UI.Xaml.Media;
+using FroggerStarter.Controller;
 using FroggerStarter.Factory;
 using Point = Windows.Foundation.Point;
 
@@ -48,16 +49,16 @@ namespace FroggerStarter.Model
         ///     Post-condition: @prev this.X +/- this.SpeedX
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">direction - null</exception>
-        public void MoveForward(double horizontalLaneWidth)
+        public void MoveForward()
         {
             switch (this.direction)
             {
                 case Direction.Left:
-                    this.moveObstacleToTheLeft(horizontalLaneWidth);
+                    this.moveObstacleToTheLeft(GameBoard.BackgroundWidth);
                     break;
 
                 case Direction.Right:
-                    this.moveObstacleToTheRight(horizontalLaneWidth);
+                    this.moveObstacleToTheRight(GameBoard.BackgroundWidth);
                     break;
 
                 default:
@@ -69,15 +70,14 @@ namespace FroggerStarter.Model
         ///     Determines whether [is within x range on inverted lane side] from the otherGameObject.
         /// </summary>
         /// <param name="otherGameObject">The other game object.</param>
-        /// <param name="horizontalLaneWidth">Width of the horizontal lane.</param>
         /// <param name="xRange">The range on each side of the obstacle</param>
         /// <returns>
         ///   <c>true</c> if [is within x range on inverted lane side] [the specified other game object]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsWithinXRangeOnInvertedLaneSide(Obstacle otherGameObject, double horizontalLaneWidth, int xRange)
+        public bool IsWithinXRangeOnInvertedLaneSide(Obstacle otherGameObject, int xRange)
         {
             var otherObjectBoundary = new Rectangle(
-                (int)otherGameObject.getInvertedXLocationOnLane(horizontalLaneWidth),
+                (int)otherGameObject.getInvertedXLocationOnLane(GameBoard.BackgroundWidth),
                 (int)otherGameObject.Y,
                 (int)otherGameObject.Width,
                 (int)otherGameObject.Height

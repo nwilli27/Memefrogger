@@ -1,7 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FroggerStarter.Controller;
 
 namespace FroggerStarter.Model
 {
@@ -17,7 +19,6 @@ namespace FroggerStarter.Model
 
         private readonly IList<Obstacle> obstacles;
         private readonly Direction direction;
-        private readonly double horizontalWidth;
         private readonly double defaultSpeed;
 
         #endregion
@@ -33,13 +34,11 @@ namespace FroggerStarter.Model
         ///                     this.defaultSpeed = defaultSpeed
         /// </summary> 
         /// <param name="direction">The direction the obstacles are moving in the lane</param>
-        /// <param name="horizontalWidth">The horizontalWidth of the lane</param>
         /// <param name="defaultSpeed">The default speed of all obstacles</param>
-        public Lane(double horizontalWidth, double defaultSpeed, Direction direction)
+        public Lane(double defaultSpeed, Direction direction)
         {
             this.obstacles = new List<Obstacle>();
             this.direction = direction;
-            this.horizontalWidth = horizontalWidth;
             this.defaultSpeed = defaultSpeed;
         }
 
@@ -95,7 +94,7 @@ namespace FroggerStarter.Model
 
             foreach (var obstacle in activeObstacles)
             {
-                obstacle.MoveForward(this.horizontalWidth);
+                obstacle.MoveForward();
             }
         }
 
@@ -187,7 +186,7 @@ namespace FroggerStarter.Model
         {
             var movingObstacleWithinRangeOfNextObstacle = this.obstacles
                                                               .Where(obstacle => obstacle.IsActive)
-                                                              .Where(obstacle => nextObstacle.IsWithinXRangeOnInvertedLaneSide(obstacle, this.horizontalWidth, 10));
+                                                              .Where(obstacle => nextObstacle.IsWithinXRangeOnInvertedLaneSide(obstacle, 10));
 
             return movingObstacleWithinRangeOfNextObstacle.Any();
         }
@@ -209,7 +208,7 @@ namespace FroggerStarter.Model
             switch (this.direction)
             {
                 case Direction.Left:
-                    obstacle.X = this.horizontalWidth;
+                    obstacle.X = GameBoard.BackgroundWidth;
                     break;
 
                 case Direction.Right:

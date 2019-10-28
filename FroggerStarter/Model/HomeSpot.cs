@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FroggerStarter.Controller
+namespace FroggerStarter.Model
 {
-    class GameBoardConstants
+    class HomeSpot
     {
 
     }

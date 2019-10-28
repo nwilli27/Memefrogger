@@ -16,17 +16,10 @@ namespace FroggerStarter.Model
         #region Data Members
 
         private readonly IList<Lane> lanes;
-        private readonly double width;
         private readonly double startingYLocation;
         private readonly double height;
 
         private DispatcherTimer obstacleSpawnTimer;
-
-        #endregion
-
-        #region Constants
-
-        private const double SpeedIncrease = 0.15;
 
         #endregion
 
@@ -41,17 +34,15 @@ namespace FroggerStarter.Model
         ///                     this.startingYLocation == startingYLocation
         ///                     this.height += endingYLocation - startingYLocation
         /// </summary>
-        /// <param name="width">The width.</param>
         /// <param name="startingYLocation">The starting y location.</param>
         /// <param name="endingYLocation">The ending y location.</param>
-        public LaneManager(double width, double startingYLocation, double endingYLocation)
+        public LaneManager(double startingYLocation, double endingYLocation)
         {
             this.startingYLocation = startingYLocation < endingYLocation ? startingYLocation : throw new ArgumentOutOfRangeException();
-            this.width = width;
             this.lanes = new List<Lane>();
             this.height = endingYLocation - startingYLocation;
 
-            this.setupObstacleSpeedTimer();
+            this.setupObstacleSpawnTimer();
         }
 
         #endregion
@@ -104,7 +95,7 @@ namespace FroggerStarter.Model
                 throw new ArgumentOutOfRangeException();
             }
 
-            var lane = new Lane(this.width, defaultSpeed, direction);
+            var lane = new Lane(defaultSpeed, direction);
             lane.AddObstacles(obstacleType, maxNumberObstacles);
             this.lanes.Add(lane);
             this.updateYLocationOfLanes();
@@ -147,7 +138,7 @@ namespace FroggerStarter.Model
 
         #region Private Helpers
 
-        private void setupObstacleSpeedTimer()
+        private void setupObstacleSpawnTimer()
         {
             this.obstacleSpawnTimer = new DispatcherTimer();
             this.obstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;

@@ -119,18 +119,20 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controller\GameBoardConstants.cs" />
-    <Compile Include="Controller\GameSettings.cs" />
+    <Compile Include="Constants\GameBoard.cs" />
+    <Compile Include="Constants\GameSettings.cs" />
+    <Compile Include="Constants\SetOnce.cs" />
     <Compile Include="Factory\ObstacleFactory.cs" />
     <Compile Include="Model\Frog.cs" />
     <Compile Include="Controller\GameManager.cs" />
     <Compile Include="Model\GameObject.cs" />
-    <Compile Include="Model\Direction.cs" />
+    <Compile Include="Enums\Direction.cs" />
+    <Compile Include="Model\HomeSpot.cs" />
     <Compile Include="Model\MovingObject.cs" />
     <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Lane.cs" />
     <Compile Include="Model\LaneManager.cs" />
-    <Compile Include="Model\ObstacleType.cs" />
+    <Compile Include="Enums\ObstacleType.cs" />
     <Compile Include="Model\PlayerStats.cs" />
     <Compile Include="Model\ScoreTimer.cs" />
     <Compile Include="View\GamePage.xaml.cs">

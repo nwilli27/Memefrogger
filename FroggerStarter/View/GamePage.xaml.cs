@@ -20,9 +20,7 @@ namespace FroggerStarter.View
 
         private readonly double applicationHeight = (double) Application.Current.Resources["AppHeight"];
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
-        private readonly double highRoadYLocation = (double) Application.Current.Resources["HighRoadYLocation"];
-        private readonly double bottomRoadYLocation = (double)Application.Current.Resources["BottomRoadYLocation"];
-
+ 
         private readonly GameManager gameManager;
 
         #endregion
@@ -41,14 +39,23 @@ namespace FroggerStarter.View
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
 
-            this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation, this.bottomRoadYLocation);
+            this.initializeGameBoardConstants();
 
+            this.gameManager = new GameManager();
             this.gameManager.LifeLoss += this.onLivesUpdated;
             this.gameManager.ScoreUpdated += this.onScoreUpdated;
             this.gameManager.GameOver += this.onGameOver;
             this.gameManager.ScoreTimerTick += this.onProgressBarOnTick;
 
             this.gameManager.InitializeGame(this.canvas);
+        }
+
+        private void initializeGameBoardConstants()
+        {
+            GameBoard.BackgroundWidth =  this.applicationWidth;
+            GameBoard.BackgroundHeight = this.applicationHeight;
+            GameBoard.HighRoadYLocation =   (double) Application.Current.Resources["HighRoadYLocation"];
+            GameBoard.BottomRoadYLocation = (double) Application.Current.Resources["BottomRoadYLocation"];
         }
 
         #endregion

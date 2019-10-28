@@ -14,11 +14,6 @@ namespace FroggerStarter.Controller
     {
         #region Data members
 
-        private readonly double backgroundHeight;
-        private readonly double backgroundWidth;
-        private readonly double highRoadYLocation;
-        private readonly double bottomRoadYLocation;
-
         private Canvas gameCanvas;
         private Frog player;
         private LaneManager laneManager;
@@ -50,36 +45,12 @@ namespace FroggerStarter.Controller
         ///     Initializes a new instance of the <see cref="GameManager" /> class.
         ///     Precondition: backgroundHeight > 0
         ///                   backgroundWidth > 0
-        ///     Post-condition: this.backgroundHeight == backgroundHeight
-        ///                     this.backgroundWidth == backgroundWidth
-        ///                     this.highShouldYLocation == highRoadYLocation
-        ///                     
-        ///                     obstacleSpeedTimer.Start()
-        ///                     gameTimer.Start()
+        /// 
+        ///     Post-condition: none
         ///     
         /// </summary>
-        /// <param name="backgroundHeight">Height of the background.</param>
-        /// <param name="backgroundWidth">Width of the background.</param>
-        /// <param name="highRoadYLocation">The high road y location.</param>
-        /// <exception cref="ArgumentOutOfRangeException">backgroundHeight &lt;= 0
-        /// or
-        /// backgroundWidth &lt;= 0</exception>
-        public GameManager(double backgroundHeight, double backgroundWidth, double highRoadYLocation, double bottomRoadYLocation)
+        public GameManager()
         {
-            if (backgroundHeight <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(backgroundHeight));
-            }
-            if (backgroundWidth <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(backgroundWidth));
-            }
-
-            this.backgroundHeight = backgroundHeight;
-            this.backgroundWidth = backgroundWidth;
-            this.highRoadYLocation = highRoadYLocation;
-            this.bottomRoadYLocation = bottomRoadYLocation;
-
             this.setupGameTimer();
             this.setupScoreTimer();
         }
@@ -122,7 +93,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerRight()
         {
-            this.player.MoveRightWithBoundaryCheck(this.backgroundWidth);
+            this.player.MoveRightWithBoundaryCheck(GameBoard.BackgroundWidth);
         }
 
         /// <summary>
@@ -140,7 +111,7 @@ namespace FroggerStarter.Controller
             }
             else
             {
-                this.player.MoveUpWithBoundaryCheck(this.highRoadYLocation);
+                this.player.MoveUpWithBoundaryCheck(GameBoard.HighRoadYLocation);
             }
         }
 
@@ -151,7 +122,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerDown()
         {
-            this.player.MoveDownWithBoundaryCheck(this.backgroundHeight - BottomLaneOffset);
+            this.player.MoveDownWithBoundaryCheck(GameBoard.BackgroundHeight - BottomLaneOffset);
         }
 
         #endregion
@@ -180,7 +151,6 @@ namespace FroggerStarter.Controller
             if (ScoreTimer.IsTimeUp)
             {
                 this.lifeLost();
-                this.checkLivesAndResetGame();
                 ScoreTimer.ResetScoreTick();
             }
             this.ScoreTimerTick?.Invoke(this, scoreTick);
@@ -196,7 +166,7 @@ namespace FroggerStarter.Controller
         private void createAndPlaceObstaclesInLanes()
         {
             //TOdO FIX HARDCORE 355
-            this.laneManager = new LaneManager(this.backgroundWidth, this.getRoadStartingYLocation(), this.bottomRoadYLocation);
+            this.laneManager = new LaneManager(this.getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
 
             this.laneManager.AddLaneOfObstacles(
                 (Direction)GameSettings.Lane5[0],
@@ -219,8 +189,8 @@ namespace FroggerStarter.Controller
 
         private void setPlayerToCenterOfBottomLane()
         {
-            this.player.X = this.backgroundWidth / 2 - this.player.Width / 2;
-            this.player.Y = (this.bottomRoadYLocation + RoadShoulderOffset) - this.player.Height;
+            this.player.X = GameBoard.BackgroundWidth / 2 - this.player.Width / 2;
+            this.player.Y = (GameBoard.BottomRoadYLocation + RoadShoulderOffset) - this.player.Height;
         }
 
         private void timerOnTick(object sender, object e)
@@ -259,12 +229,12 @@ namespace FroggerStarter.Controller
 
         private bool hasPlayerMadeItToHighRoad()
         {
-            return this.player.Y - this.player.SpeedY <= this.highRoadYLocation;
+            return this.player.Y - this.player.SpeedY <= GameBoard.HighRoadYLocation;
         }
 
         private double getRoadStartingYLocation()
         {
-            return this.highRoadYLocation + RoadShoulderOffset;
+            return GameBoard.HighRoadYLocation + RoadShoulderOffset;
         }
 
         private void lifeLost()
