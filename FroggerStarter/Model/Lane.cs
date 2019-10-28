@@ -99,16 +99,6 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        ///     Sets the obstacles to default speed of the lane.
-        ///     Precondition: none
-        ///     Post-condition: @each obstacles in this.obstacles : obstacle.SpeedX == this.defaultSpeed
-        /// </summary>
-        public void SetObstaclesToDefaultSpeed()
-        {
-            this.obstacles.ToList().ForEach(obstacle => obstacle.SpeedX = this.defaultSpeed);
-        }
-
-        /// <summary>
         ///     Moves the next obstacle that isn't active.
         ///     Precondition: none
         ///     Post-condition: @activeObstacles++

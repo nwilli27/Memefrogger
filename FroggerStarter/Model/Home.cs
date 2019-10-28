@@ -1,4 +1,6 @@
 ﻿
+using System.Runtime.CompilerServices;
+using Windows.UI.Xaml;
 using FroggerStarter.Controller;
 using FroggerStarter.View.Sprites;
 
@@ -11,6 +13,12 @@ namespace FroggerStarter.Model
     internal class Home : GameObject
     {
 
+        #region Data Members
+
+        private bool isFilled;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -19,7 +27,14 @@ namespace FroggerStarter.Model
         /// <value>
         ///   <c>true</c> if this instance is filled; otherwise, <c>false</c>.
         /// </value>
-        public bool IsFilled { get; set; }
+        public bool IsFilled
+        {
+            get => this.isFilled;
+            set
+            {
+                this.isFilled = value;
+                this.changeHomeVisibility();
+            }}
 
         #endregion
 
@@ -33,7 +48,12 @@ namespace FroggerStarter.Model
         public Home()
         {
             Sprite = new HomeSprite();
+            this.IsFilled = false;
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         ///     Aligns the sprite in the center of the allocated home area.
@@ -43,6 +63,15 @@ namespace FroggerStarter.Model
         public void alignInCenterOfHomeLocation()
         {
             this.X = ((GameBoard.HomeWidth - this.Width) / 2) + this.X;
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        private void changeHomeVisibility()
+        {
+            this.Sprite.Visibility = this.isFilled ? Visibility.Visible : Visibility.Collapsed;
         }
 
         #endregion

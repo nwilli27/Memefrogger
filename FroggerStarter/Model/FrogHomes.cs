@@ -1,16 +1,25 @@
 ﻿
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using FroggerStarter.Controller;
 
 namespace FroggerStarter.Model
 {
+
     /// <summary>
     ///     Class that holds the collection of frog homes.
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IEnumerable{Home}" />
     internal class FrogHomes : IEnumerable<Home>
     {
+        #region Properties
+
+        public bool HasHomesBeenFilled => this.frogHomes.All(home => home.IsFilled);
+
+        #endregion
+
+
         #region Data Members
 
         private readonly IList<Home> frogHomes;

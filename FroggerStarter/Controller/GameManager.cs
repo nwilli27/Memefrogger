@@ -105,15 +105,20 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerUp()
         {
-            if (this.hasPlayerMadeItToHighRoad())
+            this.player.MoveUpWithBoundaryCheck(GameBoard.HighRoadYLocation);
+            
+            if (this.hasReachedAnEmptyHome())
             {
+                this.makeHitHomeVisible();
                 this.setPlayerToCenterOfBottomLane();
                 this.increaseScore();
+                this.checkGameStatusForGameOver();
                 ScoreTimer.ResetScoreTick();
-            }
-            else
+
+            } else if (this.player.Y < GameBoard.HighRoadYLocation + RoadShoulderOffset)
             {
-                this.player.MoveUpWithBoundaryCheck(GameBoard.HighRoadYLocation);
+                this.lifeLost();
+                this.resetPlayerAndObstacles();
             }
         }
 
@@ -124,7 +129,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerDown()
         {
-            this.player.MoveDownWithBoundaryCheck(GameBoard.BackgroundHeight - BottomLaneOffset);
+            this.player.MoveDownWithBoundaryCheck(GameBoard.BottomRoadYLocation + BottomLaneOffset);
         }
 
         #endregion
@@ -153,7 +158,6 @@ namespace FroggerStarter.Controller
             if (ScoreTimer.IsTimeUp)
             {
                 this.lifeLost();
-                ScoreTimer.ResetScoreTick();
             }
             this.ScoreTimerTick?.Invoke(this, scoreTick);
         }
@@ -173,14 +177,13 @@ namespace FroggerStarter.Controller
 
         private void createAndPlaceObstaclesInLanes()
         {
-            //TOdO FIX HARDCORE 355
-            this.laneManager = new LaneManager(this.getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
+            this.laneManager = new LaneManager(getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
 
             this.laneManager.AddLaneOfObstacles(
-                (Direction)GameSettings.Lane5[0],
-                (double)GameSettings.Lane5[1],
-                (ObstacleType)GameSettings.Lane5[2],
-                (int)GameSettings.Lane5[3]);
+                (Direction)    GameSettings.Lane5[0],
+                (double)       GameSettings.Lane5[1],
+                (ObstacleType) GameSettings.Lane5[2],
+                (int)          GameSettings.Lane5[3]);
 
             this.laneManager.AddLaneOfObstacles(Direction.Left, 1.75, ObstacleType.SemiTruck, 3);
             this.laneManager.AddLaneOfObstacles(Direction.Left, 1.5, ObstacleType.Car, 4);
@@ -214,8 +217,7 @@ namespace FroggerStarter.Controller
                 if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.Sprite.Visibility == Visibility.Visible)
                 {
                     this.lifeLost();
-                    this.checkLivesAndResetGame();
-                    ScoreTimer.ResetScoreTick();
+                    this.resetPlayerAndObstacles();
                 }
             }
         }
@@ -235,12 +237,24 @@ namespace FroggerStarter.Controller
             this.gameOver();
         }
 
-        private bool hasPlayerMadeItToHighRoad()
+        private bool hasReachedAnEmptyHome()
         {
-            return this.player.Y - this.player.SpeedY <= GameBoard.HighRoadYLocation;
+            var filledHomes = this.frogHomes.ToList().Where(home => !home.IsFilled);
+            var collidedWithHomes = filledHomes.Where(home => this.player.HasCollidedWith(home));
+
+            return collidedWithHomes.Any();
         }
 
-        private double getRoadStartingYLocation()
+        private void makeHitHomeVisible()
+        {
+            var hitHome = this.frogHomes.ToList()
+                            .Where(home => !home.IsFilled)
+                            .First(home => this.player.HasCollidedWith(home));
+
+            hitHome.IsFilled = true;
+        }
+
+        private static double getRoadStartingYLocation()
         {
             return GameBoard.HighRoadYLocation + RoadShoulderOffset;
         }
@@ -250,17 +264,15 @@ namespace FroggerStarter.Controller
             this.playerStats.Lives--;
             var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
             this.LifeLoss?.Invoke(this, life);
+            ScoreTimer.ResetScoreTick();
+            this.checkGameStatusForGameOver();
         }
 
-        private void checkLivesAndResetGame()
+        private void checkGameStatusForGameOver()
         {
-            if (this.playerStats.Lives == 0)
+            if (this.playerStats.Lives == 0 || this.frogHomes.HasHomesBeenFilled)
             {
                 this.stopGamePlayAndShowGameOver();
-            }
-            else
-            {
-                this.resetPlayerAndObstacles();
             }
         }
 
