@@ -233,6 +233,7 @@ namespace FroggerStarter.Controller
                 if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.Sprite.Visibility == Visibility.Visible)
                 {
                     this.decrementLivesAndResetGame();
+                    ScoreTimer.ResetScoreTick();
                 }
             }
         }
@@ -254,13 +255,14 @@ namespace FroggerStarter.Controller
         private void resetPlayerAndObstacles()
         {
             this.setPlayerToCenterOfBottomLane();
-            this.laneManager.SetAllObstaclesToDefaultSpeed();
-            this.laneManager.ResetObstaclesSpeedTimer();
+            this.laneManager.ResetLanesToOneObstacle();
+            this.laneManager.ResetObstacleSpawnTimer();
         }
 
         private void stopGamePlayAndShowGameOver()
         {
             this.timer.Stop();
+            this.scoreTimer.Stop();
             this.player.StopMovement();
             this.gameOver();
         }

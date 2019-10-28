@@ -60,18 +60,26 @@ namespace FroggerStarter.Model
         {
             for (var i = 0; i < maxNumberObstacles; i++)
             {
-                if (i == 0)
-                {
-                    var obstacle = new Obstacle(obstacleType, this.direction) {IsActive = true};
-                    this.add(obstacle);
-                }
-                else
-                {
-                    this.add(new Obstacle(obstacleType, this.direction));
-                }
+                this.add(new Obstacle(obstacleType, this.direction));
             }
+            this.makeTheFirstObstacleActive();
+        }
 
-            //this.readjustSpaceBetweenObstacles();
+        /// <summary>
+        ///     Resets the lane to one obstacle.
+        ///     Precondition: none
+        ///     Post-condition: @each obstacle.isActive = false
+        ///                     @first obstacle.isActive = true
+        /// </summary>
+        public void ResetLaneToOneObstacle()
+        {
+            var firstActiveObstacle = this.obstacles.ToList().First(obstacle => obstacle.IsActive);
+            var allButOneObstacle = this.obstacles.ToList().Where(obstacle => !obstacle.Equals(firstActiveObstacle));
+            foreach (var obstacle in allButOneObstacle)
+            {
+                obstacle.IsActive = false;
+                this.setDefaultLocation(obstacle);
+            }
         }
 
         /// <summary>
@@ -161,6 +169,12 @@ namespace FroggerStarter.Model
 
         #region Private Helpers
 
+        private void makeTheFirstObstacleActive()
+        {
+            var firstObstacle = this.obstacles.First(obstacle => !obstacle.IsActive);
+            firstObstacle.IsActive = true;
+        }
+
         private void adjustNextObstacleXLocation(Obstacle nextObstacle)
         {
             while (this.checkForEqualSpacingBetweenObstacles(nextObstacle))
@@ -186,7 +200,12 @@ namespace FroggerStarter.Model
         private void add(Obstacle obstacle)
         {
             obstacle.SpeedX = this.defaultSpeed;
+            this.setDefaultLocation(obstacle);
+            this.obstacles.Add(obstacle);
+        }
 
+        private void setDefaultLocation(Obstacle obstacle)
+        {
             switch (this.direction)
             {
                 case Direction.Left:
@@ -200,8 +219,6 @@ namespace FroggerStarter.Model
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            this.obstacles.Add(obstacle);
         }
 
         #endregion

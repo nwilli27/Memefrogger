@@ -20,7 +20,7 @@ namespace FroggerStarter.Model
         private readonly double startingYLocation;
         private readonly double height;
 
-        private DispatcherTimer obstacleSpeedTimer;
+        private DispatcherTimer obstacleSpawnTimer;
 
         #endregion
 
@@ -69,13 +69,14 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        ///     Sets all obstacles to default speed of there corresponding lane.
+        ///     Resets the lanes to one obstacle each.
         ///     Precondition: none
-        ///     Post-condition: @each lane of obstacles : obstacle.SpeedX == lane.defaultSpeed
+        ///     Post-condition: @each obstacle.isActive = false
+        ///                     @first obstacle.isActive = true
         /// </summary>
-        public void SetAllObstaclesToDefaultSpeed()
+        public void ResetLanesToOneObstacle()
         {
-            this.lanes.ToList().ForEach(lane => lane.SetObstaclesToDefaultSpeed());
+            this.lanes.ToList().ForEach(lane => lane.ResetLaneToOneObstacle());
         }
 
         /// <summary>
@@ -134,12 +135,12 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Resets the obstacles speed timer.
         ///     Precondition: none
-        ///     Post-condition: obstacleSpeedTimer.Start()
+        ///     Post-condition: obstacleSpawnTimer.Start()
         /// </summary>
-        public void ResetObstaclesSpeedTimer()
+        public void ResetObstacleSpawnTimer()
         {
-            this.obstacleSpeedTimer.Stop();
-            this.obstacleSpeedTimer.Start();
+            this.obstacleSpawnTimer.Stop();
+            this.obstacleSpawnTimer.Start();
         }
 
         #endregion
@@ -148,13 +149,13 @@ namespace FroggerStarter.Model
 
         private void setupObstacleSpeedTimer()
         {
-            this.obstacleSpeedTimer = new DispatcherTimer();
-            this.obstacleSpeedTimer.Tick += this.obstacleSpeedTimerOnTick;
-            this.obstacleSpeedTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
-            this.obstacleSpeedTimer.Start();
+            this.obstacleSpawnTimer = new DispatcherTimer();
+            this.obstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;
+            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
+            this.obstacleSpawnTimer.Start();
         }
 
-        private void obstacleSpeedTimerOnTick(object sender, object e)
+        private void obstacleSpawnTimerOnTick(object sender, object e)
         {
             this.lanes.ToList().ForEach(lane => lane.MoveNextAvailableObstacle());
         }
