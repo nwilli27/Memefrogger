@@ -121,7 +121,7 @@
     </Compile>
     <Compile Include="Constants\GameBoard.cs" />
     <Compile Include="Constants\GameSettings.cs" />
-    <Compile Include="Constants\SetOnce.cs" />
+    <Compile Include="Utility\SetOnce.cs" />
     <Compile Include="Factory\ObstacleFactory.cs" />
     <Compile Include="Model\Frog.cs" />
     <Compile Include="Controller\GameManager.cs" />

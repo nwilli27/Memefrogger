@@ -23,21 +23,22 @@
 
         <ProgressBar x:Name="timeProgressBar" Background="Black" Canvas.Top="416" Value="20" Minimum="0" Maximum="20" Margin="0,12" Height="17" Width="540" Canvas.Left="105" Foreground="LimeGreen"/>
         <TextBlock x:Name="timeLabel" Text="Time:" Foreground="White" FontSize="22" FontFamily="Berlin Sans FB" Canvas.Left="48" Canvas.Top="422"/>
-        <Rectangle Canvas.Top="54" Fill="Gray" Width="45" Height="51" />
-        <Rectangle Canvas.Top="54" Fill="White" Width="60" Height="51" Canvas.Left="45" />
-        <Rectangle Canvas.Top="54" Fill="White" Width="60" Height="51" Canvas.Left="645" />
-        <Rectangle Canvas.Top="54" Fill="Gray" Width="45" Height="51" Canvas.Left="705" />
-        <Rectangle Canvas.Top="54" Fill="Gray" Width="45" Height="51" Canvas.Left="105" />
-        <Rectangle Canvas.Top="54" Fill="Gray" Width="45" Height="51" Canvas.Left="150" />
-        <Rectangle Canvas.Top="54" Fill="White" Width="60" Height="51" Canvas.Left="195" />
-        <Rectangle Canvas.Top="54" Fill="Gray" Width="45" Height="51" Canvas.Left="255" />
-        <Rectangle Canvas.Top="54" Fill="Gray" Width="45" Height="51" Canvas.Left="300" />
-        <Rectangle Canvas.Top="54" Fill="White" Width="60" Height="51" Canvas.Left="345" />
-        <Rectangle Canvas.Top="54" Fill="Gray" Width="45" Height="51" Canvas.Left="405" />
-        <Rectangle Canvas.Top="54" Fill="Gray" Width="45" Height="51" Canvas.Left="450" />
-        <Rectangle Canvas.Top="54" Fill="White" Width="60" Height="51" Canvas.Left="495" />
-        <Rectangle Canvas.Top="54" Fill="Gray" Width="45" Height="51" Canvas.Left="555" />
-        <Rectangle Canvas.Top="54" Fill="Gray" Width="45" Height="51" Canvas.Left="600" />
+
+        <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" />
+        <Rectangle Canvas.Top="54" Fill="White" Width="{StaticResource HomeWidth}" Height="51" Canvas.Left="45" />
+        <Rectangle Canvas.Top="54" Fill="White" Width="{StaticResource HomeWidth}" Height="51" Canvas.Left="645" />
+        <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" Canvas.Left="705" />
+        <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" Canvas.Left="105" />
+        <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" Canvas.Left="150" />
+        <Rectangle Canvas.Top="54" Fill="White" Width="{StaticResource HomeWidth}" Height="51" Canvas.Left="195" />
+        <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" Canvas.Left="255" />
+        <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" Canvas.Left="300" />
+        <Rectangle Canvas.Top="54" Fill="White" Width="{StaticResource HomeWidth}" Height="51" Canvas.Left="345" />
+        <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" Canvas.Left="405" />
+        <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" Canvas.Left="450" />
+        <Rectangle Canvas.Top="54" Fill="White" Width="{StaticResource HomeWidth}" Height="51" Canvas.Left="495" />
+        <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" Canvas.Left="555" />
+        <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" Canvas.Left="600" />
 
     </Canvas>
 </Page>

@@ -21,6 +21,8 @@ namespace FroggerStarter.Controller
         private static readonly SetOnce<double> backgroundHeight = new SetOnce<double>();
         private static readonly SetOnce<double> highRoadYLocation = new SetOnce<double>();
         private static readonly SetOnce<double> bottomRoadYLocation = new SetOnce<double>();
+        private static readonly SetOnce<double> homeWidth = new SetOnce<double>();
+        private static readonly SetOnce<double> homeLocationGapSize = new SetOnce<double>();
 
         #endregion
 
@@ -72,6 +74,30 @@ namespace FroggerStarter.Controller
         {
             get => bottomRoadYLocation;
             set => bottomRoadYLocation.Value = value;
+        }
+
+        /// <summary>
+        ///     Gets or sets the width of the home.
+        /// </summary>
+        /// <value>
+        ///     The width of the home.
+        /// </value>
+        public static double HomeWidth
+        {
+            get => homeWidth;
+            set => homeWidth.Value = value;
+        }
+
+        /// <summary>
+        ///     Gets or sets the size of the home location gap.
+        /// </summary>
+        /// <value>
+        ///     The size of the home location gap.
+        /// </value>
+        public static double HomeLocationGapSize
+        {
+            get => homeLocationGapSize;
+            set => homeLocationGapSize.Value = value;
         }
 
         #endregion

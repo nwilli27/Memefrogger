@@ -52,10 +52,12 @@ namespace FroggerStarter.View
 
         private void initializeGameBoardConstants()
         {
-            GameBoard.BackgroundWidth =  this.applicationWidth;
-            GameBoard.BackgroundHeight = this.applicationHeight;
+            GameBoard.BackgroundWidth =     this.applicationWidth;
+            GameBoard.BackgroundHeight =    this.applicationHeight;
             GameBoard.HighRoadYLocation =   (double) Application.Current.Resources["HighRoadYLocation"];
             GameBoard.BottomRoadYLocation = (double) Application.Current.Resources["BottomRoadYLocation"];
+            GameBoard.HomeWidth =           (double) Application.Current.Resources["HomeWidth"];
+            GameBoard.HomeLocationGapSize = (double) Application.Current.Resources["HomeLocationGapSize"];
         }
 
         #endregion
