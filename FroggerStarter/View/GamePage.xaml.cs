@@ -1,5 +1,4 @@
 ﻿
-using System;
 using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
@@ -22,9 +21,9 @@ namespace FroggerStarter.View
         private readonly double applicationHeight = (double) Application.Current.Resources["AppHeight"];
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
         private readonly double highRoadYLocation = (double) Application.Current.Resources["HighRoadYLocation"];
+        private readonly double bottomRoadYLocation = (double)Application.Current.Resources["BottomRoadYLocation"];
 
         private readonly GameManager gameManager;
-        private DispatcherTimer timer;
 
         #endregion
 
@@ -42,7 +41,7 @@ namespace FroggerStarter.View
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
 
-            this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation);
+            this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation, this.bottomRoadYLocation);
 
             this.gameManager.LifeLoss += this.onLivesUpdated;
             this.gameManager.ScoreUpdated += this.onScoreUpdated;

@@ -17,6 +17,7 @@ namespace FroggerStarter.Controller
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
         private readonly double highRoadYLocation;
+        private readonly double bottomRoadYLocation;
 
         private Canvas gameCanvas;
         private Frog player;
@@ -63,7 +64,7 @@ namespace FroggerStarter.Controller
         /// <exception cref="ArgumentOutOfRangeException">backgroundHeight &lt;= 0
         /// or
         /// backgroundWidth &lt;= 0</exception>
-        public GameManager(double backgroundHeight, double backgroundWidth, double highRoadYLocation)
+        public GameManager(double backgroundHeight, double backgroundWidth, double highRoadYLocation, double bottomRoadYLocation)
         {
             if (backgroundHeight <= 0)
             {
@@ -77,6 +78,7 @@ namespace FroggerStarter.Controller
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
             this.highRoadYLocation = highRoadYLocation;
+            this.bottomRoadYLocation = bottomRoadYLocation;
 
             this.setupGameTimer();
             this.setupScoreTimer();
@@ -133,7 +135,7 @@ namespace FroggerStarter.Controller
             if (this.hasPlayerMadeItToHighRoad())
             {
                 this.setPlayerToCenterOfBottomLane();
-                this.increaseScoreBasedOnTime();
+                this.increaseScore();
                 ScoreTimer.ResetScoreTick();
             }
             else
@@ -178,6 +180,7 @@ namespace FroggerStarter.Controller
             if (ScoreTimer.IsTimeUp)
             {
                 this.lifeLost();
+                this.checkLivesAndResetGame();
                 ScoreTimer.ResetScoreTick();
             }
             this.ScoreTimerTick?.Invoke(this, scoreTick);
@@ -193,7 +196,7 @@ namespace FroggerStarter.Controller
         private void createAndPlaceObstaclesInLanes()
         {
             //TOdO FIX HARDCORE 355
-            this.laneManager = new LaneManager(this.backgroundWidth, this.getRoadStartingYLocation(), 355);
+            this.laneManager = new LaneManager(this.backgroundWidth, this.getRoadStartingYLocation(), this.bottomRoadYLocation);
 
             this.laneManager.AddLaneOfObstacles(
                 (Direction)GameSettings.Lane5[0],
@@ -217,7 +220,7 @@ namespace FroggerStarter.Controller
         private void setPlayerToCenterOfBottomLane()
         {
             this.player.X = this.backgroundWidth / 2 - this.player.Width / 2;
-            this.player.Y = this.backgroundHeight - this.player.Height - BottomLaneOffset;
+            this.player.Y = (this.bottomRoadYLocation + RoadShoulderOffset) - this.player.Height;
         }
 
         private void timerOnTick(object sender, object e)
@@ -232,23 +235,10 @@ namespace FroggerStarter.Controller
             {
                 if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.Sprite.Visibility == Visibility.Visible)
                 {
-                    this.decrementLivesAndResetGame();
+                    this.lifeLost();
+                    this.checkLivesAndResetGame();
                     ScoreTimer.ResetScoreTick();
                 }
-            }
-        }
-
-        private void decrementLivesAndResetGame()
-        {
-            this.lifeLost();
-
-            if (this.playerStats.Lives == 0)
-            {
-                this.stopGamePlayAndShowGameOver();
-            }
-            else
-            {
-                this.resetPlayerAndObstacles();
             }
         }
 
@@ -277,11 +267,6 @@ namespace FroggerStarter.Controller
             return this.highRoadYLocation + RoadShoulderOffset;
         }
 
-        private double getRoadEndingYLocation()
-        {
-            return this.backgroundHeight - RoadShoulderOffset - BottomLaneOffset;
-        }
-
         private void lifeLost()
         {
             this.playerStats.Lives--;
@@ -289,7 +274,19 @@ namespace FroggerStarter.Controller
             this.LifeLoss?.Invoke(this, life);
         }
 
-        private void increaseScoreBasedOnTime()
+        private void checkLivesAndResetGame()
+        {
+            if (this.playerStats.Lives == 0)
+            {
+                this.stopGamePlayAndShowGameOver();
+            }
+            else
+            {
+                this.resetPlayerAndObstacles();
+            }
+        }
+
+        private void increaseScore()
         {
             this.playerStats.Score += (int) ScoreTimer.ScoreTick;
             var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
