@@ -17,12 +17,12 @@
         <TextBlock x:Name="scoreLabel" Text="Score:" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="654" Canvas.Top="12"/>
         <TextBlock x:Name="scoreValue" Text="" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="720" Canvas.Top="12"/>
 
-        <Rectangle Canvas.Top="{StaticResource HighRoadYLocation}" Fill="Gray" Width="{StaticResource AppWidth}" Height="50" />
+        <Rectangle Canvas.Top="{StaticResource HighRoadYLocation}" Fill="Gray" Width="{StaticResource AppWidth}" Height="{StaticResource RoadShoulderOffset}" />
 
-        <Rectangle Canvas.Top="{StaticResource BottomRoadYLocation}" Fill="Gray" Width="{StaticResource AppWidth}" Height="55" />
+        <Rectangle Canvas.Top="{StaticResource BottomRoadYLocation}" Fill="Gray" Width="{StaticResource AppWidth}" Height="{StaticResource RoadShoulderOffset}" />
 
-        <ProgressBar x:Name="timeProgressBar" Background="Black" Canvas.Top="416" Value="20" Minimum="0" Maximum="20" Margin="0,12" Height="17" Width="584" Canvas.Left="105" Foreground="LimeGreen"/>
-        <TextBlock x:Name="timeLabel" Text="Time:" Foreground="White" FontSize="22" FontFamily="Berlin Sans FB" Canvas.Left="48" Canvas.Top="422"/>
+        <ProgressBar x:Name="timeProgressBar" Background="Black" Canvas.Top="414" Value="20" Minimum="0" Maximum="20" Margin="0,12" Height="17" Width="584" Canvas.Left="105" Foreground="LimeGreen"/>
+        <TextBlock x:Name="timeLabel" Text="Time:" Foreground="White" FontSize="22" FontFamily="Berlin Sans FB" Canvas.Left="48" Canvas.Top="420"/>
 
         <Rectangle Canvas.Top="54" Fill="Gray" Width="{StaticResource HomeLocationGapSize}" Height="51" />
         <Rectangle Canvas.Top="54" Fill="Black" Width="{StaticResource HomeWidth}" Height="51" Canvas.Left="45" />

@@ -33,13 +33,6 @@ namespace FroggerStarter.Controller
 
         #endregion
 
-        #region Constants
-
-        private const int BottomLaneOffset = 5;
-        private const int RoadShoulderOffset = 50;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -115,7 +108,7 @@ namespace FroggerStarter.Controller
                 this.checkGameStatusForGameOver();
                 ScoreTimer.ResetScoreTick();
 
-            } else if (this.player.Y < GameBoard.HighRoadYLocation + RoadShoulderOffset)
+            } else if (this.player.Y < GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset)
             {
                 this.lifeLost();
                 this.resetPlayerAndObstacles();
@@ -129,7 +122,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerDown()
         {
-            this.player.MoveDownWithBoundaryCheck(GameBoard.BottomRoadYLocation + BottomLaneOffset);
+            this.player.MoveDownWithBoundaryCheck(GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset);
         }
 
         #endregion
@@ -185,10 +178,10 @@ namespace FroggerStarter.Controller
                 (ObstacleType)GameSettings.Lane5[2],
                 (int)GameSettings.Lane5[3]);
 
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.75, ObstacleType.SemiTruck, 10);
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.5, ObstacleType.Car, 13);
-            this.laneManager.AddLaneOfObstacles(Direction.Right, 1.25, ObstacleType.SemiTruck, 5);
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.0, ObstacleType.ToadTruck, 5);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.75, ObstacleType.SemiTruck, 3);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.5, ObstacleType.Car, 4);
+            this.laneManager.AddLaneOfObstacles(Direction.Right, 1.25, ObstacleType.SemiTruck, 2);
+            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.0, ObstacleType.ToadTruck, 3);
 
             this.placeObstaclesOnCanvas();
         }
@@ -201,7 +194,7 @@ namespace FroggerStarter.Controller
         private void setPlayerToCenterOfBottomLane()
         {
             this.player.X = GameBoard.BackgroundWidth / 2 - this.player.Width / 2;
-            this.player.Y = (GameBoard.BottomRoadYLocation + RoadShoulderOffset) - this.player.Height;
+            this.player.Y = (GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset) - this.player.Height;
         }
 
         private void timerOnTick(object sender, object e)
@@ -256,7 +249,7 @@ namespace FroggerStarter.Controller
 
         private static double getRoadStartingYLocation()
         {
-            return GameBoard.HighRoadYLocation + RoadShoulderOffset;
+            return GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
         }
 
         private void lifeLost()

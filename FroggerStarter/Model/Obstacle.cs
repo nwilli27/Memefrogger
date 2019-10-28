@@ -4,7 +4,6 @@ using Windows.UI.Xaml.Media;
 using FroggerStarter.Controller;
 using FroggerStarter.Factory;
 using Point = Windows.Foundation.Point;
-using System.Collections.Generic;
 
 namespace FroggerStarter.Model
 {
@@ -15,6 +14,20 @@ namespace FroggerStarter.Model
     internal class Obstacle : MovingObject
     {
 
+        #region Data Members
+
+        private readonly Direction direction;
+
+        #endregion
+
+        #region Constants
+
+        private const int SpawnLocationOffset = 5;
+
+        #endregion
+
+        #region Properties
+
         /// <summary>
         ///     Gets or sets a value indicating whether the obstacle is active (moving).
         /// </summary>
@@ -23,11 +36,9 @@ namespace FroggerStarter.Model
         /// </value>
         public bool IsActive { get; set; } = false;
 
-        #region Data Members
-
-        private readonly Direction direction;
-        
         #endregion
+
+        #region Constructor
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Obstacle"/> class.
@@ -42,7 +53,12 @@ namespace FroggerStarter.Model
             Sprite = ObstacleFactory.CreateObstacleSprite(obstacleType);
             this.direction = direction;
             this.checkDirectionToFlipHorizontally();
+            this.MoveToDefaultLocation();
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         ///     Moves the obstacle forward depending on the given direction.
@@ -68,111 +84,78 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        ///     Determines whether [is within x range on inverted lane side] from the otherGameObject.
+        ///     Determines whether [is off the end of the lane].
         /// </summary>
-        /// <param name="otherGameObject">The other game object.</param>
-        /// <param name="xRange">The range on each side of the obstacle</param>
         /// <returns>
-        ///   <c>true</c> if [is within x range on inverted lane side] [the specified other game object]; otherwise, <c>false</c>.
+        ///   <c>true</c> if [is off the end of the lane]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsWithinXRangeOnInvertedLaneSide(Obstacle otherGameObject, int xRange)
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public bool IsOffTheEndOfTheLane()
         {
-            var otherObjectBoundary = new Rectangle(
-                (int)otherGameObject.GetInvertedXLocationOnLane(),
-                (int)otherGameObject.Y,
-                (int)otherGameObject.Width,
-                (int)otherGameObject.Height
-            );
+            switch (this.direction)
+            {
+                case Direction.Right:
+                    var boundaryCheck = this.X + this.Width < 0;
+                    return boundaryCheck;
 
-            var thisObjectBoundaryWithRange = new Rectangle(
-                addRangeToLocation((int) this.X, xRange),
-                (int)this.Y,
-                addRangeToLocation((int) this.Width, xRange),
-                (int)this.Height
-            );
+                case Direction.Left:
+                    var check = this.X > GameBoard.BackgroundWidth;
+                    return check;
 
-            return thisObjectBoundaryWithRange.IntersectsWith(otherObjectBoundary);
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
-        ///     Adjusts the x location for obstacle by [amountOfSpace]
+        ///     Adjusts the x location for obstacle by the width of the obstacle.
+        ///     Precondition: none
+        ///     Post-condition: this.X +/- this.Width
         /// </summary>
-        /// <param name="amountOfSpace">The amount of space.</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void AdjustXSpacingForObstacle(double amountOfSpace)
+        public void ShiftObstacleXLocation()
         {
             switch (this.direction)
             {
                 case Direction.Left:
-                    this.X += amountOfSpace;
+                    this.X += this.Width;
                     break;
 
                 case Direction.Right:
-                    this.X -= amountOfSpace;
+                    this.X -= this.Width;
                     break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        } 
+        }
+
+        #endregion
 
         #region Private Helpers
 
-        private static int addRangeToLocation(int location, int range)
-        {
-            return location < 0 ? location - range : location + range;
-        }
-
-        public double GetInvertedXLocationOnLane()
+        public void MoveToDefaultLocation()
         {
             switch (this.direction)
             {
                 case Direction.Left:
-
-                    if (this.isOffRightSideLaneBoundary(GameBoard.BackgroundWidth))
-                    {
-                        return this.X;
-                    }
-                    else if (this.isOffLeftSideLaneBoundary())
-                    {
-                        return GameBoard.BackgroundWidth - this.X;
-                    }
-                    else
-                    {
-                        return this.X + GameBoard.BackgroundWidth;
-                    }
+                    this.X = GameBoard.BackgroundWidth + SpawnLocationOffset;
+                    break;
 
                 case Direction.Right:
-
-                    if (this.isOffLeftSideLaneBoundary())
-                    {
-                        return this.X;
-                    }
-                    else
-                    {
-                        return this.X - GameBoard.BackgroundWidth;
-                    }
+                    this.X = -this.Width - SpawnLocationOffset;
+                    break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private bool isOffLeftSideLaneBoundary()
-        {
-            return this.X <= 0;
-        }
-
-        private bool isOffRightSideLaneBoundary(double horizontalLaneWidth)
-        {
-            return this.X + this.Width >= horizontalLaneWidth;
         }
 
         private void moveObstacleToTheRight(double horizontalLaneWidth)
         {
             if (this.hasObstacleMovedOffRightSide(horizontalLaneWidth))
             {
-                this.X = -this.Width;
+                this.X = -this.Width * 2;
             }
             this.MoveRight();
         }

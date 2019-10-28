@@ -61,7 +61,7 @@ namespace FroggerStarter.Model
             {
                 this.add(new Obstacle(obstacleType, this.direction));
             }
-            this.makeTheFirstObstacleActive();
+            this.MakeObstacleActive();
         }
 
         /// <summary>
@@ -76,8 +76,8 @@ namespace FroggerStarter.Model
             var allButOneObstacle = this.obstacles.ToList().Where(obstacle => !obstacle.Equals(firstActiveObstacle));
             foreach (var obstacle in allButOneObstacle)
             {
+                obstacle.MoveToDefaultLocation();
                 obstacle.IsActive = false;
-                this.setDefaultLocation(obstacle);
             }
         }
 
@@ -90,7 +90,7 @@ namespace FroggerStarter.Model
         /// <exception cref="ArgumentOutOfRangeException">When lane direction isn't available</exception>
         public void MoveObstacles()
         {
-            var activeObstacles = this.obstacles.ToList().Where(obstacle => obstacle.IsActive);
+            var activeObstacles = this.obstacles.Where(obstacle => obstacle.IsActive).ToList();
             var collidedList = new List<Obstacle>();
 
             foreach (var obstacle in activeObstacles)
@@ -103,25 +103,20 @@ namespace FroggerStarter.Model
                 obstacle.MoveForward();
             }
 
-            var firstCollidedObstacle = collidedList.FirstOrDefault(obstacle => obstacle.X + obstacle.Width > GameBoard.BackgroundWidth);
-            if (firstCollidedObstacle != null)
-            {
-                firstCollidedObstacle.AdjustXSpacingForObstacle(50);
-            }
-
+            var firstObstacleCollidedOffBounds = collidedList.FirstOrDefault(obstacle => obstacle.IsOffTheEndOfTheLane());
+            firstObstacleCollidedOffBounds?.ShiftObstacleXLocation();
         }
 
         /// <summary>
-        ///     Moves the next obstacle that isn't active.
+        ///     Makes the next available obstacle active.
         ///     Precondition: none
-        ///     Post-condition: @activeObstacles++
+        ///     Post-condition: @obstacles.Count() that isActive += 1
         /// </summary>
-        public void MoveNextAvailableObstacle()
+        public void MakeObstacleActive()
         {
             var nextObstacle = this.obstacles.FirstOrDefault(obstacle => !obstacle.IsActive);
             if (nextObstacle != null)
             {
-                //this.adjustNextObstacleXLocation(nextObstacle);
                 nextObstacle.IsActive = true;
             }
         }
@@ -171,76 +166,6 @@ namespace FroggerStarter.Model
 
         #region Private Helpers
 
-        private void makeTheFirstObstacleActive()
-        {
-            var firstObstacle = this.obstacles.First(obstacle => !obstacle.IsActive);
-            firstObstacle.IsActive = true;
-        }
-
-        private void adjustNextObstacleXLocation(Obstacle nextObstacle)
-        {
-            //this.setObstacleToNextAvailableSpot(nextObstacle);
-            this.getNextOpenRange();
-            var pad = 0;
-            
-            //while (this.checkForEqualSpacingBetweenObstacles(nextObstacle))
-            //{
-            //    nextObstacle.AdjustXSpacingForObstacle(nextObstacle.Width);
-            //}
-        }
-
-        private void getNextOpenRange() {
-            
-            
-            
-            
-        }
-
-        //private void setObstacleToNextAvailableSpot(Obstacle nextObstacle)
-        //{
-
-        //    var activeObstacles = this.obstacles.Where(obstacle => obstacle.IsActive).OrderBy(obstacle => obstacle.GetInvertedXLocationOnLane());
-        //    var invertedXCoordinates = this.obstacles.ToList()
-        //        .Where(obstacle => obstacle.IsActive)
-        //        .Select(obstacle => obstacle.GetInvertedXLocationOnLane());
-
-
-        //    for (var i = 0; i < activeObstacles.ToList().Count - 1; i++)
-        //    {
-
-        //        var currentBottomRange = activeObstacles.ToList()[i].GetInvertedXLocationOnLane();
-        //        var currentTopRange = currentBottomRange + activeObstacles.ToList()[i].Width;
-
-        //        var minimumBottomRange = activeObstacles.Min(obstacle => obstacle.GetInvertedXLocationOnLane());
-
-        //        if (activeObstacles.Min(obstacle => obstacle.GetInvertedXLocationOnLane() > nextObstacle.X + nextObstacle.Width))
-        //        {
-        //            break;
-        //        }
-
-        //        var nextBottomRange = activeObstacles.ToList()[i + 1].GetInvertedXLocationOnLane();
-
-        //        var centerAlignment = ((nextBottomRange - currentTopRange) / 2) + currentTopRange;
-
-        //        //TODO can add padding here.
-        //        if (nextBottomRange - currentTopRange > nextObstacle.Width)
-        //        {
-        //            nextObstacle.X = centerAlignment;
-        //            break;
-        //        }
-        //    }
-        //}
-
-
-        private bool checkForEqualSpacingBetweenObstacles(Obstacle nextObstacle)
-        {
-            var movingObstacleWithinRangeOfNextObstacle = this.obstacles
-                                                              .Where(obstacle => obstacle.IsActive)
-                                                              .Where(obstacle => nextObstacle.IsWithinXRangeOnInvertedLaneSide(obstacle, 10));
-
-            return movingObstacleWithinRangeOfNextObstacle.Any();
-        }
-
         private static double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)
         {
             return ((heightOfLane - obstacle.Height) / 2) + yLocation;
@@ -249,25 +174,7 @@ namespace FroggerStarter.Model
         private void add(Obstacle obstacle)
         {
             obstacle.SpeedX = this.defaultSpeed;
-            this.setDefaultLocation(obstacle);
             this.obstacles.Add(obstacle);
-        }
-
-        private void setDefaultLocation(Obstacle obstacle)
-        {
-            switch (this.direction)
-            {
-                case Direction.Left:
-                    obstacle.X = GameBoard.BackgroundWidth;
-                    break;
-
-                case Direction.Right:
-                    obstacle.X = -obstacle.Width;
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
 
         #endregion

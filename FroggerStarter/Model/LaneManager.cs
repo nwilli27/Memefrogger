@@ -102,6 +102,17 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
+        ///     Resets the obstacles speed timer.
+        ///     Precondition: none
+        ///     Post-condition: obstacleSpawnTimer.Start()
+        /// </summary>
+        public void ResetObstacleSpawnTimer()
+        {
+            this.obstacleSpawnTimer.Stop();
+            this.obstacleSpawnTimer.Start();
+        }
+
+        /// <summary>
         ///     Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
@@ -123,17 +134,6 @@ namespace FroggerStarter.Model
             return this.lanes.SelectMany(lane => lane).GetEnumerator();
         }
 
-        /// <summary>
-        ///     Resets the obstacles speed timer.
-        ///     Precondition: none
-        ///     Post-condition: obstacleSpawnTimer.Start()
-        /// </summary>
-        public void ResetObstacleSpawnTimer()
-        {
-            this.obstacleSpawnTimer.Stop();
-            this.obstacleSpawnTimer.Start();
-        }
-
         #endregion
 
         #region Private Helpers
@@ -142,13 +142,13 @@ namespace FroggerStarter.Model
         {
             this.obstacleSpawnTimer = new DispatcherTimer();
             this.obstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;
-            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, 4, 0);
+            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, 3, 500);
             this.obstacleSpawnTimer.Start();
         }
 
         private void obstacleSpawnTimerOnTick(object sender, object e)
         {
-            this.lanes.ToList().ForEach(lane => lane.MoveNextAvailableObstacle());
+            this.lanes.ToList().ForEach(lane => lane.MakeObstacleActive());
         }
 
         private void updateYLocationOfLanes()

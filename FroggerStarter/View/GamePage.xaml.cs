@@ -45,19 +45,20 @@ namespace FroggerStarter.View
             this.gameManager.LifeLoss += this.onLivesUpdated;
             this.gameManager.ScoreUpdated += this.onScoreUpdated;
             this.gameManager.GameOver += this.onGameOver;
-            this.gameManager.ScoreTimerTick += this.onProgressBarOnTick;
+            this.gameManager.ScoreTimerTick += this.onScoreTimerTick;
 
             this.gameManager.InitializeGame(this.canvas);
         }
 
         private void initializeGameBoardConstants()
         {
-            GameBoard.BackgroundWidth =     this.applicationWidth;
-            GameBoard.BackgroundHeight =    this.applicationHeight;
-            GameBoard.HighRoadYLocation =   (double) Application.Current.Resources["HighRoadYLocation"];
+            GameBoard.BackgroundWidth     = this.applicationWidth;
+            GameBoard.BackgroundHeight    = this.applicationHeight;
+            GameBoard.HighRoadYLocation   = (double) Application.Current.Resources["HighRoadYLocation"];
             GameBoard.BottomRoadYLocation = (double) Application.Current.Resources["BottomRoadYLocation"];
-            GameBoard.HomeWidth =           (double) Application.Current.Resources["HomeWidth"];
+            GameBoard.HomeWidth           = (double) Application.Current.Resources["HomeWidth"];
             GameBoard.HomeLocationGapSize = (double) Application.Current.Resources["HomeLocationGapSize"];
+            GameBoard.RoadShoulderOffset  = (double) Application.Current.Resources["RoadShoulderOffset"];
         }
 
         #endregion
@@ -83,7 +84,7 @@ namespace FroggerStarter.View
             }
         }
 
-        private void onProgressBarOnTick(object sender, ScoreTimerTickEventArgs e)
+        private void onScoreTimerTick(object sender, ScoreTimerTickEventArgs e)
         {
             if (this.timeProgressBar.Value >= this.timeProgressBar.Minimum)
             {

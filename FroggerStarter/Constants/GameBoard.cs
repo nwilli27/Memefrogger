@@ -4,7 +4,7 @@ using FroggerStarter.Constants;
 namespace FroggerStarter.Controller
 {
     /// <summary>
-    ///     Class holds public properties that are only allowed to be set once and
+    ///     Class holds static public properties that are only allowed to be set once and
     ///     used to hold values related to the GameBoard layout.
     /// </summary>
     public class GameBoard
@@ -12,12 +12,13 @@ namespace FroggerStarter.Controller
 
         #region Data Members
 
-        private static readonly SetOnce<double> backgroundWidth = new SetOnce<double>();
-        private static readonly SetOnce<double> backgroundHeight = new SetOnce<double>();
-        private static readonly SetOnce<double> highRoadYLocation = new SetOnce<double>();
-        private static readonly SetOnce<double> bottomRoadYLocation = new SetOnce<double>();
-        private static readonly SetOnce<double> homeWidth = new SetOnce<double>();
-        private static readonly SetOnce<double> homeLocationGapSize = new SetOnce<double>();
+        private static readonly SetOnce<double> BackgroundWidthOnce = new SetOnce<double>();
+        private static readonly SetOnce<double> BackgroundHeightOnce = new SetOnce<double>();
+        private static readonly SetOnce<double> HighRoadYLocationOnce = new SetOnce<double>();
+        private static readonly SetOnce<double> BottomRoadYLocationOnce = new SetOnce<double>();
+        private static readonly SetOnce<double> HomeWidthOnce = new SetOnce<double>();
+        private static readonly SetOnce<double> HomeLocationGapSizeOnce = new SetOnce<double>();
+        private static readonly SetOnce<double> RoadShoulderOffsetOnce = new SetOnce<double>();
 
         #endregion
 
@@ -31,8 +32,8 @@ namespace FroggerStarter.Controller
         /// </value>
         public static double BackgroundWidth
         {
-            get => backgroundWidth;
-            set => backgroundWidth.Value = value;
+            get => BackgroundWidthOnce;
+            set => BackgroundWidthOnce.Value = value;
         }
 
         /// <summary>
@@ -43,8 +44,8 @@ namespace FroggerStarter.Controller
         /// </value>
         public static double BackgroundHeight
         {
-            get => backgroundHeight;
-            set => backgroundHeight.Value = value;
+            get => BackgroundHeightOnce;
+            set => BackgroundHeightOnce.Value = value;
         }
 
         /// <summary>
@@ -55,8 +56,8 @@ namespace FroggerStarter.Controller
         /// </value>
         public static double HighRoadYLocation
         {
-            get => highRoadYLocation;
-            set => highRoadYLocation.Value = value;
+            get => HighRoadYLocationOnce;
+            set => HighRoadYLocationOnce.Value = value;
         }
 
         /// <summary>
@@ -67,8 +68,8 @@ namespace FroggerStarter.Controller
         /// </value>
         public static double BottomRoadYLocation
         {
-            get => bottomRoadYLocation;
-            set => bottomRoadYLocation.Value = value;
+            get => BottomRoadYLocationOnce;
+            set => BottomRoadYLocationOnce.Value = value;
         }
 
         /// <summary>
@@ -79,8 +80,8 @@ namespace FroggerStarter.Controller
         /// </value>
         public static double HomeWidth
         {
-            get => homeWidth;
-            set => homeWidth.Value = value;
+            get => HomeWidthOnce;
+            set => HomeWidthOnce.Value = value;
         }
 
         /// <summary>
@@ -91,8 +92,20 @@ namespace FroggerStarter.Controller
         /// </value>
         public static double HomeLocationGapSize
         {
-            get => homeLocationGapSize;
-            set => homeLocationGapSize.Value = value;
+            get => HomeLocationGapSizeOnce;
+            set => HomeLocationGapSizeOnce.Value = value;
+        }
+
+        /// <summary>
+        ///     Gets or sets the road shoulder offset.
+        /// </summary>
+        /// <value>
+        ///     The road shoulder offset.
+        /// </value>
+        public static double RoadShoulderOffset
+        {
+            get => RoadShoulderOffsetOnce;
+            set => RoadShoulderOffsetOnce.Value = value;
         }
 
         #endregion

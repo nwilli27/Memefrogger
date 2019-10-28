@@ -15,10 +15,15 @@ namespace FroggerStarter.Model
     {
         #region Properties
 
+        /// <summary>
+        ///     Returns a value indicating if all homes have been filled (5 homes)
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has homes been filled; otherwise, <c>false</c>.
+        /// </value>
         public bool HasHomesBeenFilled => this.frogHomes.All(home => home.IsFilled);
 
         #endregion
-
 
         #region Data Members
 
@@ -86,7 +91,6 @@ namespace FroggerStarter.Model
                     X = xLocation,
                     Y = GameBoard.HighRoadYLocation
                 };
-
                 home.alignInCenterOfHomeLocation();
 
                 this.frogHomes.Add(home);
