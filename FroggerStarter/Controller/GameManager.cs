@@ -23,7 +23,8 @@ namespace FroggerStarter.Controller
         private LaneManager laneManager;
         private PlayerStats playerStats;
         private DispatcherTimer timer;
-        
+        private DispatcherTimer scoreTimer;
+
         #endregion
 
         #region Events
@@ -31,6 +32,7 @@ namespace FroggerStarter.Controller
         public EventHandler<LivesUpdatedEventArgs> LifeLoss;
         public EventHandler<ScoreUpdatedEventArgs> ScoreUpdated;
         public EventHandler<GameOverEventArgs> GameOver;
+        public EventHandler<ScoreTimerTickEventArgs> ScoreTimerTick;
 
         #endregion
 
@@ -77,6 +79,7 @@ namespace FroggerStarter.Controller
             this.highRoadYLocation = highRoadYLocation;
 
             this.setupGameTimer();
+            this.setupScoreTimer();
         }
 
         #endregion
@@ -158,6 +161,25 @@ namespace FroggerStarter.Controller
             this.timer.Tick += this.timerOnTick;
             this.timer.Interval = new TimeSpan(0, 0, 0, 0, 15);
             this.timer.Start();
+        }
+
+        private void setupScoreTimer()
+        {
+            this.scoreTimer = new DispatcherTimer();
+            this.scoreTimer.Tick += this.scoreTimerOnTick;
+            this.scoreTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            this.scoreTimer.Start();
+        }
+
+        private void scoreTimerOnTick(object sender, object e)
+        {
+            var scoreTick = new ScoreTimerTickEventArgs() { ScoreTick = ScoreTimer.ScoreTick -= 0.1 };
+            if (ScoreTimer.IsTimeUp)
+            {
+                this.lifeLost();
+                ScoreTimer.ScoreTick = 20.0;
+            }
+            this.ScoreTimerTick?.Invoke(this, scoreTick);
         }
 
         private void createAndPlacePlayer()

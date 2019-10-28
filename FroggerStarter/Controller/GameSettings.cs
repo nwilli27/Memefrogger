@@ -12,6 +12,7 @@ namespace FroggerStarter.Controller
     {
         public const int TotalNumberOfLives = 4;
         public const int MaxScore = 3;
+        public const double ScoreTime = 20.0;
 
         public static List<object> Lane5 = new List<object> {
             Direction.Right,

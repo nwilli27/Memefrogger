@@ -21,5 +21,7 @@
 
         <Rectangle Canvas.Top="355" Fill="Gray" Width="{StaticResource AppWidth}" Height="55" />
 
+        <ProgressBar x:Name="timeProgressBar" Background="Black" Canvas.Top="414" Value="20" Minimum="0" Maximum="20" Margin="0,12" Height="21" Width="590" Canvas.Left="29" Foreground="LimeGreen"/>
+
     </Canvas>
 </Page>

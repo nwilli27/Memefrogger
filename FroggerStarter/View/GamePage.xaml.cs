@@ -1,4 +1,5 @@
 ﻿
+using System;
 using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
@@ -23,6 +24,7 @@ namespace FroggerStarter.View
         private readonly double highRoadYLocation = (double) Application.Current.Resources["HighRoadYLocation"];
 
         private readonly GameManager gameManager;
+        private DispatcherTimer timer;
 
         #endregion
 
@@ -41,9 +43,12 @@ namespace FroggerStarter.View
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
 
             this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth, this.highRoadYLocation);
+
             this.gameManager.LifeLoss += this.onLivesUpdated;
             this.gameManager.ScoreUpdated += this.onScoreUpdated;
             this.gameManager.GameOver += this.onGameOver;
+            this.gameManager.ScoreTimerTick += this.onProgressBarOnTick;
+
             this.gameManager.InitializeGame(this.canvas);
         }
 
@@ -67,6 +72,14 @@ namespace FroggerStarter.View
                 case VirtualKey.Down:
                     this.gameManager.MovePlayerDown();
                     break;
+            }
+        }
+
+        private void onProgressBarOnTick(object sender, ScoreTimerTickEventArgs e)
+        {
+            if (this.timeProgressBar.Value >= this.timeProgressBar.Minimum)
+            {
+                this.timeProgressBar.Value = e.ScoreTick;
             }
         }
 

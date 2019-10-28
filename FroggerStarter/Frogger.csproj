@@ -130,6 +130,7 @@
     <Compile Include="Model\LaneManager.cs" />
     <Compile Include="Model\ObstacleType.cs" />
     <Compile Include="Model\PlayerStats.cs" />
+    <Compile Include="Model\ScoreTimer.cs" />
     <Compile Include="View\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>

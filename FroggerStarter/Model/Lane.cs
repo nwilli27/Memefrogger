@@ -12,11 +12,6 @@ namespace FroggerStarter.Model
     /// <seealso cref="System.Collections.IEnumerable" />
     internal class Lane : IEnumerable<Obstacle>
     {
-        #region Properties
-
-
-
-        #endregion
 
         #region Data Members
 
