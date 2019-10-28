@@ -121,13 +121,14 @@
     </Compile>
     <Compile Include="Constants\GameBoard.cs" />
     <Compile Include="Constants\GameSettings.cs" />
+    <Compile Include="Model\FrogHomes.cs" />
     <Compile Include="Utility\SetOnce.cs" />
     <Compile Include="Factory\ObstacleFactory.cs" />
     <Compile Include="Model\Frog.cs" />
     <Compile Include="Controller\GameManager.cs" />
     <Compile Include="Model\GameObject.cs" />
     <Compile Include="Enums\Direction.cs" />
-    <Compile Include="Model\HomeSpot.cs" />
+    <Compile Include="Model\Home.cs" />
     <Compile Include="Model\MovingObject.cs" />
     <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Lane.cs" />

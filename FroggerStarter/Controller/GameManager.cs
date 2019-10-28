@@ -20,6 +20,7 @@ namespace FroggerStarter.Controller
         private PlayerStats playerStats;
         private DispatcherTimer timer;
         private DispatcherTimer scoreTimer;
+        private FrogHomes frogHomes;
 
         #endregion
 
@@ -73,6 +74,7 @@ namespace FroggerStarter.Controller
 
             this.createAndPlacePlayer();
             this.createAndPlaceObstaclesInLanes();
+            this.createAndPlaceFrogHomes();
             this.setupPlayerStatsAndHud();
         }
 
@@ -154,6 +156,12 @@ namespace FroggerStarter.Controller
                 ScoreTimer.ResetScoreTick();
             }
             this.ScoreTimerTick?.Invoke(this, scoreTick);
+        }
+
+        private void createAndPlaceFrogHomes()
+        {
+            this.frogHomes = new FrogHomes();
+            this.frogHomes.ToList().ForEach(home => this.gameCanvas.Children.Add(home.Sprite));
         }
 
         private void createAndPlacePlayer()
