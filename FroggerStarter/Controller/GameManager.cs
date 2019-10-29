@@ -164,9 +164,15 @@ namespace FroggerStarter.Controller
         private void createAndPlacePlayer()
         {
             this.player = new Frog();
-            this.player.DeathAnimation.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
+            this.setupPlayerAnimations();
             this.gameCanvas.Children.Add(this.player.Sprite);
             this.setPlayerToCenterOfBottomLane();
+        }
+
+        private void setupPlayerAnimations()
+        {
+            this.player.DeathAnimation.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
+            this.player.DeathAnimation.AnimationFinished += this.onDeathAnimationDone;
         }
 
         private void createAndPlaceObstaclesInLanes()
@@ -211,7 +217,7 @@ namespace FroggerStarter.Controller
                 if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.Sprite.Visibility == Visibility.Visible)
                 {
                     this.lifeLost();
-                    this.resetPlayerAndObstacles();
+                    this.setPlayerToCenterOfBottomLane();
                 }
             }
         }
@@ -258,7 +264,7 @@ namespace FroggerStarter.Controller
             this.playerStats.Lives--;
             var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
             this.LifeLoss?.Invoke(this, life);
-            ScoreTimer.ResetScoreTick();
+            this.scoreTimer.Stop();
 
             this.player.PlayDeathAnimation();
 
@@ -267,10 +273,15 @@ namespace FroggerStarter.Controller
 
         private void checkGameStatusForGameOver()
         {
-            if (this.playerStats.Lives == 0 || this.frogHomes.HasHomesBeenFilled)
+            if (this.isGameOver())
             {
                 this.stopGamePlayAndShowGameOver();
             }
+        }
+
+        private bool isGameOver()
+        {
+            return this.playerStats.Lives == 0 || this.frogHomes.HasHomesBeenFilled;
         }
 
         private void increaseScore()
@@ -303,6 +314,18 @@ namespace FroggerStarter.Controller
             this.ScoreUpdated?.Invoke(this, score);
             var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
             this.LifeLoss?.Invoke(this, life);
+        }
+
+        private void onDeathAnimationDone(object sender, AnimationIsFinishedEventArgs e)
+        {
+            if (e.AnimationIsOver && !this.isGameOver())
+            {
+                this.player.Sprite.Visibility = Visibility.Visible;
+                this.player.startMovement();
+                this.laneManager.ResetLanesToOneObstacle();
+                ScoreTimer.ResetScoreTick();
+                this.scoreTimer.Start();
+            }
         }
 
         #endregion

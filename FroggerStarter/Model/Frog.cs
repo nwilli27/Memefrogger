@@ -50,7 +50,6 @@ namespace FroggerStarter.Model
             this.SpeedY = SpeedYDirection;
 
             this.DeathAnimation = new Animation(AnimationType.PlayerDeath);
-            this.DeathAnimation.AnimationFinished += this.onDeathAnimationDone;
         }
 
         #endregion
@@ -141,26 +140,21 @@ namespace FroggerStarter.Model
             this.DeathAnimation.Start();
         }
 
-        #endregion
-
-        #region Private Helpers
-
-        private void startMovement()
+        /// <summary>
+        ///     Starts the movement
+        ///     Precondition: none
+        ///     Post-condition: this.SpeedX = SpeedXDirection
+        ///                     this.SpeedY = SpeedYDirection
+        ///                     
+        /// </summary>
+        public void startMovement()
         {
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
         }
 
-        private void onDeathAnimationDone(object sender, AnimationIsFinishedEventArgs e)
-        {
-            if (e.AnimationIsOver)
-            {
-                this.Sprite.Visibility = Visibility.Visible;
-                this.startMovement();
-            }
-        }
-
         #endregion
+
     }
 
 }

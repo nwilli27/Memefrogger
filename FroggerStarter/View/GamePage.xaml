@@ -10,7 +10,7 @@
     <Canvas x:Name="canvas" Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Background="Black">
         <TextBlock x:Name="gameOver" Text="GAME OVER" Canvas.ZIndex="1" Visibility="Collapsed" Foreground="White" FontSize="60" FontFamily="Berlin Sans FB" Canvas.Left="214" Canvas.Top="183"/>
 
-        <TextBlock x:Name="gameName" Text="Frogger" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic" Canvas.Left="306" Canvas.Top="7"/>
+        <TextBlock x:Name="gameName" Text="Frogception" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic" Canvas.Left="273" Canvas.Top="8"/>
         <TextBlock x:Name="livesLabel" Text="Lives:" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="16" Canvas.Top="12"/>
         <TextBlock x:Name="numberLives" Text="" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="77" Canvas.Top="12"/>
 
