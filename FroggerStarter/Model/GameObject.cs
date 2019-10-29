@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using Windows.UI.Xaml;
 using FroggerStarter.View.Sprites;
 using Point = Windows.Foundation.Point;
 
@@ -109,6 +110,17 @@ namespace FroggerStarter.Model
             );
 
             return thisObjectBoundary.IntersectsWith(otherObjectBoundary);
+        }
+
+        /// <summary>
+        ///     Changes the sprite visibility based on the bool condition passed in.
+        ///     Precondition: none
+        ///     Post-condition: Sprite.Visibility == (Visible || Collapsed)
+        /// </summary>
+        /// <param name="conditionToChangeVisibility">if set to <c>true</c> [condition to change visibility].</param>
+        public void ChangeSpriteVisibility(bool conditionToChangeVisibility)
+        {
+            this.Sprite.Visibility = conditionToChangeVisibility ? Visibility.Visible : Visibility.Collapsed;
         }
 
         #endregion

@@ -33,7 +33,7 @@ namespace FroggerStarter.Model
             set
             {
                 this.isFilled = value;
-                this.changeHomeVisibility();
+                this.ChangeSpriteVisibility(value);
             }}
 
         #endregion
@@ -63,15 +63,6 @@ namespace FroggerStarter.Model
         public void alignInCenterOfHomeLocation()
         {
             this.X = ((GameBoard.HomeWidth - this.Width) / 2) + this.X;
-        }
-
-        #endregion
-
-        #region Private Helpers
-
-        private void changeHomeVisibility()
-        {
-            this.Sprite.Visibility = this.isFilled ? Visibility.Visible : Visibility.Collapsed;
         }
 
         #endregion

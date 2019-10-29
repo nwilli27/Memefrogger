@@ -1,34 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using FroggerStarter.Enums;
-using FroggerStarter.View.Sprites;
 using System.Collections;
 using FroggerStarter.Factory;
 
 namespace FroggerStarter.Model
 {
     /// <summary>
-    ///     Class holds the implementation for the Frog dying animation
+    ///     Class holds the implementation for an Animation
     /// </summary>
     public class Animation : IEnumerable<Frame>
     {
-
-        public EventHandler<AnimationIsFinishedEventArgs> AnimationFinished;
-
-        public bool IsAnimationFinished => this.animationFrames.All(frame => frame.HasBeenPlayed && !frame.IsVisible);
+        #region Data Members
 
         private DispatcherTimer animateTimer;
         private IList<Frame> animationFrames;
 
+        #endregion
+
+        #region Properties
+
+        private bool IsAnimationFinished => this.animationFrames.All(frame => frame.HasBeenPlayed && !frame.IsVisible);
+
+        #endregion
+
+        #region Events
+
+        public EventHandler<AnimationIsFinishedEventArgs> AnimationFinished;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Animation"/> class.
+        ///     Precondition: none
+        ///     Post-condition: this.animationFrames.Count()++
+        /// </summary>
+        /// <param name="animationType">Type of the animation.</param>
         public Animation(AnimationType animationType)
         {
             this.createFramesFromAnimationSprites(animationType);
         }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Sets the frame locations for all the frames.
+        ///     Precondition: none
+        ///     Post-condition: @each frame.X = [x]
+        ///                           frame.Y = [y]
+        /// </summary>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
         public void SetFrameLocations(double x, double y)
         {
             foreach (var frame in this.animationFrames)
@@ -38,6 +66,11 @@ namespace FroggerStarter.Model
             }
         }
 
+        /// <summary>
+        ///     Starts the timer and makes the first frame visible.
+        ///     Precondition: none
+        ///     Post-condition: this.animationFrames[0].IsVisible = true
+        /// </summary>
         public void Start()
         {
             this.animateTimer = new DispatcherTimer();
@@ -47,6 +80,32 @@ namespace FroggerStarter.Model
             this.animationFrames[0].IsVisible = true;
             this.animateTimer.Start();
         }
+
+        /// <summary>
+        ///     Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        /// An enumerator that can be used to iterate through the collection.
+        /// </returns>
+        public IEnumerator<Frame> GetEnumerator()
+        {
+            return this.animationFrames.GetEnumerator();
+        }
+
+        /// <summary>
+        ///     Returns an enumerator that iterates through a collection.
+        /// </summary>
+        /// <returns>
+        /// An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.
+        /// </returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.animationFrames.GetEnumerator();
+        }
+
+        #endregion
+
+        #region Private Helpers
 
         private void createFramesFromAnimationSprites(AnimationType animationType)
         {
@@ -62,13 +121,9 @@ namespace FroggerStarter.Model
         private void showNextFrame(object sender, object e)
         {
             var firstVisibleFrame = this.animationFrames.First(frame => frame.IsVisible);
+            firstVisibleFrame.IsVisible = false;
+
             var firstInvisibleFrame = this.animationFrames.FirstOrDefault(frame => !frame.IsVisible && !frame.HasBeenPlayed);
-
-            if (firstVisibleFrame != null)
-            {
-                firstVisibleFrame.IsVisible = false;
-            }
-
             if (firstInvisibleFrame != null)
             {
                 firstInvisibleFrame.IsVisible = true;
@@ -81,26 +136,29 @@ namespace FroggerStarter.Model
         {
             if (this.IsAnimationFinished)
             {
-                this.animationFrames.ToList().ForEach(frame => frame.ResetStatus());
+                this.animationFrames.ToList().ForEach(frame => frame.ResetStatusAndVisibility());
                 this.animateTimer.Stop();
                 var animationDone = new AnimationIsFinishedEventArgs() { AnimationIsOver = true };
                 this.AnimationFinished?.Invoke(this, animationDone);
             }
         }
 
-        public IEnumerator<Frame> GetEnumerator()
-        {
-            return this.animationFrames.GetEnumerator();
-        }
+        #endregion
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.animationFrames.GetEnumerator();
-        }
     }
 
+    /// <summary>
+    ///     Holds the event for finished animation.
+    /// </summary>
+    /// <seealso cref="System.EventArgs" />
     public class AnimationIsFinishedEventArgs : EventArgs
     {
+        /// <summary>
+        ///     Gets or sets a value indicating whether [animation is over].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [animation is over]; otherwise, <c>false</c>.
+        /// </value>
         public bool AnimationIsOver { get; set; }
     }
 }

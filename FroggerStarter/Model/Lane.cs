@@ -105,7 +105,7 @@ namespace FroggerStarter.Model
                 obstacle.MoveForward();
             }
 
-            var firstObstacleCollidedOffBounds = collidedList.FirstOrDefault(obstacle => obstacle.IsOffTheEndOfTheLane());
+            var firstObstacleCollidedOffBounds = collidedList.FirstOrDefault(obstacle => obstacle.IsOffTheEdgeOfTheBoard());
             firstObstacleCollidedOffBounds?.ShiftXLocationBackwardsByWidth();
         }
 

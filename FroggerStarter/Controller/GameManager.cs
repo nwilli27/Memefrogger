@@ -260,7 +260,7 @@ namespace FroggerStarter.Controller
             this.LifeLoss?.Invoke(this, life);
             ScoreTimer.ResetScoreTick();
 
-            this.player.PlayAnimationDeath();
+            this.player.PlayDeathAnimation();
 
             this.checkGameStatusForGameOver();
         }

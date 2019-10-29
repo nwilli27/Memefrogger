@@ -90,7 +90,7 @@ namespace FroggerStarter.Model
         ///   <c>true</c> if [is off the end of the lane]; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public bool IsOffTheEndOfTheLane()
+        public bool IsOffTheEdgeOfTheBoard()
         {
             switch (this.direction)
             {

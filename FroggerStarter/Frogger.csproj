@@ -140,16 +140,16 @@
     <Compile Include="Enums\ObstacleType.cs" />
     <Compile Include="Model\PlayerStats.cs" />
     <Compile Include="Model\ScoreTimer.cs" />
-    <Compile Include="View\Dying Animation\FrameFour.xaml.cs">
+    <Compile Include="View\PlayerDeathAnimation\FrameFour.xaml.cs">
       <DependentUpon>FrameFour.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Dying Animation\FrameThree.xaml.cs">
+    <Compile Include="View\PlayerDeathAnimation\FrameThree.xaml.cs">
       <DependentUpon>FrameThree.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Dying Animation\FrameTwo.xaml.cs">
+    <Compile Include="View\PlayerDeathAnimation\FrameTwo.xaml.cs">
       <DependentUpon>FrameTwo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Dying Animation\FrameOne.xaml.cs">
+    <Compile Include="View\PlayerDeathAnimation\FrameOne.xaml.cs">
       <DependentUpon>FrameOne.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GamePage.xaml.cs">
@@ -196,19 +196,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\Dying Animation\FrameFour.xaml">
+    <Page Include="View\PlayerDeathAnimation\FrameFour.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Dying Animation\FrameThree.xaml">
+    <Page Include="View\PlayerDeathAnimation\FrameThree.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Dying Animation\FrameTwo.xaml">
+    <Page Include="View\PlayerDeathAnimation\FrameTwo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Dying Animation\FrameOne.xaml">
+    <Page Include="View\PlayerDeathAnimation\FrameOne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

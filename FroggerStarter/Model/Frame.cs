@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model
@@ -15,9 +9,20 @@ namespace FroggerStarter.Model
     /// <seealso cref="FroggerStarter.Model.GameObject" />
     public class Frame : GameObject
     {
+        #region Data Members
 
         private bool isVisible;
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance is visible.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is visible; otherwise, <c>false</c>.
+        /// </value>
         public bool IsVisible
         {
             get => this.isVisible;
@@ -28,11 +33,21 @@ namespace FroggerStarter.Model
                     this.HasBeenPlayed = true;
                 }
                 this.isVisible = value;
-                this.changeSpriteVisibility();
+                this.ChangeSpriteVisibility(value);
             }
         }
 
-        public bool HasBeenPlayed { get; private set; } = false;
+        /// <summary>
+        ///     Gets a value indicating whether this instance has been played.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has been played; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasBeenPlayed { get; private set; }
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Frame"/> class.
@@ -44,17 +59,22 @@ namespace FroggerStarter.Model
             this.IsVisible = false;
         }
 
-        public void ResetStatus()
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Resets to invisible and the HasBeenPlayed is false.
+        ///     Precondition: none
+        ///     Post-condition: this.isVisible = false
+        ///                     this.HasBeenPlayed = false
+        /// </summary>
+        public void ResetStatusAndVisibility()
         {
             this.isVisible = false;
             this.HasBeenPlayed = false;
         }
 
-        //TODO maybe move this to gameobject? Same implementation in home
-        public void changeSpriteVisibility()
-        {
-            this.Sprite.Visibility = this.isVisible ? Visibility.Visible : Visibility.Collapsed;
-        }
-
+        #endregion
     }
 }

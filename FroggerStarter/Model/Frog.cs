@@ -23,6 +23,12 @@ namespace FroggerStarter.Model
 
         #region Properties
 
+        /// <summary>
+        ///     Gets the death animation.
+        /// </summary>
+        /// <value>
+        ///     The death animation.
+        /// </value>
         public Animation DeathAnimation { get; }
 
         #endregion
@@ -34,6 +40,7 @@ namespace FroggerStarter.Model
         ///     Precondition: none
         ///     Post-condition: frog.SpeedX = SpeedXDirection
         ///                     frog.SpeedY = SpeedYDirection
+        ///                     
         /// </summary>
         public Frog()
         {
@@ -42,9 +49,13 @@ namespace FroggerStarter.Model
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
 
-            this.DeathAnimation = new Animation(AnimationType.Death);
+            this.DeathAnimation = new Animation(AnimationType.PlayerDeath);
             this.DeathAnimation.AnimationFinished += this.onDeathAnimationDone;
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         ///     Move to the left with boundary check of left side
@@ -114,13 +125,15 @@ namespace FroggerStarter.Model
             this.SpeedY = 0;
         }
 
-        public void StartMovement()
-        {
-            this.SpeedX = SpeedXDirection;
-            this.SpeedY = SpeedYDirection;
-        }
-
-        public void PlayAnimationDeath()
+        /// <summary>
+        ///     Plays the death animation.
+        ///     Precondition: none
+        ///     Post-condition: this.SpeedX = 0
+        ///                     this.SpeedY = 0
+        ///                     Sprite.Visibility = Collapsed
+        ///                     DeathAnimation.Start()
+        /// </summary>
+        public void PlayDeathAnimation()
         {
             this.Sprite.Visibility = Visibility.Collapsed;
             this.StopMovement();
@@ -128,12 +141,22 @@ namespace FroggerStarter.Model
             this.DeathAnimation.Start();
         }
 
-        public void onDeathAnimationDone(object sender, AnimationIsFinishedEventArgs e)
+        #endregion
+
+        #region Private Helpers
+
+        private void startMovement()
+        {
+            this.SpeedX = SpeedXDirection;
+            this.SpeedY = SpeedYDirection;
+        }
+
+        private void onDeathAnimationDone(object sender, AnimationIsFinishedEventArgs e)
         {
             if (e.AnimationIsOver)
             {
                 this.Sprite.Visibility = Visibility.Visible;
-                this.StartMovement();
+                this.startMovement();
             }
         }
 

@@ -7,7 +7,7 @@ namespace FroggerStarter.Model
     /// <summary>
     ///     Class that holds properties in regards to the score Tick and timer.
     /// </summary>
-    class ScoreTimer
+    internal class ScoreTimer
     {
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///   <c>true</c> if the ScoreTick reached 0; otherwise, <c>false</c>.
         /// </value>
-        public static bool IsTimeUp => ScoreTick <= 0.0;
+        public static bool IsTimeUp => ScoreTick <= 0;
 
         /// <summary>
         ///     Resets the score tick back to the specified amount

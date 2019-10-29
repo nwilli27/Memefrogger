@@ -12,6 +12,7 @@ namespace FroggerStarter.Constants
         #region Data Members
 
         private bool hasValue;
+        private T valueOrDefault;
 
         #endregion
 
@@ -33,23 +34,15 @@ namespace FroggerStarter.Constants
             get
             {
                 if (!this.hasValue) throw new InvalidOperationException("Value not set");
-                return this.ValueOrDefault;
+                return this.valueOrDefault;
             }
             set
             {
                 if (this.hasValue) throw new InvalidOperationException("Value already set");
-                this.ValueOrDefault = value;
+                this.valueOrDefault = value;
                 this.hasValue = true;
             }
         }
-
-        /// <summary>
-        ///     Gets the value or default.
-        /// </summary>
-        /// <value>
-        ///     The value or default.
-        /// </value>
-        public T ValueOrDefault { get; private set; }
 
         #endregion
 
@@ -72,7 +65,7 @@ namespace FroggerStarter.Constants
         /// </returns>
         public override string ToString()
         {
-            return this.hasValue ? Convert.ToString(this.ValueOrDefault) : "";
+            return this.hasValue ? Convert.ToString(this.valueOrDefault) : "";
         }
 
         #endregion
