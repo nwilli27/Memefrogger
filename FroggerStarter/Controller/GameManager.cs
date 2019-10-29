@@ -12,6 +12,7 @@ namespace FroggerStarter.Controller
     /// </summary>
     public class GameManager
     {
+
         #region Data members
 
         private Canvas gameCanvas;
@@ -33,21 +34,9 @@ namespace FroggerStarter.Controller
 
         #endregion
 
-        #region Constructors
+        #region Constants
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="GameManager" /> class.
-        ///     Precondition: backgroundHeight > 0
-        ///                   backgroundWidth > 0
-        /// 
-        ///     Post-condition: none
-        ///     
-        /// </summary>
-        public GameManager()
-        {
-            this.setupGameTimer();
-            this.setupScoreTimer();
-        }
+        private const double ScoreTimeReduction = 0.02;
 
         #endregion
 
@@ -69,6 +58,9 @@ namespace FroggerStarter.Controller
             this.createAndPlaceObstaclesInLanes();
             this.createAndPlaceFrogHomes();
             this.setupPlayerStatsAndHud();
+
+            this.setupGameTimer();
+            this.setupScoreTimer();
         }
 
         /// <summary>
@@ -102,11 +94,8 @@ namespace FroggerStarter.Controller
             
             if (this.hasReachedAnEmptyHome())
             {
-                this.makeHitHomeVisible();
-                this.setPlayerToCenterOfBottomLane();
-                this.increaseScore();
+                this.updateBoardForReachingEmptyHome();
                 this.checkGameStatusForGameOver();
-                ScoreTimer.ResetScoreTick();
 
             } else if (this.player.Y < GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset)
             {
@@ -127,7 +116,7 @@ namespace FroggerStarter.Controller
 
         #endregion
 
-        #region Private Helpers
+        #region Timer Methods
 
         private void setupGameTimer()
         {
@@ -135,6 +124,12 @@ namespace FroggerStarter.Controller
             this.timer.Tick += this.timerOnTick;
             this.timer.Interval = new TimeSpan(0, 0, 0, 0, 15);
             this.timer.Start();
+        }
+
+        private void timerOnTick(object sender, object e)
+        {
+            this.laneManager.MoveAllObstacles();
+            this.checkForPlayerToObstacleCollision();
         }
 
         private void setupScoreTimer()
@@ -147,13 +142,30 @@ namespace FroggerStarter.Controller
 
         private void scoreTimerOnTick(object sender, object e)
         {
-            var scoreTick = new ScoreTimerTickEventArgs() { ScoreTick = ScoreTimer.ScoreTick -= 0.02 };
+            var scoreTick = new ScoreTimerTickEventArgs() { ScoreTick = ScoreTimer.ScoreTick -= ScoreTimeReduction };
             if (ScoreTimer.IsTimeUp)
             {
                 this.lifeLost();
             }
             this.ScoreTimerTick?.Invoke(this, scoreTick);
         }
+
+        private void checkForPlayerToObstacleCollision()
+        {
+            foreach (var currentObstacle in this.laneManager)
+            {
+                if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.IsActive)
+                {
+                    this.lifeLost();
+                    this.scoreTimer.Stop();
+                    this.setPlayerToCenterOfBottomLane();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Setup Methods
 
         private void createAndPlaceFrogHomes()
         {
@@ -179,16 +191,11 @@ namespace FroggerStarter.Controller
         {
             this.laneManager = new LaneManager(getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
 
-            this.laneManager.AddLaneOfObstacles(
-                (Direction)GameSettings.Lane5[0],
-                (double)GameSettings.Lane5[1],
-                (ObstacleType)GameSettings.Lane5[2],
-                (int)GameSettings.Lane5[3]);
-
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.75, ObstacleType.SemiTruck, 3);
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.5, ObstacleType.Car, 4);
-            this.laneManager.AddLaneOfObstacles(Direction.Right, 1.25, ObstacleType.SemiTruck, 2);
-            this.laneManager.AddLaneOfObstacles(Direction.Left, 1.0, ObstacleType.ToadTruck, 3);
+            this.laneManager.AddLaneOfObstacles(GameSettings.Lane5);
+            this.laneManager.AddLaneOfObstacles(GameSettings.Lane4);
+            this.laneManager.AddLaneOfObstacles(GameSettings.Lane3);
+            this.laneManager.AddLaneOfObstacles(GameSettings.Lane2);
+            this.laneManager.AddLaneOfObstacles(GameSettings.Lane1);
 
             this.placeObstaclesOnCanvas();
         }
@@ -198,28 +205,21 @@ namespace FroggerStarter.Controller
             this.laneManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
         }
 
+        #endregion
+
+        #region Update Methods
+
+        private void updateBoardForReachingEmptyHome()
+        {
+            this.makeHitHomeVisible();
+            this.setPlayerToCenterOfBottomLane();
+            this.increaseScore();
+        }
+
         private void setPlayerToCenterOfBottomLane()
         {
             this.player.X = GameBoard.BackgroundWidth / 2 - this.player.Width / 2;
             this.player.Y = (GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset) - this.player.Height;
-        }
-
-        private void timerOnTick(object sender, object e)
-        {
-            this.laneManager.MoveAllObstacles();
-            this.checkForPlayerToObstacleCollision();
-        }
-
-        private void checkForPlayerToObstacleCollision()
-        {
-            foreach (var currentObstacle in this.laneManager)
-            {
-                if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.Sprite.Visibility == Visibility.Visible)
-                {
-                    this.lifeLost();
-                    this.setPlayerToCenterOfBottomLane();
-                }
-            }
         }
 
         private void resetPlayerAndObstacles()
@@ -237,38 +237,13 @@ namespace FroggerStarter.Controller
             this.gameOver();
         }
 
-        private bool hasReachedAnEmptyHome()
-        {
-            var filledHomes = this.frogHomes.ToList().Where(home => !home.IsFilled);
-            var collidedWithHomes = filledHomes.Where(home => this.player.HasCollidedWith(home));
-
-            return collidedWithHomes.Any();
-        }
-
         private void makeHitHomeVisible()
         {
             var hitHome = this.frogHomes.ToList()
-                            .Where(home => !home.IsFilled)
-                            .First(home => this.player.HasCollidedWith(home));
+                              .Where(home => !home.IsFilled)
+                              .First(home => this.player.HasCollidedWith(home));
 
             hitHome.IsFilled = true;
-        }
-
-        private static double getRoadStartingYLocation()
-        {
-            return GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
-        }
-
-        private void lifeLost()
-        {
-            this.playerStats.Lives--;
-            var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
-            this.LifeLoss?.Invoke(this, life);
-            this.scoreTimer.Stop();
-
-            this.player.PlayDeathAnimation();
-
-            this.checkGameStatusForGameOver();
         }
 
         private void checkGameStatusForGameOver()
@@ -277,6 +252,22 @@ namespace FroggerStarter.Controller
             {
                 this.stopGamePlayAndShowGameOver();
             }
+            else
+            {
+                this.resetScoreTimerBar();
+            }
+        }
+
+        #endregion
+
+        #region Boolean Conditions
+
+        private bool hasReachedAnEmptyHome()
+        {
+            var filledHomes = this.frogHomes.ToList().Where(home => !home.IsFilled);
+            var collidedWithHomes = filledHomes.Where(home => this.player.HasCollidedWith(home));
+
+            return collidedWithHomes.Any();
         }
 
         private bool isGameOver()
@@ -284,9 +275,31 @@ namespace FroggerStarter.Controller
             return this.playerStats.Lives == 0 || this.frogHomes.HasHomesBeenFilled;
         }
 
+        #endregion
+
+        #region Events
+
+        private void lifeLost()
+        {
+            this.playerStats.Lives--;
+            var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
+            this.LifeLoss?.Invoke(this, life);
+
+            this.player.PlayDeathAnimation();
+
+            this.checkGameStatusForGameOver();
+        }
+
+        private void resetScoreTimerBar()
+        {
+            ScoreTimer.ResetScoreTick();
+            var scoreTick = new ScoreTimerTickEventArgs() { ScoreTick = ScoreTimer.ScoreTick };
+            this.ScoreTimerTick?.Invoke(this, scoreTick);
+        }
+
         private void increaseScore()
         {
-            this.playerStats.Score += (int) ScoreTimer.ScoreTick;
+            this.playerStats.Score += (int)ScoreTimer.ScoreTick;
             var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
             this.ScoreUpdated?.Invoke(this, score);
 
@@ -329,6 +342,16 @@ namespace FroggerStarter.Controller
         }
 
         #endregion
+
+        #region Private Helpers
+
+        private static double getRoadStartingYLocation()
+        {
+            return GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
+        }
+
+        #endregion
+
     }
 
     /// <summary>

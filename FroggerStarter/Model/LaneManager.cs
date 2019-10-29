@@ -84,8 +84,13 @@ namespace FroggerStarter.Model
         /// <param name="defaultSpeed">The default speed.</param>
         /// <param name="obstacleType">Type of the obstacle.</param>
         /// <param name="maxNumberObstacles">The max number of obstacles.</param>
-        public void AddLaneOfObstacles(Direction direction, double defaultSpeed, ObstacleType obstacleType, int maxNumberObstacles)
+        public void AddLaneOfObstacles(List<object> laneSettings)
         {
+            var direction = (Direction) laneSettings[0];
+            var defaultSpeed =(double) laneSettings[1];
+            var obstacleType = (ObstacleType) laneSettings[2];
+            var maxNumberObstacles = (int) laneSettings[3];
+
             if (maxNumberObstacles <= 0)
             {
                 throw new ArgumentOutOfRangeException();

@@ -20,5 +20,33 @@ namespace FroggerStarter.Controller
             ObstacleType.Car,
             5
         };
+
+        public static List<object> Lane4 = new List<object> {
+            Direction.Left,
+            1.75,
+            ObstacleType.SemiTruck,
+            3
+        };
+
+        public static List<object> Lane3 = new List<object> {
+            Direction.Left,
+            1.5,
+            ObstacleType.Car,
+            4
+        };
+
+        public static List<object> Lane2 = new List<object> {
+            Direction.Right,
+            1.25,
+            ObstacleType.SemiTruck,
+            2
+        };
+
+        public static List<object> Lane1 = new List<object> {
+            Direction.Left,
+            1.0,
+            ObstacleType.ToadTruck,
+            3
+        };
     }
 }
