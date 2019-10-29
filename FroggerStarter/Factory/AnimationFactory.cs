@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using FroggerStarter.Enums;
-using FroggerStarter.View.Dying_Animation;
 using FroggerStarter.View.PlayerDeathAnimation;
 using FroggerStarter.View.Sprites;
 

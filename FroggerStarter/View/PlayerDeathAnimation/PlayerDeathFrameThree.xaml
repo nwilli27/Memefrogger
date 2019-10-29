@@ -1,9 +1,8 @@
 ﻿<sprites:BaseSprite
 
-    x:Class="FroggerStarter.View.Dying_Animation.PlayerDeathFrameThree"
+    x:Class="FroggerStarter.View.PlayerDeathAnimation.PlayerDeathFrameThree"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FroggerStarter.View.Dying_Animation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sprites="using:FroggerStarter.View.Sprites"
@@ -14,7 +13,6 @@
     <UserControl.Resources>
         <SolidColorBrush x:Key="FrogColor" x:Name="frogColor" Color="SaddleBrown"/>
         <SolidColorBrush x:Key="EyeColor" Color="Orange"/>
-        <SolidColorBrush x:Key="DesignColor" Color="Black"/>
     </UserControl.Resources>
 
     <Canvas Margin="0,-1,0,1">

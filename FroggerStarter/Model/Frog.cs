@@ -1,6 +1,4 @@
 ﻿
-using System;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using FroggerStarter.Enums;
 using FroggerStarter.View.Sprites;

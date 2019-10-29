@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace FroggerStarter.Constants
+namespace FroggerStarter.Utility
 {
     /// <summary>
     ///     Class allows you to create an object that only allows for it to be set once.

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using FroggerStarter.Enums;
-using FroggerStarter.Model;
 
 namespace FroggerStarter.Constants
 {

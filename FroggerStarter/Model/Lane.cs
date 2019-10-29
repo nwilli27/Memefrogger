@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using FroggerStarter.Controller;
+using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 
 namespace FroggerStarter.Model
@@ -171,7 +171,7 @@ namespace FroggerStarter.Model
         private void moveFirstObstacleStartLocationForward()
         {
             var first = this.obstacles.First(obstacle => obstacle.IsActive);
-            first.ShiftXForward(GameBoard.BackgroundWidth / this.obstacles.Count());
+            first.ShiftXForward(GameBoard.BackgroundWidth / this.obstacles.Count);
         }
 
         private static double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)

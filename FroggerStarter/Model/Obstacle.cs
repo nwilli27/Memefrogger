@@ -1,6 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml.Media;
-using FroggerStarter.Controller;
+using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using FroggerStarter.Factory;
 using Point = Windows.Foundation.Point;

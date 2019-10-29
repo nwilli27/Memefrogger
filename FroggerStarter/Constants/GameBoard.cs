@@ -1,7 +1,7 @@
 ﻿
-using FroggerStarter.Constants;
+using FroggerStarter.Utility;
 
-namespace FroggerStarter.Controller
+namespace FroggerStarter.Constants
 {
     /// <summary>
     ///     Class holds static public properties that are only allowed to be set once and

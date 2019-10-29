@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using FroggerStarter.Controller;
+using FroggerStarter.Constants;
 
 namespace FroggerStarter.Model
 {
