@@ -4,6 +4,9 @@ using FroggerStarter.Controller;
 
 namespace FroggerStarter.Model
 {
+    /// <summary>
+    ///     Class that holds properties in regards to the score Tick and timer.
+    /// </summary>
     class ScoreTimer
     {
 

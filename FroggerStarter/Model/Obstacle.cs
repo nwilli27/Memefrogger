@@ -108,12 +108,12 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        ///     Adjusts the x location for obstacle by the width of the obstacle.
+        ///     Adjusts the x location backwards by the width of the obstacle.
         ///     Precondition: none
         ///     Post-condition: this.X +/- this.Width
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void ShiftObstacleXLocation()
+        public void ShiftXLocationBackwardsByWidth()
         {
             switch (this.direction)
             {
@@ -123,6 +123,29 @@ namespace FroggerStarter.Model
 
                 case Direction.Right:
                     this.X -= this.Width;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        /// <summary>
+        ///     Shifts the x location forward by [amountToShift]
+        ///     Precondition: none
+        ///     Post-condition: this.X +/- [amountToShift]
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public void ShiftXLocationForward(double amountToShift)
+        {
+            switch (this.direction)
+            {
+                case Direction.Left:
+                    this.X -= amountToShift;
+                    break;
+
+                case Direction.Right:
+                    this.X += amountToShift;
                     break;
 
                 default:

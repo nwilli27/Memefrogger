@@ -1,4 +1,8 @@
 ﻿
+using System;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using FroggerStarter.Enums;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model
@@ -17,6 +21,12 @@ namespace FroggerStarter.Model
 
         #endregion
 
+        #region Properties
+
+        public Animation DeathAnimation { get; }
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -28,8 +38,12 @@ namespace FroggerStarter.Model
         public Frog()
         {
             Sprite = new FrogSprite();
+
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
+
+            this.DeathAnimation = new Animation(AnimationType.Death);
+            this.DeathAnimation.AnimationFinished += this.onDeathAnimationDone;
         }
 
         /// <summary>
@@ -98,6 +112,29 @@ namespace FroggerStarter.Model
         {
             this.SpeedX = 0;
             this.SpeedY = 0;
+        }
+
+        public void StartMovement()
+        {
+            this.SpeedX = SpeedXDirection;
+            this.SpeedY = SpeedYDirection;
+        }
+
+        public void PlayAnimationDeath()
+        {
+            this.Sprite.Visibility = Visibility.Collapsed;
+            this.StopMovement();
+            this.DeathAnimation.SetFrameLocations(this.X, this.Y);
+            this.DeathAnimation.Start();
+        }
+
+        public void onDeathAnimationDone(object sender, AnimationIsFinishedEventArgs e)
+        {
+            if (e.AnimationIsOver)
+            {
+                this.Sprite.Visibility = Visibility.Visible;
+                this.StartMovement();
+            }
         }
 
         #endregion

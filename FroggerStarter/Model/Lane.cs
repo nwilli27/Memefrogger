@@ -61,7 +61,9 @@ namespace FroggerStarter.Model
             {
                 this.add(new Obstacle(obstacleType, this.direction));
             }
+            
             this.MakeObstacleActive();
+            this.moveFirstObstacleStartLocationForward();
         }
 
         /// <summary>
@@ -104,7 +106,7 @@ namespace FroggerStarter.Model
             }
 
             var firstObstacleCollidedOffBounds = collidedList.FirstOrDefault(obstacle => obstacle.IsOffTheEndOfTheLane());
-            firstObstacleCollidedOffBounds?.ShiftObstacleXLocation();
+            firstObstacleCollidedOffBounds?.ShiftXLocationBackwardsByWidth();
         }
 
         /// <summary>
@@ -165,6 +167,12 @@ namespace FroggerStarter.Model
         #endregion
 
         #region Private Helpers
+
+        private void moveFirstObstacleStartLocationForward()
+        {
+            var first = this.obstacles.First(obstacle => obstacle.IsActive);
+            first.ShiftXLocationForward(GameBoard.BackgroundWidth / this.obstacles.Count());
+        }
 
         private static double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)
         {

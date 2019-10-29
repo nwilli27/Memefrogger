@@ -141,13 +141,13 @@ namespace FroggerStarter.Controller
         {
             this.scoreTimer = new DispatcherTimer();
             this.scoreTimer.Tick += this.scoreTimerOnTick;
-            this.scoreTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            this.scoreTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             this.scoreTimer.Start();
         }
 
         private void scoreTimerOnTick(object sender, object e)
         {
-            var scoreTick = new ScoreTimerTickEventArgs() { ScoreTick = ScoreTimer.ScoreTick -= 0.1 };
+            var scoreTick = new ScoreTimerTickEventArgs() { ScoreTick = ScoreTimer.ScoreTick -= 0.02 };
             if (ScoreTimer.IsTimeUp)
             {
                 this.lifeLost();
@@ -164,6 +164,7 @@ namespace FroggerStarter.Controller
         private void createAndPlacePlayer()
         {
             this.player = new Frog();
+            this.player.DeathAnimation.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
             this.gameCanvas.Children.Add(this.player.Sprite);
             this.setPlayerToCenterOfBottomLane();
         }
@@ -258,6 +259,9 @@ namespace FroggerStarter.Controller
             var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
             this.LifeLoss?.Invoke(this, life);
             ScoreTimer.ResetScoreTick();
+
+            this.player.PlayAnimationDeath();
+
             this.checkGameStatusForGameOver();
         }
 

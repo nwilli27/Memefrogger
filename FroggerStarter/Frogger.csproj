@@ -121,6 +121,10 @@
     </Compile>
     <Compile Include="Constants\GameBoard.cs" />
     <Compile Include="Constants\GameSettings.cs" />
+    <Compile Include="Enums\AnimationType.cs" />
+    <Compile Include="Factory\AnimationFactory.cs" />
+    <Compile Include="Model\Animation.cs" />
+    <Compile Include="Model\Frame.cs" />
     <Compile Include="Model\FrogHomes.cs" />
     <Compile Include="Utility\SetOnce.cs" />
     <Compile Include="Factory\ObstacleFactory.cs" />
@@ -136,6 +140,18 @@
     <Compile Include="Enums\ObstacleType.cs" />
     <Compile Include="Model\PlayerStats.cs" />
     <Compile Include="Model\ScoreTimer.cs" />
+    <Compile Include="View\Dying Animation\FrameFour.xaml.cs">
+      <DependentUpon>FrameFour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dying Animation\FrameThree.xaml.cs">
+      <DependentUpon>FrameThree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dying Animation\FrameTwo.xaml.cs">
+      <DependentUpon>FrameTwo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dying Animation\FrameOne.xaml.cs">
+      <DependentUpon>FrameOne.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -180,6 +196,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\Dying Animation\FrameFour.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dying Animation\FrameThree.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dying Animation\FrameTwo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dying Animation\FrameOne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\GamePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
