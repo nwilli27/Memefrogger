@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using FroggerStarter.Enums;
 using FroggerStarter.View.Dying_Animation;
+using FroggerStarter.View.PlayerDeathAnimation;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Factory
@@ -30,10 +31,11 @@ namespace FroggerStarter.Factory
             {
                 case AnimationType.PlayerDeath:
                     var deathAnimation = new List<BaseSprite>();
-                    deathAnimation.Add(new FrameOne());
-                    deathAnimation.Add(new FrameTwo());
-                    deathAnimation.Add(new FrameThree());
-                    deathAnimation.Add(new FrameFour());
+                    deathAnimation.Add(new PlayerDeathFrameOne());
+                    deathAnimation.Add(new PlayerDeathFrameTwo());
+                    deathAnimation.Add(new PlayerDeathFrameThree());
+                    deathAnimation.Add(new PlayerDeathFrameFour());
+                    deathAnimation.Add(new PlayerDeathFrameFive());
                     return deathAnimation;
 
                 default:

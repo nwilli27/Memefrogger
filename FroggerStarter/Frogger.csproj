@@ -140,22 +140,25 @@
     <Compile Include="Enums\ObstacleType.cs" />
     <Compile Include="Model\PlayerStats.cs" />
     <Compile Include="Model\ScoreTimer.cs" />
-    <Compile Include="View\PlayerDeathAnimation\FrameFour.xaml.cs">
-      <DependentUpon>FrameFour.xaml</DependentUpon>
+    <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFour.xaml.cs">
+      <DependentUpon>PlayerDeathFrameFour.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PlayerDeathAnimation\FrameThree.xaml.cs">
-      <DependentUpon>FrameThree.xaml</DependentUpon>
+    <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameThree.xaml.cs">
+      <DependentUpon>PlayerDeathFrameThree.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PlayerDeathAnimation\FrameTwo.xaml.cs">
-      <DependentUpon>FrameTwo.xaml</DependentUpon>
+    <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameTwo.xaml.cs">
+      <DependentUpon>PlayerDeathFrameTwo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PlayerDeathAnimation\FrameOne.xaml.cs">
-      <DependentUpon>FrameOne.xaml</DependentUpon>
+    <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameOne.xaml.cs">
+      <DependentUpon>PlayerDeathFrameOne.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFive.xaml.cs">
+      <DependentUpon>PlayerDeathFrameFive.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\BaseSprite.xaml.cs">
       <DependentUpon>BaseSprite.xaml</DependentUpon>
     </Compile>
@@ -196,25 +199,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\PlayerDeathAnimation\FrameFour.xaml">
+    <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameFour.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\PlayerDeathAnimation\FrameThree.xaml">
+    <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameThree.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\PlayerDeathAnimation\FrameTwo.xaml">
+    <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameTwo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\PlayerDeathAnimation\FrameOne.xaml">
+    <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameOne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GamePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameFive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\BaseSprite.xaml">
       <SubType>Designer</SubType>
