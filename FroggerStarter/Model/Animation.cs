@@ -32,6 +32,12 @@ namespace FroggerStarter.Model
 
         #endregion
 
+        #region Constants
+
+        private const int AnimationInterval = 500;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -75,9 +81,9 @@ namespace FroggerStarter.Model
         {
             this.animateTimer = new DispatcherTimer();
             this.animateTimer.Tick += this.showNextFrame;
-            this.animateTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            this.animateTimer.Interval = new TimeSpan(0, 0, 0, 0, AnimationInterval);
 
-            this.animationFrames[0].IsVisible = true;
+            this.makeFirstFrameVisible();
             this.animateTimer.Start();
         }
 
@@ -106,6 +112,11 @@ namespace FroggerStarter.Model
         #endregion
 
         #region Private Helpers
+
+        private void makeFirstFrameVisible()
+        {
+            this.animationFrames[0].IsVisible = true;
+        }
 
         private void createFramesFromAnimationSprites(AnimationType animationType)
         {

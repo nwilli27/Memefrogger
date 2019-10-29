@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Drawing;
 using Windows.UI.Xaml.Media;
 using FroggerStarter.Controller;
+using FroggerStarter.Enums;
 using FroggerStarter.Factory;
 using Point = Windows.Foundation.Point;
 
@@ -84,23 +84,23 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        ///     Determines whether [is off the end of the lane].
+        ///     Determines whether [is out of bounds].
+        ///     Precondition: none
+        ///     Post-condition: none
         /// </summary>
         /// <returns>
         ///   <c>true</c> if [is off the end of the lane]; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public bool IsOffTheEdgeOfTheBoard()
+        public bool IsOutOfBounds()
         {
             switch (this.direction)
             {
                 case Direction.Right:
-                    var boundaryCheck = this.X + this.Width < 0;
-                    return boundaryCheck;
+                    return this.X + this.Width < 0;
 
                 case Direction.Left:
-                    var check = this.X > GameBoard.BackgroundWidth;
-                    return check;
+                    return this.X > GameBoard.BackgroundWidth;
 
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -113,7 +113,7 @@ namespace FroggerStarter.Model
         ///     Post-condition: this.X +/- this.Width
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void ShiftXLocationBackwardsByWidth()
+        public void ShiftXBackwardsByWidth()
         {
             switch (this.direction)
             {
@@ -136,7 +136,7 @@ namespace FroggerStarter.Model
         ///     Post-condition: this.X +/- [amountToShift]
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void ShiftXLocationForward(double amountToShift)
+        public void ShiftXForward(double amountToShift)
         {
             switch (this.direction)
             {
@@ -153,10 +153,12 @@ namespace FroggerStarter.Model
             }
         }
 
-        #endregion
-
-        #region Private Helpers
-
+        /// <summary>
+        ///     Moves the X location to the default spawn location.
+        ///     Precondition: none
+        ///     Post-condition: this.X == SpawnLocation [based on direction]
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void MoveToDefaultLocation()
         {
             switch (this.direction)
@@ -173,6 +175,10 @@ namespace FroggerStarter.Model
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        #endregion
+
+        #region Private Helpers
 
         private void moveObstacleToTheRight(double horizontalLaneWidth)
         {

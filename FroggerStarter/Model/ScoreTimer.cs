@@ -1,6 +1,6 @@
 ﻿
 using System;
-using FroggerStarter.Controller;
+using FroggerStarter.Constants;
 
 namespace FroggerStarter.Model
 {

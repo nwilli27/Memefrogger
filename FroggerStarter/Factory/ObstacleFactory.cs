@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FroggerStarter.Model;
+﻿
+using System;
+using FroggerStarter.Enums;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Factory

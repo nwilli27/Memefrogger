@@ -2,6 +2,7 @@
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using FroggerStarter.Constants;
 using FroggerStarter.Model;
 
 namespace FroggerStarter.Controller
@@ -37,6 +38,8 @@ namespace FroggerStarter.Controller
         #region Constants
 
         private const double ScoreTimeReduction = 0.02;
+        private const int GameTimerInterval = 15;
+        private const int ScoreTimerInterval = 10;
 
         #endregion
 
@@ -100,7 +103,7 @@ namespace FroggerStarter.Controller
             } else if (this.player.Y < GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset)
             {
                 this.lifeLost();
-                this.resetPlayerAndObstacles();
+                this.setPlayerToCenterOfBottomLane();
             }
         }
 
@@ -122,7 +125,7 @@ namespace FroggerStarter.Controller
         {
             this.timer = new DispatcherTimer();
             this.timer.Tick += this.timerOnTick;
-            this.timer.Interval = new TimeSpan(0, 0, 0, 0, 15);
+            this.timer.Interval = new TimeSpan(0, 0, 0, 0, GameTimerInterval);
             this.timer.Start();
         }
 
@@ -136,7 +139,7 @@ namespace FroggerStarter.Controller
         {
             this.scoreTimer = new DispatcherTimer();
             this.scoreTimer.Tick += this.scoreTimerOnTick;
-            this.scoreTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            this.scoreTimer.Interval = new TimeSpan(0, 0, 0, 0, ScoreTimerInterval);
             this.scoreTimer.Start();
         }
 
@@ -157,7 +160,6 @@ namespace FroggerStarter.Controller
                 if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.IsActive)
                 {
                     this.lifeLost();
-                    this.scoreTimer.Stop();
                     this.setPlayerToCenterOfBottomLane();
                 }
             }
@@ -222,13 +224,6 @@ namespace FroggerStarter.Controller
             this.player.Y = (GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset) - this.player.Height;
         }
 
-        private void resetPlayerAndObstacles()
-        {
-            this.setPlayerToCenterOfBottomLane();
-            this.laneManager.ResetLanesToOneObstacle();
-            this.laneManager.ResetObstacleSpawnTimer();
-        }
-
         private void stopGamePlayAndShowGameOver()
         {
             this.timer.Stop();
@@ -286,6 +281,7 @@ namespace FroggerStarter.Controller
             this.LifeLoss?.Invoke(this, life);
 
             this.player.PlayDeathAnimation();
+            this.scoreTimer.Stop();
 
             this.checkGameStatusForGameOver();
         }

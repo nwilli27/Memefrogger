@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
+using FroggerStarter.Enums;
 
 namespace FroggerStarter.Model
 {
@@ -23,6 +24,12 @@ namespace FroggerStarter.Model
 
         #endregion
 
+        #region Constants
+
+        private const int SpawnTimeInterval = 3;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -30,7 +37,6 @@ namespace FroggerStarter.Model
         ///     Precondition: startingYLocation lt; endingYLocation;
         /// 
         ///     Post-condition: this.lanes.Count() == 0
-        ///                     this.width == width
         ///                     this.startingYLocation == startingYLocation
         ///                     this.height += endingYLocation - startingYLocation
         /// </summary>
@@ -80,14 +86,13 @@ namespace FroggerStarter.Model
         ///                     lane.obstacles.Count += numberOfObstacles
         ///                     @each lane yLocation readjusts accordingly
         /// </summary>
-        /// <param name="direction">The lane direction.</param>
-        /// <param name="defaultSpeed">The default speed.</param>
-        /// <param name="obstacleType">Type of the obstacle.</param>
-        /// <param name="maxNumberObstacles">The max number of obstacles.</param>
-        public void AddLaneOfObstacles(List<object> laneSettings)
+        /// <param name="laneSettings">The lane settings.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// </exception>
+        public void AddLaneOfObstacles(IList<object> laneSettings)
         {
             var direction = (Direction) laneSettings[0];
-            var defaultSpeed =(double) laneSettings[1];
+            var defaultSpeed = (double) laneSettings[1];
             var obstacleType = (ObstacleType) laneSettings[2];
             var maxNumberObstacles = (int) laneSettings[3];
 
@@ -104,17 +109,6 @@ namespace FroggerStarter.Model
             lane.AddObstacles(obstacleType, maxNumberObstacles);
             this.lanes.Add(lane);
             this.updateYLocationOfLanes();
-        }
-
-        /// <summary>
-        ///     Resets the obstacles speed timer.
-        ///     Precondition: none
-        ///     Post-condition: obstacleSpawnTimer.Start()
-        /// </summary>
-        public void ResetObstacleSpawnTimer()
-        {
-            this.obstacleSpawnTimer.Stop();
-            this.obstacleSpawnTimer.Start();
         }
 
         /// <summary>
@@ -147,7 +141,7 @@ namespace FroggerStarter.Model
         {
             this.obstacleSpawnTimer = new DispatcherTimer();
             this.obstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;
-            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, 3, 0);
+            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, SpawnTimeInterval, 0);
             this.obstacleSpawnTimer.Start();
         }
 

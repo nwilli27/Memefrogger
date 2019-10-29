@@ -1,6 +1,6 @@
 ﻿
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Enums
 {
     /// <summary>
     ///     Holds the different types of Obstacles.

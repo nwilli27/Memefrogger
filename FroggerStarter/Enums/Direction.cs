@@ -1,6 +1,6 @@
 ﻿
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Enums
 {
     /// <summary>
     ///     Enums that specifies the direction of anything

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FroggerStarter.Controller;
+using FroggerStarter.Enums;
 
 namespace FroggerStarter.Model
 {
@@ -29,7 +30,6 @@ namespace FroggerStarter.Model
         ///     Initializes a new instance of the <see cref="Lane"/> class.
         ///     Precondition: none
         ///     Post-condition: this.obstacles.Count == 0
-        ///                     this.horizontalWidth = horizontalWidth
         ///                     this.direction = direction
         ///                     this.defaultSpeed = defaultSpeed
         /// </summary> 
@@ -105,8 +105,8 @@ namespace FroggerStarter.Model
                 obstacle.MoveForward();
             }
 
-            var firstObstacleCollidedOffBounds = collidedList.FirstOrDefault(obstacle => obstacle.IsOffTheEdgeOfTheBoard());
-            firstObstacleCollidedOffBounds?.ShiftXLocationBackwardsByWidth();
+            var firstObstacleThatCollidedOffBounds = collidedList.FirstOrDefault(obstacle => obstacle.IsOutOfBounds());
+            firstObstacleThatCollidedOffBounds?.ShiftXBackwardsByWidth();
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace FroggerStarter.Model
         private void moveFirstObstacleStartLocationForward()
         {
             var first = this.obstacles.First(obstacle => obstacle.IsActive);
-            first.ShiftXLocationForward(GameBoard.BackgroundWidth / this.obstacles.Count());
+            first.ShiftXForward(GameBoard.BackgroundWidth / this.obstacles.Count());
         }
 
         private static double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)

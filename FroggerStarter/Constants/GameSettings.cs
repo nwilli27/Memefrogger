@@ -1,9 +1,8 @@
-﻿
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FroggerStarter.Enums;
 using FroggerStarter.Model;
 
-namespace FroggerStarter.Controller
+namespace FroggerStarter.Constants
 {
     /// <summary>
     ///     Class holds unique data needed for game operation and setup.
@@ -14,35 +13,50 @@ namespace FroggerStarter.Controller
         public const int MaxScore = 3;
         public const double ScoreTime = 20.0;
 
-        public static List<object> Lane5 = new List<object> {
+        /// <summary>
+        ///     The 5th Lane settings
+        /// </summary>
+        public static IList<object> Lane5 = new List<object> {
             Direction.Right,
             2.0,
             ObstacleType.Car,
             5
         };
 
-        public static List<object> Lane4 = new List<object> {
+        /// <summary>
+        ///     The 4th Lane settings
+        /// </summary>
+        public static IList<object> Lane4 = new List<object> {
             Direction.Left,
             1.75,
             ObstacleType.SemiTruck,
             3
         };
 
-        public static List<object> Lane3 = new List<object> {
+        /// <summary>
+        ///     The 3rd Lane settings
+        /// </summary>
+        public static IList<object> Lane3 = new List<object> {
             Direction.Left,
             1.5,
             ObstacleType.Car,
             4
         };
 
-        public static List<object> Lane2 = new List<object> {
+        /// <summary>
+        ///     The 2nd Lane settings
+        /// </summary>
+        public static IList<object> Lane2 = new List<object> {
             Direction.Right,
             1.25,
             ObstacleType.SemiTruck,
             2
         };
 
-        public static List<object> Lane1 = new List<object> {
+        /// <summary>
+        ///     The 1st Lane settings
+        /// </summary>
+        public static IList<object> Lane1 = new List<object> {
             Direction.Left,
             1.0,
             ObstacleType.ToadTruck,
