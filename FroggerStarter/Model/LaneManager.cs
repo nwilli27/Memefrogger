@@ -26,7 +26,7 @@ namespace FroggerStarter.Model
 
         #region Constants
 
-        private const int SpawnTimeInterval = 3;
+        private const int SpawnTimeInterval = 4;
 
         #endregion
 
@@ -74,6 +74,7 @@ namespace FroggerStarter.Model
         public void ResetLanesToOneObstacle()
         {
             this.lanes.ToList().ForEach(lane => lane.ResetLaneToOneObstacle());
+            this.resetSpawnTimer();
         }
 
         /// <summary>
@@ -148,6 +149,12 @@ namespace FroggerStarter.Model
         private void obstacleSpawnTimerOnTick(object sender, object e)
         {
             this.lanes.ToList().ForEach(lane => lane.MakeObstacleActive());
+        }
+
+        private void resetSpawnTimer()
+        {
+            this.obstacleSpawnTimer.Stop();
+            this.obstacleSpawnTimer.Start();
         }
 
         private void updateYLocationOfLanes()

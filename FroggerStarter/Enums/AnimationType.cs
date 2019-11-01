@@ -6,6 +6,9 @@ namespace FroggerStarter.Enums
     /// </summary>
     public enum AnimationType
     {
+        /// <summary>
+        ///     The player death
+        /// </summary>
         PlayerDeath
     }
 }

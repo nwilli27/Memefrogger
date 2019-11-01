@@ -298,11 +298,6 @@ namespace FroggerStarter.Controller
             this.playerStats.Score += (int)ScoreTimer.ScoreTick;
             var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
             this.ScoreUpdated?.Invoke(this, score);
-
-            if (this.playerStats.Score == GameSettings.MaxScore)
-            {
-                this.stopGamePlayAndShowGameOver();
-            }
         }
 
         private void gameOver()
