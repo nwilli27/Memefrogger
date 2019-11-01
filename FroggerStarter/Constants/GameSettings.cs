@@ -9,7 +9,6 @@ namespace FroggerStarter.Constants
     internal static class GameSettings
     {
         public const int TotalNumberOfLives = 4;
-        public const int MaxScore = 3;
         public const double ScoreTime = 20.0;
 
         /// <summary>
