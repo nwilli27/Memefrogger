@@ -15,6 +15,7 @@ namespace FroggerStarter.Model
         #region Data Members
 
         private bool canMove = true;
+        private bool hasCollided;
 
         #endregion
 
@@ -44,6 +45,24 @@ namespace FroggerStarter.Model
         /// </value>
         public Animation FrogLeapAnimation { get; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance has collided.
+        ///     Precondition: none
+        ///     Post-condition: canMove == !HasCollided
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance has collided; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasCollided
+        {
+            get => this.hasCollided;
+            set
+            {
+                this.canMove = !value;
+                this.hasCollided = value;
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -53,7 +72,6 @@ namespace FroggerStarter.Model
         ///     Precondition: none
         ///     Post-condition: frog.SpeedX = SpeedXDirection
         ///                     frog.SpeedY = SpeedYDirection
-        ///                     
         /// </summary>
         public Frog()
         {
@@ -198,7 +216,7 @@ namespace FroggerStarter.Model
 
         private void onLeapFinished(object sender, AnimationIsFinishedEventArgs e)
         {
-            if (e.FrogLeapIsOver)
+            if (e.FrogLeapIsOver && !this.HasCollided)
             {
                 this.canMove = true;
                 this.Sprite.Visibility = Visibility.Visible;

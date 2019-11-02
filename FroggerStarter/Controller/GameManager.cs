@@ -120,6 +120,7 @@ namespace FroggerStarter.Controller
             {
                 this.lifeLost();
                 this.setPlayerToCenterOfBottomLane();
+                this.player.HasCollided = true;
             }
         }
 
@@ -177,6 +178,7 @@ namespace FroggerStarter.Controller
                 {
                     this.lifeLost();
                     this.setPlayerToCenterOfBottomLane();
+                    this.player.HasCollided = true;
                 }
             }
         }
@@ -233,6 +235,7 @@ namespace FroggerStarter.Controller
             this.makeHitHomeVisible();
             this.setPlayerToCenterOfBottomLane();
             this.increaseScore();
+            this.player.HasCollided = true;
         }
 
         private void setPlayerToCenterOfBottomLane()
@@ -347,6 +350,7 @@ namespace FroggerStarter.Controller
                 this.laneManager.ResetLanesToOneObstacle();
                 ScoreTimer.ResetScoreTick();
                 this.scoreTimer.Start();
+                this.player.HasCollided = false;
             }
         }
 
