@@ -14,9 +14,8 @@ namespace FroggerStarter.Model
     {
         #region Data Members
 
-        public bool CanMove { get; set; } = true;
-
-        public bool HasBeenCollidedWith { get; set; }
+        private bool canMove = true;
+        private bool hasCollided;
 
         #endregion
 
@@ -46,6 +45,22 @@ namespace FroggerStarter.Model
         /// </value>
         public Animation FrogLeapAnimation { get; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance has collided.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has collided; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasCollided
+        {
+            get => this.hasCollided;
+            set
+            {
+                this.canMove = !value;
+                this.hasCollided = value;
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -66,6 +81,7 @@ namespace FroggerStarter.Model
 
             this.DeathAnimation = new Animation(AnimationType.PlayerDeath, DeathAnimationInterval);
             this.FrogLeapAnimation = new Animation(AnimationType.FrogLeap, 100);
+            this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
         }
 
         #endregion
@@ -80,7 +96,7 @@ namespace FroggerStarter.Model
         /// <param name="leftBoundary">The left boundary.</param>
         public void MoveLeftWithBoundaryCheck(double leftBoundary)
         {
-            if (this.X - this.SpeedX >= leftBoundary && this.CanMove)
+            if (this.X - this.SpeedX >= leftBoundary && this.canMove)
             {
                 this.MoveLeft();
                 this.Direction = Direction.Left;
@@ -97,7 +113,7 @@ namespace FroggerStarter.Model
         /// <param name="rightBoundary">The right boundary.</param>
         public void MoveRightWithBoundaryCheck(double rightBoundary)
         {
-            if (this.X + this.SpeedX < rightBoundary && this.CanMove)
+            if (this.X + this.SpeedX < rightBoundary && this.canMove)
             {
                 this.MoveRight();
                 this.Direction = Direction.Right;
@@ -114,7 +130,7 @@ namespace FroggerStarter.Model
         /// <param name="topBoundary">The top boundary.</param>
         public void MoveUpWithBoundaryCheck(double topBoundary)
         {
-            if (this.Y - this.SpeedY >= topBoundary && this.CanMove)
+            if (this.Y - this.SpeedY >= topBoundary && this.canMove)
             {
                 this.MoveUp();
                 this.Direction = Direction.Up;
@@ -131,7 +147,7 @@ namespace FroggerStarter.Model
         /// <param name="bottomBoundary">The bottom boundary.</param>
         public void MoveDownWithBoundaryCheck(double bottomBoundary)
         {
-            if (this.Y + this.SpeedY < bottomBoundary && this.CanMove)
+            if (this.Y + this.SpeedY < bottomBoundary && this.canMove)
             {
                 this.MoveDown();
                 this.Direction = Direction.Down;
@@ -190,10 +206,20 @@ namespace FroggerStarter.Model
         {
             this.Sprite.Visibility = Visibility.Collapsed;
             this.StopMovement();
-            this.CanMove = false;
+            this.canMove = false;
             this.FrogLeapAnimation.RotateFrames(this.Direction);
             this.FrogLeapAnimation.SetFrameLocations(this.X, this.Y);
             this.FrogLeapAnimation.Start();
+        }
+
+        private void onLeapFinished(object sender, AnimationIsFinishedEventArgs e)
+        {
+            if (e.FrogLeapIsOver && !this.HasCollided)
+            {
+                this.canMove = true;
+                this.ChangeSpriteVisibility(true);
+                this.startMovement();
+            }
         }
 
         #endregion

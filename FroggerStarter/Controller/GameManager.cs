@@ -120,6 +120,7 @@ namespace FroggerStarter.Controller
             {
                 this.lifeLost();
                 this.setPlayerToCenterOfBottomLane();
+                this.player.HasCollided = true;
             }
         }
 
@@ -176,8 +177,8 @@ namespace FroggerStarter.Controller
                 if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.IsActive)
                 {
                     this.lifeLost();
-                    this.player.HasBeenCollidedWith = true;
                     this.setPlayerToCenterOfBottomLane();
+                    this.player.HasCollided = true;
                 }
             }
         }
@@ -345,11 +346,10 @@ namespace FroggerStarter.Controller
             {
                 this.player.Sprite.Visibility = Visibility.Visible;
                 this.player.startMovement();
-                this.player.CanMove = true;
-                this.player.HasBeenCollidedWith = false;
                 this.laneManager.ResetLanesToOneObstacle();
                 ScoreTimer.ResetScoreTick();
                 this.scoreTimer.Start();
+                this.player.HasCollided = false;
             }
         }
 
@@ -363,7 +363,6 @@ namespace FroggerStarter.Controller
         }
 
         #endregion
-
     }
 
     /// <summary>
