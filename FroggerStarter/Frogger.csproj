@@ -173,7 +173,6 @@
     <Compile Include="View\Sprites\FrogSprite.xaml.cs">
       <DependentUpon>FrogSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\ISpriteRenderer.cs" />
     <Compile Include="View\Sprites\ToadTruckSprite.xaml.cs">
       <DependentUpon>ToadTruckSprite.xaml</DependentUpon>
     </Compile>

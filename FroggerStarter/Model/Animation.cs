@@ -28,6 +28,9 @@ namespace FroggerStarter.Model
 
         #region Events
 
+        /// <summary>
+        ///     The animation finished Event Args
+        /// </summary>
         public EventHandler<AnimationIsFinishedEventArgs> AnimationFinished;
 
         #endregion

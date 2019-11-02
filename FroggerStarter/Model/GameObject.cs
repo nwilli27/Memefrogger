@@ -16,7 +16,6 @@ namespace FroggerStarter.Model
         #region Data members
 
         private Point location;
-        private Direction Direction;
 
         #endregion
 

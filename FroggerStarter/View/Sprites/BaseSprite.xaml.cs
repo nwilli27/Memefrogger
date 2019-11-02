@@ -9,7 +9,7 @@ namespace FroggerStarter.View.Sprites
     ///     Holds common functionality for all game sprites.
     /// </summary>
     /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
-    public abstract partial class BaseSprite : ISpriteRenderer
+    public abstract partial class BaseSprite
     {
         #region Constructors
 

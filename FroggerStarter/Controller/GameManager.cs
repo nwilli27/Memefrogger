@@ -29,9 +29,24 @@ namespace FroggerStarter.Controller
 
         #region Events
 
+        /// <summary>
+        ///     The life loss Event Args
+        /// </summary>
         public EventHandler<LivesUpdatedEventArgs> LifeLoss;
+
+        /// <summary>
+        ///     The score updated Event Args
+        /// </summary>
         public EventHandler<ScoreUpdatedEventArgs> ScoreUpdated;
+
+        /// <summary>
+        ///     The game over Event Args
+        /// </summary>
         public EventHandler<GameOverEventArgs> GameOver;
+
+        /// <summary>
+        ///     The score timer tick Event Args
+        /// </summary>
         public EventHandler<ScoreTimerTickEventArgs> ScoreTimerTick;
 
         #endregion
