@@ -1,7 +1,6 @@
-﻿
-using System;
+﻿using System;
 using FroggerStarter.Enums;
-using FroggerStarter.View.Sprites;
+using FroggerStarter.Model;
 
 namespace FroggerStarter.Factory
 {
@@ -10,31 +9,37 @@ namespace FroggerStarter.Factory
     /// </summary>
     internal class ObstacleFactory
     {
+        #region Methods
 
         /// <summary>
-        ///     Creates the correlating sprite of type [obstacleType] and returns that sprite.
+        ///     Creates the correlating type of Obstacle [obstacleType] and returns that Obstacle.
+        ///     Precondition: none
+        ///     Post-condition: none
         /// </summary>
-        /// <param name="obstacleType">Type of the obstacle sprite.</param>
+        /// <param name="obstacleType">Type of the Obstacle.</param>
+        /// <param name="direction">The direction of the Obstacle.</param>
         /// <returns>
-        ///     Returns the sprite of the correlating [obstacleType]
+        ///     Returns the Obstacle of the correlating [obstacleType]
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">obstacleType - null</exception>
-        public static BaseSprite CreateObstacleSprite(ObstacleType obstacleType)
+        public static Obstacle CreateObstacle(ObstacleType obstacleType, Direction direction)
         {
             switch (obstacleType)
             {
                 case ObstacleType.Car:
-                    return new CarSprite();
+                    return new Car(direction);
 
                 case ObstacleType.SemiTruck:
-                    return new SemiTruckSprite();
+                    return new SemiTruck(direction);
 
                 case ObstacleType.ToadTruck:
-                    return new ToadTruckSprite();
+                    return new ToadTruck(direction);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(obstacleType), obstacleType, null);
             }
         }
+
+        #endregion
     }
 }

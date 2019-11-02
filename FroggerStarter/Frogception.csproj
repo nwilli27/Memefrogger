@@ -126,8 +126,11 @@
     <Compile Include="Enums\AnimationType.cs" />
     <Compile Include="Factory\AnimationFactory.cs" />
     <Compile Include="Model\Animation.cs" />
+    <Compile Include="Model\Car.cs" />
     <Compile Include="Model\Frame.cs" />
     <Compile Include="Model\FrogHomes.cs" />
+    <Compile Include="Model\SemiTruck.cs" />
+    <Compile Include="Model\ToadTruck.cs" />
     <Compile Include="Utility\SetOnce.cs" />
     <Compile Include="Factory\ObstacleFactory.cs" />
     <Compile Include="Model\Frog.cs" />

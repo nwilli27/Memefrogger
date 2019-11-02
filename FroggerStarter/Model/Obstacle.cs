@@ -3,16 +3,23 @@ using Windows.UI.Xaml.Media;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using FroggerStarter.Factory;
+using FroggerStarter.View.Sprites;
 using Point = Windows.Foundation.Point;
 
 namespace FroggerStarter.Model
 {
+
     /// <summary>
-    ///     A Obstacle sprite object of type GameObject.
+    ///     An obstacle sprite object of MovingObject.
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.GameObject" />
-    internal class Obstacle : MovingObject
+    /// <seealso cref="FroggerStarter.Model.MovingObject" />
+    public abstract class Obstacle : MovingObject
     {
+        #region Data Members
+
+        private BaseSprite sprite;
+
+        #endregion
 
         #region Constants
 
@@ -30,24 +37,37 @@ namespace FroggerStarter.Model
         /// </value>
         public bool IsActive { get; set; } = false;
 
+        /// <summary>
+        ///     Gets or sets the sprite associated with the game object.
+        ///     Precondition: none
+        ///     Post-condition: Flips sprite based on direction.
+        /// </summary>
+        /// <value>
+        ///     The sprite.
+        /// </value>
+        public override BaseSprite Sprite
+        {
+            get => this.sprite;
+            protected set
+            {
+                this.sprite = value;
+                this.checkDirectionToFlipHorizontally();
+            }
+        }
+
         #endregion
 
         #region Constructor
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Obstacle"/> class.
-        ///     Creates a Game object sprite according to the type of obstacle passed in.
         ///     Precondition: none
         ///     Post-condition: none
         /// </summary>
-        /// <param name="obstacleType">Type of obstacle to create.</param>
         /// <param name="direction">The direction the vehicle is facing.</param>
-        public Obstacle(ObstacleType obstacleType, Direction direction)
+        protected Obstacle(Direction direction)
         {
-            Sprite = ObstacleFactory.CreateObstacleSprite(obstacleType);
             this.Direction = direction;
-            this.checkDirectionToFlipHorizontally();
-            this.MoveToDefaultLocation();
         }
 
         #endregion
@@ -204,6 +224,11 @@ namespace FroggerStarter.Model
 
         private void checkDirectionToFlipHorizontally()
         {
+            if (this.Sprite == null)
+            {
+                
+            }
+
             if (this.Direction.Equals(Direction.Right))
             {
                 this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
