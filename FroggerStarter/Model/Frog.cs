@@ -14,7 +14,9 @@ namespace FroggerStarter.Model
     {
         #region Data Members
 
-        private bool canMove = true;
+        public bool CanMove { get; set; } = true;
+
+        public bool HasBeenCollidedWith { get; set; }
 
         #endregion
 
@@ -64,8 +66,6 @@ namespace FroggerStarter.Model
 
             this.DeathAnimation = new Animation(AnimationType.PlayerDeath, DeathAnimationInterval);
             this.FrogLeapAnimation = new Animation(AnimationType.FrogLeap, 100);
-
-            this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
         }
 
         #endregion
@@ -80,7 +80,7 @@ namespace FroggerStarter.Model
         /// <param name="leftBoundary">The left boundary.</param>
         public void MoveLeftWithBoundaryCheck(double leftBoundary)
         {
-            if (this.X - this.SpeedX >= leftBoundary && this.canMove)
+            if (this.X - this.SpeedX >= leftBoundary && this.CanMove)
             {
                 this.MoveLeft();
                 this.Direction = Direction.Left;
@@ -97,7 +97,7 @@ namespace FroggerStarter.Model
         /// <param name="rightBoundary">The right boundary.</param>
         public void MoveRightWithBoundaryCheck(double rightBoundary)
         {
-            if (this.X + this.SpeedX < rightBoundary && this.canMove)
+            if (this.X + this.SpeedX < rightBoundary && this.CanMove)
             {
                 this.MoveRight();
                 this.Direction = Direction.Right;
@@ -114,7 +114,7 @@ namespace FroggerStarter.Model
         /// <param name="topBoundary">The top boundary.</param>
         public void MoveUpWithBoundaryCheck(double topBoundary)
         {
-            if (this.Y - this.SpeedY >= topBoundary && this.canMove)
+            if (this.Y - this.SpeedY >= topBoundary && this.CanMove)
             {
                 this.MoveUp();
                 this.Direction = Direction.Up;
@@ -131,7 +131,7 @@ namespace FroggerStarter.Model
         /// <param name="bottomBoundary">The bottom boundary.</param>
         public void MoveDownWithBoundaryCheck(double bottomBoundary)
         {
-            if (this.Y + this.SpeedY < bottomBoundary && this.canMove)
+            if (this.Y + this.SpeedY < bottomBoundary && this.CanMove)
             {
                 this.MoveDown();
                 this.Direction = Direction.Down;
@@ -190,20 +190,10 @@ namespace FroggerStarter.Model
         {
             this.Sprite.Visibility = Visibility.Collapsed;
             this.StopMovement();
-            this.canMove = false;
+            this.CanMove = false;
             this.FrogLeapAnimation.RotateFrames(this.Direction);
             this.FrogLeapAnimation.SetFrameLocations(this.X, this.Y);
             this.FrogLeapAnimation.Start();
-        }
-
-        private void onLeapFinished(object sender, AnimationIsFinishedEventArgs e)
-        {
-            if (e.FrogLeapIsOver)
-            {
-                this.canMove = true;
-                this.Sprite.Visibility = Visibility.Visible;
-                this.startMovement();
-            }
         }
 
         #endregion
