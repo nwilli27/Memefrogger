@@ -142,6 +142,9 @@
     <Compile Include="Enums\ObstacleType.cs" />
     <Compile Include="Model\PlayerStats.cs" />
     <Compile Include="Model\ScoreTimer.cs" />
+    <Compile Include="View\FrogLeapAnimation\FrogLeapFrameOne.xaml.cs">
+      <DependentUpon>FrogLeapFrameOne.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFour.xaml.cs">
       <DependentUpon>PlayerDeathFrameFour.xaml</DependentUpon>
     </Compile>
@@ -200,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\FrogLeapAnimation\FrogLeapFrameOne.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameFour.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

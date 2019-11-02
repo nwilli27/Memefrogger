@@ -17,6 +17,8 @@ namespace FroggerStarter.Model
 
         private DispatcherTimer animateTimer;
         private IList<Frame> animationFrames;
+        private readonly int animationInterval;
+        private AnimationType animationType;
 
         #endregion
 
@@ -35,12 +37,6 @@ namespace FroggerStarter.Model
 
         #endregion
 
-        #region Constants
-
-        private const int AnimationInterval = 500;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -48,10 +44,13 @@ namespace FroggerStarter.Model
         ///     Precondition: none
         ///     Post-condition: this.animationFrames.Count()++
         /// </summary>
-        /// <param name="animationType">Type of the animation.</param>
-        public Animation(AnimationType animationType)
+        /// <param name="animationType">Type of the animation</param>
+        /// <param name="animationInterval">The speed of the animation</param>
+        public Animation(AnimationType animationType, int animationInterval)
         {
-            this.createFramesFromAnimationSprites(animationType);
+            this.animationType = animationType;
+            this.createFramesFromAnimationSprites();
+            this.animationInterval = animationInterval;
         }
 
         #endregion
@@ -95,7 +94,7 @@ namespace FroggerStarter.Model
         {
             this.animateTimer = new DispatcherTimer();
             this.animateTimer.Tick += this.showNextFrame;
-            this.animateTimer.Interval = new TimeSpan(0, 0, 0, 0, AnimationInterval);
+            this.animateTimer.Interval = new TimeSpan(0, 0, 0, 0, this.animationInterval);
 
             this.makeFirstFrameVisible();
             this.animateTimer.Start();
@@ -132,10 +131,10 @@ namespace FroggerStarter.Model
             this.animationFrames[0].IsVisible = true;
         }
 
-        private void createFramesFromAnimationSprites(AnimationType animationType)
+        private void createFramesFromAnimationSprites()
         {
             this.animationFrames = new List<Frame>();
-            var listOfSprites = AnimationFactory.CreateAnimationSprites(animationType);
+            var listOfSprites = AnimationFactory.CreateAnimationSprites(this.animationType);
 
             foreach (var sprite in listOfSprites)
             {
@@ -163,13 +162,32 @@ namespace FroggerStarter.Model
             {
                 this.animationFrames.ToList().ForEach(frame => frame.ResetStatusAndVisibility());
                 this.animateTimer.Stop();
-                var animationDone = new AnimationIsFinishedEventArgs() { AnimationIsOver = true };
-                this.AnimationFinished?.Invoke(this, animationDone);
+                this.invokeFinishedAnimationBasedOnType();
             }
         }
 
-        #endregion
+        private void invokeFinishedAnimationBasedOnType()
+        {
+            var animationDone = new AnimationIsFinishedEventArgs();
 
+            switch (this.animationType)
+            {
+                case AnimationType.PlayerDeath:
+                    animationDone.PlayerDeathIsOver = true;
+                    break;
+
+                case AnimationType.FrogLeap:
+                    animationDone.FrogLeapIsOver = true;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            this.AnimationFinished?.Invoke(this, animationDone);
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -178,12 +196,21 @@ namespace FroggerStarter.Model
     /// <seealso cref="System.EventArgs" />
     public class AnimationIsFinishedEventArgs : EventArgs
     {
+
         /// <summary>
         ///     Gets or sets a value indicating whether [animation is over].
         /// </summary>
         /// <value>
         ///   <c>true</c> if [animation is over]; otherwise, <c>false</c>.
         /// </value>
-        public bool AnimationIsOver { get; set; }
+        public bool PlayerDeathIsOver { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether [animation is over].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [animation is over]; otherwise, <c>false</c>.
+        /// </value>
+        public bool FrogLeapIsOver { get; set; }
     }
 }

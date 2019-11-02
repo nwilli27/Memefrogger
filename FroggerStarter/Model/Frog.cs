@@ -12,11 +12,17 @@ namespace FroggerStarter.Model
     /// <seealso cref="FroggerStarter.Model.GameObject" />
     public class Frog : MovingObject
     {
- 
+        #region Data Members
+
+        private bool canMove = true;
+
+        #endregion
+
         #region Constants
 
         private const int SpeedXDirection = 50;
         private const int SpeedYDirection = 50;
+        private const int DeathAnimationInterval = 500;
 
         #endregion
 
@@ -29,6 +35,14 @@ namespace FroggerStarter.Model
         ///     The death animation.
         /// </value>
         public Animation DeathAnimation { get; }
+
+        /// <summary>
+        ///     Gets the frog leap animation.
+        /// </summary>
+        /// <value>
+        ///     The frog leap animation.
+        /// </value>
+        public Animation FrogLeapAnimation { get; }
 
         #endregion
 
@@ -48,7 +62,10 @@ namespace FroggerStarter.Model
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
 
-            this.DeathAnimation = new Animation(AnimationType.PlayerDeath);
+            this.DeathAnimation = new Animation(AnimationType.PlayerDeath, DeathAnimationInterval);
+            this.FrogLeapAnimation = new Animation(AnimationType.FrogLeap, 100);
+
+            this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
         }
 
         #endregion
@@ -63,11 +80,12 @@ namespace FroggerStarter.Model
         /// <param name="leftBoundary">The left boundary.</param>
         public void MoveLeftWithBoundaryCheck(double leftBoundary)
         {
-            if (this.X - this.SpeedX >= leftBoundary)
+            if (this.X - this.SpeedX >= leftBoundary && this.canMove)
             {
                 this.MoveLeft();
                 this.Direction = Direction.Left;
                 this.Rotate(this.Direction);
+                this.playLeapAnimation();
             }
         }
 
@@ -79,11 +97,12 @@ namespace FroggerStarter.Model
         /// <param name="rightBoundary">The right boundary.</param>
         public void MoveRightWithBoundaryCheck(double rightBoundary)
         {
-            if (this.X + this.SpeedX < rightBoundary)
+            if (this.X + this.SpeedX < rightBoundary && this.canMove)
             {
                 this.MoveRight();
                 this.Direction = Direction.Right;
                 this.Rotate(this.Direction);
+                this.playLeapAnimation();
             }
         }
 
@@ -95,11 +114,12 @@ namespace FroggerStarter.Model
         /// <param name="topBoundary">The top boundary.</param>
         public void MoveUpWithBoundaryCheck(double topBoundary)
         {
-            if (this.Y - this.SpeedY >= topBoundary)
+            if (this.Y - this.SpeedY >= topBoundary && this.canMove)
             {
                 this.MoveUp();
                 this.Direction = Direction.Up;
                 this.Rotate(this.Direction);
+                this.playLeapAnimation();
             }
         }
 
@@ -111,11 +131,12 @@ namespace FroggerStarter.Model
         /// <param name="bottomBoundary">The bottom boundary.</param>
         public void MoveDownWithBoundaryCheck(double bottomBoundary)
         {
-            if (this.Y + this.SpeedY < bottomBoundary)
+            if (this.Y + this.SpeedY < bottomBoundary && this.canMove)
             {
                 this.MoveDown();
                 this.Direction = Direction.Down;
                 this.Rotate(this.Direction);
+                this.playLeapAnimation();
             }
         }
 
@@ -159,6 +180,30 @@ namespace FroggerStarter.Model
         {
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        private void playLeapAnimation()
+        {
+            this.Sprite.Visibility = Visibility.Collapsed;
+            this.StopMovement();
+            this.canMove = false;
+            this.FrogLeapAnimation.RotateFrames(this.Direction);
+            this.FrogLeapAnimation.SetFrameLocations(this.X, this.Y);
+            this.FrogLeapAnimation.Start();
+        }
+
+        private void onLeapFinished(object sender, AnimationIsFinishedEventArgs e)
+        {
+            if (e.FrogLeapIsOver)
+            {
+                this.canMove = true;
+                this.Sprite.Visibility = Visibility.Visible;
+                this.startMovement();
+            }
         }
 
         #endregion

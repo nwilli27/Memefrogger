@@ -9,6 +9,11 @@ namespace FroggerStarter.Enums
         /// <summary>
         ///     The player death
         /// </summary>
-        PlayerDeath
+        PlayerDeath,
+
+        /// <summary>
+        ///     The frog leap
+        /// </summary>
+        FrogLeap
     }
 }

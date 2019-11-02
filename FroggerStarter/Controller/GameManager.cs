@@ -203,6 +203,7 @@ namespace FroggerStarter.Controller
         {
             this.player.DeathAnimation.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
             this.player.DeathAnimation.AnimationFinished += this.onDeathAnimationDone;
+            this.player.FrogLeapAnimation.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
         }
 
         private void createAndPlaceObstaclesInLanes()
@@ -339,7 +340,7 @@ namespace FroggerStarter.Controller
 
         private void onDeathAnimationDone(object sender, AnimationIsFinishedEventArgs e)
         {
-            if (e.AnimationIsOver && !this.isGameOver())
+            if (e.PlayerDeathIsOver && !this.isGameOver())
             {
                 this.player.Sprite.Visibility = Visibility.Visible;
                 this.player.startMovement();

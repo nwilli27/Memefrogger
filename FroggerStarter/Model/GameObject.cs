@@ -165,7 +165,6 @@ namespace FroggerStarter.Model
             this.Sprite.RenderTransform = rotateTransform;
         }
 
-
         #endregion
 
         #region Private Helpers

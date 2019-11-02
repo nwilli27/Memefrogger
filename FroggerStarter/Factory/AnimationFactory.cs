@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using FroggerStarter.Enums;
+using FroggerStarter.View.FrogLeapAnimation;
 using FroggerStarter.View.PlayerDeathAnimation;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Factory
 {
+
     /// <summary>
     ///     Factory class that returns a collection of BaseSprites in order of an animation.
     /// </summary>
@@ -37,6 +39,11 @@ namespace FroggerStarter.Factory
                     deathAnimation.Add(new PlayerDeathFrameFour());
 
                     return deathAnimation;
+
+                case AnimationType.FrogLeap:
+                    var frogLeapAnimation = new List<BaseSprite>();
+                    frogLeapAnimation.Add(new FrogLeapFrameOne());
+                    return frogLeapAnimation;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(animationType), animationType, null);
