@@ -269,6 +269,7 @@ namespace FroggerStarter.Controller
             }
             else
             {
+                this.setPlayerToCenterOfBottomLane();
                 this.resetScoreTimerBar();
             }
         }
