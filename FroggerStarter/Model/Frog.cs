@@ -99,7 +99,6 @@ namespace FroggerStarter.Model
             if (this.X - this.SpeedX >= leftBoundary && this.canMove)
             {
                 this.MoveLeft();
-                this.Direction = Direction.Left;
                 this.Rotate(this.Direction);
                 this.playLeapAnimation();
             }
@@ -116,7 +115,6 @@ namespace FroggerStarter.Model
             if (this.X + this.SpeedX < rightBoundary && this.canMove)
             {
                 this.MoveRight();
-                this.Direction = Direction.Right;
                 this.Rotate(this.Direction);
                 this.playLeapAnimation();
             }
@@ -133,7 +131,6 @@ namespace FroggerStarter.Model
             if (this.Y - this.SpeedY >= topBoundary && this.canMove)
             {
                 this.MoveUp();
-                this.Direction = Direction.Up;
                 this.Rotate(this.Direction);
                 this.playLeapAnimation();
             }
@@ -150,7 +147,6 @@ namespace FroggerStarter.Model
             if (this.Y + this.SpeedY < bottomBoundary && this.canMove)
             {
                 this.MoveDown();
-                this.Direction = Direction.Down;
                 this.Rotate(this.Direction);
                 this.playLeapAnimation();
             }
@@ -192,7 +188,7 @@ namespace FroggerStarter.Model
         ///                     this.SpeedY = SpeedYDirection
         ///                     
         /// </summary>
-        public void startMovement()
+        public void StartMovement()
         {
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
@@ -218,7 +214,7 @@ namespace FroggerStarter.Model
             {
                 this.canMove = true;
                 this.ChangeSpriteVisibility(true);
-                this.startMovement();
+                this.StartMovement();
             }
         }
 

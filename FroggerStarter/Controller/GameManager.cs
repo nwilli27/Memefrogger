@@ -115,8 +115,8 @@ namespace FroggerStarter.Controller
             {
                 this.updateBoardForReachingEmptyHome();
                 this.checkGameStatusForGameOver();
-
-            } else if (this.player.Y < GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset)
+            }
+            else if (this.hasMovedPastTopBoundary())
             {
                 this.lifeLost();
                 this.setPlayerToCenterOfBottomLane();
@@ -290,6 +290,11 @@ namespace FroggerStarter.Controller
             return this.playerStats.Lives == 0 || this.frogHomes.HasHomesBeenFilled;
         }
 
+        private bool hasMovedPastTopBoundary()
+        {
+            return this.player.Y < GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
+        }
+
         #endregion
 
         #region Events
@@ -345,7 +350,7 @@ namespace FroggerStarter.Controller
             if (e.PlayerDeathIsOver && !this.isGameOver())
             {
                 this.player.Sprite.Visibility = Visibility.Visible;
-                this.player.startMovement();
+                this.player.StartMovement();
                 this.laneManager.ResetLanesToOneObstacle();
                 ScoreTimer.ResetScoreTick();
                 this.scoreTimer.Start();
