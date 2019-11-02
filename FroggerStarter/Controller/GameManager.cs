@@ -235,7 +235,6 @@ namespace FroggerStarter.Controller
             this.makeHitHomeVisible();
             this.setPlayerToCenterOfBottomLane();
             this.increaseScore();
-            this.player.HasCollided = true;
         }
 
         private void setPlayerToCenterOfBottomLane()
