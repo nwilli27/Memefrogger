@@ -224,11 +224,6 @@ namespace FroggerStarter.Model
 
         private void checkDirectionToFlipHorizontally()
         {
-            if (this.Sprite == null)
-            {
-                
-            }
-
             if (this.Direction.Equals(Direction.Right))
             {
                 this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
