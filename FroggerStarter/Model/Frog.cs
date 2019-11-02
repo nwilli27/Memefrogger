@@ -47,11 +47,9 @@ namespace FroggerStarter.Model
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance has collided.
-        ///     Precondition: none
-        ///     Post-condition: canMove == !HasCollided
         /// </summary>
         /// <value>
-        ///     <c>true</c> if this instance has collided; otherwise, <c>false</c>.
+        ///   <c>true</c> if this instance has collided; otherwise, <c>false</c>.
         /// </value>
         public bool HasCollided
         {
@@ -72,6 +70,7 @@ namespace FroggerStarter.Model
         ///     Precondition: none
         ///     Post-condition: frog.SpeedX = SpeedXDirection
         ///                     frog.SpeedY = SpeedYDirection
+        ///                     
         /// </summary>
         public Frog()
         {
@@ -82,7 +81,6 @@ namespace FroggerStarter.Model
 
             this.DeathAnimation = new Animation(AnimationType.PlayerDeath, DeathAnimationInterval);
             this.FrogLeapAnimation = new Animation(AnimationType.FrogLeap, 100);
-
             this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
         }
 
@@ -219,7 +217,7 @@ namespace FroggerStarter.Model
             if (e.FrogLeapIsOver && !this.HasCollided)
             {
                 this.canMove = true;
-                this.Sprite.Visibility = Visibility.Visible;
+                this.ChangeSpriteVisibility(true);
                 this.startMovement();
             }
         }

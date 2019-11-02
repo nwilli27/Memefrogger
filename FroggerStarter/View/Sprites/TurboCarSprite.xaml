@@ -7,10 +7,45 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Height="44"
-    Width="50">
+    Width="60">
 
     <Canvas>
         <local:CarSprite/>
+        <Ellipse Width="17" Height="7" Fill="Red" Canvas.Left="42.848" Canvas.Top="25.36" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="0.37"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Width="12" Height="5" Fill="OrangeRed" Canvas.Left="46.316" Canvas.Top="26.377" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="0.37"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Width="10" Height="3" Fill="Yellow" Canvas.Left="45.798" Canvas.Top="27.402" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="0.37"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Width="12" Height="8" Fill="Silver" Canvas.Left="38.616" Canvas.Top="25" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="0.368" TranslateX="0" TranslateY="-0.005"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Width="8" Height="6" Fill="Silver" Canvas.Left="45.124" Canvas.Top="26.001" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-89.841" TranslateX="0" TranslateY="0.024"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Rectangle Width="5" Height="8" Fill="Silver" Canvas.Left="44.609" Canvas.Top="25.005" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-0.185" TranslateX="0" TranslateY="0.011"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Ellipse Width="4" Height="1" Fill="White" Canvas.Left="41.201" Canvas.Top="26.356" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-13.321" TranslateX="0" TranslateY="-0.005"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
     </Canvas>
 
 </local:BaseSprite>

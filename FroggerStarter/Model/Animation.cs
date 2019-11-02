@@ -196,7 +196,6 @@ namespace FroggerStarter.Model
     /// <seealso cref="System.EventArgs" />
     public class AnimationIsFinishedEventArgs : EventArgs
     {
-
         /// <summary>
         ///     Gets or sets a value indicating whether [animation is over].
         /// </summary>
