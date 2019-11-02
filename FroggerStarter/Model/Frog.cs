@@ -10,7 +10,7 @@ namespace FroggerStarter.Model
     ///     Defines the frog model
     /// </summary>
     /// <seealso cref="FroggerStarter.Model.GameObject" />
-    public class Frog : MovingObject
+    public sealed class Frog : MovingObject
     {
  
         #region Constants
