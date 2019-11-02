@@ -16,6 +16,16 @@ namespace FroggerStarter.Enums
         /// <summary>
         ///     The direction is going left
         /// </summary>
-        Left
+        Left,
+
+        /// <summary>
+        ///     The direction is going up
+        /// </summary>
+        Up,
+
+        /// <summary>
+        ///     The direction is going down
+        /// </summary>
+        Down
     }
 }

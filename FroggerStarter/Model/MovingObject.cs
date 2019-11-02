@@ -1,13 +1,16 @@
 ﻿
 
+using FroggerStarter.Enums;
+
 namespace FroggerStarter.Model
 {
     /// <summary>
     ///     Type of GameObject that allows movement.
     /// </summary>
     /// <seealso cref="FroggerStarter.Model.GameObject" />
-    public class MovingObject : GameObject
+    public abstract class MovingObject : GameObject
     {
+
         #region Properties
 
         /// <summary>
@@ -25,6 +28,14 @@ namespace FroggerStarter.Model
         ///     The speed y.
         /// </value>
         public double SpeedY { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the direction.
+        /// </summary>
+        /// <value>
+        ///     The direction.
+        /// </value>
+        public Direction Direction { get; set; }
 
         #endregion
 

@@ -73,6 +73,17 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
+        ///     Rotates the frames the specified [direction].
+        ///     Precondition: none
+        ///     Post-condition: @sprite.RenderTransform = direction
+        /// </summary>
+        /// <param name="direction">The direction.</param>
+        public void RotateFrames(Direction direction)
+        {
+            this.animationFrames.ToList().ForEach(frame => frame.Rotate(direction));
+        }
+
+        /// <summary>
         ///     Starts the timer and makes the first frame visible.
         ///     Precondition: none
         ///     Post-condition: this.animationFrames[0].IsVisible = true

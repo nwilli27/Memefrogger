@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
+using FroggerStarter.Enums;
 using FroggerStarter.View.Sprites;
 using Point = Windows.Foundation.Point;
 
@@ -14,6 +16,7 @@ namespace FroggerStarter.Model
         #region Data members
 
         private Point location;
+        private Direction Direction;
 
         #endregion
 
@@ -121,6 +124,46 @@ namespace FroggerStarter.Model
         public void ChangeSpriteVisibility(bool conditionToChangeVisibility)
         {
             this.Sprite.Visibility = conditionToChangeVisibility ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        /// <summary>
+        ///     Rotates the specified Direction.
+        ///     Precondition: none
+        ///     Post-condition: @sprite.RenderTransform = Direction
+        /// </summary>
+        /// <param name="direction">The Direction.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Direction - null</exception>
+        public void Rotate(Direction direction)
+        {
+            var rotateTransform = new RotateTransform
+            {
+                CenterX = this.Width / 2,
+                CenterY = this.Height / 2
+            };
+
+            switch (direction)
+            {
+                case Direction.Right:
+                    rotateTransform.Angle = 90;
+                    break;
+
+                case Direction.Left:
+                    rotateTransform.Angle = -90;
+                    break;
+
+                case Direction.Up:
+                    rotateTransform.Angle = 0;
+                    break;
+
+                case Direction.Down:
+                    rotateTransform.Angle = 180;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+            }
+
+            this.Sprite.RenderTransform = rotateTransform;
         }
 
         #endregion

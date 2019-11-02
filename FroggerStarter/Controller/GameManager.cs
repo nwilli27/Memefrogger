@@ -3,6 +3,7 @@ using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Constants;
+using FroggerStarter.Enums;
 using FroggerStarter.Model;
 
 namespace FroggerStarter.Controller
@@ -222,6 +223,7 @@ namespace FroggerStarter.Controller
         {
             this.player.X = GameBoard.BackgroundWidth / 2 - this.player.Width / 2;
             this.player.Y = (GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset) - this.player.Height;
+            this.player.Rotate(Direction.Up);
         }
 
         private void stopGamePlayAndShowGameOver()

@@ -12,7 +12,8 @@ namespace FroggerStarter.Model
     /// <seealso cref="FroggerStarter.Model.GameObject" />
     public class Frog : MovingObject
     {
-        #region Data members
+ 
+        #region Constants
 
         private const int SpeedXDirection = 50;
         private const int SpeedYDirection = 50;
@@ -65,6 +66,8 @@ namespace FroggerStarter.Model
             if (this.X - this.SpeedX >= leftBoundary)
             {
                 this.MoveLeft();
+                this.Direction = Direction.Left;
+                this.Rotate(this.Direction);
             }
         }
 
@@ -79,6 +82,8 @@ namespace FroggerStarter.Model
             if (this.X + this.SpeedX < rightBoundary)
             {
                 this.MoveRight();
+                this.Direction = Direction.Right;
+                this.Rotate(this.Direction);
             }
         }
 
@@ -93,6 +98,8 @@ namespace FroggerStarter.Model
             if (this.Y - this.SpeedY >= topBoundary)
             {
                 this.MoveUp();
+                this.Direction = Direction.Up;
+                this.Rotate(this.Direction);
             }
         }
 
@@ -107,6 +114,8 @@ namespace FroggerStarter.Model
             if (this.Y + this.SpeedY < bottomBoundary)
             {
                 this.MoveDown();
+                this.Direction = Direction.Down;
+                this.Rotate(this.Direction);
             }
         }
 
@@ -134,6 +143,7 @@ namespace FroggerStarter.Model
         {
             this.Sprite.Visibility = Visibility.Collapsed;
             this.StopMovement();
+            this.DeathAnimation.RotateFrames(this.Direction);
             this.DeathAnimation.SetFrameLocations(this.X, this.Y);
             this.DeathAnimation.Start();
         }

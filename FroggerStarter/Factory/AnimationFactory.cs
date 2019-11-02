@@ -35,7 +35,6 @@ namespace FroggerStarter.Factory
                     deathAnimation.Add(new PlayerDeathFrameTwo());
                     deathAnimation.Add(new PlayerDeathFrameThree());
                     deathAnimation.Add(new PlayerDeathFrameFour());
-                    deathAnimation.Add(new PlayerDeathFrameFive());
 
                     return deathAnimation;
 

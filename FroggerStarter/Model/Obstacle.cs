@@ -14,12 +14,6 @@ namespace FroggerStarter.Model
     internal class Obstacle : MovingObject
     {
 
-        #region Data Members
-
-        private readonly Direction direction;
-
-        #endregion
-
         #region Constants
 
         private const int SpawnLocationOffset = 5;
@@ -51,7 +45,7 @@ namespace FroggerStarter.Model
         public Obstacle(ObstacleType obstacleType, Direction direction)
         {
             Sprite = ObstacleFactory.CreateObstacleSprite(obstacleType);
-            this.direction = direction;
+            this.Direction = direction;
             this.checkDirectionToFlipHorizontally();
             this.MoveToDefaultLocation();
         }
@@ -68,7 +62,7 @@ namespace FroggerStarter.Model
         /// <exception cref="ArgumentOutOfRangeException">direction - null</exception>
         public void MoveForward()
         {
-            switch (this.direction)
+            switch (this.Direction)
             {
                 case Direction.Left:
                     this.moveObstacleToTheLeft();
@@ -79,7 +73,7 @@ namespace FroggerStarter.Model
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(this.direction), this.direction, null);
+                    throw new ArgumentOutOfRangeException(nameof(this.Direction), this.Direction, null);
             }
         }
 
@@ -94,7 +88,7 @@ namespace FroggerStarter.Model
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public bool IsOutOfBounds()
         {
-            switch (this.direction)
+            switch (this.Direction)
             {
                 case Direction.Right:
                     return this.X + this.Width < 0;
@@ -115,7 +109,7 @@ namespace FroggerStarter.Model
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void ShiftXBackwardsByWidth()
         {
-            switch (this.direction)
+            switch (this.Direction)
             {
                 case Direction.Left:
                     this.X += this.Width;
@@ -138,7 +132,7 @@ namespace FroggerStarter.Model
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void ShiftXForward(double amountToShift)
         {
-            switch (this.direction)
+            switch (this.Direction)
             {
                 case Direction.Left:
                     this.X -= amountToShift;
@@ -161,7 +155,7 @@ namespace FroggerStarter.Model
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void MoveToDefaultLocation()
         {
-            switch (this.direction)
+            switch (this.Direction)
             {
                 case Direction.Left:
                     this.X = GameBoard.BackgroundWidth + SpawnLocationOffset;
@@ -210,7 +204,7 @@ namespace FroggerStarter.Model
 
         private void checkDirectionToFlipHorizontally()
         {
-            if (this.direction.Equals(Direction.Right))
+            if (this.Direction.Equals(Direction.Right))
             {
                 this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
                 this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
