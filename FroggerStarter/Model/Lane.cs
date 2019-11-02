@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
+using FroggerStarter.Factory;
 
 namespace FroggerStarter.Model
 {
@@ -59,7 +60,7 @@ namespace FroggerStarter.Model
         {
             for (var i = 0; i < maxNumberObstacles; i++)
             {
-                this.add(new Obstacle(obstacleType, this.direction));
+                this.add(ObstacleFactory.CreateObstacle(obstacleType, this.direction));
             }
             
             this.MakeObstacleActive();
