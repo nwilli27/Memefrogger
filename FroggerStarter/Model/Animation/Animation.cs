@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using FroggerStarter.Enums;
-using System.Collections;
 using FroggerStarter.Factory;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Animation
 {
     /// <summary>
     ///     Class holds the implementation for an Animation
@@ -18,7 +18,7 @@ namespace FroggerStarter.Model
         private DispatcherTimer animateTimer;
         private IList<Frame> animationFrames;
         private readonly int animationInterval;
-        private AnimationType animationType;
+        private readonly AnimationType animationType;
 
         #endregion
 

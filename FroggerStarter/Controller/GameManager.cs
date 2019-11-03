@@ -5,6 +5,8 @@ using Windows.UI.Xaml.Controls;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using FroggerStarter.Model;
+using FroggerStarter.Model.Animation;
+using FroggerStarter.Model.Game_Objects.Power_Ups;
 
 namespace FroggerStarter.Controller
 {
@@ -20,10 +22,13 @@ namespace FroggerStarter.Controller
         private Canvas gameCanvas;
         private Frog player;
         private LaneManager laneManager;
+        private FrogHomes frogHomes;
+        private PowerUpManager powerUpManager;
+
         private PlayerStats playerStats;
+
         private DispatcherTimer timer;
         private DispatcherTimer scoreTimer;
-        private FrogHomes frogHomes;
 
         #endregion
 
@@ -76,6 +81,7 @@ namespace FroggerStarter.Controller
             this.createAndPlacePlayer();
             this.createAndPlaceObstaclesInLanes();
             this.createAndPlaceFrogHomes();
+            this.createAndPlacePowerUps();
             this.setupPlayerStatsAndHud();
 
             this.setupGameTimer();
@@ -150,6 +156,7 @@ namespace FroggerStarter.Controller
         {
             this.laneManager.MoveAllObstacles();
             this.checkForPlayerToObstacleCollision();
+            this.checkForPlayerToPowerUpCollision();
         }
 
         private void setupScoreTimer()
@@ -166,6 +173,8 @@ namespace FroggerStarter.Controller
             if (ScoreTimer.IsTimeUp)
             {
                 this.lifeLost();
+                this.setPlayerToCenterOfBottomLane();
+                this.player.HasCollided = true;
             }
             this.ScoreTimerTick?.Invoke(this, scoreTick);
         }
@@ -183,6 +192,12 @@ namespace FroggerStarter.Controller
             }
         }
 
+        private void checkForPlayerToPowerUpCollision()
+        {
+            var collidedPowerUp = this.powerUpManager.ToList().FirstOrDefault(powerUp => this.player.HasCollidedWith(powerUp));
+            collidedPowerUp?.activate();
+        }
+
         #endregion
 
         #region Setup Methods
@@ -191,6 +206,12 @@ namespace FroggerStarter.Controller
         {
             this.frogHomes = new FrogHomes();
             this.frogHomes.ToList().ForEach(home => this.gameCanvas.Children.Add(home.Sprite));
+        }
+
+        private void createAndPlacePowerUps()
+        {
+            this.powerUpManager = new PowerUpManager();
+            this.powerUpManager.ToList().ForEach(powerUp => this.gameCanvas.Children.Add(powerUp.Sprite));
         }
 
         private void createAndPlacePlayer()

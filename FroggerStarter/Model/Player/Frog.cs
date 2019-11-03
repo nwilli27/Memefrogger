@@ -1,6 +1,7 @@
 ﻿
 using Windows.UI.Xaml;
 using FroggerStarter.Enums;
+using FroggerStarter.Model.Animation;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model
@@ -35,7 +36,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The death animation.
         /// </value>
-        public Animation DeathAnimation { get; }
+        public Animation.Animation DeathAnimation { get; }
 
         /// <summary>
         ///     Gets the frog leap animation.
@@ -43,7 +44,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The frog leap animation.
         /// </value>
-        public Animation FrogLeapAnimation { get; }
+        public Animation.Animation FrogLeapAnimation { get; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance has collided.
@@ -79,8 +80,8 @@ namespace FroggerStarter.Model
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
 
-            this.DeathAnimation = new Animation(AnimationType.PlayerDeath, DeathAnimationInterval);
-            this.FrogLeapAnimation = new Animation(AnimationType.FrogLeap, 100);
+            this.DeathAnimation = new Animation.Animation(AnimationType.PlayerDeath, DeathAnimationInterval);
+            this.FrogLeapAnimation = new Animation.Animation(AnimationType.FrogLeap, 100);
             this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
         }
 

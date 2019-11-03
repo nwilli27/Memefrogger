@@ -1,5 +1,7 @@
-﻿using FroggerStarter.Constants;
+﻿using System;
+using FroggerStarter.Constants;
 using FroggerStarter.Utility;
+using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model.Game_Objects.Power_Ups
 {
@@ -8,6 +10,31 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
     /// </summary>
     internal abstract class PowerUp : GameObject
     {
+        #region Data Members
+
+        private BaseSprite sprite;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the sprite associated with the game object.
+        /// </summary>
+        /// <value>
+        ///     The sprite.
+        /// </value>
+        public override BaseSprite Sprite
+        {
+            get => this.sprite;
+            protected set
+            {
+                this.sprite = value;
+                this.ChangeSpriteVisibility(false);
+            }
+        }
+
+        #endregion
 
         #region Methods
 
@@ -23,8 +50,11 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
             var randomXGridValue = Randomizer.getRandomValueInRange(0, getTotalXJumpSpaces());
             var randomYGridValue = Randomizer.getRandomValueInRange(0, getTotalYJumpSpaces());
 
-            this.X = randomXGridValue * GameBoard.PlayerJumpRange;
-            this.Y = randomYGridValue * GameBoard.PlayerJumpRange;
+            var yLocation = (randomYGridValue * GameBoard.PlayerJumpRange) + getTopStartingYPoint();
+            var xLocation = randomXGridValue * GameBoard.PlayerJumpRange;
+
+            this.X = this.getCenterXLocation(xLocation); 
+            this.Y = this.getCenterYLocation(yLocation);
         }
 
         /// <summary>
@@ -35,6 +65,16 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         #endregion
 
         #region Private Helpers
+
+        private double getCenterXLocation(double xLocation)
+        {
+            return ((GameBoard.PlayerJumpRange - this.Width) / 2) + xLocation;
+        }
+
+        private double getCenterYLocation(double yLocation)
+        {
+            return ((GameBoard.PlayerJumpRange - this.Height) / 2) + yLocation;
+        }
 
         private static int getTotalYJumpSpaces()
         {
@@ -57,9 +97,24 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         private static int getTopStartingYPoint()
         {
             //TODO this will change once water is introduced
-            return (int)GameBoard.HighRoadYLocation;
+            return (int)GameBoard.HighRoadYLocation + (int) GameBoard.RoadShoulderOffset;
         }
 
         #endregion
+    }
+
+    /// <summary>
+    ///     Holds the event for finished animation.
+    /// </summary>
+    /// <seealso cref="System.EventArgs" />
+    public class PowerUpTimeAssigned : EventArgs
+    {
+        /// <summary>
+        ///     Gets or sets the power up time.
+        /// </summary>
+        /// <value>
+        ///     The power up time.
+        /// </value>
+        public int PowerUpTime { get; set; }
     }
 }

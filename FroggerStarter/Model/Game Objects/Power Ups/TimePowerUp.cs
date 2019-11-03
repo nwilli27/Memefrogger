@@ -1,4 +1,5 @@
 ﻿
+using System;
 using FroggerStarter.Utility;
 using FroggerStarter.View.Sprites;
 
@@ -10,6 +11,11 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
     /// <seealso cref="PowerUp" />
     internal sealed class TimePowerUp : PowerUp
     {
+        #region Data Members
+
+        private bool hasCollided;
+
+        #endregion
 
         #region Constants
 
@@ -42,8 +48,13 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         /// </summary>
         public override void activate()
         {
-            var timeExtension = getRandomTimeExtension();
-            ScoreTimer.ScoreTick += timeExtension;
+            if (!this.hasCollided)
+            {
+                var timeExtension = getRandomTimeExtension();
+                ScoreTimer.ScoreTick += timeExtension;
+                this.ChangeSpriteVisibility(false);
+                this.hasCollided = true;
+            }
         }
 
         #endregion
@@ -56,6 +67,7 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         }
 
         #endregion
-
     }
+
+
 }
