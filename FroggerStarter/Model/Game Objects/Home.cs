@@ -8,7 +8,7 @@ namespace FroggerStarter.Model
     ///     Holds the implementation for the home location for
     ///     frog to jump in.
     /// </summary>
-    internal class Home : GameObject
+    internal sealed class Home : GameObject
     {
 
         #region Data Members

@@ -131,6 +131,7 @@
     <Compile Include="Model\Game Objects\FrogHomes.cs" />
     <Compile Include="Model\Game Objects\Moving Object\SemiTruck.cs" />
     <Compile Include="Model\Game Objects\Moving Object\ToadTruck.cs" />
+    <Compile Include="Model\Game Objects\PowerUp.cs" />
     <Compile Include="Utility\SetOnce.cs" />
     <Compile Include="Factory\ObstacleFactory.cs" />
     <Compile Include="Model\Player\Frog.cs" />
@@ -140,8 +141,8 @@
     <Compile Include="Model\Game Objects\Home.cs" />
     <Compile Include="Model\Game Objects\Moving Object\MovingObject.cs" />
     <Compile Include="Model\Game Objects\Moving Object\Obstacle.cs" />
-    <Compile Include="Model\Area Manager\Lane.cs" />
-    <Compile Include="Model\Area Manager\LaneManager.cs" />
+    <Compile Include="Model\Area Managers\Lane.cs" />
+    <Compile Include="Model\Area Managers\LaneManager.cs" />
     <Compile Include="Enums\ObstacleType.cs" />
     <Compile Include="Model\Player\PlayerStats.cs" />
     <Compile Include="Model\Score\ScoreTimer.cs" />
@@ -166,6 +167,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFive.xaml.cs">
       <DependentUpon>PlayerDeathFrameFive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PowerUpSprites\TimePowerUpSprite.xaml.cs">
+      <DependentUpon>TimePowerUpSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\BaseSprite.xaml.cs">
       <DependentUpon>BaseSprite.xaml</DependentUpon>
@@ -236,6 +240,10 @@
     <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameFive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PowerUpSprites\TimePowerUpSprite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Sprites\BaseSprite.xaml">
       <SubType>Designer</SubType>

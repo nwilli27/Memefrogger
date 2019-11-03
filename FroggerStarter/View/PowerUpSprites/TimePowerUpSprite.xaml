@@ -1,0 +1,119 @@
+﻿<local:BaseSprite
+
+    x:Class="FroggerStarter.View.Sprites.TimePowerUpSprite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FroggerStarter.View.Sprites"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="50"
+    Width="50">
+
+    <Canvas>
+
+        <Ellipse Fill="DarkSlateBlue" Width="39" Height="39" Canvas.Top="9" Canvas.Left="6"/>
+        <Rectangle Fill="Goldenrod" Width="6" Height="4" Canvas.Left="22.135" Canvas.Top="3.716" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-0.561"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Goldenrod" Width="4" Height="4" Canvas.Left="24.929" Canvas.Top="3.068" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="77.327"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Goldenrod" Width="4" Height="4" Canvas.Left="21.739" Canvas.Top="3.068" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="100.549"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Goldenrod" Width="2" Height="3" Canvas.Left="22.608" Canvas.Top="5.644" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="96.983"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Goldenrod" Width="2" Height="4" Canvas.Left="25.798" Canvas.Top="5.089" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="84.276"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Ellipse Fill="Goldenrod" Width="2" Height="2" Canvas.Top="6" Canvas.Left="21.25" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-12.529"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Fill="Goldenrod" Width="2" Height="2" Canvas.Top="6" Canvas.Left="27.375" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-23.411"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Rectangle Fill="Goldenrod" Width="6" Height="2" Canvas.Left="22.233" Canvas.Top="2.573" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="180.417"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Goldenrod" Width="4" Height="4" Canvas.Left="8.179" Canvas.Top="10.193" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="29.075" TranslateX="-0.794" TranslateY="-1.038"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Goldenrod" Width="4" Height="4" Canvas.Left="4.989" Canvas.Top="10.193" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="52.297" TranslateX="0.272" TranslateY="1.342"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Goldenrod" Width="2" Height="3" Canvas.Left="5.858" Canvas.Top="12.769" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="48.731" TranslateX="1.865" TranslateY="0.747"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Goldenrod" Width="2" Height="4" Canvas.Left="9.048" Canvas.Top="12.214" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="36.024" TranslateX="0.758" TranslateY="-1.616"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Ellipse Fill="Goldenrod" Width="2" Height="2" Canvas.Top="13.125" Canvas.Left="4.5" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-60.781" TranslateX="2.211" TranslateY="1.807"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Fill="Goldenrod" Width="2" Height="2" Canvas.Top="13.125" Canvas.Left="10.625" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-71.663" TranslateX="0.164" TranslateY="-2.762"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Rectangle Fill="Goldenrod" Width="6" Height="2" Canvas.Left="5.483" Canvas.Top="9.698" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="132.165" TranslateX="-1.342" TranslateY="0.727"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Ellipse Fill="Gray" Width="37" Height="37" Canvas.Top="10" Canvas.Left="7.125" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="-2.529"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Fill="Black" Width="6" Height="6" Canvas.Top="25.25" RenderTransformOrigin="0.5,0.5" Canvas.Left="22.375" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform ScaleX="-1" Rotation="-6.926"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Rectangle Fill="Goldenrod" Width="14" Height="2" Canvas.Left="28.01" Canvas.Top="25.779" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="170.611"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Goldenrod" Width="7" Height="2" Canvas.Left="15.916" Canvas.Top="24.802" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="24.106"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <TextBlock x:Name="timePowerUp" Text="0" Canvas.Left="21.12" Canvas.Top="8.762" Height="14" Width="13" FontSize="14" FontFamily="Britannic" Foreground="DodgerBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <TextBlock.RenderTransform>
+                <CompositeTransform Rotation="0.366"/>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Text="Sec" Canvas.Left="17" Canvas.Top="31" Height="12" Width="18" FontSize="11" FontFamily="Impact" Foreground="DodgerBlue" />
+    </Canvas>
+
+</local:BaseSprite>
