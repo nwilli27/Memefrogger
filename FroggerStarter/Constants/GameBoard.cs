@@ -22,6 +22,15 @@ namespace FroggerStarter.Constants
 
         #endregion
 
+        #region Constants
+
+        /// <summary>
+        ///     The size of the player sprite
+        /// </summary>
+        public const int PlayerJumpRange = 50;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
