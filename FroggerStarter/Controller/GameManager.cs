@@ -7,6 +7,7 @@ using FroggerStarter.Enums;
 using FroggerStarter.Model;
 using FroggerStarter.Model.Animation;
 using FroggerStarter.Model.Game_Objects.Power_Ups;
+using FroggerStarter.Model.Score;
 
 namespace FroggerStarter.Controller
 {
@@ -195,7 +196,11 @@ namespace FroggerStarter.Controller
         private void checkForPlayerToPowerUpCollision()
         {
             var collidedPowerUp = this.powerUpManager.ToList().FirstOrDefault(powerUp => this.player.HasCollidedWith(powerUp));
-            collidedPowerUp?.activate();
+            if (collidedPowerUp != null)
+            {
+                collidedPowerUp.activate();
+                this.powerUpManager.ResetPowerUpSpawnTimer();
+            }
         }
 
         #endregion
@@ -371,12 +376,13 @@ namespace FroggerStarter.Controller
         {
             if (e.PlayerDeathIsOver && !this.isGameOver())
             {
-                this.player.Sprite.Visibility = Visibility.Visible;
+                this.player.ChangeSpriteVisibility(true);
                 this.player.StartMovement();
                 this.laneManager.ResetLanesToOneObstacle();
                 ScoreTimer.ResetScoreTick();
                 this.scoreTimer.Start();
                 this.player.HasCollided = false;
+                this.powerUpManager.ResetPowerUpSpawnTimer();
             }
         }
 

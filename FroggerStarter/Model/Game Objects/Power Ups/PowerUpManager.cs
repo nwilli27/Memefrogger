@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.UI.Xaml;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
@@ -43,6 +44,19 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         #region Methods
 
         /// <summary>
+        ///     Resets the power up spawn timer and moves all current
+        ///     power ups off the board and makes them invisible.
+        ///     Precondition: none
+        ///     Post-condition: @each powerUp.Visibility = Collapsed
+        ///                           powerUp.X = -powerUp.Width
+        /// </summary>
+        public void ResetPowerUpSpawnTimer()
+        {
+            this.resetRandomTickSpeedAndStart();
+            this.powerUps.ToList().ForEach(powerUp => powerUp.MoveOffBoardAndMakeInvisible());
+        }
+
+        /// <summary>
         ///     Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
@@ -72,6 +86,11 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         {
             this.powerUpSpawnTimer = new DispatcherTimer();
             this.powerUpSpawnTimer.Tick += this.onSpawnPowerUpTick;
+            this.resetRandomTickSpeedAndStart();
+        }
+
+        private void resetRandomTickSpeedAndStart()
+        {
             this.powerUpSpawnTimer.Interval = new TimeSpan(0, 0, 0, getRandomSpawnTimeInterval(), 0);
             this.powerUpSpawnTimer.Start();
         }
@@ -87,14 +106,16 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
 
         private static int getRandomSpawnTimeInterval()
         {
-            return Randomizer.getRandomValueInRange(7, (int) GameSettings.ScoreTime);
+            return Randomizer.getRandomValueInRange(3, (int) GameSettings.ScoreTime - 12);
         }
 
         private void createPowerUps()
         {
             foreach (PowerUpType powerUpType in Enum.GetValues(typeof(PowerUpType)))
             {
-                this.powerUps.Add(PowerUpFactory.CreatePowerUp(powerUpType));
+                var powerUp = PowerUpFactory.CreatePowerUp(powerUpType);
+                powerUp.ChangeSpriteVisibility(false);
+                this.powerUps.Add(powerUp);
             }
         }
 

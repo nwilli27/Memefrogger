@@ -90,7 +90,7 @@ namespace FroggerStarter.Model
         /// <returns>
         ///   <c>true</c> if [has collided with] [the specified other game object]; otherwise, <c>false</c>.
         /// </returns>
-        public virtual bool HasCollidedWith(GameObject otherGameObject)
+        public bool HasCollidedWith(GameObject otherGameObject)
         {
             if (otherGameObject == null)
             {

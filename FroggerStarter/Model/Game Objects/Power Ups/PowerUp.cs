@@ -10,31 +10,6 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
     /// </summary>
     internal abstract class PowerUp : GameObject
     {
-        #region Data Members
-
-        private BaseSprite sprite;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        ///     Gets or sets the sprite associated with the game object.
-        /// </summary>
-        /// <value>
-        ///     The sprite.
-        /// </value>
-        public override BaseSprite Sprite
-        {
-            get => this.sprite;
-            protected set
-            {
-                this.sprite = value;
-                this.ChangeSpriteVisibility(false);
-            }
-        }
-
-        #endregion
 
         #region Methods
 
@@ -47,14 +22,28 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         /// </summary>
         public void setRandomLocationOnBoard()
         {
-            var randomXGridValue = Randomizer.getRandomValueInRange(0, getTotalXJumpSpaces());
-            var randomYGridValue = Randomizer.getRandomValueInRange(0, getTotalYJumpSpaces());
+            var randomXGridValue = Randomizer.getRandomValueInRange(0, getTotalXJumpSpaces() - 1);
+            var randomYGridValue = Randomizer.getRandomValueInRange(0, getTotalYJumpSpaces() - 1);
 
             var yLocation = (randomYGridValue * GameBoard.PlayerJumpRange) + getTopStartingYPoint();
             var xLocation = randomXGridValue * GameBoard.PlayerJumpRange;
 
             this.X = this.getCenterXLocation(xLocation); 
             this.Y = this.getCenterYLocation(yLocation);
+        }
+
+        /// <summary>
+        ///     Moves the power up off the board and
+        ///     makes the sprite invisible
+        ///     Precondition: none
+        ///     Post-condition: this.X = -this.Width
+        ///                     Sprite.Visibility == Visibility.Collapsed
+        ///     
+        /// </summary>
+        public void MoveOffBoardAndMakeInvisible()
+        {
+            this.X = -this.Width;
+            this.ChangeSpriteVisibility(false);
         }
 
         /// <summary>
@@ -78,13 +67,11 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
 
         private static int getTotalYJumpSpaces()
         {
-            //TODO do something with this 50
             return ((getLowerEndingYPoint() + (int) GameBoard.RoadShoulderOffset) - getTopStartingYPoint()) / GameBoard.PlayerJumpRange;
         }
 
         private static int getTotalXJumpSpaces()
         {
-            //TODO do something with 50
             return (int)GameBoard.BackgroundWidth / GameBoard.PlayerJumpRange;
         }
 
@@ -103,18 +90,4 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         #endregion
     }
 
-    /// <summary>
-    ///     Holds the event for finished animation.
-    /// </summary>
-    /// <seealso cref="System.EventArgs" />
-    public class PowerUpTimeAssigned : EventArgs
-    {
-        /// <summary>
-        ///     Gets or sets the power up time.
-        /// </summary>
-        /// <value>
-        ///     The power up time.
-        /// </value>
-        public int PowerUpTime { get; set; }
-    }
 }

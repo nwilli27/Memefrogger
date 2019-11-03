@@ -1,8 +1,7 @@
-﻿
-using System;
+﻿using System;
 using FroggerStarter.Constants;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Score
 {
     /// <summary>
     ///     Class that holds properties in regards to the score Tick and timer.
