@@ -198,14 +198,14 @@ namespace FroggerStarter.Controller
             var collidedPowerUp = this.powerUpManager.ToList().FirstOrDefault(powerUp => this.player.HasCollidedWith(powerUp));
             if (collidedPowerUp != null)
             {
-                collidedPowerUp.activate();
-                this.powerUpManager.ResetPowerUpSpawnTimer();
+                collidedPowerUp.Activate();
+                this.powerUpManager.ResetPowerUpsAndSpawnTimer();
             }
         }
 
         #endregion
 
-        #region Setup Methods
+        #region SetupAbility Methods
 
         private void createAndPlaceFrogHomes()
         {
@@ -383,7 +383,7 @@ namespace FroggerStarter.Controller
                 ScoreTimer.ResetScoreTick();
                 this.scoreTimer.Start();
                 this.player.HasCollided = false;
-                this.powerUpManager.ResetPowerUpSpawnTimer();
+                this.powerUpManager.ResetPowerUpsAndSpawnTimer();
             }
         }
 

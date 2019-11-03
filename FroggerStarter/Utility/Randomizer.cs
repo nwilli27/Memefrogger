@@ -22,7 +22,7 @@ namespace FroggerStarter.Utility
         /// <returns>
         ///     A random value in range of lowerBound and upperBound
         /// </returns>
-        public static int getRandomValueInRange(int lowerBound, int upperBound)
+        public static int GetRandomValueInRange(int lowerBound, int upperBound)
         {
             var random = new Random();
             return random.Next(lowerBound, upperBound);

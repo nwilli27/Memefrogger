@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FroggerStarter.Enums;
-using FroggerStarter.Model;
 using FroggerStarter.Model.Game_Objects.Power_Ups;
 
 namespace FroggerStarter.Factory

@@ -1,4 +1,7 @@
 ﻿
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using FroggerStarter.Annotations;
 using FroggerStarter.Model.Score;
 using FroggerStarter.Utility;
 using FroggerStarter.View.Sprites;
@@ -9,8 +12,33 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
     ///     A special Power up that gains the user extra time
     /// </summary>
     /// <seealso cref="PowerUp" />
-    internal sealed class TimePowerUp : PowerUp
+    internal sealed class TimePowerUp : PowerUp, INotifyPropertyChanged
     {
+        #region Data Members
+
+        private int timeExtension;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the time extension.
+        /// </summary>
+        /// <value>
+        ///     The time extension.
+        /// </value>
+        public int TimeExtension
+        {
+            get => this.timeExtension;
+            set
+            {
+                this.timeExtension = value;
+                this.onPropertyChanged();
+            }
+        }
+
+        #endregion
 
         #region Constants
 
@@ -41,11 +69,20 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         ///     Precondition: none
         ///     Post-condition: ScoreTick += timeExtension
         /// </summary>
-        public override void activate()
-        { 
-            var timeExtension = getRandomTimeExtension();
-            ScoreTimer.ScoreTick += timeExtension;
-            this.MoveOffBoardAndMakeInvisible();
+        public override void Activate()
+        {
+            ScoreTimer.ScoreTick += this.TimeExtension;
+        }
+
+        /// <summary>
+        ///     Setups the the power up by assigning a random time extension
+        ///     and binding the TimeExtension property to the Sprite text block.
+        ///     Precondition: none
+        ///     Post-condition: this.TimeExtension = random [3-9]
+        /// </summary>
+        public override void SetupAbility()
+        {
+            this.TimeExtension = getRandomTimeExtension();
         }
 
         #endregion
@@ -54,10 +91,18 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
 
         private static int getRandomTimeExtension()
         {
-            return Randomizer.getRandomValueInRange(LowSecondRange, HighSecondRange);
+            return Randomizer.GetRandomValueInRange(LowSecondRange, HighSecondRange);
         }
 
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        private void onPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 

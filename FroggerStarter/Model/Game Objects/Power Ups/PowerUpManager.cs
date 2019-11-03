@@ -25,6 +25,13 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
 
         #endregion
 
+        #region Constants
+
+        private const int EndingSpawnTimeRange = (int) GameSettings.ScoreTime - 7;
+        private const int StartingSpawnTimeRange = 3;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -50,7 +57,7 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         ///     Post-condition: @each powerUp.Visibility = Collapsed
         ///                           powerUp.X = -powerUp.Width
         /// </summary>
-        public void ResetPowerUpSpawnTimer()
+        public void ResetPowerUpsAndSpawnTimer()
         {
             this.resetRandomTickSpeedAndStart();
             this.powerUps.ToList().ForEach(powerUp => powerUp.MoveOffBoardAndMakeInvisible());
@@ -107,16 +114,16 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
 
         private void onSpawnPowerUpTick(object sender, object e)
         {
-            var randomValueRangeOfListSize = Randomizer.getRandomValueInRange(0, this.powerUps.Count);
+            var randomValueRangeOfListSize = Randomizer.GetRandomValueInRange(0, this.powerUps.Count);
             var randomPowerUp = this.powerUps[randomValueRangeOfListSize];
-            randomPowerUp.ChangeSpriteVisibility(true);
-            randomPowerUp.setRandomLocationOnBoard();
+
+            randomPowerUp.SetLocationAndMakeVisible();
             this.powerUpSpawnTimer.Stop();
         }
 
         private static int getRandomSpawnTimeInterval()
         {
-            return Randomizer.getRandomValueInRange(3, (int) GameSettings.ScoreTime - 12);
+            return Randomizer.GetRandomValueInRange(StartingSpawnTimeRange, EndingSpawnTimeRange);
         }
 
         private void createPowerUps()

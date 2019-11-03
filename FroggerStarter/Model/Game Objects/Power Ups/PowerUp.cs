@@ -1,7 +1,6 @@
-﻿using System;
+﻿
 using FroggerStarter.Constants;
 using FroggerStarter.Utility;
-using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model.Game_Objects.Power_Ups
 {
@@ -14,22 +13,18 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         #region Methods
 
         /// <summary>
-        ///     Sets a random X and Y location based on a grid layout
-        ///     (RandomLaneNumber = Y, RandomXJumpNumber = X)
+        ///     Sets the location and makes the sprite visible
+        ///     Also setups the correlating ability.
         ///     Precondition: none
-        ///     Post-condition: this.X = randomX
-        ///                     this.Y = randomY
+        ///     Post-condition: Sprite.Visibility = Visible
+        ///                     this.X = random location
+        ///                     this.Y = random location
         /// </summary>
-        public void setRandomLocationOnBoard()
+        public void SetLocationAndMakeVisible()
         {
-            var randomXGridValue = Randomizer.getRandomValueInRange(0, getTotalXJumpSpaces() - 1);
-            var randomYGridValue = Randomizer.getRandomValueInRange(0, getTotalYJumpSpaces() - 1);
-
-            var yLocation = (randomYGridValue * GameBoard.PlayerJumpRange) + getTopStartingYPoint();
-            var xLocation = randomXGridValue * GameBoard.PlayerJumpRange;
-
-            this.X = this.getCenterXLocation(xLocation); 
-            this.Y = this.getCenterYLocation(yLocation);
+            this.ChangeSpriteVisibility(true);
+            this.setRandomLocationOnBoard();
+            this.SetupAbility();
         }
 
         /// <summary>
@@ -37,7 +32,7 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         ///     makes the sprite invisible
         ///     Precondition: none
         ///     Post-condition: this.X = -this.Width
-        ///                     Sprite.Visibility == Visibility.Collapsed
+        ///                     Sprite.Visibility = Collapsed
         ///     
         /// </summary>
         public void MoveOffBoardAndMakeInvisible()
@@ -47,13 +42,31 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         }
 
         /// <summary>
-        ///     Abstract method holder for power up activation/ability
+        ///     Abstract method that allows subclasses to have different
+        ///     implementation of setup 
         /// </summary>
-        public abstract void activate();
+        public abstract void SetupAbility();
+
+        /// <summary>
+        ///     Abstract method for power up activation/ability.
+        /// </summary>
+        public abstract void Activate();
 
         #endregion
 
         #region Private Helpers
+
+        private void setRandomLocationOnBoard()
+        {
+            var randomXGridValue = Randomizer.GetRandomValueInRange(0, getTotalXJumpSpaces() - 1);
+            var randomYGridValue = Randomizer.GetRandomValueInRange(0, getTotalYJumpSpaces() - 1);
+
+            var yLocation = (randomYGridValue * GameBoard.PlayerJumpRange) + getTopStartingYPoint();
+            var xLocation = randomXGridValue * GameBoard.PlayerJumpRange;
+
+            this.X = this.getCenterXLocation(xLocation);
+            this.Y = this.getCenterYLocation(yLocation);
+        }
 
         private double getCenterXLocation(double xLocation)
         {

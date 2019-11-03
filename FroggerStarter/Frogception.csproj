@@ -136,6 +136,7 @@
     <Compile Include="Model\Game Objects\Power Ups\PowerUp.cs" />
     <Compile Include="Model\Game Objects\Power Ups\PowerUpManager.cs" />
     <Compile Include="Model\Game Objects\Power Ups\TimePowerUp.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utility\Randomizer.cs" />
     <Compile Include="Utility\SetOnce.cs" />
     <Compile Include="Factory\ObstacleFactory.cs" />
