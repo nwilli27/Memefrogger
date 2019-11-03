@@ -57,6 +57,16 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         }
 
         /// <summary>
+        ///     Stops the power up spawn timer.
+        ///     Precondition: none
+        ///     Post-condition: powerUpSpawnTimer.Stop()
+        /// </summary>
+        public void StopPowerUpSpawnTimer()
+        {
+            this.powerUpSpawnTimer.Stop();
+        }
+
+        /// <summary>
         ///     Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>

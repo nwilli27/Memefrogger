@@ -79,7 +79,7 @@ namespace FroggerStarter.Model
 
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
-
+            
             this.DeathAnimation = new Animation.Animation(AnimationType.PlayerDeath, DeathAnimationInterval);
             this.FrogLeapAnimation = new Animation.Animation(AnimationType.FrogLeap, 100);
             this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
@@ -180,6 +180,7 @@ namespace FroggerStarter.Model
             this.DeathAnimation.RotateFrames(this.Direction);
             this.DeathAnimation.SetFrameLocations(this.X, this.Y);
             this.DeathAnimation.Start();
+            this.Direction = Direction.Up;
         }
 
         /// <summary>

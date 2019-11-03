@@ -275,6 +275,7 @@ namespace FroggerStarter.Controller
             this.timer.Stop();
             this.scoreTimer.Stop();
             this.player.StopMovement();
+            this.powerUpManager.StopPowerUpSpawnTimer();
             this.gameOver();
         }
 
