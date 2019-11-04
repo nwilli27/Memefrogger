@@ -130,6 +130,10 @@
     <Compile Include="Factory\PowerUpFactory.cs" />
     <Compile Include="Factory\SoundEffectFactory.cs" />
     <Compile Include="Model\Animation\Animation.cs" />
+    <Compile Include="Model\Area Managers\Road\RoadLane.cs" />
+    <Compile Include="Model\Area Managers\Road\RoadManager.cs" />
+    <Compile Include="Model\Area Managers\Water\WaterLane.cs" />
+    <Compile Include="Model\Area Managers\Water\WaterManager.cs" />
     <Compile Include="Model\Game Objects\Moving Object\Car.cs" />
     <Compile Include="Model\Animation\Frame.cs" />
     <Compile Include="Model\Game Objects\Home\FrogHomes.cs" />
@@ -292,6 +296,7 @@
       <Version>6.2.8</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

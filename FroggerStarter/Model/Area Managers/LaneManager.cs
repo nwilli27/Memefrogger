@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
-using FroggerStarter.Enums;
 using FroggerStarter.Model.Game_Objects.Moving_Object;
 
 namespace FroggerStarter.Model.Area_Managers
@@ -12,22 +11,39 @@ namespace FroggerStarter.Model.Area_Managers
     ///     Class to hold and manage a collection of Lanes.
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IEnumerable{Lane}" />
-    internal class LaneManager : IEnumerable<Obstacle>
+    public abstract class LaneManager : IEnumerable<Obstacle>
     {
 
         #region Data Members
 
-        private readonly IList<Lane> lanes;
-        private readonly double startingYLocation;
-        private readonly double height;
+        /// <summary>
+        ///     The lanes collection
+        /// </summary>
+        protected readonly IList<Lane> Lanes;
 
-        private DispatcherTimer obstacleSpawnTimer;
+        /// <summary>
+        ///     The starting y location
+        /// </summary>
+        protected readonly double StartingYLocation;
+
+        /// <summary>
+        ///     The height
+        /// </summary>
+        protected readonly double Height;
+
+        /// <summary>
+        ///     The obstacle spawn timer
+        /// </summary>
+        protected DispatcherTimer ObstacleSpawnTimer;
 
         #endregion
 
         #region Constants
 
-        private const int SpawnTimeInterval = 4;
+        /// <summary>
+        ///     The spawn time interval
+        /// </summary>
+        protected const int SpawnTimeInterval = 4;
 
         #endregion
 
@@ -43,11 +59,11 @@ namespace FroggerStarter.Model.Area_Managers
         /// </summary>
         /// <param name="startingYLocation">The starting y location.</param>
         /// <param name="endingYLocation">The ending y location.</param>
-        public LaneManager(double startingYLocation, double endingYLocation)
+        protected LaneManager(double startingYLocation, double endingYLocation)
         {
-            this.startingYLocation = startingYLocation < endingYLocation ? startingYLocation : throw new ArgumentOutOfRangeException();
-            this.lanes = new List<Lane>();
-            this.height = endingYLocation - startingYLocation;
+            this.StartingYLocation = startingYLocation < endingYLocation ? startingYLocation : throw new ArgumentOutOfRangeException();
+            this.Lanes = new List<Lane>();
+            this.Height = endingYLocation - startingYLocation;
 
             this.setupObstacleSpawnTimer();
         }
@@ -63,7 +79,7 @@ namespace FroggerStarter.Model.Area_Managers
         /// </summary>
         public void MoveAllObstacles()
         {
-            this.lanes.ToList().ForEach(lane => lane.MoveObstacles());
+            this.Lanes.ToList().ForEach(lane => lane.MoveObstacles());
         }
 
         /// <summary>
@@ -74,7 +90,7 @@ namespace FroggerStarter.Model.Area_Managers
         /// </summary>
         public void ResetLanesToOneObstacle()
         {
-            this.lanes.ToList().ForEach(lane => lane.ResetLaneToOneObstacle());
+            this.Lanes.ToList().ForEach(lane => lane.ResetLaneToOneObstacle());
             this.resetSpawnTimer();
         }
 
@@ -91,27 +107,9 @@ namespace FroggerStarter.Model.Area_Managers
         /// <param name="laneSettings">The lane settings.</param>
         /// <exception cref="ArgumentOutOfRangeException">
         /// </exception>
-        public void AddLaneOfObstacles(IList<object> laneSettings)
-        {
-            var direction = (Direction) laneSettings[0];
-            var defaultSpeed = (double) laneSettings[1];
-            var obstacleType = (ObstacleType) laneSettings[2];
-            var maxNumberObstacles = (int) laneSettings[3];
-
-            if (maxNumberObstacles <= 0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-            if (defaultSpeed <= 0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            var lane = new Lane(defaultSpeed, direction);
-            lane.AddObstacles(obstacleType, maxNumberObstacles);
-            this.lanes.Add(lane);
-            this.updateYLocationOfLanes();
-        }
+        public abstract void AddLaneOfObstacles(IList<object> laneSettings);
+        //TODO: Determine if this needs to be abstract?
+        //TODO: Implementation between Road/Water might only be the var lane = new Lane(etc) line...
 
         /// <summary>
         ///     Returns an enumerator that iterates through the collection.
@@ -121,7 +119,7 @@ namespace FroggerStarter.Model.Area_Managers
         /// </returns>
         public IEnumerator<Obstacle> GetEnumerator()
         {
-            return this.lanes.SelectMany(lane => lane).GetEnumerator();
+            return this.Lanes.SelectMany(lane => lane).GetEnumerator();
         }
 
         /// <summary>
@@ -132,7 +130,7 @@ namespace FroggerStarter.Model.Area_Managers
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.lanes.SelectMany(lane => lane).GetEnumerator();
+            return this.Lanes.SelectMany(lane => lane).GetEnumerator();
         }
 
         #endregion
@@ -141,30 +139,36 @@ namespace FroggerStarter.Model.Area_Managers
 
         private void setupObstacleSpawnTimer()
         {
-            this.obstacleSpawnTimer = new DispatcherTimer();
-            this.obstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;
-            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, SpawnTimeInterval, 0);
-            this.obstacleSpawnTimer.Start();
+            this.ObstacleSpawnTimer = new DispatcherTimer();
+            this.ObstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;
+            this.ObstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, SpawnTimeInterval, 0);
+            this.ObstacleSpawnTimer.Start();
         }
 
         private void obstacleSpawnTimerOnTick(object sender, object e)
         {
-            this.lanes.ToList().ForEach(lane => lane.MakeObstacleActive());
+            this.Lanes.ToList().ForEach(lane => lane.MakeObstacleActive());
         }
 
         private void resetSpawnTimer()
         {
-            this.obstacleSpawnTimer.Stop();
-            this.obstacleSpawnTimer.Start();
+            this.ObstacleSpawnTimer.Stop();
+            this.ObstacleSpawnTimer.Start();
         }
 
-        private void updateYLocationOfLanes()
+        /// <summary>
+        ///     Updates the y location of lanes.
+        ///     Precondition: none
+        ///     Post-condition: Determines the height of the lanes based on the number of lanes 
+        ///                     and the height of the lanes.
+        /// </summary>
+        protected void UpdateYLocationOfLanes()
         {
-            var heightOfEachLane = this.height / this.lanes.Count;
-            for (var i = 0; i < this.lanes.Count; i++)
+            var heightOfEachLane = this.Height / this.Lanes.Count;
+            for (var i = 0; i < this.Lanes.Count; i++)
             {
-                var yLocation = this.startingYLocation + (heightOfEachLane * i);
-                this.lanes[i].SetObstaclesToLaneYLocation(yLocation, heightOfEachLane);
+                var yLocation = this.StartingYLocation + (heightOfEachLane * i);
+                this.Lanes[i].SetObstaclesToLaneYLocation(yLocation, heightOfEachLane);
             }
         }
 

@@ -15,7 +15,7 @@ namespace FroggerStarter.Model.Area_Managers
     ///     A row of moving obstacles of type GameObject.
     /// </summary>
     /// <seealso cref="System.Collections.IEnumerable" />
-    internal class Lane : IEnumerable<Obstacle>
+    public abstract class Lane : IEnumerable<Obstacle>
     {
 
         #region Data Members
@@ -37,7 +37,7 @@ namespace FroggerStarter.Model.Area_Managers
         /// </summary> 
         /// <param name="direction">The direction the obstacles are moving in the lane</param>
         /// <param name="defaultSpeed">The default speed of all obstacles</param>
-        public Lane(double defaultSpeed, Direction direction)
+        protected Lane(double defaultSpeed, Direction direction)
         {
             this.obstacles = new List<Obstacle>();
             this.direction = direction;
