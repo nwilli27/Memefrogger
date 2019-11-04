@@ -1,10 +1,9 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FroggerStarter.Constants;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Game_Objects.Home
 {
 
     /// <summary>

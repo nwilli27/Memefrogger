@@ -6,7 +6,7 @@ using FroggerStarter.Enums;
 using FroggerStarter.View.Sprites;
 using Point = Windows.Foundation.Point;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Game_Objects
 {
     /// <summary>
     ///     Defines basic properties and behavior of every game object.

@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using FroggerStarter.Enums;
+using FroggerStarter.Model.Game_Objects.Moving_Object;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Area_Managers
 {
     /// <summary>
     ///     Class to hold and manage a collection of Lanes.

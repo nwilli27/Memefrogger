@@ -2,17 +2,16 @@
 using Windows.UI.Xaml.Media;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
-using FroggerStarter.Factory;
 using FroggerStarter.View.Sprites;
 using Point = Windows.Foundation.Point;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Game_Objects.Moving_Object
 {
 
     /// <summary>
     ///     An obstacle sprite object of MovingObject.
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.MovingObject" />
+    /// <seealso cref="MovingObject" />
     public abstract class Obstacle : MovingObject
     {
         #region Data Members

@@ -1,10 +1,9 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using FroggerStarter.Annotations;
 using FroggerStarter.Model.Score;
+using FroggerStarter.Properties;
 using FroggerStarter.Utility;
-using FroggerStarter.View.Sprites;
+using FroggerStarter.View.PowerUpSprites;
 
 namespace FroggerStarter.Model.Game_Objects.Power_Ups
 {

@@ -1,13 +1,14 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using FroggerStarter.Factory;
+using FroggerStarter.Model.Game_Objects;
+using FroggerStarter.Model.Game_Objects.Moving_Object;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Area_Managers
 {
 
     /// <summary>

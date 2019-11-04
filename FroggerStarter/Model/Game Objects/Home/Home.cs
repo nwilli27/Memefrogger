@@ -1,8 +1,7 @@
-﻿
-using FroggerStarter.Constants;
+﻿using FroggerStarter.Constants;
 using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Game_Objects.Home
 {
     /// <summary>
     ///     Holds the implementation for the home location for
