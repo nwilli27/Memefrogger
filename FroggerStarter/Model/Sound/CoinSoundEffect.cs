@@ -11,7 +11,7 @@
         /// <summary>
         ///     Initializes a new instance of the <see cref="CoinSoundEffect" /> class.
         ///     Precondition: none
-        ///     Post-condition: Sets file of media element to coin pickup sound.
+        ///     Post-condition: Sets file of media element to 'Coin Pickup Sound.mp3'.
         /// </summary>
         public CoinSoundEffect() : base("Coin Pickup Sound.mp3")
         {

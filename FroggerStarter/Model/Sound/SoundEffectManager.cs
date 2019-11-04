@@ -7,6 +7,7 @@ using FroggerStarter.Factory;
 namespace FroggerStarter.Model.Sound
 {
     /// <summary>
+    ///     Defines the object for a Sound Effect Manager.
     /// </summary>
     public class SoundEffectManager
     {
