@@ -27,7 +27,7 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
 
         #region Constants
 
-        private const int EndingSpawnTimeRange = (int) GameSettings.ScoreTime - 7;
+        private const int EndingSpawnTimeRange = (int) GameSettings.ScoreTime - 10;
         private const int StartingSpawnTimeRange = 3;
 
         #endregion

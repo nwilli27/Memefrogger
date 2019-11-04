@@ -1,13 +1,16 @@
 ﻿
-using Windows.Foundation;
+using System.Drawing;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using FroggerStarter.Constants;
 using FroggerStarter.Controller;
 using FroggerStarter.Model;
 using FroggerStarter.Model.Score;
+using Color = Windows.UI.Color;
+using Size = Windows.Foundation.Size;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -91,6 +94,10 @@ namespace FroggerStarter.View
 
         private void onScoreTimerTick(object sender, ScoreTimerTickEventArgs e)
         {
+            this.timeProgressBar.Foreground = e.ScoreTick > GameSettings.ScoreTime
+                ? new SolidColorBrush(Color.FromArgb(255, 218, 165, 32))
+                : new SolidColorBrush(Color.FromArgb(255, 50, 205, 50));
+
             if (this.timeProgressBar.Value >= this.timeProgressBar.Minimum)
             {
                 this.timeProgressBar.Value = e.ScoreTick;
