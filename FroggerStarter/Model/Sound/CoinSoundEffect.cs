@@ -13,9 +13,7 @@
         ///     Precondition: none
         ///     Post-condition: Sets file of media element to 'Coin Pickup Sound.mp3'.
         /// </summary>
-        public CoinSoundEffect() : base("Coin Pickup Sound.mp3")
-        {
-        }
+        public CoinSoundEffect() : base("Coin Pickup Sound.mp3") {}
 
         #endregion
     }
