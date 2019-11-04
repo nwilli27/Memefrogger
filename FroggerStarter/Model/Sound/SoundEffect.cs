@@ -33,6 +33,8 @@ namespace FroggerStarter.Model.Sound
 
         /// <summary>
         ///     Plays the sound.
+        ///     Precondition: none
+        ///     Post-condition: none
         /// </summary>
         public void PlaySound()
         {
