@@ -17,7 +17,7 @@ namespace FroggerStarter.Model.Player
         #region Data Members
 
         private bool canMove = true;
-        private bool hasCollided;
+        private bool isDead;
 
         #endregion
 
@@ -53,13 +53,13 @@ namespace FroggerStarter.Model.Player
         /// <value>
         ///   <c>true</c> if this instance has collided; otherwise, <c>false</c>.
         /// </value>
-        public bool HasCollided
+        public bool IsDead
         {
-            get => this.hasCollided;
+            get => this.isDead;
             set
             {
                 this.canMove = !value;
-                this.hasCollided = value;
+                this.isDead = value;
             }
         }
 
@@ -176,30 +176,39 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void PlayDeathAnimation()
         {
-            this.Sprite.Visibility = Visibility.Collapsed;
+            this.ChangeSpriteVisibility(false);
             this.StopMovement();
+            this.IsDead = true;
+
             this.DeathAnimation.RotateFrames(this.Direction);
             this.DeathAnimation.SetFrameLocations(this.X, this.Y);
             this.DeathAnimation.Start();
-            this.Direction = Direction.Up;
         }
 
         /// <summary>
-        ///     Starts the movement
+        ///     Resets the player after the death animation is finished.
         ///     Precondition: none
-        ///     Post-condition: this.SpeedX = SpeedXDirection
-        ///                     this.SpeedY = SpeedYDirection
-        ///                     
+        ///     Post-condition: Sprite.Visibility = Visible
+        ///                     Direction = Up
+        ///                     this.IsDead = false
         /// </summary>
-        public void StartMovement()
+        public void ResetAfterDeath()
         {
-            this.SpeedX = SpeedXDirection;
-            this.SpeedY = SpeedYDirection;
+            this.ChangeSpriteVisibility(true);
+            this.startMovement();
+            this.Direction = Direction.Up;
+            this.IsDead = false;
         }
 
         #endregion
 
         #region Private Helpers
+
+        private void startMovement()
+        {
+            this.SpeedX = SpeedXDirection;
+            this.SpeedY = SpeedYDirection;
+        }
 
         private void playLeapAnimation()
         {
@@ -213,11 +222,11 @@ namespace FroggerStarter.Model.Player
 
         private void onLeapFinished(object sender, AnimationIsFinishedEventArgs e)
         {
-            if (e.FrogLeapIsOver && !this.HasCollided)
+            if (e.FrogLeapIsOver && !this.IsDead)
             {
                 this.canMove = true;
                 this.ChangeSpriteVisibility(true);
-                this.StartMovement();
+                this.startMovement();
             }
         }
 
