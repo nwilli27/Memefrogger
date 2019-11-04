@@ -159,6 +159,11 @@ namespace FroggerStarter.Controller
         private void timerOnTick(object sender, object e)
         {
             this.laneManager.MoveAllObstacles();
+
+            //if player x > mid field check collision with water
+
+            //else check collision with vehicles
+
             this.checkForPlayerToObstacleCollision();
             this.checkForPlayerToPowerUpCollision();
         }
@@ -335,9 +340,8 @@ namespace FroggerStarter.Controller
             this.LifeLoss?.Invoke(this, life);
 
             this.player.PlayDeathAnimation();
-            this.player.IsDead = true;
-            this.scoreTimer.Stop();
 
+            this.scoreTimer.Stop();
             this.checkGameStatusForGameOver();
         }
 
@@ -380,12 +384,12 @@ namespace FroggerStarter.Controller
         {
             if (e.PlayerDeathIsOver && !this.isGameOver())
             {
-                this.player.ChangeSpriteVisibility(true);
-                this.player.StartMovement();
+                this.player.ResetAfterDeath();
+
                 this.laneManager.ResetLanesToOneObstacle();
                 ScoreTimer.ResetScoreTick();
                 this.scoreTimer.Start();
-                this.player.IsDead = false;
+
                 this.powerUpManager.ResetPowerUpsAndSpawnTimer();
             }
         }
