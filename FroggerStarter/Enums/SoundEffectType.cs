@@ -5,11 +5,20 @@
     /// </summary>
     public enum SoundEffectType
     {
-        //TODO: Where we'll put the types for the sounds.
+        
+        /// <summary>
+        ///     The time power up pickup sound.
+        /// </summary>
+        TimePowerUp,
 
         /// <summary>
-        ///     The coin pickup sound.
+        ///     The game over sound.
         /// </summary>
-        Coin
+        GameOver,
+
+        /// <summary>
+        ///     The home safely sound.
+        /// </summary>
+        HomeSafely
     }
 }

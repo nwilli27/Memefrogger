@@ -23,9 +23,20 @@ namespace FroggerStarter.Factory
         {
             switch (soundEffect)
             {
-                case SoundEffectType.Coin:
-                    return new SoundEffect("Coin Pickup Sound.mp3") {
-                        SoundEffectType = SoundEffectType.Coin
+                case SoundEffectType.TimePowerUp:
+                    return new SoundEffect("TimePowerUp.wav") {
+                        SoundEffectType = SoundEffectType.TimePowerUp
+                    };
+
+                case SoundEffectType.GameOver:
+                    return new SoundEffect("GameOver.wav") {
+                        SoundEffectType = SoundEffectType.GameOver
+                    };
+
+                case SoundEffectType.HomeSafely:
+                    return new SoundEffect("HomeSafely.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.HomeSafely
                     };
 
                 default:

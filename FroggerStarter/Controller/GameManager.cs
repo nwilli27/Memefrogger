@@ -267,6 +267,15 @@ namespace FroggerStarter.Controller
             this.makeHitHomeVisible();
             this.setPlayerToCenterOfBottomLane();
             this.increaseScore();
+            this.playHomeSafelySoundEffect();
+        }
+
+        private void playHomeSafelySoundEffect()
+        {
+            if (!this.frogHomes.HasHomesBeenFilled)
+            {
+                SoundEffectManager.PlaySound(SoundEffectType.HomeSafely);
+            }    
         }
 
         private void setPlayerToCenterOfBottomLane()
@@ -283,6 +292,7 @@ namespace FroggerStarter.Controller
             this.player.StopMovement();
             this.powerUpManager.StopPowerUpSpawnTimer();
             this.gameOver();
+            SoundEffectManager.PlaySound(SoundEffectType.GameOver);
         }
 
         private void makeHitHomeVisible()

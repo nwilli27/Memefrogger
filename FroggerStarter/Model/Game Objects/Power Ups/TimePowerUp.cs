@@ -74,7 +74,7 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         public override void Activate()
         {
             ScoreTimer.ScoreTick += this.TimeExtension;
-            SoundEffectManager.PlaySound(SoundEffectType.Coin);
+            SoundEffectManager.PlaySound(SoundEffectType.TimePowerUp);
         }
 
         /// <summary>
