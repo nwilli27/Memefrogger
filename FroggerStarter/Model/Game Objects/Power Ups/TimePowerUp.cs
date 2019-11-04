@@ -2,7 +2,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using FroggerStarter.Annotations;
+using FroggerStarter.Enums;
 using FroggerStarter.Model.Score;
+using FroggerStarter.Model.Sound;
 using FroggerStarter.Utility;
 using FroggerStarter.View.Sprites;
 
@@ -72,6 +74,7 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         public override void Activate()
         {
             ScoreTimer.ScoreTick += this.TimeExtension;
+            SoundEffectManager.PlaySound(SoundEffectType.Coin);
         }
 
         /// <summary>

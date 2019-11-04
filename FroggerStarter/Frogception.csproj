@@ -138,7 +138,6 @@
     <Compile Include="Model\Game Objects\Power Ups\PowerUp.cs" />
     <Compile Include="Model\Game Objects\Power Ups\PowerUpManager.cs" />
     <Compile Include="Model\Game Objects\Power Ups\TimePowerUp.cs" />
-    <Compile Include="Model\Sound\CoinSoundEffect.cs" />
     <Compile Include="Model\Sound\SoundEffect.cs" />
     <Compile Include="Model\Sound\SoundEffectManager.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -218,7 +217,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="SoundFiles\Coin Pickup Sound.mp3" />
+    <Content Include="SoundEffects\Coin Pickup Sound.mp3" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

@@ -7,30 +7,13 @@ using FroggerStarter.Factory;
 namespace FroggerStarter.Model.Sound
 {
     /// <summary>
+    ///     Holds the static class of sound effects to be used anywhere in the system
     /// </summary>
-    public class SoundEffectManager
+    public static class SoundEffectManager
     {
         #region Data members
 
-        private readonly IList<SoundEffect> sounds;
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="SoundEffectManager" /> class.
-        ///     Precondition: none
-        ///     Post-condition: Creates one of each type of SoundEffect and sets them up ready to be played.
-        /// </summary>
-        public SoundEffectManager()
-        {
-            this.sounds = new List<SoundEffect>();
-
-            var soundEffectTypes = Enum.GetValues(typeof(SoundEffectType)).Cast<SoundEffectType>();
-            soundEffectTypes.ToList().ForEach(soundEffect =>
-                this.sounds.Add(SoundEffectFactory.CreateSoundEffect(soundEffect)));
-        }
+        private static IList<SoundEffect> sounds;
 
         #endregion
 
@@ -43,18 +26,23 @@ namespace FroggerStarter.Model.Sound
         /// </summary>
         /// <param name="soundEffectType">Type of the sound effect.</param>
         /// <exception cref="ArgumentOutOfRangeException">soundEffectType - null</exception>
-        public void PlaySound(SoundEffectType soundEffectType)
+        public static void PlaySound(SoundEffectType soundEffectType)
         {
-            switch (soundEffectType)
-            {
-                case SoundEffectType.Coin:
-                    this.sounds.ToList().Where(sound => sound is CoinSoundEffect).ToList()
-                        .ForEach(sound => sound.PlaySound());
-                    break;
+            sounds.ToList().First(sound => sound.SoundEffectType == soundEffectType).PlaySound();
+        }
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(soundEffectType), soundEffectType, null);
-            }
+        /// <summary>
+        ///     Creates and loads all the possible sound effects from the SoundEffectFactory
+        ///     Precondition: non
+        ///     Post-condition: sounds.Count() += total # sounds
+        /// </summary>
+        public static void CreateAndLoadAllSoundEffects()
+        {
+            sounds = new List<SoundEffect>();
+            var soundEffectTypes = Enum.GetValues(typeof(SoundEffectType)).Cast<SoundEffectType>();
+
+            soundEffectTypes.ToList().ForEach(soundEffect =>
+                sounds.Add(SoundEffectFactory.CreateSoundEffect(soundEffect)));
         }
 
         #endregion

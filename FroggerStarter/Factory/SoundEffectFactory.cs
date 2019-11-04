@@ -24,7 +24,9 @@ namespace FroggerStarter.Factory
             switch (soundEffect)
             {
                 case SoundEffectType.Coin:
-                    return new CoinSoundEffect();
+                    return new SoundEffect("Coin Pickup Sound.mp3") {
+                        SoundEffectType = SoundEffectType.Coin
+                    };
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(soundEffect), soundEffect, null);

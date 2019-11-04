@@ -33,8 +33,6 @@ namespace FroggerStarter.Controller
         private DispatcherTimer timer;
         private DispatcherTimer scoreTimer;
 
-        private SoundEffectManager soundEffectManager;
-
         #endregion
 
         #region Events
@@ -82,7 +80,7 @@ namespace FroggerStarter.Controller
         public void InitializeGame(Canvas gamePage)
         {
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
-            this.soundEffectManager = new SoundEffectManager();
+            SoundEffectManager.CreateAndLoadAllSoundEffects();
 
             this.createAndPlacePlayer();
             this.createAndPlaceObstaclesInLanes();
@@ -203,7 +201,6 @@ namespace FroggerStarter.Controller
             var collidedPowerUp = this.powerUpManager.ToList().FirstOrDefault(powerUp => this.player.HasCollidedWith(powerUp));
             if (collidedPowerUp != null)
             {
-                this.soundEffectManager.PlaySound(SoundEffectType.Coin);
                 collidedPowerUp.Activate();
                 this.powerUpManager.ResetPowerUpsAndSpawnTimer();
             }

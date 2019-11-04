@@ -2,14 +2,28 @@
 using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
+using FroggerStarter.Enums;
 
 namespace FroggerStarter.Model.Sound
 {
     /// <summary>
     ///     Represents the sound effect base object.
     /// </summary>
-    public abstract class SoundEffect
+    public class SoundEffect
     {
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the type of the sound effect.
+        /// </summary>
+        /// <value>
+        ///     The type of the sound effect.
+        /// </value>
+        public SoundEffectType SoundEffectType { get; set; }
+
+        #endregion
+
         #region Data members
 
         private readonly MediaElement soundEffectElement;
@@ -20,9 +34,17 @@ namespace FroggerStarter.Model.Sound
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SoundEffect" /> class.
+        ///     Precondition: fileName != null
+        ///     Post-condition: none
         /// </summary>
-        protected SoundEffect(string fileName)
+        /// <param name="fileName">Name of the file.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public SoundEffect(string fileName)
         {
+            if (fileName == null)
+            {
+                throw new ArgumentNullException();
+            }
             this.soundEffectElement = new MediaElement();
             this.setSoundFile(fileName);
         }
@@ -41,9 +63,13 @@ namespace FroggerStarter.Model.Sound
             this.soundEffectElement.Play();
         }
 
+        #endregion
+
+        #region Private Helpers
+
         private async void setSoundFile(string fileName)
         {
-            var folder = await Package.Current.InstalledLocation.GetFolderAsync("SoundFiles");
+            var folder = await Package.Current.InstalledLocation.GetFolderAsync("SoundEffects");
             var file = await folder.GetFileAsync(fileName);
             var stream = await file.OpenAsync(FileAccessMode.Read);
             this.soundEffectElement.AutoPlay = false;
