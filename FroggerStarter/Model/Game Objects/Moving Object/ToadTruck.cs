@@ -1,12 +1,12 @@
 ﻿using FroggerStarter.Enums;
 using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Game_Objects.Moving_Object
 {
     /// <summary>
     ///     A toad truck object of type Obstacle.
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.Obstacle" />
+    /// <seealso cref="Obstacle" />
     public sealed class ToadTruck : Obstacle
     {
         #region Constructors

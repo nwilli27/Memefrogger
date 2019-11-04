@@ -1,6 +1,6 @@
 ﻿using System;
 using FroggerStarter.Enums;
-using FroggerStarter.Model;
+using FroggerStarter.Model.Game_Objects.Moving_Object;
 
 namespace FroggerStarter.Factory
 {

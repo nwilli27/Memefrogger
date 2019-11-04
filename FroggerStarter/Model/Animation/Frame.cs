@@ -1,13 +1,13 @@
-﻿
+﻿using FroggerStarter.Model.Game_Objects;
 using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Animation
 {
     /// <summary>
     ///     Holds the implementation for a single frame.
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.GameObject" />
-    public class Frame : GameObject
+    /// <seealso cref="GameObject" />
+    public sealed class Frame : GameObject
     {
         #region Data Members
 

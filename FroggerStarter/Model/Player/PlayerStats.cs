@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Player
 {
     /// <summary>
     ///     Class to hold statistics for the Player.

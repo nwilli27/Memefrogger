@@ -1,14 +1,11 @@
-﻿
+﻿using FroggerStarter.Enums;
 
-using System;
-using FroggerStarter.Enums;
-
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Game_Objects.Moving_Object
 {
     /// <summary>
     ///     Type of GameObject that allows movement.
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.GameObject" />
+    /// <seealso cref="GameObject" />
     public abstract class MovingObject : GameObject
     {
 

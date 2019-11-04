@@ -1,6 +1,8 @@
 ﻿using Windows.UI.Xaml;
 using FroggerStarter.Enums;
 using FroggerStarter.Model.Animation;
+using FroggerStarter.Model.Game_Objects;
+using FroggerStarter.Model.Game_Objects.Moving_Object;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model.Player
@@ -9,7 +11,7 @@ namespace FroggerStarter.Model.Player
     /// <summary>
     ///     Defines the frog model
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.GameObject" />
+    /// <seealso cref="GameObject" />
     public sealed class Frog : MovingObject
     {
         #region Data Members

@@ -1,12 +1,12 @@
 ﻿
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using FroggerStarter.Annotations;
 using FroggerStarter.Enums;
 using FroggerStarter.Model.Score;
 using FroggerStarter.Model.Sound;
+using FroggerStarter.Properties;
 using FroggerStarter.Utility;
-using FroggerStarter.View.Sprites;
+using FroggerStarter.View.PowerUpSprites;
 
 namespace FroggerStarter.Model.Game_Objects.Power_Ups
 {
