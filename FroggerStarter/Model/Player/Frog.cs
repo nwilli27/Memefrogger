@@ -17,7 +17,7 @@ namespace FroggerStarter.Model.Player
         #region Data Members
 
         private bool canMove = true;
-        private bool hasCollided;
+        private bool isDead;
 
         #endregion
 
@@ -53,13 +53,13 @@ namespace FroggerStarter.Model.Player
         /// <value>
         ///   <c>true</c> if this instance has collided; otherwise, <c>false</c>.
         /// </value>
-        public bool HasCollided
+        public bool IsDead
         {
-            get => this.hasCollided;
+            get => this.isDead;
             set
             {
                 this.canMove = !value;
-                this.hasCollided = value;
+                this.isDead = value;
             }
         }
 
@@ -213,7 +213,7 @@ namespace FroggerStarter.Model.Player
 
         private void onLeapFinished(object sender, AnimationIsFinishedEventArgs e)
         {
-            if (e.FrogLeapIsOver && !this.HasCollided)
+            if (e.FrogLeapIsOver && !this.IsDead)
             {
                 this.canMove = true;
                 this.ChangeSpriteVisibility(true);

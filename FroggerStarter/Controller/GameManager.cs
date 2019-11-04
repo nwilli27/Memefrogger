@@ -131,7 +131,6 @@ namespace FroggerStarter.Controller
             {
                 this.lifeLost();
                 this.setPlayerToCenterOfBottomLane();
-                this.player.HasCollided = true;
             }
         }
 
@@ -179,7 +178,6 @@ namespace FroggerStarter.Controller
             {
                 this.lifeLost();
                 this.setPlayerToCenterOfBottomLane();
-                this.player.HasCollided = true;
             }
             this.ScoreTimerTick?.Invoke(this, scoreTick);
         }
@@ -192,7 +190,6 @@ namespace FroggerStarter.Controller
                 {
                     this.lifeLost();
                     this.setPlayerToCenterOfBottomLane();
-                    this.player.HasCollided = true;
                 }
             }
         }
@@ -338,6 +335,7 @@ namespace FroggerStarter.Controller
             this.LifeLoss?.Invoke(this, life);
 
             this.player.PlayDeathAnimation();
+            this.player.IsDead = true;
             this.scoreTimer.Stop();
 
             this.checkGameStatusForGameOver();
@@ -361,7 +359,7 @@ namespace FroggerStarter.Controller
         {
             var gameOver = new GameOverEventArgs() { GameOver = true };
             this.GameOver?.Invoke(this, gameOver);
-            this.player.HasCollided = true;
+            this.player.IsDead = true;
         }
 
         private void setupPlayerStatsAndHud()
@@ -387,7 +385,7 @@ namespace FroggerStarter.Controller
                 this.laneManager.ResetLanesToOneObstacle();
                 ScoreTimer.ResetScoreTick();
                 this.scoreTimer.Start();
-                this.player.HasCollided = false;
+                this.player.IsDead = false;
                 this.powerUpManager.ResetPowerUpsAndSpawnTimer();
             }
         }
