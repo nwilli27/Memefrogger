@@ -1,10 +1,9 @@
-﻿
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using FroggerStarter.Enums;
 using FroggerStarter.Model.Animation;
 using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.Player
 {
 
     /// <summary>

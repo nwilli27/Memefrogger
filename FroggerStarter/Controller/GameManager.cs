@@ -7,7 +7,9 @@ using FroggerStarter.Enums;
 using FroggerStarter.Model;
 using FroggerStarter.Model.Animation;
 using FroggerStarter.Model.Game_Objects.Power_Ups;
+using FroggerStarter.Model.Player;
 using FroggerStarter.Model.Score;
+using FroggerStarter.Model.Sound;
 
 namespace FroggerStarter.Controller
 {
@@ -30,6 +32,8 @@ namespace FroggerStarter.Controller
 
         private DispatcherTimer timer;
         private DispatcherTimer scoreTimer;
+
+        private SoundEffectManager soundEffectManager;
 
         #endregion
 
@@ -78,6 +82,7 @@ namespace FroggerStarter.Controller
         public void InitializeGame(Canvas gamePage)
         {
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
+            this.soundEffectManager = new SoundEffectManager();
 
             this.createAndPlacePlayer();
             this.createAndPlaceObstaclesInLanes();
@@ -198,6 +203,7 @@ namespace FroggerStarter.Controller
             var collidedPowerUp = this.powerUpManager.ToList().FirstOrDefault(powerUp => this.player.HasCollidedWith(powerUp));
             if (collidedPowerUp != null)
             {
+                this.soundEffectManager.PlaySound(SoundEffectType.Coin);
                 collidedPowerUp.Activate();
                 this.powerUpManager.ResetPowerUpsAndSpawnTimer();
             }
@@ -357,6 +363,7 @@ namespace FroggerStarter.Controller
         {
             var gameOver = new GameOverEventArgs() { GameOver = true };
             this.GameOver?.Invoke(this, gameOver);
+            this.player.HasCollided = true;
         }
 
         private void setupPlayerStatsAndHud()
