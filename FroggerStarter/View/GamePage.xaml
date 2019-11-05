@@ -7,7 +7,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
 
-    <Canvas x:Name="canvas" Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Margin="0,0,750,220" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Black">
+    <Canvas x:Name="canvas" Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Margin="0,0,750,220" Background="Black">
 
         <TextBlock x:Name="gameOver" Canvas.ZIndex="4" Visibility="Collapsed" Foreground="White" FontSize="80" FontFamily="Berlin Sans FB" Canvas.Left="150" Canvas.Top="356" Height="125" Width="451" RenderTransformOrigin="0.494,0.44"><Run Text="GAME "/><Run Text="OVER"/></TextBlock>
 
@@ -107,7 +107,7 @@
         <Rectangle Canvas.Top="525" Fill="White" Width="24" Height="2" Canvas.Left="560" />
         <Rectangle Canvas.Top="525" Fill="White" Width="24" Height="2" Canvas.Left="410" />
         <Rectangle Canvas.Top="525" Fill="White" Width="24" Height="2" Canvas.Left="460" />
-        <Rectangle x:Name="blackOverlay" Canvas.Top="0" Fill="Black" Canvas.ZIndex="3" Opacity="0.8" Visibility="Collapsed" Width="{StaticResource AppWidth}" Height="780" />
+        <Rectangle x:Name="blackOverlay" Canvas.Top="0" Fill="Black" Canvas.ZIndex="3" Opacity="0.6" Visibility="Collapsed" Width="{StaticResource AppWidth}" Height="780" />
 
     </Canvas>
 </Page>
