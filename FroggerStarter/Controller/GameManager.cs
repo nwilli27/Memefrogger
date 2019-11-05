@@ -321,7 +321,7 @@ namespace FroggerStarter.Controller
         private void stopGamePlayInSlowMotion()
         {
             this.timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
-            this.scoreTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+            this.scoreTimer.Stop();
             this.player.DeathAnimation.AnimationInterval = 1500;
             this.player.PlayDeathAnimation();
             this.gameOver();

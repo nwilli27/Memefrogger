@@ -11,7 +11,7 @@
     Height="50"
     Width="50">
 
-    <Canvas d:DataContext="{d:DesignInstance model:TimePowerUp}">
+    <Canvas>
 
         <Ellipse Fill="DarkSlateBlue" Width="38" Height="38" Canvas.Top="9" Canvas.Left="7"/>
         <Rectangle Fill="Goldenrod" Width="6" Height="4" Canvas.Left="22.698" Canvas.Top="3.806" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
@@ -109,7 +109,7 @@
                 <CompositeTransform Rotation="21.797"/>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <TextBlock x:Name="timePowerUp" Text="{Binding Path=TimeExtension, Mode=OneWay}" Canvas.Left="21.708" Canvas.Top="8.728" Height="14" Width="13" FontSize="14" FontFamily="Britannic" Foreground="White" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+        <TextBlock x:Name="timePowerUp" Text="" Canvas.Left="21.708" Canvas.Top="8.728" Height="14" Width="13" FontSize="14" FontFamily="Britannic" Foreground="White" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
             <TextBlock.RenderTransform>
                 <CompositeTransform Rotation="0.366"/>
             </TextBlock.RenderTransform>
