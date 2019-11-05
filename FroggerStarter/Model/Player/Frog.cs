@@ -88,6 +88,7 @@ namespace FroggerStarter.Model.Player
                 AnimationInterval = 100
             };
             this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
+            this.Direction = Direction.Up;
         }
 
         #endregion

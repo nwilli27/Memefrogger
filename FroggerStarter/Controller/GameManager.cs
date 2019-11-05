@@ -305,6 +305,7 @@ namespace FroggerStarter.Controller
             hitHome.IsFilled = true;
         }
 
+
         private void checkGameStatusForGameOver()
         { 
             if (this.frogHomes.HasHomesBeenFilled)

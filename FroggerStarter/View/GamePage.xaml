@@ -11,7 +11,7 @@
 
         <TextBlock x:Name="gameOver" Canvas.ZIndex="4" Visibility="Collapsed" Foreground="White" FontSize="80" FontFamily="Berlin Sans FB" Canvas.Left="150" Canvas.Top="356" Height="125" Width="451" RenderTransformOrigin="0.494,0.44"><Run Text="GAME "/><Run Text="OVER"/></TextBlock>
 
-        <TextBlock x:Name="gameName" Text="Frogception" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic" Canvas.Left="273" Canvas.Top="8"/>
+        <TextBlock x:Name="gameName" Text="MemeFrogger" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic" Canvas.Left="273" Canvas.Top="8"/>
         <TextBlock x:Name="livesLabel" Text="Lives:" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="16" Canvas.Top="12"/>
         <TextBlock x:Name="numberLives" Text="" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="77" Canvas.Top="12"/>
 
@@ -20,7 +20,7 @@
 
         <Rectangle Canvas.Top="{StaticResource HighRoadYLocation}" Fill="Blue" Width="{StaticResource AppWidth}" Height="{StaticResource RoadShoulderOffset}" />
 
-        <Rectangle Canvas.Top="125" Fill="Blue" Width="{StaticResource AppWidth}" Height="250" />
+        <Rectangle Canvas.Top="119" Fill="Blue" Width="{StaticResource AppWidth}" Height="256" />
 
         <ProgressBar x:Name="timeProgressBar" Background="Black" Canvas.Top="734" Value="20" Minimum="0" Maximum="20" Margin="0,12" Height="17" Width="584" Canvas.Left="107" Foreground="LimeGreen"/>
         <TextBlock x:Name="timeLabel" Text="Time:" Foreground="White" FontSize="22" FontFamily="Berlin Sans FB" Canvas.Left="50" Canvas.Top="740"/>
