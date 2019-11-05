@@ -1,7 +1,5 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using FroggerStarter.Enums;
 using FroggerStarter.Model.Score;
 using FroggerStarter.Model.Sound;
 using FroggerStarter.Properties;

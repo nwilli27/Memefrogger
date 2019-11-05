@@ -1,22 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FroggerStarter.Model.Score
 {
     /// <summary>
     ///     Defines the object for a HighScore.
     /// </summary>
-    public class HighScore : IComparable
+    public class HighScore : IComparable<HighScore>
     {
-        private int score;
-        private string playerName;
-        private int level;
+        #region Data members
+
+        private readonly int score;
+        private readonly string playerName;
+        private readonly int level;
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="HighScore"/> class.
+        ///     Initializes a new instance of the <see cref="HighScore" /> class.
         ///     Precondition: none
         ///     Post-condition: none
         /// </summary>
@@ -30,10 +32,47 @@ namespace FroggerStarter.Model.Score
             this.level = level;
         }
 
-        public int CompareTo(object obj)
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Natural sort order for HighScores.  Player Score, then Name, then level.
+        ///     Precondition: none
+        ///     Post-condition: none
+        /// </summary>
+        /// <param name="other">The other HighScore.</param>
+        /// <returns>
+        ///     Value greater than 0 if this HighScore is greater than the other, 0 if this HighScore equals the other
+        ///     HighScore, and a value less than 0 if this HighScore is less than the other.
+        /// </returns>
+        public int CompareTo(HighScore other)
         {
-            throw new NotImplementedException();
-            //TODO: I'll do this or figure it out.
+            if (ReferenceEquals(this, other))
+            {
+                return 0;
+            }
+
+            if (ReferenceEquals(null, other))
+            {
+                return 1;
+            }
+
+            var scoreComparison = this.score.CompareTo(other.score);
+            if (scoreComparison != 0)
+            {
+                return scoreComparison;
+            }
+
+            var playerNameComparison = string.Compare(this.playerName, other.playerName, StringComparison.Ordinal);
+            if (playerNameComparison != 0)
+            {
+                return playerNameComparison;
+            }
+
+            return this.level.CompareTo(other.level);
         }
+
+        #endregion
     }
 }
