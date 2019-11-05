@@ -223,9 +223,11 @@
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="SoundEffects\AlmostHadIt.mp3" />
-    <Content Include="SoundEffects\HomerDoh.wav" />
+    <Content Include="SoundEffects\GTADeath.mp3" />
+    <Content Include="SoundEffects\HomerDoh.mp3" />
     <Content Include="SoundEffects\HomeSafely.mp3" />
     <Content Include="SoundEffects\GameOver.wav" />
+    <Content Include="SoundEffects\Oof.mp3" />
     <Content Include="SoundEffects\TimePowerUp.mp3" />
   </ItemGroup>
   <ItemGroup>

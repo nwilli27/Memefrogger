@@ -19,6 +19,7 @@ namespace FroggerStarter.Constants
         private static readonly SetOnce<double> HomeWidthOnce = new SetOnce<double>();
         private static readonly SetOnce<double> HomeLocationGapSizeOnce = new SetOnce<double>();
         private static readonly SetOnce<double> RoadShoulderOffsetOnce = new SetOnce<double>();
+        private static readonly SetOnce<double> MiddleRoadYLocationOnce = new SetOnce<double>();
 
         #endregion
 
@@ -67,6 +68,18 @@ namespace FroggerStarter.Constants
         {
             get => HighRoadYLocationOnce;
             set => HighRoadYLocationOnce.Value = value;
+        }
+
+        /// <summary>
+        ///     Gets or sets the middle road y location.
+        /// </summary>
+        /// <value>
+        ///     The middle road y location.
+        /// </value>
+        public static double MiddleRoadYLocation
+        {
+            get => MiddleRoadYLocationOnce;
+            set => MiddleRoadYLocationOnce.Value = value;
         }
 
         /// <summary>

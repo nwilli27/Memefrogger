@@ -46,10 +46,23 @@ namespace FroggerStarter.Factory
                     };
 
                 case SoundEffectType.HomerDoh:
-                    return new SoundEffect("HomerDoh.wav")
+                    return new SoundEffect("HomerDoh.mp3")
                     {
                         SoundEffectType = SoundEffectType.HomerDoh,
                         IsPlayerDeathSoundEffect = true
+                    };
+
+                case SoundEffectType.Oof:
+                    return new SoundEffect("Oof.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.Oof,
+                        IsPlayerDeathSoundEffect = true
+                    };
+
+                case SoundEffectType.GTADeath:
+                    return new SoundEffect("GTADeath.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.GTADeath
                     };
 
                 default:

@@ -29,7 +29,17 @@
         /// <summary>
         ///     The almost had it sound.
         /// </summary>
-        AlmostHadIt
+        AlmostHadIt,
+
+        /// <summary>
+        ///     The oof sound.
+        /// </summary>
+        Oof,
+
+        /// <summary>
+        ///     The gta death sound.
+        /// </summary>
+        GTADeath
 
     }
 }

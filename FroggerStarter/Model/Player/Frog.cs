@@ -80,9 +80,13 @@ namespace FroggerStarter.Model.Player
 
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
-            
-            this.DeathAnimation = new Animation.Animation(AnimationType.PlayerDeath, DeathAnimationInterval);
-            this.FrogLeapAnimation = new Animation.Animation(AnimationType.FrogLeap, 100);
+
+            this.DeathAnimation = new Animation.Animation(AnimationType.PlayerDeath) {
+                AnimationInterval = 500
+            };
+            this.FrogLeapAnimation = new Animation.Animation(AnimationType.FrogLeap) {
+                AnimationInterval = 100
+            };
             this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
         }
 

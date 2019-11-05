@@ -62,6 +62,7 @@ namespace FroggerStarter.View
             GameBoard.BackgroundHeight    = this.applicationHeight;
             GameBoard.HighRoadYLocation   = (double) Application.Current.Resources["HighRoadYLocation"];
             GameBoard.BottomRoadYLocation = (double) Application.Current.Resources["BottomRoadYLocation"];
+            GameBoard.MiddleRoadYLocation = (double) Application.Current.Resources["MiddleRoadYLocation"];
             GameBoard.HomeWidth           = (double) Application.Current.Resources["HomeWidth"];
             GameBoard.HomeLocationGapSize = (double) Application.Current.Resources["HomeLocationGapSize"];
             GameBoard.RoadShoulderOffset  = (double) Application.Current.Resources["RoadShoulderOffset"];
@@ -117,6 +118,7 @@ namespace FroggerStarter.View
             if (e.GameOver)
             {
                 this.gameOver.Visibility = Visibility.Visible;
+                this.blackOverlay.Visibility = Visibility.Visible;
             }
         }
 

@@ -17,13 +17,26 @@ namespace FroggerStarter.Model.Animation
 
         private DispatcherTimer animateTimer;
         private IList<Frame> animationFrames;
-        private readonly int animationInterval;
         private readonly AnimationType animationType;
 
         #endregion
 
         #region Properties
 
+        /// <summary>
+        ///     Gets or sets the animation interval.
+        /// </summary>
+        /// <value>
+        ///     The animation interval.
+        /// </value>
+        public int AnimationInterval { get; set; }
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is animation finished.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is animation finished; otherwise, <c>false</c>.
+        /// </value>
         private bool IsAnimationFinished => this.animationFrames.All(frame => frame.HasBeenPlayed && !frame.IsVisible);
 
         #endregion
@@ -45,12 +58,10 @@ namespace FroggerStarter.Model.Animation
         ///     Post-condition: this.animationFrames.Count()++
         /// </summary>
         /// <param name="animationType">Type of the animation</param>
-        /// <param name="animationInterval">The speed of the animation</param>
-        public Animation(AnimationType animationType, int animationInterval)
+        public Animation(AnimationType animationType)
         {
             this.animationType = animationType;
             this.createFramesFromAnimationSprites();
-            this.animationInterval = animationInterval;
         }
 
         #endregion
@@ -94,7 +105,7 @@ namespace FroggerStarter.Model.Animation
         {
             this.animateTimer = new DispatcherTimer();
             this.animateTimer.Tick += this.showNextFrame;
-            this.animateTimer.Interval = new TimeSpan(0, 0, 0, 0, this.animationInterval);
+            this.animateTimer.Interval = new TimeSpan(0, 0, 0, 0, this.AnimationInterval);
 
             this.makeFirstFrameVisible();
             this.animateTimer.Start();

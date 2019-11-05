@@ -278,7 +278,7 @@ namespace FroggerStarter.Controller
         {
             if (!this.frogHomes.HasHomesBeenFilled)
             {
-                SoundEffectManager.PlaySound(Enums.SoundEffectType.HomeSafely);
+                SoundEffectManager.PlaySound(SoundEffectType.HomeSafely);
             }    
         }
 
@@ -291,12 +291,12 @@ namespace FroggerStarter.Controller
 
         private void stopGamePlayAndShowGameOver()
         {
+            this.player.StopMovement();
             this.timer.Stop();
             this.scoreTimer.Stop();
-            this.player.StopMovement();
             this.powerUpManager.StopPowerUpSpawnTimer();
             this.gameOver();
-            SoundEffectManager.PlaySound(Enums.SoundEffectType.GameOver);
+            SoundEffectManager.PlaySound(SoundEffectType.GameOver);
         }
 
         private void makeHitHomeVisible()
@@ -309,8 +309,8 @@ namespace FroggerStarter.Controller
         }
 
         private void checkGameStatusForGameOver()
-        {
-            if (this.isGameOver())
+        { 
+            if (this.frogHomes.HasHomesBeenFilled)
             {
                 this.stopGamePlayAndShowGameOver();
             }
@@ -319,6 +319,16 @@ namespace FroggerStarter.Controller
                 this.setPlayerToCenterOfBottomLane();
                 this.resetScoreTimerBar();
             }
+        }
+
+        private void stopGamePlayInSlowMotion()
+        {
+            this.timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+            this.scoreTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+            this.player.DeathAnimation.AnimationInterval = 1500;
+            this.player.PlayDeathAnimation();
+            SoundEffectManager.PlaySound(SoundEffectType.GTADeath);
+            this.gameOver();
         }
 
         #endregion
@@ -353,10 +363,16 @@ namespace FroggerStarter.Controller
             var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
             this.LifeLoss?.Invoke(this, life);
 
-            this.player.PlayDeathAnimation();
-            
-            this.scoreTimer.Stop();
-            this.checkGameStatusForGameOver();
+            if (this.playerStats.Lives == 0)
+            {
+                this.stopGamePlayInSlowMotion();
+            }
+            else
+            {
+                this.scoreTimer.Stop();
+                this.player.PlayDeathAnimation();
+                this.checkGameStatusForGameOver();
+            }
         }
 
         private void resetScoreTimerBar()
@@ -414,7 +430,7 @@ namespace FroggerStarter.Controller
 
         private static double getRoadStartingYLocation()
         {
-            return GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
+            return GameBoard.MiddleRoadYLocation + GameBoard.RoadShoulderOffset;
         }
 
         #endregion
