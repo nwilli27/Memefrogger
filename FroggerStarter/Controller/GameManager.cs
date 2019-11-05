@@ -6,6 +6,7 @@ using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using FroggerStarter.Model.Animation;
 using FroggerStarter.Model.Area_Managers;
+using FroggerStarter.Model.Area_Managers.Road;
 using FroggerStarter.Model.Game_Objects.Home;
 using FroggerStarter.Model.Game_Objects.Power_Ups;
 using FroggerStarter.Model.Player;
@@ -245,7 +246,7 @@ namespace FroggerStarter.Controller
 
         private void createAndPlaceObstaclesInLanes()
         {
-            this.laneManager = new LaneManager(getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
+            this.laneManager = new RoadManager(getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
 
             this.laneManager.AddLaneOfObstacles(GameSettings.Lane5);
             this.laneManager.AddLaneOfObstacles(GameSettings.Lane4);
