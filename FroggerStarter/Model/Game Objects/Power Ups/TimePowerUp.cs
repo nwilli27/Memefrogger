@@ -1,8 +1,7 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿
+using FroggerStarter.Enums;
 using FroggerStarter.Model.Score;
 using FroggerStarter.Model.Sound;
-using FroggerStarter.Properties;
 using FroggerStarter.Utility;
 using FroggerStarter.View.PowerUpSprites;
 
@@ -12,31 +11,12 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
     ///     A special Power up that gains the user extra time
     /// </summary>
     /// <seealso cref="PowerUp" />
-    internal sealed class TimePowerUp : PowerUp, INotifyPropertyChanged
+    internal sealed class TimePowerUp : PowerUp
     {
         #region Data Members
 
+        private readonly TimePowerUpSprite timeSprite;
         private int timeExtension;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        ///     Gets or sets the time extension.
-        /// </summary>
-        /// <value>
-        ///     The time extension.
-        /// </value>
-        public int TimeExtension
-        {
-            get => this.timeExtension;
-            set
-            {
-                this.timeExtension = value;
-                this.onPropertyChanged();
-            }
-        }
 
         #endregion
 
@@ -56,7 +36,8 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         /// </summary>
         public TimePowerUp()
         {
-            this.Sprite = new TimePowerUpSprite();
+            this.timeSprite = new TimePowerUpSprite();
+            this.Sprite = this.timeSprite;
         }
 
         #endregion
@@ -71,8 +52,8 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         /// </summary>
         public override void Activate()
         {
-            ScoreTimer.ScoreTick += this.TimeExtension;
-            SoundEffectManager.PlaySound(Enums.SoundEffectType.TimePowerUp);
+            ScoreTimer.ScoreTick += this.timeExtension;
+            SoundEffectManager.PlaySound(SoundEffectType.TimePowerUp);
         }
 
         /// <summary>
@@ -83,7 +64,8 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         /// </summary>
         public override void SetupAbility()
         {
-            this.TimeExtension = getRandomTimeExtension();
+            this.timeExtension = getRandomTimeExtension();
+            this.timeSprite.TimeExtension = this.timeExtension.ToString();
         }
 
         #endregion
@@ -96,15 +78,5 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         }
 
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        private void onPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
-
-
 }
