@@ -1,6 +1,7 @@
-﻿using System;
-using FroggerStarter.Enums;
+﻿
 using FroggerStarter.Model.Sound;
+using System;
+using SoundEffectType = FroggerStarter.Enums.SoundEffectType;
 
 namespace FroggerStarter.Factory
 {
@@ -24,7 +25,7 @@ namespace FroggerStarter.Factory
             switch (soundEffect)
             {
                 case SoundEffectType.TimePowerUp:
-                    return new SoundEffect("TimePowerUp.wav") {
+                    return new SoundEffect("TimePowerUp.mp3") {
                         SoundEffectType = SoundEffectType.TimePowerUp
                     };
 
@@ -34,9 +35,21 @@ namespace FroggerStarter.Factory
                     };
 
                 case SoundEffectType.HomeSafely:
-                    return new SoundEffect("HomeSafely.mp3")
-                    {
+                    return new SoundEffect("HomeSafely.mp3") {
                         SoundEffectType = SoundEffectType.HomeSafely
+                    };
+
+                case SoundEffectType.AlmostHadIt:
+                    return new SoundEffect("AlmostHadIt.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.AlmostHadIt
+                    };
+
+                case SoundEffectType.HomerDoh:
+                    return new SoundEffect("HomerDoh.wav")
+                    {
+                        SoundEffectType = SoundEffectType.HomerDoh,
+                        IsPlayerDeathSoundEffect = true
                     };
 
                 default:

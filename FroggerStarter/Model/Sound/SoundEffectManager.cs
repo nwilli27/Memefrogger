@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FroggerStarter.Enums;
 using FroggerStarter.Factory;
+using FroggerStarter.Utility;
 
 namespace FroggerStarter.Model.Sound
 {
@@ -13,7 +14,8 @@ namespace FroggerStarter.Model.Sound
     {
         #region Data members
 
-        private static IList<SoundEffect> sounds;
+        private static IList<SoundEffect> allSounds;
+        private static IList<SoundEffect> playerDeathSounds;
 
         #endregion
 
@@ -26,9 +28,20 @@ namespace FroggerStarter.Model.Sound
         /// </summary>
         /// <param name="soundEffectType">Type of the sound effect.</param>
         /// <exception cref="ArgumentOutOfRangeException">soundEffectType - null</exception>
-        public static void PlaySound(SoundEffectType soundEffectType)
+        public static void PlaySound(Enums.SoundEffectType soundEffectType)
         {
-            sounds.ToList().First(sound => sound.SoundEffectType == soundEffectType).PlaySound();
+            allSounds.ToList().First(sound => sound.SoundEffectType == soundEffectType).PlaySound();
+        }
+
+        /// <summary>
+        ///     Plays a random player death sound.
+        ///     Precondition: none
+        ///     Post-condition: randomDeathSound.Play()
+        /// </summary>
+        public static void PlayRandomPlayerDeathSound()
+        {
+            var randomIndexValue = Randomizer.GetRandomValueInRange(0, playerDeathSounds.Count);
+            playerDeathSounds[randomIndexValue].PlaySound();
         }
 
         /// <summary>
@@ -38,11 +51,15 @@ namespace FroggerStarter.Model.Sound
         /// </summary>
         public static void CreateAndLoadAllSoundEffects()
         {
-            sounds = new List<SoundEffect>();
-            var soundEffectTypes = Enum.GetValues(typeof(SoundEffectType)).Cast<SoundEffectType>();
+            allSounds = new List<SoundEffect>();
+            playerDeathSounds = new List<SoundEffect>();
 
-            soundEffectTypes.ToList().ForEach(soundEffect =>
-                sounds.Add(SoundEffectFactory.CreateSoundEffect(soundEffect)));
+            var soundEffectTypes = Enum.GetValues(typeof(SoundEffectType)).Cast<SoundEffectType>();
+            soundEffectTypes.ToList().ForEach(soundEffectType =>
+                             allSounds.Add(SoundEffectFactory.CreateSoundEffect(soundEffectType)));
+
+            var deathSounds = allSounds.Where(soundEffect => soundEffect.IsPlayerDeathSoundEffect);
+            deathSounds.ToList().ForEach(deathSound => playerDeathSounds.Add(deathSound));
         }
 
         #endregion

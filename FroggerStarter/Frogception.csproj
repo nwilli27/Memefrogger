@@ -217,9 +217,11 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="SoundEffects\AlmostHadIt.mp3" />
+    <Content Include="SoundEffects\HomerDoh.wav" />
     <Content Include="SoundEffects\HomeSafely.mp3" />
-    <Content Include="SoundEffects\TimePowerUp.wav" />
     <Content Include="SoundEffects\GameOver.wav" />
+    <Content Include="SoundEffects\TimePowerUp.mp3" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

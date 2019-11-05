@@ -22,6 +22,14 @@ namespace FroggerStarter.Model.Sound
         /// </value>
         public SoundEffectType SoundEffectType { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance is player death sound effect.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is player death sound effect; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsPlayerDeathSoundEffect { get; set; }
+
         #endregion
 
         #region Data members

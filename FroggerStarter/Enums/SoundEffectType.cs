@@ -19,6 +19,17 @@
         /// <summary>
         ///     The home safely sound.
         /// </summary>
-        HomeSafely
+        HomeSafely,
+
+        /// <summary>
+        ///     The homer doh sound.
+        /// </summary>
+        HomerDoh,
+
+        /// <summary>
+        ///     The almost had it sound.
+        /// </summary>
+        AlmostHadIt
+
     }
 }

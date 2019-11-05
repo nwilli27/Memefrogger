@@ -131,6 +131,7 @@ namespace FroggerStarter.Controller
             {
                 this.lifeLost();
                 this.setPlayerToCenterOfBottomLane();
+                SoundEffectManager.PlaySound(SoundEffectType.AlmostHadIt);
             }
         }
 
@@ -182,6 +183,7 @@ namespace FroggerStarter.Controller
             if (ScoreTimer.IsTimeUp)
             {
                 this.lifeLost();
+                SoundEffectManager.PlayRandomPlayerDeathSound();
                 this.setPlayerToCenterOfBottomLane();
             }
             this.ScoreTimerTick?.Invoke(this, scoreTick);
@@ -194,6 +196,7 @@ namespace FroggerStarter.Controller
                 if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.IsActive)
                 {
                     this.lifeLost();
+                    SoundEffectManager.PlayRandomPlayerDeathSound();
                     this.setPlayerToCenterOfBottomLane();
                 }
             }
@@ -274,7 +277,7 @@ namespace FroggerStarter.Controller
         {
             if (!this.frogHomes.HasHomesBeenFilled)
             {
-                SoundEffectManager.PlaySound(SoundEffectType.HomeSafely);
+                SoundEffectManager.PlaySound(Enums.SoundEffectType.HomeSafely);
             }    
         }
 
@@ -292,7 +295,7 @@ namespace FroggerStarter.Controller
             this.player.StopMovement();
             this.powerUpManager.StopPowerUpSpawnTimer();
             this.gameOver();
-            SoundEffectManager.PlaySound(SoundEffectType.GameOver);
+            SoundEffectManager.PlaySound(Enums.SoundEffectType.GameOver);
         }
 
         private void makeHitHomeVisible()
@@ -350,7 +353,7 @@ namespace FroggerStarter.Controller
             this.LifeLoss?.Invoke(this, life);
 
             this.player.PlayDeathAnimation();
-
+            
             this.scoreTimer.Stop();
             this.checkGameStatusForGameOver();
         }
