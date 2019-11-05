@@ -132,7 +132,6 @@ namespace FroggerStarter.Controller
             {
                 this.lifeLost();
                 this.setPlayerToCenterOfBottomLane();
-                SoundEffectManager.PlaySound(SoundEffectType.AlmostHadIt);
             }
         }
 
@@ -184,7 +183,6 @@ namespace FroggerStarter.Controller
             if (ScoreTimer.IsTimeUp)
             {
                 this.lifeLost();
-                SoundEffectManager.PlayRandomPlayerDeathSound();
                 this.setPlayerToCenterOfBottomLane();
             }
             this.ScoreTimerTick?.Invoke(this, scoreTick);
@@ -197,7 +195,6 @@ namespace FroggerStarter.Controller
                 if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.IsActive)
                 {
                     this.lifeLost();
-                    SoundEffectManager.PlayRandomPlayerDeathSound();
                     this.setPlayerToCenterOfBottomLane();
                 }
             }
@@ -327,7 +324,6 @@ namespace FroggerStarter.Controller
             this.scoreTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             this.player.DeathAnimation.AnimationInterval = 1500;
             this.player.PlayDeathAnimation();
-            SoundEffectManager.PlaySound(SoundEffectType.GTADeath);
             this.gameOver();
         }
 
@@ -362,6 +358,7 @@ namespace FroggerStarter.Controller
             this.playerStats.Lives--;
             var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
             this.LifeLoss?.Invoke(this, life);
+            this.checkWhatLifeLostSoundToPlay();
 
             if (this.playerStats.Lives == 0)
             {
@@ -431,6 +428,22 @@ namespace FroggerStarter.Controller
         private static double getRoadStartingYLocation()
         {
             return GameBoard.MiddleRoadYLocation + GameBoard.RoadShoulderOffset;
+        }
+
+        private void checkWhatLifeLostSoundToPlay()
+        {
+            if (this.playerStats.Lives == 0)
+            {
+                SoundEffectManager.PlaySound(SoundEffectType.GTADeath);
+            }
+            else if (this.hasMovedPastTopBoundary())
+            {
+                SoundEffectManager.PlaySound(SoundEffectType.AlmostHadIt);
+            }
+            else
+            {
+                SoundEffectManager.PlayRandomPlayerDeathSound();
+            }
         }
 
         #endregion
