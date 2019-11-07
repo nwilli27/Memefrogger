@@ -20,21 +20,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
 
         #endregion
 
-        #region Constants
-
-        private const int SpawnLocationOffset = 5;
-
-        #endregion
-
         #region Properties
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether the obstacle is active (moving).
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is active; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsActive { get; set; } = false;
 
         /// <summary>
         ///     Gets or sets the sprite associated with the game object.
@@ -59,7 +45,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Obstacle"/> class.
+        ///     Initializes a new instance of the <see cref="WaterObstacle"/> class.
         ///     Precondition: none
         ///     Post-condition: none
         /// </summary>
@@ -79,7 +65,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         ///     Post-condition: @prev this.X +/- this.SpeedX
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">direction - null</exception>
-        public void MoveForward()
+        public virtual void MoveForward()
         {
             switch (this.Direction)
             {
@@ -159,29 +145,6 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
 
                 case Direction.Right:
                     this.X += amountToShift;
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        /// <summary>
-        ///     Moves the X location to the default spawn location.
-        ///     Precondition: none
-        ///     Post-condition: this.X == SpawnLocation [based on direction]
-        /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void MoveToDefaultLocation()
-        {
-            switch (this.Direction)
-            {
-                case Direction.Left:
-                    this.X = GameBoard.BackgroundWidth + SpawnLocationOffset;
-                    break;
-
-                case Direction.Right:
-                    this.X = -this.Width - SpawnLocationOffset;
                     break;
 
                 default:

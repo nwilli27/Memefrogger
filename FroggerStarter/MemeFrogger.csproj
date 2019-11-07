@@ -134,11 +134,18 @@
     <Compile Include="Model\Area Managers\Road\RoadManager.cs" />
     <Compile Include="Model\Area Managers\Water\WaterLane.cs" />
     <Compile Include="Model\Area Managers\Water\WaterManager.cs" />
-    <Compile Include="Model\Game Objects\Moving Object\Car.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\RoadObstacle\RoadObstacle.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\RoadObstacle\Car.cs" />
     <Compile Include="Model\Animation\Frame.cs" />
     <Compile Include="Model\Game Objects\Home\FrogHomes.cs" />
-    <Compile Include="Model\Game Objects\Moving Object\SemiTruck.cs" />
-    <Compile Include="Model\Game Objects\Moving Object\ToadTruck.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\RoadObstacle\SemiTruck.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\Log.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\LargeLog.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\MediumLog.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\SmallLog.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\SpeedBoat.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\RoadObstacle\ToadTruck.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\WaterObstacle.cs" />
     <Compile Include="Model\Game Objects\Power Ups\PowerUp.cs" />
     <Compile Include="Model\Game Objects\Power Ups\PowerUpManager.cs" />
     <Compile Include="Model\Game Objects\Power Ups\TimePowerUp.cs" />
@@ -207,13 +214,22 @@
     <Compile Include="View\Sprites\RoadSprites\TurboCarSprite.xaml.cs">
       <DependentUpon>TurboCarSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\WaterSprites\MiddleLogSprite.xaml.cs">
+    <Compile Include="View\Sprites\WaterSprites\LargeLogSprite.xaml.cs">
+      <DependentUpon>LargeLogSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\WaterSprites\MediumLogSprite.xaml.cs">
+      <DependentUpon>MediumLogSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\WaterSprites\SmallLogSprite.xaml.cs">
+      <DependentUpon>SmallLogSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\WaterSprites\LogPieces\MiddleLogSprite.xaml.cs">
       <DependentUpon>MiddleLogSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\WaterSprites\BackLogSprite.xaml.cs">
+    <Compile Include="View\Sprites\WaterSprites\LogPieces\BackLogSprite.xaml.cs">
       <DependentUpon>BackLogSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\WaterSprites\FrontLogSprite.xaml.cs">
+    <Compile Include="View\Sprites\WaterSprites\LogPieces\FrontLogSprite.xaml.cs">
       <DependentUpon>FrontLogSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\WaterSprites\SpeedBoatSprite.xaml.cs">
@@ -307,15 +323,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\WaterSprites\MiddleLogSprite.xaml">
+    <Page Include="View\Sprites\WaterSprites\LargeLogSprite.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Sprites\WaterSprites\BackLogSprite.xaml">
+    <Page Include="View\Sprites\WaterSprites\MediumLogSprite.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Sprites\WaterSprites\FrontLogSprite.xaml">
+    <Page Include="View\Sprites\WaterSprites\SmallLogSprite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\WaterSprites\LogPieces\MiddleLogSprite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\WaterSprites\LogPieces\BackLogSprite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\WaterSprites\LogPieces\FrontLogSprite.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -14,7 +14,7 @@ namespace FroggerStarter.Constants
         /// <summary>
         ///     The 5th Lane settings
         /// </summary>
-        public static IList<object> Lane5 = new List<object> {
+        public static IList<object> RoadLane5 = new List<object> {
             Direction.Right,
             2.0,
             ObstacleType.Car,
@@ -24,7 +24,7 @@ namespace FroggerStarter.Constants
         /// <summary>
         ///     The 4th Lane settings
         /// </summary>
-        public static IList<object> Lane4 = new List<object> {
+        public static IList<object> RoadLane4 = new List<object> {
             Direction.Left,
             1.75,
             ObstacleType.SemiTruck,
@@ -34,7 +34,7 @@ namespace FroggerStarter.Constants
         /// <summary>
         ///     The 3rd Lane settings
         /// </summary>
-        public static IList<object> Lane3 = new List<object> {
+        public static IList<object> RoadLane3 = new List<object> {
             Direction.Left,
             1.5,
             ObstacleType.Car,
@@ -44,7 +44,7 @@ namespace FroggerStarter.Constants
         /// <summary>
         ///     The 2nd Lane settings
         /// </summary>
-        public static IList<object> Lane2 = new List<object> {
+        public static IList<object> RoadLane2 = new List<object> {
             Direction.Right,
             1.25,
             ObstacleType.SemiTruck,
@@ -54,11 +54,21 @@ namespace FroggerStarter.Constants
         /// <summary>
         ///     The 1st Lane settings
         /// </summary>
-        public static IList<object> Lane1 = new List<object> {
+        public static IList<object> RoadLane1 = new List<object> {
             Direction.Left,
             1.0,
             ObstacleType.ToadTruck,
             3
+        };
+
+        /// <summary>
+        ///     The 1st Lane settings
+        /// </summary>
+        public static IList<object> WaterLane1 = new List<object> {
+            Direction.Left,
+            3.0,
+            ObstacleType.LargeLog,
+            2
         };
     }
 }

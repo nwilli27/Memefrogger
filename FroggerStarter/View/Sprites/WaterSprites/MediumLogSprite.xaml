@@ -1,0 +1,22 @@
+﻿<local:BaseSprite
+
+    x:Class="FroggerStarter.View.Sprites.MediumLogSprite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FroggerStarter.View.Sprites"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="45"
+    Width= "200">
+
+    <Canvas>
+        <local:FrontLogSprite/>
+        <local:MiddleLogSprite Canvas.Left="50"/>
+        <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="48" Canvas.Top="1"/>
+        <local:BackLogSprite Canvas.Left="150"/>
+        <local:MiddleLogSprite Canvas.Left="100"/>
+        <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="98" Canvas.Top="1"/>
+        <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="148" Canvas.Top="1"/>
+    </Canvas>
+</local:BaseSprite>

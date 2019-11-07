@@ -12,6 +12,8 @@ using FroggerStarter.Model.Game_Objects.Power_Ups;
 using FroggerStarter.Model.Player;
 using FroggerStarter.Model.Score;
 using FroggerStarter.Model.Sound;
+using FroggerStarter.Model.Area_Managers.Water;
+using FroggerStarter.Model.Game_Objects.Moving_Object;
 
 namespace FroggerStarter.Controller
 {
@@ -26,7 +28,8 @@ namespace FroggerStarter.Controller
 
         private Canvas gameCanvas;
         private Frog player;
-        private LaneManager laneManager;
+        private RoadManager roadManager;
+        private WaterManager waterManager;
         private FrogHomes frogHomes;
         private PowerUpManager powerUpManager;
 
@@ -84,8 +87,9 @@ namespace FroggerStarter.Controller
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
             SoundEffectManager.CreateAndLoadAllSoundEffects();
 
+            this.createAndPlaceWaterObstaclesOnCanvas();
             this.createAndPlacePlayer();
-            this.createAndPlaceObstaclesInLanes();
+            this.createAndPlaceRoadObstaclesOnCanvas();
             this.createAndPlaceFrogHomes();
             this.createAndPlacePowerUps();
             this.setupPlayerStatsAndHud();
@@ -159,7 +163,8 @@ namespace FroggerStarter.Controller
 
         private void timerOnTick(object sender, object e)
         {
-            this.laneManager.MoveAllObstacles();
+            this.roadManager.MoveAllObstacles();
+            this.waterManager.MoveAllObstacles();
 
             //if player x > mid field check collision with water
 
@@ -190,7 +195,7 @@ namespace FroggerStarter.Controller
 
         private void checkForPlayerToObstacleCollision()
         {
-            foreach (var currentObstacle in this.laneManager)
+            foreach (RoadObstacle currentObstacle in this.roadManager)
             {
                 if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.IsActive)
                 {
@@ -241,22 +246,30 @@ namespace FroggerStarter.Controller
             this.player.FrogLeapAnimation.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
         }
 
-        private void createAndPlaceObstaclesInLanes()
+        private void createAndPlaceRoadObstaclesOnCanvas()
         {
-            this.laneManager = new RoadManager(getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
+            this.roadManager = new RoadManager(getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
 
-            this.laneManager.AddLaneOfObstacles(GameSettings.Lane5);
-            this.laneManager.AddLaneOfObstacles(GameSettings.Lane4);
-            this.laneManager.AddLaneOfObstacles(GameSettings.Lane3);
-            this.laneManager.AddLaneOfObstacles(GameSettings.Lane2);
-            this.laneManager.AddLaneOfObstacles(GameSettings.Lane1);
+            this.roadManager.AddLaneOfObstacles(GameSettings.RoadLane5);
+            this.roadManager.AddLaneOfObstacles(GameSettings.RoadLane4);
+            this.roadManager.AddLaneOfObstacles(GameSettings.RoadLane3);
+            this.roadManager.AddLaneOfObstacles(GameSettings.RoadLane2);
+            this.roadManager.AddLaneOfObstacles(GameSettings.RoadLane1);
 
-            this.placeObstaclesOnCanvas();
+            this.roadManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
         }
 
-        private void placeObstaclesOnCanvas()
+        private void createAndPlaceWaterObstaclesOnCanvas()
         {
-            this.laneManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
+            this.waterManager = new WaterManager(GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset, GameBoard.MiddleRoadYLocation);
+
+            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
+            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
+            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
+            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
+            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
+
+            this.waterManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
         }
 
         #endregion
@@ -414,7 +427,7 @@ namespace FroggerStarter.Controller
             {
                 this.player.ResetAfterDeath();
 
-                this.laneManager.ResetLanesToOneObstacle();
+                this.roadManager.ResetLanesToOneObstacle();
                 ScoreTimer.ResetScoreTick();
                 this.scoreTimer.Start();
 

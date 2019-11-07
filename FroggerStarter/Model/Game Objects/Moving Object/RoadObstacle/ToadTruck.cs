@@ -4,22 +4,20 @@ using FroggerStarter.View.Sprites;
 namespace FroggerStarter.Model.Game_Objects.Moving_Object
 {
     /// <summary>
-    ///     A car object of type Obstacle.
+    ///     A toad truck object of type RoadObstacle.
     /// </summary>
-    /// <seealso cref="Obstacle" />
-    public sealed class Car : Obstacle
+    /// <seealso cref="WaterObstacle" />
+    public sealed class ToadTruck : RoadObstacle
     {
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Car" /> class.
-        ///     Precondition: none
-        ///     Post-condition: none
+        ///     Initializes a new instance of the <see cref="ToadTruck" /> class.
         /// </summary>
         /// <param name="direction">The direction the vehicle is facing.</param>
-        public Car(Direction direction) : base(direction)
+        public ToadTruck(Direction direction) : base(direction)
         {
-            Sprite = new CarSprite();
+            Sprite = new ToadTruckSprite();
             this.MoveToDefaultLocation();
         }
 

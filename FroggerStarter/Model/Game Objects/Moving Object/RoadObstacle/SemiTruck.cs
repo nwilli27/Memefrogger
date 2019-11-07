@@ -4,10 +4,10 @@ using FroggerStarter.View.Sprites;
 namespace FroggerStarter.Model.Game_Objects.Moving_Object
 {
     /// <summary>
-    ///     A semi truck object of type Obstacle.
+    ///     A semi truck object of type RoadObstacle.
     /// </summary>
-    /// <seealso cref="Obstacle" />
-    public sealed class SemiTruck : Obstacle
+    /// <seealso cref="WaterObstacle" />
+    public sealed class SemiTruck : RoadObstacle
     {
         #region Constructors
 

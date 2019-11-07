@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using FroggerStarter.Model.Game_Objects.Moving_Object;
+using FroggerStarter.Enums;
 
 namespace FroggerStarter.Model.Area_Managers
 {
@@ -31,20 +32,6 @@ namespace FroggerStarter.Model.Area_Managers
         /// </summary>
         protected readonly double Height;
 
-        /// <summary>
-        ///     The obstacle spawn timer
-        /// </summary>
-        protected DispatcherTimer ObstacleSpawnTimer;
-
-        #endregion
-
-        #region Constants
-
-        /// <summary>
-        ///     The spawn time interval
-        /// </summary>
-        protected const int SpawnTimeInterval = 4;
-
         #endregion
 
         #region Constructors
@@ -64,8 +51,6 @@ namespace FroggerStarter.Model.Area_Managers
             this.StartingYLocation = startingYLocation < endingYLocation ? startingYLocation : throw new ArgumentOutOfRangeException();
             this.Lanes = new List<Lane>();
             this.Height = endingYLocation - startingYLocation;
-
-            this.setupObstacleSpawnTimer();
         }
 
         #endregion
@@ -83,18 +68,6 @@ namespace FroggerStarter.Model.Area_Managers
         }
 
         /// <summary>
-        ///     Resets the lanes to one obstacle each.
-        ///     Precondition: none
-        ///     Post-condition: @each obstacle.isActive = false
-        ///                     @first obstacle.isActive = true
-        /// </summary>
-        public void ResetLanesToOneObstacle()
-        {
-            this.Lanes.ToList().ForEach(lane => lane.ResetLaneToOneObstacle());
-            this.resetSpawnTimer();
-        }
-
-        /// <summary>
         ///     Adds a lane with a specified number of [obstacleType] obstacles to it and
         ///     then readjusts the Y spacing of each lane.
         ///     Precondition: defaultSpeed > 0
@@ -108,8 +81,19 @@ namespace FroggerStarter.Model.Area_Managers
         /// <exception cref="ArgumentOutOfRangeException">
         /// </exception>
         public abstract void AddLaneOfObstacles(IList<object> laneSettings);
-        //TODO: Determine if this needs to be abstract?
-        //TODO: Implementation between Road/Water might only be the var lane = new Lane(etc) line...
+
+        /// <summary>
+        ///     Updates the y location of lanes.
+        /// </summary>
+        protected void UpdateYLocationOfLanes()
+        {
+            var heightOfEachLane = this.Height / this.Lanes.Count;
+            for (var i = 0; i < this.Lanes.Count; i++)
+            {
+                var yLocation = this.StartingYLocation + (heightOfEachLane * i);
+                this.Lanes[i].SetObstaclesToLaneYLocation(yLocation, heightOfEachLane);
+            }
+        }
 
         /// <summary>
         ///     Returns an enumerator that iterates through the collection.
@@ -131,45 +115,6 @@ namespace FroggerStarter.Model.Area_Managers
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.Lanes.SelectMany(lane => lane).GetEnumerator();
-        }
-
-        #endregion
-
-        #region Private Helpers
-
-        private void setupObstacleSpawnTimer()
-        {
-            this.ObstacleSpawnTimer = new DispatcherTimer();
-            this.ObstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;
-            this.ObstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, SpawnTimeInterval, 0);
-            this.ObstacleSpawnTimer.Start();
-        }
-
-        private void obstacleSpawnTimerOnTick(object sender, object e)
-        {
-            this.Lanes.ToList().ForEach(lane => lane.MakeObstacleActive());
-        }
-
-        private void resetSpawnTimer()
-        {
-            this.ObstacleSpawnTimer.Stop();
-            this.ObstacleSpawnTimer.Start();
-        }
-
-        /// <summary>
-        ///     Updates the y location of lanes.
-        ///     Precondition: none
-        ///     Post-condition: Determines the height of the lanes based on the number of lanes 
-        ///                     and the height of the lanes.
-        /// </summary>
-        protected void UpdateYLocationOfLanes()
-        {
-            var heightOfEachLane = this.Height / this.Lanes.Count;
-            for (var i = 0; i < this.Lanes.Count; i++)
-            {
-                var yLocation = this.StartingYLocation + (heightOfEachLane * i);
-                this.Lanes[i].SetObstaclesToLaneYLocation(yLocation, heightOfEachLane);
-            }
         }
 
         #endregion
