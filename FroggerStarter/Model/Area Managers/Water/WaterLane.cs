@@ -68,7 +68,12 @@ namespace FroggerStarter.Model.Area_Managers.Water
 
         private double getSpacingBetweenVehicles()
         {
-            return GameBoard.BackgroundWidth / this.obstacles.Count;
+            return (GameBoard.BackgroundWidth / this.obstacles.Count) + (this.getAverageWidth() / 2);
+        }
+
+        private double getAverageWidth()
+        {
+            return this.obstacles.Average(obstacle => obstacle.Width);
         }
 
         #endregion

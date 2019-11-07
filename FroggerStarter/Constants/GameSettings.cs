@@ -67,8 +67,8 @@ namespace FroggerStarter.Constants
         public static IList<object> WaterLane1 = new List<object> {
             Direction.Left,
             3.0,
-            ObstacleType.LargeLog,
-            2
+            ObstacleType.SmallLog,
+            4
         };
     }
 }

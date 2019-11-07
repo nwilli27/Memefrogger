@@ -65,7 +65,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         ///     Post-condition: @prev this.X +/- this.SpeedX
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">direction - null</exception>
-        public virtual void MoveForward()
+        public void MoveForward()
         {
             switch (this.Direction)
             {
@@ -74,7 +74,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
                     break;
 
                 case Direction.Right:
-                    this.moveObstacleToTheRight(GameBoard.BackgroundWidth);
+                    this.moveObstacleToTheRight();
                     break;
 
                 default:
@@ -156,16 +156,16 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
 
         #region Private Helpers
 
-        private void moveObstacleToTheRight(double horizontalLaneWidth)
+        protected virtual void moveObstacleToTheRight()
         {
-            if (this.hasObstacleMovedOffRightSide(horizontalLaneWidth))
+            if (this.hasObstacleMovedOffRightSide(GameBoard.BackgroundWidth))
             {
                 this.X = -this.Width * 2;
             }
             this.MoveRight();
         }
 
-        private void moveObstacleToTheLeft()
+        protected virtual void moveObstacleToTheLeft()
         {
             if (this.hasObstacleMovedOffLeftSide())
             {
@@ -174,12 +174,12 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
             this.MoveLeft();
         }
 
-        private bool hasObstacleMovedOffRightSide(double horizontalLaneWidth)
+        protected bool hasObstacleMovedOffRightSide(double horizontalLaneWidth)
         {
             return this.X + this.SpeedX > horizontalLaneWidth;
         }
 
-        private bool hasObstacleMovedOffLeftSide()
+        protected bool hasObstacleMovedOffLeftSide()
         {
             return this.X + this.SpeedX < -this.Width;
         }
