@@ -88,8 +88,8 @@ namespace FroggerStarter.Model.Area_Managers
         /// <param name="heightOfLane">The height of lane.</param>
         public void SetObstaclesToLaneYLocation(double yLocation, double heightOfLane)
         {
-            this.obstacles.ToList().ForEach(obstacle => 
-                obstacle.Y = getCenteredYLocationOfLane(obstacle, yLocation, heightOfLane));
+            this.obstacles.ToList().ForEach(obstacle =>
+                obstacle.SetCenteredYLocationOfArea(heightOfLane, yLocation));
         }
 
         /// <summary>
@@ -122,12 +122,6 @@ namespace FroggerStarter.Model.Area_Managers
         #endregion
 
         #region Private Helpers
-
-
-        private static double getCenteredYLocationOfLane(GameObject obstacle, double yLocation, double heightOfLane)
-        {
-            return ((heightOfLane - obstacle.Height) / 2) + yLocation;
-        }
 
         private void add(Obstacle obstacle)
         {

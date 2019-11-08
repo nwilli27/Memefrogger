@@ -11,10 +11,10 @@
     Width= "200">
 
     <Canvas>
-        <local:FrontLogSprite/>
+        <local:FrontLogSprite Canvas.Left="1"/>
         <local:MiddleLogSprite Canvas.Left="50"/>
         <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="48" Canvas.Top="1"/>
-        <local:BackLogSprite Canvas.Left="150"/>
+        <local:BackLogSprite Canvas.Left="149"/>
         <local:MiddleLogSprite Canvas.Left="100"/>
         <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="98" Canvas.Top="1"/>
         <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="148" Canvas.Top="1"/>

@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sprites="using:FroggerStarter.View.Sprites"
     mc:Ignorable="d"
-    Height="50"
-    Width="50">
+    Height="40"
+    Width="40">
 
     <UserControl.Resources>
         <SolidColorBrush x:Key="FrogColor" x:Name="frogColor" Color="DarkGreen"/>
@@ -17,387 +17,401 @@
     </UserControl.Resources>
 
 
-    <Canvas Margin="5,5,5,5">
+    <Canvas>
+        <Viewbox Height="34" Stretch="Fill" Width="40" Canvas.Top="2" Canvas.Left="-1">
+            <Grid Height="34.9999993867874" Width="41.312999833107">
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="12.998,0.857,11.287,6.165" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-1.175" SkewY="0" SkewX="0.058"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="13.098,1.829,23.922,27.731" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="31.344" ScaleY="1.007" ScaleX="0.993" SkewY="0" SkewX="-1.228"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="24.639,1.732,12.382,27.828" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-37.586" ScaleY="1.009" ScaleX="0.992" SkewY="0" SkewX="1.33"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="27.483,11.77,5.558,20.122" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-27.193" ScaleY="1.005" ScaleX="0.994" SkewY="0" SkewX="1.126"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="27.966,9.55,6.667,22.342" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-12.258" ScaleY="1.001" ScaleX="0.999" SkewY="0" SkewX="0.58"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="29.541,9.012,3.5,22.879" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-78.987" TranslateX="1.329" TranslateY="-1.719" ScaleY="1.023" ScaleX="0.977" SkewY="0" SkewX="0.501"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="29.631,7.253,3.41,24.639" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-58.851" TranslateX="-0.086" TranslateY="0.073" ScaleY="1.018" ScaleX="0.982" SkewY="0" SkewX="1.196"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="35.247,2.71,1.773,28.405" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="39.185" TranslateX="-1.282" TranslateY="-0.465" ScaleY="1.011" ScaleX="0.991" SkewY="0" SkewX="-1.346"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="36.78,3.098,1.037,30.736" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="0.228" TranslateX="-0.989" TranslateY="0.844" SkewY="0" SkewX="-0.011"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="33.789,2.473,4.028,31.362" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-91.139" TranslateX="0.504" TranslateY="-0.274" ScaleY="1.025" ScaleX="0.976" SkewX="0" SkewY="-0.055"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="34.167,4.527,3.649,29.308" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-159.367" TranslateX="-0.865" TranslateY="-1.643" ScaleY="1.003" ScaleX="0.997" SkewX="0" SkewY="-0.886"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="38.925,0.526,-0.313,32.142" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="39.185" TranslateX="-0.289" TranslateY="2.796" ScaleY="1.011" ScaleX="0.991" SkewY="0" SkewX="-1.346"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="2.013,0,36.599,32.668" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="57.238" TranslateX="2.642" TranslateY="-0.511" ScaleY="1.018" ScaleX="0.984" SkewY="0" SkewX="-1.232"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="32.701,4.693,5.911,27.975" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="39.185" TranslateX="-0.993" TranslateY="-3.261" ScaleY="1.011" ScaleX="0.991" SkewY="0" SkewX="-1.346"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="32.684,0.011,5.928,32.658" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="23.957" TranslateX="2.016" TranslateY="-0.559" ScaleY="1.004" ScaleX="0.996" SkewY="0" SkewX="-1.031"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="36.264,2.999,1.552,30.835" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-48.738" TranslateX="-0.412" TranslateY="-0.455" ScaleY="1.014" ScaleX="0.986" SkewY="0" SkewX="1.352"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="34.776,0.418,3.836,32.251" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="65.71" TranslateX="2.979" TranslateY="-0.204" ScaleY="1.021" ScaleX="0.98" SkewY="0" SkewX="-1.009"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="6.875,11.871,26.961,20.021" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleX="-0.994" Rotation="28.01" TranslateX="0.265" TranslateY="-0.117" ScaleY="1.005" SkewY="-1.118"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="6.883,9.927,26.451,22.079" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="9.611" ScaleX="-1" TranslateX="0.202" TranslateY="-0.117" ScaleY="1" SkewY="-0.44"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="2.153,9.259,31.181,22.747" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="77.39" TranslateX="1.466" TranslateY="-1.676" ScaleX="-0.978" ScaleY="1.022" SkewY="-0.596"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="4.842,7.317,28.492,24.689" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="57.927" TranslateX="0.044" TranslateY="0.058" ScaleX="-0.983" ScaleY="1.016" SkewY="-1.243"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="4.261,2.294,32.76,28.82" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-2.094" TranslateX="-0.086" TranslateY="0.096" SkewY="0" SkewX="0.103"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="5.861,2.696,31.955,31.138" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-41.09" TranslateX="-0.127" TranslateY="0.034" ScaleY="1.01" ScaleX="0.99" SkewY="0" SkewX="1.359"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="5.174,2.13,32.642,31.705" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-97.456" TranslateX="-0.66" TranslateY="0.394" ScaleY="1.024" ScaleX="0.976" SkewX="0" SkewY="-0.359"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="3.266,3.833,34.551,30.001" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="157.708" TranslateX="-0.085" TranslateY="0.164" ScaleY="1.003" ScaleX="0.997" SkewX="0" SkewY="0.944"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="0,0.893,38.612,31.776" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="19.964" TranslateX="1.781" TranslateY="-0.16" ScaleY="1.002" ScaleX="0.998" SkewY="0" SkewX="-0.894"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="2.796,3.247,35.02,30.587" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-134.401" TranslateX="0.267" TranslateY="-0.257" ScaleY="1.012" ScaleX="0.988" SkewX="0" SkewY="-1.367"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="8.264,0.772,30.348,31.896" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-2.094" TranslateX="-0.201" TranslateY="-0.052" SkewY="0" SkewX="0.103"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="1.865,3.815,36.747,28.854" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-2.094" TranslateX="-0.046" TranslateY="0.245" SkewY="0" SkewX="0.103"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="7.36,19.22,25.681,10.389" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-25.373" ScaleY="1.005" ScaleX="0.995" SkewY="0" SkewX="1.075"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="7.915,21.553,23.63,9.895" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-8.251" ScaleY="1.001" ScaleX="0.999" SkewY="0" SkewX="0.398"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="5.72,24.583,26.525,6.959" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="42.439" ScaleY="1.011" ScaleX="0.989" SkewY="0" SkewX="-1.364"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="5.233,20.801,30.794,9.345">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="27.048" ScaleY="1.006" ScaleX="0.995" SkewY="0" SkewX="-1.123"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="5.626,30.083,26.618,1.75" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-34.204" TranslateX="-0.459" TranslateY="-0.407" ScaleY="1.008" ScaleX="0.992" SkewY="0" SkewX="1.282"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="12.453,30.214,24.912,1.237">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-1.455" TranslateX="-1.421" TranslateY="-3.211" SkewY="0" SkewX="0.071"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="4.036,29.144,32.954,4.673" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-3.724" TranslateX="-0.307" TranslateY="2.404" ScaleY="1" ScaleX="1" SkewY="0" SkewX="0.181"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="3.568,30.528,33.423,3.29" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-32.099" TranslateX="0.601" TranslateY="2.296" ScaleY="1.007" ScaleX="0.993" SkewY="0" SkewX="1.243"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="4.017,32.134,32.973,1.684" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-60.275" TranslateX="1.397" TranslateY="1.629" ScaleY="1.019" ScaleX="0.981" SkewY="0" SkewX="1.164"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="2.3,27.037,36.312,5.631" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-63.6" TranslateX="-0.716" TranslateY="4.145" ScaleY="1.02" ScaleX="0.98" SkewY="0" SkewX="1.074"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="1.657,29.714,36.955,2.955" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-63.6" TranslateX="0.973" TranslateY="3.901" ScaleY="1.02" ScaleX="0.98" SkewY="0" SkewX="1.074"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="2.337,32.668,36.275,0" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-63.6" TranslateX="2.516" TranslateY="2.851" ScaleY="1.02" ScaleX="0.98" SkewY="0" SkewX="1.074"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="26.679,19.249,5.566,10.59" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="26.448" ScaleX="-0.995" ScaleY="1.005" SkewY="-1.075"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="25.09,21.368,7.409,9.943" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="10.212" ScaleX="-1" ScaleY="1" SkewY="-0.467"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="29.417,24.537,4.42,7.151" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-43.803" ScaleX="-0.989" ScaleY="1.011" SkewY="1.364"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="32.854,21.124,3.384,9.227">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-28.171" ScaleX="-0.995" ScaleY="1.006" SkewY="1.123"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="28.745,30.322,3.5,1.646" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="37.94" ScaleX="-0.991" TranslateX="0.371" TranslateY="-0.439" ScaleY="1.009" SkewY="-1.318"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="26.716,30.122,10.804,1.479">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="4.021" ScaleX="-1" TranslateX="1.765" TranslateY="-3.073" ScaleY="1" SkewY="-0.187"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="34.902,29.555,2.258,4.313" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="6.4" ScaleX="-0.999" TranslateX="0.332" TranslateY="2.465" ScaleY="1.001" SkewY="-0.296"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="35.356,30.859,1.804,3.009" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="35.801" ScaleX="-0.992" TranslateX="-0.566" TranslateY="2.456" ScaleY="1.008" SkewY="-1.288"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="34.941,32.384,2.22,1.483" >
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="63.843" ScaleX="-0.982" TranslateX="-1.401" TranslateY="1.872" ScaleY="1.019" SkewY="-1.098"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="38.14,27.302,0.574,5.466" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="67.074" ScaleX="-0.981" TranslateX="0.615" TranslateY="4.396" ScaleY="1.02" SkewY="-0.998"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="38.777,29.877,-0.063,2.89" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="67.074" ScaleX="-0.981" TranslateX="-1.127" TranslateY="4.105" ScaleY="1.02" SkewY="-0.998"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource FrogColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="38.15,32.73,0.564,0.037" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="67.074" ScaleX="-0.981" TranslateX="-2.703" TranslateY="2.987" ScaleY="1.02" SkewY="-0.998"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Ellipse Fill="{StaticResource EyeColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="23.074,3.154,14.825,29.514" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="39.185" TranslateX="2.387" TranslateY="-0.585" ScaleY="1.011" ScaleX="0.991" SkewY="0" SkewX="-1.346"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="Black" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="24.062,3.087,15.465,30.475" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="44.317" TranslateX="2.387" TranslateY="-0.585" ScaleY="1.013" ScaleX="0.988" SkewY="0" SkewX="-1.367"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource EyeColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="10.737,3.265,27.162,29.402" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-38.28" TranslateX="2.388" TranslateY="-0.651" ScaleY="1.01" ScaleX="0.99" SkewY="0" SkewX="1.337"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="Black" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="12.071,2.937,27.455,30.625" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-33.175" TranslateX="1.665" TranslateY="-0.351" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.264"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="16.771,5.315,21.459,27.497" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-34.406" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.286"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="20.146,2.887,18.084,29.925" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-66.016" ScaleY="1.02" ScaleX="0.98" SkewY="0" SkewX="1"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="13.482,8.696,23.853,23.41" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-34.406" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.286"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="22.816,5.898,15.414,26.914" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-34.406" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.286"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="19.625,8.91,18.606,23.903" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="24.765,9.48,12.977,22.946" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="16.207,13.012,22.616,20.268" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="25.758,14.163,13.064,19.117" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="20.146,13.087,18.084,19.726" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-34.406" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.286"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="14.555,17.373,23.187,15.054" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="19.242,17.459,18.988,15.354" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-66.016" ScaleY="1.02" ScaleX="0.98" SkewY="0" SkewX="1"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="23.033,18.313,14.302,13.792" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-34.406" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.286"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="17.998,22.018,20.825,11.263" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="21.805,22.122,16.425,10.691" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="{StaticResource DesignColor}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="19.59,24.946,19.233,8.334" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+            </Grid>
+        </Viewbox>
 
         <!--BODY-->
-        <Ellipse Width="16.715" Height="27.978" Fill="{StaticResource FrogColor}" Canvas.Left="11.601" Canvas.Top="2.218" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-1.175" SkewY="0" SkewX="0.058"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
 
         <!--EYES-->
-        <Ellipse Width="3.98" Height="5.44" Fill="{StaticResource FrogColor}" Canvas.Left="11.701" Canvas.Top="3.19" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="31.344" ScaleY="1.007" ScaleX="0.993" SkewY="0" SkewX="-1.228"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="3.979" Height="5.44" Fill="{StaticResource FrogColor}" Canvas.Left="23.242" Canvas.Top="3.093" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-37.586" ScaleY="1.009" ScaleX="0.992" SkewY="0" SkewX="1.33"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
 
         <!--Right Arm-->
-        <Rectangle Width="7.959" Height="3.108" Fill="{StaticResource FrogColor}" Canvas.Left="26.086" Canvas.Top="13.131" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-27.193" ScaleY="1.005" ScaleX="0.994" SkewY="0" SkewX="1.126"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="6.367" Height="3.108" Fill="{StaticResource FrogColor}" Canvas.Left="26.569" Canvas.Top="10.911" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-12.258" ScaleY="1.001" ScaleX="0.999" SkewY="0" SkewX="0.58"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="7.959" Height="3.109" Fill="{StaticResource FrogColor}" Canvas.Left="28.144" Canvas.Top="10.373" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-78.987" TranslateX="1.329" TranslateY="-1.719" ScaleY="1.023" ScaleX="0.977" SkewY="0" SkewX="0.501"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="7.959" Height="3.108" Fill="{StaticResource FrogColor}" Canvas.Left="28.234" Canvas.Top="8.614" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-58.851" TranslateX="-0.086" TranslateY="0.073" ScaleY="1.018" ScaleX="0.982" SkewY="0" SkewX="1.196"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
 
         <!--Right Arm Hand-->
-        <Ellipse Width="3.98" Height="3.885" Fill="{StaticResource FrogColor}" Canvas.Left="33.85" Canvas.Top="4.071" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="39.185" TranslateX="-1.282" TranslateY="-0.465" ScaleY="1.011" ScaleX="0.991" SkewY="0" SkewX="-1.346"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Rectangle Width="3.183" Height="1.166" Fill="{StaticResource FrogColor}" Canvas.Left="35.383" Canvas.Top="4.459" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="0.228" TranslateX="-0.989" TranslateY="0.844" SkewY="0" SkewX="-0.011"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="3.183" Height="1.165" Fill="{StaticResource FrogColor}" Canvas.Left="32.392" Canvas.Top="3.834" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-91.139" TranslateX="0.504" TranslateY="-0.274" ScaleY="1.025" ScaleX="0.976" SkewX="0" SkewY="-0.055"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="3.184" Height="1.165" Fill="{StaticResource FrogColor}" Canvas.Left="32.77" Canvas.Top="5.888" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-159.367" TranslateX="-0.865" TranslateY="-1.643" ScaleY="1.003" ScaleX="0.997" SkewX="0" SkewY="-0.886"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Width="2.388" Height="2.332" Fill="{StaticResource FrogColor}" Canvas.Left="37.528" Canvas.Top="1.887" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="39.185" TranslateX="-0.289" TranslateY="2.796" ScaleY="1.011" ScaleX="0.991" SkewY="0" SkewX="-1.346"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.388" Height="2.332" Fill="{StaticResource FrogColor}" Canvas.Left="0.616" Canvas.Top="1.361" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="57.238" TranslateX="2.642" TranslateY="-0.511" ScaleY="1.018" ScaleX="0.984" SkewY="0" SkewX="-1.232"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.388" Height="2.332" Fill="{StaticResource FrogColor}" Canvas.Top="6.054" Canvas.Left="31.304" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="39.185" TranslateX="-0.993" TranslateY="-3.261" ScaleY="1.011" ScaleX="0.991" SkewY="0" SkewX="-1.346"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.388" Height="2.331" Fill="{StaticResource FrogColor}" Canvas.Left="31.287" Canvas.Top="1.372" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="23.957" TranslateX="2.016" TranslateY="-0.559" ScaleY="1.004" ScaleX="0.996" SkewY="0" SkewX="-1.031"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Rectangle Width="3.184" Height="1.166" Fill="{StaticResource FrogColor}" Canvas.Left="34.867" Canvas.Top="4.36" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-48.738" TranslateX="-0.412" TranslateY="-0.455" ScaleY="1.014" ScaleX="0.986" SkewY="0" SkewX="1.352"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Width="2.388" Height="2.331" Fill="{StaticResource FrogColor}" Canvas.Left="33.379" Canvas.Top="1.779" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="65.71" TranslateX="2.979" TranslateY="-0.204" ScaleY="1.021" ScaleX="0.98" SkewY="0" SkewX="-1.009"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
 
         <!--Left Arm-->
-        <Rectangle Width="7.164" Height="3.108" Fill="{StaticResource FrogColor}" Canvas.Left="5.478" Canvas.Top="13.232" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform ScaleX="-0.994" Rotation="28.01" TranslateX="0.265" TranslateY="-0.117" ScaleY="1.005" SkewY="-1.118"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="7.666" Height="2.994" Fill="{StaticResource FrogColor}" Canvas.Left="5.486" Canvas.Top="11.288" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="9.611" ScaleX="-1" TranslateX="0.202" TranslateY="-0.117" ScaleY="1" SkewY="-0.44"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="7.666" Height="2.994" Fill="{StaticResource FrogColor}" Canvas.Left="0.756" Canvas.Top="10.62" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="77.39" TranslateX="1.466" TranslateY="-1.676" ScaleX="-0.978" ScaleY="1.022" SkewY="-0.596"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="7.666" Height="2.994" Fill="{StaticResource FrogColor}" Canvas.Left="3.445" Canvas.Top="8.678" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="57.927" TranslateX="0.044" TranslateY="0.058" ScaleX="-0.983" ScaleY="1.016" SkewY="-1.243"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
 
         <!--Left Arm Hand-->
-        <Ellipse Width="3.979" Height="3.886" Fill="{StaticResource FrogColor}" Canvas.Left="2.864" Canvas.Top="3.655" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-2.094" TranslateX="-0.086" TranslateY="0.096" SkewY="0" SkewX="0.103"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Rectangle Width="3.184" Height="1.166" Fill="{StaticResource FrogColor}" Canvas.Left="4.464" Canvas.Top="4.057" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-41.09" TranslateX="-0.127" TranslateY="0.034" ScaleY="1.01" ScaleX="0.99" SkewY="0" SkewX="1.359"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="3.184" Height="1.165" Fill="{StaticResource FrogColor}" Canvas.Left="3.777" Canvas.Top="3.491" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-97.456" TranslateX="-0.66" TranslateY="0.394" ScaleY="1.024" ScaleX="0.976" SkewX="0" SkewY="-0.359"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="3.183" Height="1.166" Fill="{StaticResource FrogColor}" Canvas.Left="1.869" Canvas.Top="5.194" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="157.708" TranslateX="-0.085" TranslateY="0.164" ScaleY="1.003" ScaleX="0.997" SkewX="0" SkewY="0.944"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Width="2.388" Height="2.331" Fill="{StaticResource FrogColor}" Canvas.Left="-1.397" Canvas.Top="2.254" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="19.964" TranslateX="1.781" TranslateY="-0.16" ScaleY="1.002" ScaleX="0.998" SkewY="0" SkewX="-0.894"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Rectangle Width="3.184" Height="1.166" Fill="{StaticResource FrogColor}" Canvas.Left="1.399" Canvas.Top="4.608" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-134.401" TranslateX="0.267" TranslateY="-0.257" ScaleY="1.012" ScaleX="0.988" SkewX="0" SkewY="-1.367"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Width="2.388" Height="2.332" Fill="{StaticResource FrogColor}" Canvas.Left="6.867" Canvas.Top="2.133" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-2.094" TranslateX="-0.201" TranslateY="-0.052" SkewY="0" SkewX="0.103"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.388" Height="2.331" Fill="{StaticResource FrogColor}" Canvas.Top="5.176" RenderTransformOrigin="0.5,0.5" Canvas.Left="0.468" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-2.094" TranslateX="-0.046" TranslateY="0.245" SkewY="0" SkewX="0.103"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
 
         <!--Left Leg-->
-        <Rectangle Height="5.391" Width="7.959" Fill="{StaticResource FrogColor}" Canvas.Left="5.963" Canvas.Top="20.581" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-25.373" ScaleY="1.005" ScaleX="0.995" SkewY="0" SkewX="1.075"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Height="3.552" Width="9.455" Fill="{StaticResource FrogColor}" Canvas.Left="6.518" Canvas.Top="22.914" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-8.251" ScaleY="1.001" ScaleX="0.999" SkewY="0" SkewX="0.398"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Height="3.458" Width="8.755" Fill="{StaticResource FrogColor}" Canvas.Left="4.323" Canvas.Top="25.944" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="42.439" ScaleY="1.011" ScaleX="0.989" SkewY="0" SkewX="-1.364"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Height="4.854" Width="4.973" Fill="{StaticResource FrogColor}" Canvas.Left="3.836" Canvas.Top="22.162" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="27.048" ScaleY="1.006" ScaleX="0.995" SkewY="0" SkewX="-1.123"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Rectangle Height="3.167" Width="8.756" Fill="{StaticResource FrogColor}" Canvas.Left="4.229" Canvas.Top="31.444" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-34.204" TranslateX="-0.459" TranslateY="-0.407" ScaleY="1.008" ScaleX="0.992" SkewY="0" SkewX="1.282"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Height="3.549" Width="3.635" Fill="{StaticResource FrogColor}" Canvas.Left="11.056" Canvas.Top="31.575" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-1.455" TranslateX="-1.421" TranslateY="-3.211" SkewY="0" SkewX="0.071"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Rectangle Height="1.183" Width="4.01" Fill="{StaticResource FrogColor}" Canvas.Left="2.639" Canvas.Top="30.505" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-3.724" TranslateX="-0.307" TranslateY="2.404" ScaleY="1" ScaleX="1" SkewY="0" SkewX="0.181"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Height="1.182" Width="4.009" Fill="{StaticResource FrogColor}" Canvas.Left="2.171" Canvas.Top="31.889" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-32.099" TranslateX="0.601" TranslateY="2.296" ScaleY="1.007" ScaleX="0.993" SkewY="0" SkewX="1.243"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Height="1.182" Width="4.01" Fill="{StaticResource FrogColor}" Canvas.Left="2.62" Canvas.Top="33.495" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-60.275" TranslateX="1.397" TranslateY="1.629" ScaleY="1.019" ScaleX="0.981" SkewY="0" SkewX="1.164"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Width="2.388" Height="2.332" Fill="{StaticResource FrogColor}" Canvas.Top="28.398" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Canvas.Left="0.903" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-63.6" TranslateX="-0.716" TranslateY="4.145" ScaleY="1.02" ScaleX="0.98" SkewY="0" SkewX="1.074"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.388" Height="2.331" Fill="{StaticResource FrogColor}" Canvas.Top="31.075" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Canvas.Left="0.26" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-63.6" TranslateX="0.973" TranslateY="3.901" ScaleY="1.02" ScaleX="0.98" SkewY="0" SkewX="1.074"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.388" Height="2.332" Fill="{StaticResource FrogColor}" Canvas.Top="34.029" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Canvas.Left="0.94" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-63.6" TranslateX="2.516" TranslateY="2.851" ScaleY="1.02" ScaleX="0.98" SkewY="0" SkewX="1.074"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
 
         <!--Right Leg-->
-        <Rectangle Height="5.161" Width="8.755" Fill="{StaticResource FrogColor}" Canvas.Left="25.282" Canvas.Top="20.61" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="26.448" ScaleX="-0.995" ScaleY="1.005" SkewY="-1.075"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Height="3.689" Width="8.501" Fill="{StaticResource FrogColor}" Canvas.Left="23.693" Canvas.Top="22.729" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="10.212" ScaleX="-1" ScaleY="1" SkewY="-0.467"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Height="3.312" Width="7.163" Fill="{StaticResource FrogColor}" Canvas.Left="28.02" Canvas.Top="25.898" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-43.803" ScaleX="-0.989" ScaleY="1.011" SkewY="1.364"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Height="4.649" Width="4.762" Fill="{StaticResource FrogColor}" Canvas.Left="31.457" Canvas.Top="22.485" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-28.171" ScaleX="-0.995" ScaleY="1.006" SkewY="1.123"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Rectangle Height="3.032" Width="8.755" Fill="{StaticResource FrogColor}" Canvas.Left="27.348" Canvas.Top="31.683" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="37.94" ScaleX="-0.991" TranslateX="0.371" TranslateY="-0.439" ScaleY="1.009" SkewY="-1.318"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Height="3.399" Width="3.48" Fill="{StaticResource FrogColor}" Canvas.Left="25.319" Canvas.Top="31.483" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="4.021" ScaleX="-1" TranslateX="1.765" TranslateY="-3.073" ScaleY="1" SkewY="-0.187"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Rectangle Height="1.132" Width="3.84" Fill="{StaticResource FrogColor}" Canvas.Left="33.505" Canvas.Top="30.916" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="6.4" ScaleX="-0.999" TranslateX="0.332" TranslateY="2.465" ScaleY="1.001" SkewY="-0.296"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Height="1.132" Width="3.84" Fill="{StaticResource FrogColor}" Canvas.Left="33.959" Canvas.Top="32.22" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="35.801" ScaleX="-0.992" TranslateX="-0.566" TranslateY="2.456" ScaleY="1.008" SkewY="-1.288"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Height="1.133" Width="3.839" Fill="{StaticResource FrogColor}" Canvas.Left="33.544" Canvas.Top="33.745" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="63.843" ScaleX="-0.982" TranslateX="-1.401" TranslateY="1.872" ScaleY="1.019" SkewY="-1.098"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Width="2.286" Height="2.232" Fill="{StaticResource FrogColor}" Canvas.Left="36.743" Canvas.Top="28.663" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="67.074" ScaleX="-0.981" TranslateX="0.615" TranslateY="4.396" ScaleY="1.02" SkewY="-0.998"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.286" Height="2.233" Fill="{StaticResource FrogColor}" Canvas.Top="31.238" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Canvas.Left="37.38" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="67.074" ScaleX="-0.981" TranslateX="-1.127" TranslateY="4.105" ScaleY="1.02" SkewY="-0.998"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.286" Height="2.233" Fill="{StaticResource FrogColor}" Canvas.Top="34.091" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Canvas.Left="36.753" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="67.074" ScaleX="-0.981" TranslateX="-2.703" TranslateY="2.987" ScaleY="1.02" SkewY="-0.998"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
 
         <!--EYES-->
-        <Ellipse Width="3.101" Height="2.332" Fill="{StaticResource EyeColor}" Canvas.Left="21.677" Canvas.Top="4.515" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="39.185" TranslateX="2.387" TranslateY="-0.585" ScaleY="1.011" ScaleX="0.991" SkewY="0" SkewX="-1.346"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="1.473" Height="1.438" Fill="Black" Canvas.Left="22.665" Canvas.Top="4.448" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="44.317" TranslateX="2.387" TranslateY="-0.585" ScaleY="1.013" ScaleX="0.988" SkewY="0" SkewX="-1.367"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="3.101" Height="2.333" Fill="{StaticResource EyeColor}" Canvas.Left="9.34" Canvas.Top="4.626" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-38.28" TranslateX="2.388" TranslateY="-0.651" ScaleY="1.01" ScaleX="0.99" SkewY="0" SkewX="1.337"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="1.474" Height="1.438" Fill="Black" Canvas.Left="10.674" Canvas.Top="4.298" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-33.175" TranslateX="1.665" TranslateY="-0.351" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.264"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
 
         <!--DESIGNS-->
-        <Ellipse Width="2.77" Height="2.188" Fill="{StaticResource DesignColor}" Canvas.Left="15.374" Canvas.Top="6.676" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-34.406" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.286"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.77" Height="2.188" Fill="{StaticResource DesignColor}" Canvas.Left="18.749" Canvas.Top="4.248" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-66.016" ScaleY="1.02" ScaleX="0.98" SkewY="0" SkewX="1"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="3.665" Height="2.894" Fill="{StaticResource DesignColor}" Canvas.Left="12.085" Canvas.Top="10.057" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-34.406" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.286"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.77" Height="2.188" Fill="{StaticResource DesignColor}" Canvas.Left="21.419" Canvas.Top="7.259" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-34.406" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.286"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.769" Height="2.187" Fill="{StaticResource DesignColor}" Canvas.Left="18.228" Canvas.Top="10.271" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="3.258" Height="2.574" Fill="{StaticResource DesignColor}" Canvas.Left="23.368" Canvas.Top="10.841" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.177" Height="1.72" Fill="{StaticResource DesignColor}" Canvas.Left="14.81" Canvas.Top="14.373" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.178" Height="1.72" Fill="{StaticResource DesignColor}" Canvas.Left="24.361" Canvas.Top="15.524" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.77" Height="2.187" Fill="{StaticResource DesignColor}" Canvas.Left="18.749" Canvas.Top="14.448" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-34.406" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.286"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="3.258" Height="2.573" Fill="{StaticResource DesignColor}" Canvas.Left="13.158" Canvas.Top="18.734" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.77" Height="2.187" Fill="{StaticResource DesignColor}" Canvas.Left="17.845" Canvas.Top="18.82" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-66.016" ScaleY="1.02" ScaleX="0.98" SkewY="0" SkewX="1"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="3.665" Height="2.895" Fill="{StaticResource DesignColor}" Canvas.Left="21.636" Canvas.Top="19.674" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-34.406" ScaleY="1.008" ScaleX="0.993" SkewY="0" SkewX="1.286"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.177" Height="1.719" Fill="{StaticResource DesignColor}" Canvas.Left="16.601" Canvas.Top="23.379" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.77" Height="2.187" Fill="{StaticResource DesignColor}" Canvas.Left="20.408" Canvas.Top="23.483" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse Width="2.177" Height="1.72" Fill="{StaticResource DesignColor}" Canvas.Left="18.193" Canvas.Top="26.307" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-124.618" ScaleY="1.016" ScaleX="0.984" SkewX="0" SkewY="-1.288"/>
-            </Ellipse.RenderTransform>
-        </Ellipse>
 
     </Canvas>
 

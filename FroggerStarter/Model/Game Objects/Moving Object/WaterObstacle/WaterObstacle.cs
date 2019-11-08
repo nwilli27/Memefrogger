@@ -20,7 +20,11 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
 
         #endregion
 
+        #region Methods
 
+        /// <summary>
+        ///     Moves the obstacle to the left.
+        /// </summary>
         protected override void moveObstacleToTheLeft()
         {
             if (this.hasObstacleMovedOffLeftSide())
@@ -30,7 +34,10 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
             this.MoveLeft();
         }
 
-        protected void moveObstacleToTheRight()
+        /// <summary>
+        ///     Moves the obstacle to the right.
+        /// </summary>
+        protected override void moveObstacleToTheRight()
         {
             if (this.hasObstacleMovedOffRightSide(GameBoard.BackgroundWidth))
             {
@@ -38,5 +45,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
             }
             this.MoveRight();
         }
+
+        #endregion
     }
 }

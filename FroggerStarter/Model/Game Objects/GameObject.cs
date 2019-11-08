@@ -165,6 +165,19 @@ namespace FroggerStarter.Model.Game_Objects
             this.Sprite.RenderTransform = rotateTransform;
         }
 
+        /// <summary>
+        ///     Sets the centered y location of an area on the board,
+        ///     then returns the centered location with the current yLocation.
+        ///     Precondition: none
+        ///     Post-condition: none
+        /// </summary>
+        /// <param name="areaHeight">Height of the area.</param>
+        /// <param name="yLocation">The y location.</param>
+        public void SetCenteredYLocationOfArea(double areaHeight, double yLocation)
+        {
+            this.Y = ((areaHeight - this.Height) / 2) + yLocation;
+        }
+
         #endregion
 
         #region Private Helpers

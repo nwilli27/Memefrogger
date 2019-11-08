@@ -4,6 +4,7 @@ using FroggerStarter.Model.Animation;
 using FroggerStarter.Model.Game_Objects;
 using FroggerStarter.Model.Game_Objects.Moving_Object;
 using FroggerStarter.View.Sprites;
+using FroggerStarter.Constants;
 
 namespace FroggerStarter.Model.Player
 {
@@ -25,7 +26,6 @@ namespace FroggerStarter.Model.Player
 
         private const int SpeedXDirection = 50;
         private const int SpeedYDirection = 50;
-        private const int DeathAnimationInterval = 500;
 
         #endregion
 
@@ -100,11 +100,13 @@ namespace FroggerStarter.Model.Player
         ///     Precondition: none
         ///     Post-condition: this.X =- this.SpeedX
         /// </summary>
-        /// <param name="leftBoundary">The left boundary.</param>
-        public void MoveLeftWithBoundaryCheck(double leftBoundary)
+        public void MoveLeftWithBoundaryCheck()
         {
+            var leftBoundary = 0;
+
             if (this.X - this.SpeedX >= leftBoundary && this.canMove)
             {
+                this.SpeedX = SpeedXDirection;
                 this.MoveLeft();
                 this.Rotate(this.Direction);
                 this.playLeapAnimation();
@@ -116,11 +118,13 @@ namespace FroggerStarter.Model.Player
         ///     Precondition: none
         ///     Post-condition: this.X += this.SpeedX
         /// </summary>
-        /// <param name="rightBoundary">The right boundary.</param>
-        public void MoveRightWithBoundaryCheck(double rightBoundary)
+        public void MoveRightWithBoundaryCheck()
         {
+            var rightBoundary = GameBoard.BackgroundWidth;
+
             if (this.X + this.SpeedX < rightBoundary && this.canMove)
             {
+                this.SpeedX = SpeedXDirection;
                 this.MoveRight();
                 this.Rotate(this.Direction);
                 this.playLeapAnimation();
@@ -132,11 +136,13 @@ namespace FroggerStarter.Model.Player
         ///     Precondition: none
         ///     Post-condition: this.Y =- this.SpeedY
         /// </summary>
-        /// <param name="topBoundary">The top boundary.</param>
-        public void MoveUpWithBoundaryCheck(double topBoundary)
+        public void MoveUpWithBoundaryCheck()
         {
+            var topBoundary = GameBoard.HighRoadYLocation;
+
             if (this.Y - this.SpeedY >= topBoundary && this.canMove)
             {
+                this.SpeedX = SpeedXDirection;
                 this.MoveUp();
                 this.Rotate(this.Direction);
                 this.playLeapAnimation();
@@ -148,11 +154,13 @@ namespace FroggerStarter.Model.Player
         ///     Precondition: none
         ///     Post-condition: this.Y += this.SpeedY
         /// </summary>
-        /// <param name="bottomBoundary">The bottom boundary.</param>
-        public void MoveDownWithBoundaryCheck(double bottomBoundary)
+        public void MoveDownWithBoundaryCheck()
         {
+            var bottomBoundary = GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset;
+
             if (this.Y + this.SpeedY < bottomBoundary && this.canMove)
             {
+                this.SpeedX = SpeedXDirection;
                 this.MoveDown();
                 this.Rotate(this.Direction);
                 this.playLeapAnimation();
@@ -205,6 +213,30 @@ namespace FroggerStarter.Model.Player
             this.IsDead = false;
         }
 
+        /// <summary>
+        ///     Moves the player with given game object
+        ///     speedX and the correlating direction.
+        /// </summary>
+        /// <param name="obstacle">The obstacle.</param>
+        public void MovePlayerWithObstacle(Obstacle obstacle)
+        {
+            this.SpeedX = obstacle.SpeedX;
+
+            switch (obstacle.Direction)
+            {
+                case Direction.Left:
+                    this.moveLeftPreventBoundary();
+                    break;
+
+                case Direction.Right:
+                    this.moveRightPreventBoundary();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         #endregion
 
         #region Private Helpers
@@ -232,6 +264,26 @@ namespace FroggerStarter.Model.Player
                 this.canMove = true;
                 this.ChangeSpriteVisibility(true);
                 this.startMovement();
+            }
+        }
+
+        private void moveLeftPreventBoundary()
+        {
+            var leftBoundary = 0;
+
+            if (this.X - this.SpeedX >= leftBoundary)
+            {
+                this.MoveLeft();
+            }
+        }
+
+        private void moveRightPreventBoundary()
+        {
+            var rightBoundary = GameBoard.BackgroundWidth;
+
+            if (this.X + this.SpeedX < rightBoundary)
+            {
+                this.MoveRight();
             }
         }
 

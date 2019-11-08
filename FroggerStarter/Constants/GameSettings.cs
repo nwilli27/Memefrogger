@@ -62,11 +62,51 @@ namespace FroggerStarter.Constants
         };
 
         /// <summary>
-        ///     The 1st Lane settings
+        ///     The 1st water Lane settings
         /// </summary>
         public static IList<object> WaterLane1 = new List<object> {
             Direction.Left,
+            1.5,
+            ObstacleType.LargeLog,
+            2
+        };
+
+        /// <summary>
+        ///     The 2nd water Lane settings
+        /// </summary>
+        public static IList<object> WaterLane2 = new List<object> {
+            Direction.Right,
             3.0,
+            ObstacleType.SpeedBoat,
+            3
+        };
+
+        /// <summary>
+        ///     The 1st water Lane settings
+        /// </summary>
+        public static IList<object> WaterLane3 = new List<object> {
+            Direction.Left,
+            1.75,
+            ObstacleType.MediumLog,
+            3
+        };
+
+        /// <summary>
+        ///     The 1st water Lane settings
+        /// </summary>
+        public static IList<object> WaterLane4 = new List<object> {
+            Direction.Right,
+            3.5,
+            ObstacleType.SpeedBoat,
+            3
+        };
+
+        /// <summary>
+        ///     The 1st water Lane settings
+        /// </summary>
+        public static IList<object> WaterLane5 = new List<object> {
+            Direction.Left,
+            2.0,
             ObstacleType.SmallLog,
             4
         };

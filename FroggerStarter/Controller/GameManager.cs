@@ -14,6 +14,7 @@ using FroggerStarter.Model.Score;
 using FroggerStarter.Model.Sound;
 using FroggerStarter.Model.Area_Managers.Water;
 using FroggerStarter.Model.Game_Objects.Moving_Object;
+using FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle;
 
 namespace FroggerStarter.Controller
 {
@@ -105,7 +106,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerLeft()
         {
-            this.player.MoveLeftWithBoundaryCheck(0);
+            this.player.MoveLeftWithBoundaryCheck();
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerRight()
         {
-            this.player.MoveRightWithBoundaryCheck(GameBoard.BackgroundWidth);
+            this.player.MoveRightWithBoundaryCheck();
         }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerUp()
         {
-            this.player.MoveUpWithBoundaryCheck(GameBoard.HighRoadYLocation);
+            this.player.MoveUpWithBoundaryCheck();
             
             if (this.hasReachedAnEmptyHome())
             {
@@ -146,7 +147,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerDown()
         {
-            this.player.MoveDownWithBoundaryCheck(GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset);
+            this.player.MoveDownWithBoundaryCheck();
         }
 
         #endregion
@@ -166,11 +167,15 @@ namespace FroggerStarter.Controller
             this.roadManager.MoveAllObstacles();
             this.waterManager.MoveAllObstacles();
 
-            //if player x > mid field check collision with water
+            if (this.player.Y < GameBoard.MiddleRoadYLocation)
+            {
+                this.checkForPlayerToWaterObstacleCollision();
+            }
+            else
+            {
+                this.checkForPlayerToRoadObstacleCollision();
+            }
 
-            //else check collision with vehicles
-
-            this.checkForPlayerToObstacleCollision();
             this.checkForPlayerToPowerUpCollision();
         }
 
@@ -193,7 +198,7 @@ namespace FroggerStarter.Controller
             this.ScoreTimerTick?.Invoke(this, scoreTick);
         }
 
-        private void checkForPlayerToObstacleCollision()
+        private void checkForPlayerToRoadObstacleCollision()
         {
             foreach (RoadObstacle currentObstacle in this.roadManager)
             {
@@ -202,6 +207,21 @@ namespace FroggerStarter.Controller
                     this.lifeLost();
                     this.setPlayerToCenterOfBottomLane();
                 }
+            }
+        }
+
+        private void checkForPlayerToWaterObstacleCollision()
+        {
+            var firstCollided = this.waterManager.FirstOrDefault(obstacle => this.player.HasCollidedWith(obstacle));
+
+            if (firstCollided != null)
+            {
+                this.player.MovePlayerWithObstacle(firstCollided);
+            }
+            else
+            {
+                this.lifeLost();
+                this.setPlayerToCenterOfBottomLane();
             }
         }
 
@@ -263,10 +283,10 @@ namespace FroggerStarter.Controller
         {
             this.waterManager = new WaterManager(GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset, GameBoard.MiddleRoadYLocation);
 
-            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
-            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
-            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
-            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
+            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane5);
+            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane4);
+            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane3);
+            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane2);
             this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
 
             this.waterManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
@@ -295,7 +315,7 @@ namespace FroggerStarter.Controller
         private void setPlayerToCenterOfBottomLane()
         {
             this.player.X = GameBoard.BackgroundWidth / 2 - this.player.Width / 2;
-            this.player.Y = (GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset) - this.player.Height;
+            this.player.SetCenteredYLocationOfArea(GameBoard.RoadShoulderOffset, GameBoard.BottomRoadYLocation);
             this.player.Rotate(Direction.Up);
         }
 
