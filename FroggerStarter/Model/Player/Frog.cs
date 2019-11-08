@@ -108,7 +108,7 @@ namespace FroggerStarter.Model.Player
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveLeft();
-                this.Rotate(this.Direction);
+                this.Rotate(this.Direction = Direction.Left);
                 this.playLeapAnimation();
             }
         }
@@ -126,7 +126,7 @@ namespace FroggerStarter.Model.Player
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveRight();
-                this.Rotate(this.Direction);
+                this.Rotate(this.Direction = Direction.Right);
                 this.playLeapAnimation();
             }
         }
@@ -144,7 +144,7 @@ namespace FroggerStarter.Model.Player
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveUp();
-                this.Rotate(this.Direction);
+                this.Rotate(this.Direction = Direction.Up);
                 this.playLeapAnimation();
             }
         }
@@ -162,7 +162,7 @@ namespace FroggerStarter.Model.Player
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveDown();
-                this.Rotate(this.Direction);
+                this.Rotate(this.Direction = Direction.Down);
                 this.playLeapAnimation();
             }
         }

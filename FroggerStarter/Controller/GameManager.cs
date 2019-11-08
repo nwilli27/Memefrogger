@@ -200,13 +200,10 @@ namespace FroggerStarter.Controller
 
         private void checkForPlayerToRoadObstacleCollision()
         {
-            foreach (RoadObstacle currentObstacle in this.roadManager)
+            if (this.roadManager.Any(obstacle => this.player.HasCollidedWith(obstacle)))
             {
-                if (this.player.HasCollidedWith(currentObstacle) && currentObstacle.IsActive)
-                {
-                    this.lifeLost();
-                    this.setPlayerToCenterOfBottomLane();
-                }
+                this.lifeLost();
+                this.setPlayerToCenterOfBottomLane();
             }
         }
 
@@ -473,6 +470,10 @@ namespace FroggerStarter.Controller
             else if (this.hasMovedPastTopBoundary())
             {
                 SoundEffectManager.PlaySound(SoundEffectType.AlmostHadIt);
+            }
+            else if (this.player.Y < GameBoard.MiddleRoadYLocation)
+            {
+                SoundEffectManager.PlaySound(SoundEffectType.WaterDrop);
             }
             else
             {

@@ -39,7 +39,12 @@
         /// <summary>
         ///     The gta death sound.
         /// </summary>
-        GTADeath
+        GTADeath,
+
+        /// <summary>
+        ///     The water drop sound.
+        /// </summary>
+        WaterDrop
 
     }
 }

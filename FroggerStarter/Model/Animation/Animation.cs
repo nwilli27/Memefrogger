@@ -5,6 +5,7 @@ using System.Linq;
 using Windows.UI.Xaml;
 using FroggerStarter.Enums;
 using FroggerStarter.Factory;
+using FroggerStarter.Constants;
 
 namespace FroggerStarter.Model.Animation
 {

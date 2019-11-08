@@ -257,6 +257,7 @@
     <Content Include="SoundEffects\GameOver.wav" />
     <Content Include="SoundEffects\Oof.mp3" />
     <Content Include="SoundEffects\TimePowerUp.mp3" />
+    <Content Include="SoundEffects\WaterDrop.mp3" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

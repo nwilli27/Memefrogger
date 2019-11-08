@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sprites="using:FroggerStarter.View.Sprites"
     mc:Ignorable="d"
-    Height="50"
-    Width="50">
+    Height="40"
+    Width="40">
 
     <UserControl.Resources>
         <SolidColorBrush x:Key="FrogColor" x:Name="frogColor" Color="DarkOliveGreen"/>
@@ -37,7 +37,7 @@
         <!--EYES-->
 
         <!--DESIGNS-->
-        <Viewbox Height="42" Canvas.Left="-1" Stretch="Fill" Width="41">
+        <Viewbox Height="42" Canvas.Left="-5" Stretch="Fill" Width="39" Canvas.Top="-5">
             <Grid Height="52.2379997968674" Width="50.4709990234375">
                 <Ellipse Fill="DarkRed" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="6.69,15.14,22.31,11.86" >
                     <Ellipse.RenderTransform>
@@ -518,9 +518,9 @@
                 </Rectangle>
             </Grid>
         </Viewbox>
-        <Rectangle Width="3.306" Height="1" Fill="White" Canvas.Left="33.509" Canvas.Top="38.94" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+        <Rectangle Width="3.125" Height="1.009" Fill="White" Canvas.Left="27.795" Canvas.Top="33.895" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
             <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-148.869" TranslateX="1.416" TranslateY="-1.67" ScaleX="0.981" ScaleY="-1.02" SkewX="-11.289"/>
+                <CompositeTransform Rotation="40.547" TranslateX="1.416" TranslateY="-1.67" ScaleX="-0.99" ScaleY="1.01" SkewX="0" SkewY="-7.722"/>
             </Rectangle.RenderTransform>
         </Rectangle>
     </Canvas>

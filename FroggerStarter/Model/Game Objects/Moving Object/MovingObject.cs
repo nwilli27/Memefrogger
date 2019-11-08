@@ -1,4 +1,6 @@
 ﻿using FroggerStarter.Enums;
+using System;
+using System.Drawing;
 
 namespace FroggerStarter.Model.Game_Objects.Moving_Object
 {
@@ -47,7 +49,6 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         public void MoveRight()
         {
             this.moveX(this.SpeedX);
-            this.Direction = Direction.Right;
         }
 
         /// <summary>
@@ -58,7 +59,6 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         public void MoveLeft()
         {
             this.moveX(-this.SpeedX);
-            this.Direction = Direction.Left;
         }
 
         /// <summary>
@@ -69,7 +69,6 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         public virtual void MoveUp()
         {
             this.moveY(-this.SpeedY);
-            this.Direction = Direction.Up;
         }
 
         /// <summary>
@@ -80,7 +79,6 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         public void MoveDown()
         {
             this.moveY(this.SpeedY);
-            this.Direction = Direction.Down;
         }
 
         #endregion

@@ -65,6 +65,12 @@ namespace FroggerStarter.Factory
                         SoundEffectType = SoundEffectType.GTADeath
                     };
 
+                case SoundEffectType.WaterDrop:
+                    return new SoundEffect("WaterDrop.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.WaterDrop
+                    };
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(soundEffect), soundEffect, null);
             }
