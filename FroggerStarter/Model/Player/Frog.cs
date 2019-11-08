@@ -281,7 +281,7 @@ namespace FroggerStarter.Model.Player
         {
             var rightBoundary = GameBoard.BackgroundWidth;
 
-            if (this.X + this.SpeedX < rightBoundary)
+            if (this.X + this.Width + this.SpeedX < rightBoundary)
             {
                 this.MoveRight();
             }
