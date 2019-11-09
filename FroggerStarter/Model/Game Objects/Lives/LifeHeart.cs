@@ -15,7 +15,7 @@ namespace FroggerStarter.Model.Game_Objects.Lives
         /// <summary>
         ///     The heart lost animation
         /// </summary>
-        public Animation.Animation HeartLostAnimation;
+        public Animation.Animation HeartLostAnimation { get; set; }
 
         #endregion
 

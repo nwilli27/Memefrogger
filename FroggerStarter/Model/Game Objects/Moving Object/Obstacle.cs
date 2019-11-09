@@ -65,7 +65,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         ///     Post-condition: @prev this.X +/- this.SpeedX
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">direction - null</exception>
-        public void MoveForward()
+        public virtual void MoveForward()
         {
             switch (this.Direction)
             {
@@ -152,19 +152,21 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
             }
         }
 
-        #endregion
-
-        #region Private Helpers
-
+        /// <summary>
+        ///     Moves the obstacle to the right.
+        /// </summary>
         protected virtual void moveObstacleToTheRight()
         {
-            if (this.hasObstacleMovedOffRightSide(GameBoard.BackgroundWidth))
+            if (this.hasObstacleMovedOffRightSide())
             {
                 this.X = -this.Width * 2;
             }
             this.MoveRight();
         }
 
+        /// <summary>
+        ///     Moves the obstacle to the left.
+        /// </summary>
         protected virtual void moveObstacleToTheLeft()
         {
             if (this.hasObstacleMovedOffLeftSide())
@@ -174,15 +176,31 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
             this.MoveLeft();
         }
 
-        protected bool hasObstacleMovedOffRightSide(double horizontalLaneWidth)
+        /// <summary>
+        ///     Determines whether [has obstacle moved off right side].
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if [has obstacle moved off right side]; otherwise, <c>false</c>.
+        /// </returns>
+        protected virtual bool hasObstacleMovedOffRightSide()
         {
-            return this.X + this.SpeedX > horizontalLaneWidth;
+            return this.X + this.SpeedX > GameBoard.BackgroundWidth;
         }
 
-        protected bool hasObstacleMovedOffLeftSide()
+        /// <summary>
+        ///     Determines whether [has obstacle moved off left side].
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if [has obstacle moved off left side]; otherwise, <c>false</c>.
+        /// </returns>
+        protected virtual bool hasObstacleMovedOffLeftSide()
         {
             return this.X + this.SpeedX < -this.Width;
         }
+
+        #endregion
+
+        #region Private Helpers
 
         private void checkDirectionToFlipHorizontally()
         {

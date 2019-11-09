@@ -19,6 +19,12 @@ namespace FroggerStarter.Enums
         /// <summary>
         ///     The life heart lost
         /// </summary>
-        LifeHeartLost
+        LifeHeartLost,
+
+
+        /// <summary>
+        ///     The speed boat splash
+        /// </summary>
+        SpeedBoatSplash
     }
 }

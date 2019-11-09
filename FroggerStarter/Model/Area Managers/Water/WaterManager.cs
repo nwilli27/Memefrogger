@@ -2,11 +2,26 @@
 using FroggerStarter.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using FroggerStarter.Model.Animation;
+using FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle;
 
 namespace FroggerStarter.Model.Area_Managers.Water
 {
-    class WaterManager : LaneManager
+    internal class WaterManager : LaneManager
     {
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets the speed boat animation frames.
+        /// </summary>
+        /// <value>
+        ///     The speed boat animation frames.
+        /// </value>
+        public IEnumerable<Frame> SpeedBoatAnimationFrames => this.Where(obstacle => obstacle is SpeedBoat).SelectMany(obstacle => (obstacle as SpeedBoat)?.SplashAnimation);
+
+        #endregion
 
         #region Constructors
 
@@ -55,12 +70,6 @@ namespace FroggerStarter.Model.Area_Managers.Water
             Lanes.Add(lane);
             this.UpdateYLocationOfLanes();
         }
-
-        #endregion
-
-        #region Private Helpers
-
-        
 
         #endregion
     }

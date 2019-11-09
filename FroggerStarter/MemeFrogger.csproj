@@ -217,6 +217,15 @@
     <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFive.xaml.cs">
       <DependentUpon>PlayerDeathFrameFive.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameThree.xaml.cs">
+      <DependentUpon>SplashBoatFrameThree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameTwo.xaml.cs">
+      <DependentUpon>SplashBoatFrameTwo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameOne.xaml.cs">
+      <DependentUpon>SplashBoatFrameOne.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\GameSprites\LifeSprite.xaml.cs">
       <DependentUpon>LifeSprite.xaml</DependentUpon>
     </Compile>
@@ -362,6 +371,18 @@
     <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameFive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameThree.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameTwo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameOne.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Sprites\GameSprites\LifeSprite.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -159,7 +160,7 @@ namespace FroggerStarter.Controller
         {
             this.roadManager.MoveAllObstacles();
             this.waterManager.MoveAllObstacles();
-
+            
             if (this.player.Y < GameBoard.MiddleRoadYLocation)
             {
                 this.checkForPlayerToWaterObstacleCollision();
@@ -289,6 +290,7 @@ namespace FroggerStarter.Controller
             this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
 
             this.waterManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
+            this.waterManager.SpeedBoatAnimationFrames.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
         }
 
         #endregion
