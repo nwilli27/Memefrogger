@@ -88,7 +88,7 @@ namespace FroggerStarter.Controller
             this.createAndPlacePowerUps();
             this.setupPlayerStatsAndHud();
             this.createAndPlacePlayerHearts();
-
+            
             this.setupGameTimer();
             this.setupScoreTimer();
         }

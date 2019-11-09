@@ -7,11 +7,31 @@ namespace FroggerStarter.Model.Score
     /// </summary>
     public class HighScore : IComparable<HighScore>
     {
-        #region Data members
+        #region Properties
 
-        private readonly int score;
-        private readonly string playerName;
-        private readonly int level;
+        /// <summary>
+        ///     Gets the score.
+        /// </summary>
+        /// <value>
+        ///     The score.
+        /// </value>
+        public int Score { get; set; }
+
+        /// <summary>
+        ///     Gets the name of the player.
+        /// </summary>
+        /// <value>
+        ///     The name of the player.
+        /// </value>
+        public string PlayerName { get; set; }
+
+        /// <summary>
+        ///     Gets the level.
+        /// </summary>
+        /// <value>
+        ///     The level.
+        /// </value>
+        public int Level { get; set; }
 
         #endregion
 
@@ -27,9 +47,18 @@ namespace FroggerStarter.Model.Score
         /// <param name="level">The level.</param>
         public HighScore(int score, string playerName, int level)
         {
-            this.score = score;
-            this.playerName = playerName;
-            this.level = level;
+            this.Score = score;
+            this.PlayerName = playerName;
+            this.Level = level;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="HighScore" /> class.
+        ///     Precondition: none
+        ///     Post-condition: Score == 0; PlayerName == ""; Level == 0
+        /// </summary>
+        public HighScore() : this(0, "", 0)
+        {
         }
 
         #endregion
@@ -58,19 +87,19 @@ namespace FroggerStarter.Model.Score
                 return 1;
             }
 
-            var scoreComparison = this.score.CompareTo(other.score);
+            var scoreComparison = this.Score.CompareTo(other.Score);
             if (scoreComparison != 0)
             {
                 return scoreComparison;
             }
 
-            var playerNameComparison = string.Compare(this.playerName, other.playerName, StringComparison.Ordinal);
+            var playerNameComparison = string.Compare(this.PlayerName, other.PlayerName, StringComparison.Ordinal);
             if (playerNameComparison != 0)
             {
                 return playerNameComparison;
             }
 
-            return this.level.CompareTo(other.level);
+            return this.Level.CompareTo(other.Level);
         }
 
         #endregion

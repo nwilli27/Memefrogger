@@ -155,6 +155,7 @@
     <Compile Include="Model\Sound\SoundEffect.cs" />
     <Compile Include="Model\Sound\SoundEffectManager.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Serializer\Serializer.cs" />
     <Compile Include="Utility\Randomizer.cs" />
     <Compile Include="Utility\SetOnce.cs" />
     <Compile Include="Factory\ObstacleFactory.cs" />
