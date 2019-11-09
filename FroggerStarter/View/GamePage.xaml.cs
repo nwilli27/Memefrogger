@@ -37,12 +37,10 @@ namespace FroggerStarter.View
         {
             this.InitializeComponent();
 
-            ApplicationView.PreferredLaunchViewSize = new Size
-                {Width = this.applicationWidth, Height = this.applicationHeight};
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            ApplicationView.GetForCurrentView()
-                           .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
-
+            ApplicationView.GetForCurrentView().TryResizeView(
+                new Size(Width = this.applicationWidth, Height = this.applicationHeight)
+            );
+            
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
 
             this.initializeGameBoardConstants();
