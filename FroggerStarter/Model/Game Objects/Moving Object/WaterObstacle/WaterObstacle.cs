@@ -1,7 +1,5 @@
 ﻿using FroggerStarter.Constants;
 using FroggerStarter.Enums;
-using System;
-using System.Drawing;
 
 namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
 {
@@ -19,6 +17,14 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         /// </summary>
         /// <param name="direction">The direction.</param>
         public WaterObstacle(Direction direction) : base(direction) { }
+
+        /// <summary>
+        ///     Gets the type of the obstacle.
+        /// </summary>
+        /// <value>
+        ///     The type of the obstacle.
+        /// </value>
+        public ObstacleType ObstacleType { get; set; }
 
         #endregion
 
@@ -41,7 +47,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         /// </summary>
         protected override void moveObstacleToTheRight()
         {
-            if (this.hasObstacleMovedOffRightSide(GameBoard.BackgroundWidth))
+            if (this.hasObstacleMovedOffRightSide())
             {
                 this.X = -this.Width;
             }

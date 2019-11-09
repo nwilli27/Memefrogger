@@ -5,7 +5,6 @@ using System.Linq;
 using Windows.UI.Xaml;
 using FroggerStarter.Enums;
 using FroggerStarter.Factory;
-using FroggerStarter.Constants;
 
 namespace FroggerStarter.Model.Animation
 {
@@ -113,6 +112,21 @@ namespace FroggerStarter.Model.Animation
         }
 
         /// <summary>
+        ///     Starts the animation on endless loop
+        ///     Precondition: none
+        ///     Post-condition: this.animationFrames[0].IsVisible = true
+        /// </summary>
+        public void StartEndlessLoopKeepBaseFrame()
+        {
+            this.animateTimer = new DispatcherTimer();
+            this.animateTimer.Tick += this.showNextFrameEndlessLoopKeepBaseFrame;
+            this.animateTimer.Interval = new TimeSpan(0, 0, 0, 0, this.AnimationInterval);
+
+            this.makeFirstFrameVisible();
+            this.animateTimer.Start();
+        }
+
+        /// <summary>
         ///     Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
@@ -168,6 +182,46 @@ namespace FroggerStarter.Model.Animation
             this.checkIfAnimationIsFinished();
         }
 
+        private void showNextFrameEndlessLoopKeepBaseFrame(object sender, object e)
+        {
+            var firstVisibleFrame = this.animationFrames.FirstOrDefault(frame => frame.IsVisible);
+            var firstInvisibleFrame = this.animationFrames.FirstOrDefault(frame => !frame.IsVisible && !frame.HasBeenPlayed);
+            var numberOfVisibleFrames = this.animationFrames.Count(frame => frame.IsVisible);
+
+            if (firstVisibleFrame != null && numberOfVisibleFrames != 1)
+            {
+                firstVisibleFrame.IsVisible = false;
+            }
+            else if (firstInvisibleFrame != null)
+            {
+                firstInvisibleFrame.IsVisible = true;
+            }
+            else
+            {
+                this.animationFrames.ToList().ForEach(frame => frame.ResetStatusAndVisibility());
+            }
+        }
+
+        private void showNextFrameEndlessLoop(object sender, object e)
+        {
+            var firstVisibleFrame = this.animationFrames.FirstOrDefault(frame => frame.IsVisible);
+            if (firstVisibleFrame != null)
+            {
+                firstVisibleFrame.IsVisible = false;
+            }
+
+            var firstInvisibleFrame = this.animationFrames.FirstOrDefault(frame => !frame.IsVisible && !frame.HasBeenPlayed);
+            if (firstInvisibleFrame != null)
+            {
+                firstInvisibleFrame.IsVisible = true;
+            }
+
+            if (this.IsAnimationFinished)
+            {
+                this.animationFrames.ToList().ForEach(frame => frame.ResetStatusAndVisibility());
+            }
+        }
+
         private void checkIfAnimationIsFinished()
         {
             if (this.IsAnimationFinished)
@@ -193,6 +247,9 @@ namespace FroggerStarter.Model.Animation
                     break;
 
                 case AnimationType.LifeHeartLost:
+                    break;
+
+                case AnimationType.SpeedBoatSplash:
                     break;
 
                 default:

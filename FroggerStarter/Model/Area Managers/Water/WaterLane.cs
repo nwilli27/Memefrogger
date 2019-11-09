@@ -1,4 +1,5 @@
-﻿using FroggerStarter.Constants;
+﻿
+using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using System.Linq;
 
@@ -7,8 +8,8 @@ namespace FroggerStarter.Model.Area_Managers.Water
     /// <summary>
     ///     A Waterlane that is of type Lanea
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.Area_Managers.Lane" />
-    class WaterLane : Lane
+    /// <seealso cref="Lane" />
+    internal class WaterLane : Lane
     {
 
         #region Constructors

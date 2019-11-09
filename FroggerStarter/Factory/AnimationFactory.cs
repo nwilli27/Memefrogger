@@ -60,6 +60,15 @@ namespace FroggerStarter.Factory
 
                     return heartLostAnimation;
 
+                case AnimationType.SpeedBoatSplash:
+                    var speedBoatSplashAnimation = new List<BaseSprite>();
+
+                    speedBoatSplashAnimation.Add(new SplashBoatFrameOne());
+                    speedBoatSplashAnimation.Add(new SplashBoatFrameTwo());
+                    speedBoatSplashAnimation.Add(new SplashBoatFrameThree());
+
+                    return speedBoatSplashAnimation;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(animationType), animationType, null);
             }
