@@ -92,8 +92,6 @@ namespace FroggerStarter.Controller
             
             this.setupGameTimer();
             this.setupScoreTimer();
-
-            Serializer.Serializer<GameSettings>.WriteObjectToFile("test123", new GameSettings());
         }
 
         /// <summary>
@@ -362,6 +360,7 @@ namespace FroggerStarter.Controller
             this.timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             this.scoreTimer.Stop();
             this.player.DeathAnimation.AnimationInterval = 1500;
+            this.waterManager.SlowDownSpeedBoatWaterAnimations();
             this.player.PlayDeathAnimation();
             this.gameOver();
         }

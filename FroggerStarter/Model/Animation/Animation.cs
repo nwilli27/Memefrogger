@@ -106,9 +106,17 @@ namespace FroggerStarter.Model.Animation
             this.animateTimer = new DispatcherTimer();
             this.animateTimer.Tick += this.showNextFrame;
             this.animateTimer.Interval = new TimeSpan(0, 0, 0, 0, this.AnimationInterval);
-
+            
             this.makeFirstFrameVisible();
             this.animateTimer.Start();
+        }
+
+        /// <summary>
+        ///     Stops the animate timer.
+        /// </summary>
+        public void Stop()
+        {
+            this.animateTimer.Stop();
         }
 
         /// <summary>
