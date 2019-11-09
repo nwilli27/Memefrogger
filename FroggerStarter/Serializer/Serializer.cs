@@ -61,7 +61,7 @@ namespace FroggerStarter.Serializer
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>
-        ///     The read object.
+        ///     The read object.  If file doesn't exist, return null.
         /// </returns>
         public static T ReadObjectFromFile(string fileName)
         {
@@ -76,6 +76,11 @@ namespace FroggerStarter.Serializer
             }
 
             var inStream = getInStream(fileName);
+
+            if (inStream == null)
+            {
+                return default;
+            }
 
             var deserializer = new XmlSerializer(typeof(T));
             var readObject = (T) deserializer.Deserialize(inStream);
@@ -93,6 +98,11 @@ namespace FroggerStarter.Serializer
         private static async Task<Stream> setupReadFile(string fileName)
         {
             var folder = ApplicationData.Current.LocalFolder;
+            if (!File.Exists(folder.Path + @"\" + fileName))
+            {
+                return null;
+            }
+
             var file = await folder.GetFileAsync(fileName);
             var inStream = await file.OpenStreamForReadAsync();
 
