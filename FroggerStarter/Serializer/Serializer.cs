@@ -60,7 +60,9 @@ namespace FroggerStarter.Serializer
         ///     Post-condition: none
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     The read object.
+        /// </returns>
         public static T ReadObjectFromFile(string fileName)
         {
             if (fileName == null)
