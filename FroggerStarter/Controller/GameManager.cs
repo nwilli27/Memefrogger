@@ -92,8 +92,6 @@ namespace FroggerStarter.Controller
 
             this.setupGameTimer();
             this.setupScoreTimer();
-
-            Serializer.Serializer<GameSettings>.WriteObjectToFile("test123", new GameSettings());
         }
 
         /// <summary>

@@ -1,5 +1,7 @@
 ﻿using System;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -42,6 +44,29 @@ namespace FroggerStarter.View
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(GamePage));
+        }
+
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var viewId = 0;
+
+            var newView = CoreApplication.CreateNewView();
+            await newView.Dispatcher.RunAsync(
+                CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    var frame = new Frame();
+                    frame.Navigate(typeof(HighScoreBoard));
+                    Window.Current.Content = frame;
+
+                    viewId = ApplicationView.GetForCurrentView().Id;
+
+                    //ApplicationView.GetForCurrentView().Consolidated = 
+
+                    Window.Current.Activate();
+                });
+
+            var viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(viewId);
         }
     }
 }

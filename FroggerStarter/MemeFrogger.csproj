@@ -171,8 +171,12 @@
     <Compile Include="Enums\ObstacleType.cs" />
     <Compile Include="Model\Player\PlayerStats.cs" />
     <Compile Include="Model\Score\ScoreTimer.cs" />
+    <Compile Include="ViewModel\HighScoreBoardViewModel.cs" />
     <Compile Include="View\FrogLeapAnimation\FrogLeapFrameOne.xaml.cs">
       <DependentUpon>FrogLeapFrameOne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HighScoreBoard.xaml.cs">
+      <DependentUpon>HighScoreBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameEight.xaml.cs">
       <DependentUpon>LifeHeartLostFrameEight.xaml</DependentUpon>
@@ -315,6 +319,10 @@
     <Page Include="View\FrogLeapAnimation\FrogLeapFrameOne.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\HighScoreBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameEight.xaml">
       <Generator>MSBuild:Compile</Generator>

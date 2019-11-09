@@ -13,6 +13,7 @@
     <Canvas x:Name="startCanvas" Width="{StaticResource StartWindowWidth}" Background="Black">
         <Rectangle Width="122" Height="53" Fill="Green" Canvas.Left="58" Canvas.Top="199"/>
         <TextBlock Text="MemeFrogger" Foreground="LimeGreen" FontSize="50" FontFamily="Showcard Gothic" Canvas.Left="68" Canvas.Top="26" Height="66" Width="368"/>
-        <Button Content="Start" Canvas.ZIndex="1" FontFamily="Berlin Sans FB" FontSize="25" Canvas.Left="59" Canvas.Top="200" Height="51" Width="120" Click="Button_Click" Background="#FF20E800" BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" Foreground="Black" FocusVisualSecondaryBrush="#99FFFFFF" />
+        <Button Content="Start" Canvas.ZIndex="1" FontFamily="Berlin Sans FB" FontSize="25" Canvas.Left="54" Canvas.Top="200" Height="51" Width="142" Click="Button_Click" Background="#FF20E800" BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" Foreground="Black" FocusVisualSecondaryBrush="#99FFFFFF" />
+        <Button Content="High Scores" Canvas.ZIndex="1" FontFamily="Berlin Sans FB" FontSize="25" Canvas.Left="304" Canvas.Top="200" Height="51" Width="142" Background="#FF20E800" BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" Foreground="Black" FocusVisualSecondaryBrush="#99FFFFFF" Click="Button_Click_1" />
     </Canvas>
 </Page>
