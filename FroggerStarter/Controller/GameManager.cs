@@ -1,6 +1,7 @@
 ﻿using System;
 
 using System.Linq;
+using System.Runtime.InteropServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Constants;
@@ -91,6 +92,8 @@ namespace FroggerStarter.Controller
             
             this.setupGameTimer();
             this.setupScoreTimer();
+
+            Serializer.Serializer<GameSettings>.WriteObjectToFile("test123", new GameSettings());
         }
 
         /// <summary>
@@ -291,6 +294,7 @@ namespace FroggerStarter.Controller
 
             this.waterManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
             this.waterManager.SpeedBoatAnimationFrames.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
+            this.waterManager.StartAllSpeedBoatWaterAnimations();
         }
 
         #endregion

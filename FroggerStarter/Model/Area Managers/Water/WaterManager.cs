@@ -71,6 +71,16 @@ namespace FroggerStarter.Model.Area_Managers.Water
             this.UpdateYLocationOfLanes();
         }
 
+        /// <summary>
+        ///     Starts all speed boat water animations
+        ///     Precondition: none
+        ///     Post-condition: @each speedBoat SplashAnimation.Start()
+        /// </summary>
+        public void StartAllSpeedBoatWaterAnimations()
+        {
+            this.ToList().ForEach(speedboat => (speedboat as SpeedBoat)?.StartSpeedBoatWaterAnimation());
+        }
+
         #endregion
     }
 }

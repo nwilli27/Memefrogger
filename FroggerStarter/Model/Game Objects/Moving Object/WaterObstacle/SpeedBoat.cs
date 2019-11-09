@@ -20,6 +20,12 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
 
         #endregion
 
+        #region Constants
+
+        private const int SplashAnimationBaseSpeed = 300;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -31,11 +37,8 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         public SpeedBoat(Direction direction) : base(direction)
         {
             this.Sprite = new SpeedBoatSprite();
-            this.SplashAnimation = new Animation.Animation(AnimationType.SpeedBoatSplash) {
-                AnimationInterval = 125
-            };
+            this.SplashAnimation = new Animation.Animation(AnimationType.SpeedBoatSplash);
             this.ObstacleType = ObstacleType.SpeedBoat;
-            this.SplashAnimation.StartEndlessLoopKeepBaseFrame();
         }
 
         /// <summary>
@@ -47,6 +50,17 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         {
             base.MoveForward();
             this.SplashAnimation.SetFrameLocations(this.X - (this.Width / 2), this.Y);
+        }
+
+        /// <summary>
+        ///     Starts the speed boat water animation.
+        ///     Precondition: none
+        ///     Post-condition: SplashAnimation.Interval = 300 / SpeedX
+        /// </summary>
+        public void StartSpeedBoatWaterAnimation()
+        {
+            this.SplashAnimation.AnimationInterval = SplashAnimationBaseSpeed / (int) this.SpeedX;
+            this.SplashAnimation.StartEndlessLoopKeepBaseFrame();
         }
 
         /// <summary>

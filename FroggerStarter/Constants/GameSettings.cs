@@ -6,9 +6,16 @@ namespace FroggerStarter.Constants
     /// <summary>
     ///     Class holds unique data needed for game operation and setup.
     /// </summary>
-    internal static class GameSettings
+    public class GameSettings
     {
+        /// <summary>
+        ///     The total number of lives
+        /// </summary>
         public const int TotalNumberOfLives = 4;
+
+        /// <summary>
+        ///     The total score time
+        /// </summary>
         public const double ScoreTime = 20.0;
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FroggerStarter.Constants
         /// </summary>
         public static IList<object> WaterLane2 = new List<object> {
             Direction.Right,
-            3.0,
+            2.0,
             ObstacleType.SpeedBoat,
             3
         };
