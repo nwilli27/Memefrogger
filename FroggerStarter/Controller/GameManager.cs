@@ -41,11 +41,6 @@ namespace FroggerStarter.Controller
         #region Events
 
         /// <summary>
-        ///     The life loss Event Args
-        /// </summary>
-        public EventHandler<LivesUpdatedEventArgs> LifeLoss;
-
-        /// <summary>
         ///     The score updated Event Args
         /// </summary>
         public EventHandler<ScoreUpdatedEventArgs> ScoreUpdated;
@@ -86,11 +81,12 @@ namespace FroggerStarter.Controller
             SoundEffectManager.CreateAndLoadAllSoundEffects();
 
             this.createAndPlaceWaterObstaclesOnCanvas();
+            this.createAndPlaceFrogHomes();
             this.createAndPlacePlayer();
             this.createAndPlaceRoadObstaclesOnCanvas();
-            this.createAndPlaceFrogHomes();
             this.createAndPlacePowerUps();
             this.setupPlayerStatsAndHud();
+            this.createAndPlacePlayerHearts();
 
             this.setupGameTimer();
             this.setupScoreTimer();
@@ -239,6 +235,15 @@ namespace FroggerStarter.Controller
             this.frogHomes.ToList().ForEach(home => this.gameCanvas.Children.Add(home.Sprite));
         }
 
+        private void createAndPlacePlayerHearts()
+        {
+            foreach (var live in this.playerStats.Lives)
+            {
+                this.gameCanvas.Children.Add(live.Sprite);
+                live.HeartLostAnimation.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
+            }
+        }
+
         private void createAndPlacePowerUps()
         {
             this.powerUpManager = new PowerUpManager();
@@ -369,7 +374,7 @@ namespace FroggerStarter.Controller
 
         private bool isGameOver()
         {
-            return this.playerStats.Lives == 0 || this.frogHomes.HasHomesBeenFilled;
+            return this.playerStats.TotalLives == 0 || this.frogHomes.HasHomesBeenFilled;
         }
 
         private bool hasMovedPastTopBoundary()
@@ -383,12 +388,10 @@ namespace FroggerStarter.Controller
 
         private void lifeLost()
         {
-            this.playerStats.Lives--;
-            var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
-            this.LifeLoss?.Invoke(this, life);
+            this.playerStats.TotalLives--;
             this.checkWhatLifeLostSoundToPlay();
 
-            if (this.playerStats.Lives == 0)
+            if (this.playerStats.TotalLives == 0)
             {
                 this.stopGamePlayInSlowMotion();
             }
@@ -423,16 +426,10 @@ namespace FroggerStarter.Controller
 
         private void setupPlayerStatsAndHud()
         {
-            this.playerStats = new PlayerStats()
-            {
-                Score = 0,
-                Lives = GameSettings.TotalNumberOfLives,
-            };
+            this.playerStats = new PlayerStats {Score = 0, TotalLives = GameSettings.TotalNumberOfLives };
 
             var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
             this.ScoreUpdated?.Invoke(this, score);
-            var life = new LivesUpdatedEventArgs() { Lives = this.playerStats.Lives };
-            this.LifeLoss?.Invoke(this, life);
         }
 
         private void onDeathAnimationDone(object sender, AnimationIsFinishedEventArgs e)
@@ -460,7 +457,7 @@ namespace FroggerStarter.Controller
 
         private void checkWhatLifeLostSoundToPlay()
         {
-            if (this.playerStats.Lives == 0)
+            if (this.playerStats.TotalLives == 0)
             {
                 SoundEffectManager.PlaySound(SoundEffectType.GtaDeath);
             }

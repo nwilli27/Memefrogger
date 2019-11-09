@@ -12,8 +12,6 @@
         <TextBlock x:Name="gameOver" Canvas.ZIndex="4" Visibility="Collapsed" Foreground="White" FontSize="80" FontFamily="Berlin Sans FB" Canvas.Left="150" Canvas.Top="356" Height="125" Width="451" RenderTransformOrigin="0.494,0.44"><Run Text="GAME "/><Run Text="OVER"/></TextBlock>
 
         <TextBlock x:Name="gameName" Text="MemeFrogger" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic" Canvas.Left="273" Canvas.Top="12"/>
-        <TextBlock x:Name="livesLabel" Text="Lives:" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="16" Canvas.Top="17"/>
-        <TextBlock x:Name="numberLives" Text="0" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="77" Canvas.Top="17"/>
 
         <TextBlock x:Name="scoreLabel" Text="Score:" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="654" Canvas.Top="17"/>
         <TextBlock x:Name="scoreValue" Text="0" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="720" Canvas.Top="17"/>
@@ -40,7 +38,7 @@
         <Rectangle Canvas.Top="74" Fill="Blue" Width="{StaticResource HomeWidth}" Height="51" Canvas.Left="495" />
         <Rectangle Canvas.Top="74" Fill="DarkOliveGreen" Width="{StaticResource HomeLocationGapSize}" Height="50" Canvas.Left="555" />
         <Rectangle Canvas.Top="74" Fill="DarkOliveGreen" Width="{StaticResource HomeLocationGapSize}" Height="50" Canvas.Left="600" />
-        <Rectangle Canvas.Top="61" Fill="DarkOliveGreen" Width="{StaticResource AppWidth}" Height="15" />
+        <Rectangle Canvas.Top="{StaticResource StatHudBottomYLocation}" Fill="DarkOliveGreen" Width="{StaticResource AppWidth}" Height="15" />
         <Rectangle Canvas.Top="{StaticResource BottomRoadYLocation}" Fill="Gray" Width="{StaticResource AppWidth}" Height="{StaticResource RoadShoulderOffset}" />
         <Rectangle Canvas.Top="{StaticResource MiddleRoadYLocation}" Fill="Tan" Width="{StaticResource AppWidth}" Height="{StaticResource RoadShoulderOffset}" />
 

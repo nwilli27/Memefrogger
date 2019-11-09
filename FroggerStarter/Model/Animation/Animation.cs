@@ -192,6 +192,9 @@ namespace FroggerStarter.Model.Animation
                     animationDone.FrogLeapIsOver = true;
                     break;
 
+                case AnimationType.LifeHeartLost:
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
