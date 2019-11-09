@@ -115,6 +115,41 @@ namespace FroggerStarter.Model.Game_Objects
         }
 
         /// <summary>
+        ///     Determines whether [has collided with] [the specified other game object].
+        ///     But it squeezes the x location on right/left side of collision boundary.
+        ///     Needed to make the frog have more a realistic landing on water obstacles etc.
+        ///     Precondition: otherGameObject != null
+        ///     Post-condition: none
+        /// </summary>
+        /// <param name="otherGameObject">The other game object.</param>
+        /// <returns>
+        ///   <c>true</c> if [has collided with] [the specified other game object]; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasCollidedMoreThanHalfOfSprite(GameObject otherGameObject)
+        {
+            if (otherGameObject == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            var otherObjectBoundary = new Rectangle(
+                (int)otherGameObject.X + (int) this.Width / 2,
+                (int)otherGameObject.Y,
+                (int)otherGameObject.Width - (int) this.Width,
+                (int)otherGameObject.Height
+            );
+
+            var thisObjectBoundary = new Rectangle(
+                (int)this.X,
+                (int)this.Y,
+                (int)this.Width,
+                (int)this.Height
+            );
+
+            return thisObjectBoundary.IntersectsWith(otherObjectBoundary);
+        }
+
+        /// <summary>
         ///     Changes the sprite visibility based on the bool condition passed in.
         ///     Precondition: none
         ///     Post-condition: Sprite.Visibility == (Visible || Collapsed)

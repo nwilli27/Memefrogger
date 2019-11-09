@@ -5,7 +5,6 @@ using Windows.UI.Xaml.Controls;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using FroggerStarter.Model.Animation;
-using FroggerStarter.Model.Area_Managers;
 using FroggerStarter.Model.Area_Managers.Road;
 using FroggerStarter.Model.Game_Objects.Home;
 using FroggerStarter.Model.Game_Objects.Power_Ups;
@@ -13,8 +12,6 @@ using FroggerStarter.Model.Player;
 using FroggerStarter.Model.Score;
 using FroggerStarter.Model.Sound;
 using FroggerStarter.Model.Area_Managers.Water;
-using FroggerStarter.Model.Game_Objects.Moving_Object;
-using FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle;
 
 namespace FroggerStarter.Controller
 {
@@ -209,7 +206,7 @@ namespace FroggerStarter.Controller
 
         private void checkForPlayerToWaterObstacleCollision()
         {
-            var firstCollided = this.waterManager.FirstOrDefault(obstacle => this.player.HasCollidedWith(obstacle));
+            var firstCollided = this.waterManager.FirstOrDefault(obstacle => this.player.HasCollidedMoreThanHalfOfSprite(obstacle));
 
             if (firstCollided != null)
             {
@@ -330,7 +327,7 @@ namespace FroggerStarter.Controller
         {
             var hitHome = this.frogHomes.ToList()
                               .Where(home => !home.IsFilled)
-                              .First(home => this.player.HasCollidedWith(home));
+                              .First(home => this.player.HasCollidedMoreThanHalfOfSprite(home));
 
             hitHome.IsFilled = true;
         }
@@ -365,7 +362,7 @@ namespace FroggerStarter.Controller
         private bool hasReachedAnEmptyHome()
         {
             var filledHomes = this.frogHomes.ToList().Where(home => !home.IsFilled);
-            var collidedWithHomes = filledHomes.Where(home => this.player.HasCollidedWith(home));
+            var collidedWithHomes = filledHomes.Where(home => this.player.HasCollidedMoreThanHalfOfSprite(home));
 
             return collidedWithHomes.Any();
         }
@@ -465,7 +462,7 @@ namespace FroggerStarter.Controller
         {
             if (this.playerStats.Lives == 0)
             {
-                SoundEffectManager.PlaySound(SoundEffectType.GTADeath);
+                SoundEffectManager.PlaySound(SoundEffectType.GtaDeath);
             }
             else if (this.hasMovedPastTopBoundary())
             {
@@ -473,7 +470,7 @@ namespace FroggerStarter.Controller
             }
             else if (this.player.Y < GameBoard.MiddleRoadYLocation)
             {
-                SoundEffectManager.PlaySound(SoundEffectType.WaterDrop);
+                SoundEffectManager.PlaySound(SoundEffectType.MarioDrown);
             }
             else
             {

@@ -39,12 +39,32 @@
         /// <summary>
         ///     The gta death sound.
         /// </summary>
-        GTADeath,
+        GtaDeath,
 
         /// <summary>
-        ///     The water drop sound.
+        ///     The mario drown sound.
         /// </summary>
-        WaterDrop
+        MarioDrown,
+
+        /// <summary>
+        ///     The mario death sound.
+        /// </summary>
+        MarioDeath,
+
+        /// <summary>
+        ///     The mario oof sound.
+        /// </summary>
+        MarioOof,
+
+        /// <summary>
+        ///     The yoda death sound.
+        /// </summary>
+        YodaDeath,
+
+        /// <summary>
+        ///     The wilhelm scream sound.
+        /// </summary>
+        WilhelmScream
 
     }
 }

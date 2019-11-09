@@ -7,7 +7,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
     ///     A speed boat object of type Obstacle
     /// </summary>
     /// <seealso cref="WaterObstacle" />
-    class SpeedBoat : WaterObstacle
+    internal sealed class SpeedBoat : WaterObstacle
     {
         #region Constructors
 
@@ -19,7 +19,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         /// <param name="direction">The direction the boat is facing.</param>
         public SpeedBoat(Direction direction) : base(direction)
         {
-            Sprite = new SpeedBoatSprite();
+            this.Sprite = new SpeedBoatSprite();
         }
 
         #endregion

@@ -242,6 +242,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SoundEffects\MarioOof.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -255,9 +256,14 @@
     <Content Include="SoundEffects\HomerDoh.mp3" />
     <Content Include="SoundEffects\HomeSafely.mp3" />
     <Content Include="SoundEffects\GameOver.wav" />
+    <Content Include="SoundEffects\MarioDeath.mp3" />
+    <Content Include="SoundEffects\MarioStartToPlay.mp3" />
+    <Content Include="SoundEffects\NextLevel.mp3" />
     <Content Include="SoundEffects\Oof.mp3" />
+    <Content Include="SoundEffects\MarioDrown.mp3" />
     <Content Include="SoundEffects\TimePowerUp.mp3" />
-    <Content Include="SoundEffects\WaterDrop.mp3" />
+    <Content Include="SoundEffects\WilhelmScream.mp3" />
+    <Content Include="SoundEffects\YodaDeath.mp3" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

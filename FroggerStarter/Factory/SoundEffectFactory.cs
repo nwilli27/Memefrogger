@@ -59,16 +59,44 @@ namespace FroggerStarter.Factory
                         IsPlayerDeathSoundEffect = true
                     };
 
-                case SoundEffectType.GTADeath:
-                    return new SoundEffect("GTADeath.mp3")
+                case SoundEffectType.GtaDeath:
+                    return new SoundEffect("GtaDeath.mp3")
                     {
-                        SoundEffectType = SoundEffectType.GTADeath
+                        SoundEffectType = SoundEffectType.GtaDeath
                     };
 
-                case SoundEffectType.WaterDrop:
-                    return new SoundEffect("WaterDrop.mp3")
+                case SoundEffectType.MarioDrown:
+                    return new SoundEffect("MarioDrown.mp3")
                     {
-                        SoundEffectType = SoundEffectType.WaterDrop
+                        SoundEffectType = SoundEffectType.MarioDrown
+                    };
+
+                case SoundEffectType.MarioDeath:
+                    return new SoundEffect("MarioDeath.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.MarioDeath,
+                        IsPlayerDeathSoundEffect = true
+                    };
+
+                case SoundEffectType.MarioOof:
+                    return new SoundEffect("MarioOof.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.MarioOof,
+                        IsPlayerDeathSoundEffect = true
+                    };
+
+                case SoundEffectType.YodaDeath:
+                    return new SoundEffect("YodaDeath.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.YodaDeath,
+                        IsPlayerDeathSoundEffect = true
+                    };
+
+                case SoundEffectType.WilhelmScream:
+                    return new SoundEffect("WilhelmScream.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.WilhelmScream,
+                        IsPlayerDeathSoundEffect = true
                     };
 
                 default:

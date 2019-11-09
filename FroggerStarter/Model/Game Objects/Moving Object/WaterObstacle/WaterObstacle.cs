@@ -1,5 +1,7 @@
 ﻿using FroggerStarter.Constants;
 using FroggerStarter.Enums;
+using System;
+using System.Drawing;
 
 namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
 {
