@@ -265,6 +265,9 @@
     <Compile Include="View\Sprites\WaterSprites\SpeedBoatSprite.xaml.cs">
       <DependentUpon>SpeedBoatSprite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -423,6 +426,10 @@
     <Page Include="View\Sprites\WaterSprites\SpeedBoatSprite.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\StartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
