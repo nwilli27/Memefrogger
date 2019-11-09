@@ -134,6 +134,8 @@
     <Compile Include="Model\Area Managers\Road\RoadManager.cs" />
     <Compile Include="Model\Area Managers\Water\WaterLane.cs" />
     <Compile Include="Model\Area Managers\Water\WaterManager.cs" />
+    <Compile Include="Model\Game Objects\Lives\LifeHeart.cs" />
+    <Compile Include="Model\Game Objects\Lives\PlayerLives.cs" />
     <Compile Include="Model\Game Objects\Moving Object\RoadObstacle\RoadObstacle.cs" />
     <Compile Include="Model\Game Objects\Moving Object\RoadObstacle\Car.cs" />
     <Compile Include="Model\Animation\Frame.cs" />
@@ -172,6 +174,30 @@
     <Compile Include="View\FrogLeapAnimation\FrogLeapFrameOne.xaml.cs">
       <DependentUpon>FrogLeapFrameOne.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameEight.xaml.cs">
+      <DependentUpon>LifeHeartLostFrameEight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameSeven.xaml.cs">
+      <DependentUpon>LifeHeartLostFrameSeven.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameSix.xaml.cs">
+      <DependentUpon>LifeHeartLostFrameSix.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameFive.xaml.cs">
+      <DependentUpon>LifeHeartLostFrameFive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameFour.xaml.cs">
+      <DependentUpon>LifeHeartLostFrameFour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameThree.xaml.cs">
+      <DependentUpon>LifeHeartLostFrameThree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameTwo.xaml.cs">
+      <DependentUpon>LifeHeartLostFrameTwo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameOne.xaml.cs">
+      <DependentUpon>LifeHeartLostFrameOne.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFour.xaml.cs">
       <DependentUpon>PlayerDeathFrameFour.xaml</DependentUpon>
     </Compile>
@@ -190,6 +216,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFive.xaml.cs">
       <DependentUpon>PlayerDeathFrameFive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\GameSprites\LifeSprite.xaml.cs">
+      <DependentUpon>LifeSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\PowerUpSprites\TimePowerUpSprite.xaml.cs">
       <DependentUpon>TimePowerUpSprite.xaml</DependentUpon>
@@ -275,6 +304,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameEight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameSeven.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameSix.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameFive.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameFour.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameThree.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameTwo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameOne.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameFour.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -298,6 +359,10 @@
     <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameFive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\GameSprites\LifeSprite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Sprites\PowerUpSprites\TimePowerUpSprite.xaml">
       <Generator>MSBuild:Compile</Generator>

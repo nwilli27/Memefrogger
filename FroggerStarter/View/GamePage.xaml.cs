@@ -48,7 +48,6 @@ namespace FroggerStarter.View
             this.initializeGameBoardConstants();
 
             this.gameManager = new GameManager();
-            this.gameManager.LifeLoss += this.onLivesUpdated;
             this.gameManager.ScoreUpdated += this.onScoreUpdated;
             this.gameManager.GameOver += this.onGameOver;
             this.gameManager.ScoreTimerTick += this.onScoreTimerTick;
@@ -60,12 +59,13 @@ namespace FroggerStarter.View
         {
             GameBoard.BackgroundWidth     = this.applicationWidth;
             GameBoard.BackgroundHeight    = this.applicationHeight;
-            GameBoard.HighRoadYLocation   = (double) Application.Current.Resources["HighRoadYLocation"];
-            GameBoard.BottomRoadYLocation = (double) Application.Current.Resources["BottomRoadYLocation"];
-            GameBoard.MiddleRoadYLocation = (double) Application.Current.Resources["MiddleRoadYLocation"];
-            GameBoard.HomeWidth           = (double) Application.Current.Resources["HomeWidth"];
-            GameBoard.HomeLocationGapSize = (double) Application.Current.Resources["HomeLocationGapSize"];
-            GameBoard.RoadShoulderOffset  = (double) Application.Current.Resources["RoadShoulderOffset"];
+            GameBoard.HighRoadYLocation   =    (double) Application.Current.Resources["HighRoadYLocation"];
+            GameBoard.BottomRoadYLocation =    (double) Application.Current.Resources["BottomRoadYLocation"];
+            GameBoard.MiddleRoadYLocation =    (double) Application.Current.Resources["MiddleRoadYLocation"];
+            GameBoard.HomeWidth           =    (double) Application.Current.Resources["HomeWidth"];
+            GameBoard.HomeLocationGapSize =    (double) Application.Current.Resources["HomeLocationGapSize"];
+            GameBoard.RoadShoulderOffset  =    (double) Application.Current.Resources["RoadShoulderOffset"];
+            GameBoard.StatHudBottomYLocation = (double) Application.Current.Resources["StatHudBottomYLocation"];
         }
 
         #endregion
@@ -101,11 +101,6 @@ namespace FroggerStarter.View
             {
                 this.timeProgressBar.Value = e.ScoreTick;
             }
-        }
-
-        private void onLivesUpdated(object sender, LivesUpdatedEventArgs e)
-        {
-            this.numberLives.Text = e.Lives.ToString();
         }
 
         private void onScoreUpdated(object sender, ScoreUpdatedEventArgs e)

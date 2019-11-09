@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using FroggerStarter.Enums;
 using FroggerStarter.View.FrogLeapAnimation;
+using FroggerStarter.View.LifeHeartLostAnimation;
 using FroggerStarter.View.PlayerDeathAnimation;
 using FroggerStarter.View.Sprites;
 
@@ -44,6 +45,20 @@ namespace FroggerStarter.Factory
                     var frogLeapAnimation = new List<BaseSprite>();
                     frogLeapAnimation.Add(new FrogLeapFrameOne());
                     return frogLeapAnimation;
+
+                case AnimationType.LifeHeartLost:
+                    var heartLostAnimation = new List<BaseSprite>();
+
+                    heartLostAnimation.Add(new LifeHeartLostFrameOne());
+                    heartLostAnimation.Add(new LifeHeartLostFrameTwo());
+                    heartLostAnimation.Add(new LifeHeartLostFrameThree());
+                    heartLostAnimation.Add(new LifeHeartLostFrameFour());
+                    heartLostAnimation.Add(new LifeHeartLostFrameFive());
+                    heartLostAnimation.Add(new LifeHeartLostFrameSix());
+                    heartLostAnimation.Add(new LifeHeartLostFrameSeven());
+                    heartLostAnimation.Add(new LifeHeartLostFrameEight());
+
+                    return heartLostAnimation;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(animationType), animationType, null);

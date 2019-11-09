@@ -1,4 +1,6 @@
 ﻿using System;
+using Windows.UI.Xaml;
+using FroggerStarter.Model.Game_Objects.Lives;
 
 namespace FroggerStarter.Model.Player
 {
@@ -16,12 +18,29 @@ namespace FroggerStarter.Model.Player
         public int Score { get; set; }
 
         /// <summary>
-        ///     Gets the lives.
+        ///     Gets or sets the lives.
         /// </summary>
         /// <value>
         ///     The lives.
         /// </value>
-        public int Lives { get; set; }
+        public PlayerLives Lives { get; }
+
+        /// <summary>
+        ///     Gets the total lives.
+        /// </summary>
+        /// <value>
+        ///     The total lives.
+        /// </value>
+        public int TotalLives
+        {
+            get => this.Lives.NumberOfHearts;
+            set => this.Lives.NumberOfHearts = value;
+        }
+
+        public PlayerStats()
+        {
+            this.Lives = new PlayerLives();
+        }
 
     }
 
@@ -38,6 +57,7 @@ namespace FroggerStarter.Model.Player
         ///     The lives.
         /// </value>
         public int Lives { get; set; }
+
     }
 
     /// <summary>

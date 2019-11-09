@@ -20,6 +20,7 @@ namespace FroggerStarter.Constants
         private static readonly SetOnce<double> HomeLocationGapSizeOnce = new SetOnce<double>();
         private static readonly SetOnce<double> RoadShoulderOffsetOnce = new SetOnce<double>();
         private static readonly SetOnce<double> MiddleRoadYLocationOnce = new SetOnce<double>();
+        private static readonly SetOnce<double> StatHudBottomYLocationOnce = new SetOnce<double>();
 
         #endregion
 
@@ -33,6 +34,18 @@ namespace FroggerStarter.Constants
         #endregion
 
         #region Properties
+
+        /// <summary>
+        ///     Gets or sets the stat hud bottom y location.
+        /// </summary>
+        /// <value>
+        ///     The stat hud bottom y location.
+        /// </value>
+        public static double StatHudBottomYLocation
+        {
+            get => StatHudBottomYLocationOnce.Value;
+            set => StatHudBottomYLocationOnce.Value = value;
+        }
 
         /// <summary>
         ///     Gets or sets the width of the background.
