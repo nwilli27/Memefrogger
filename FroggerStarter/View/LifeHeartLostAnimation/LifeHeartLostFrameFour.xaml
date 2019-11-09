@@ -109,28 +109,28 @@
                         <CompositeTransform Rotation="-4.07" ScaleY="1" ScaleX="1" SkewX="0.977" SkewY="0.176" TranslateX="-0.003" TranslateY="-0.035"/>
                     </Ellipse.RenderTransform>
                 </Ellipse>
-                <Ellipse Fill="DarkRed" Margin="21,23,21,19"/>
-                <Ellipse Fill="DarkRed" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="23,22,20,19">
+                <Ellipse Fill="DarkRed" Margin="19,20,19,16"/>
+                <Ellipse Fill="DarkRed" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="23,18,17,15">
                     <Ellipse.RenderTransform>
                         <CompositeTransform Rotation="29.13" ScaleY="1.011" ScaleX="0.989" SkewX="-2.992" TranslateX="-0.17" TranslateY="-0.094"/>
                     </Ellipse.RenderTransform>
                 </Ellipse>
-                <Ellipse Fill="DarkRed" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="20,22,23,19">
+                <Ellipse Fill="DarkRed" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="17,18,23,15">
                     <Ellipse.RenderTransform>
                         <CompositeTransform Rotation="-31.246" ScaleY="1.014" ScaleX="0.986" SkewX="2.554"/>
                     </Ellipse.RenderTransform>
                 </Ellipse>
-                <Ellipse Fill="DarkRed" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="19,21,23,22">
+                <Ellipse Fill="DarkRed" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="15,16,23,21">
                     <Ellipse.RenderTransform>
                         <CompositeTransform Rotation="-4.577" SkewX="0.47"/>
                     </Ellipse.RenderTransform>
                 </Ellipse>
-                <Ellipse Fill="DarkRed" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="23,21,19,23">
+                <Ellipse Fill="DarkRed" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="23,16,15,23">
                     <Ellipse.RenderTransform>
                         <CompositeTransform Rotation="-4.07" ScaleY="1" ScaleX="1" SkewX="1.505" SkewY="0.176" TranslateX="-0.003" TranslateY="-0.035"/>
                     </Ellipse.RenderTransform>
                 </Ellipse>
-                <Ellipse Fill="White" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="19,22,25,25">
+                <Ellipse Fill="White" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="15,18,27,28">
                     <Ellipse.RenderTransform>
                         <CompositeTransform Rotation="-60.174" ScaleY="1" ScaleX="1" SkewX="1.505" SkewY="0.176" TranslateX="-0.003" TranslateY="-0.035"/>
                     </Ellipse.RenderTransform>

@@ -23,6 +23,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         #region Constants
 
         private const int SplashAnimationBaseSpeed = 300;
+        private const int SplashAnimationSlowDownIncrement = 150;
 
         #endregion
 
@@ -60,6 +61,18 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         public void StartSpeedBoatWaterAnimation()
         {
             this.SplashAnimation.AnimationInterval = SplashAnimationBaseSpeed / (int) this.SpeedX;
+            this.SplashAnimation.StartEndlessLoopKeepBaseFrame();
+        }
+
+        /// <summary>
+        ///     Stops the and slow down speed boat splash animation.
+        ///     Precondition: none
+        ///     Post-condition: SplashAnimation.AnimationInterval += SplashAnimationSlowDownIncrement
+        /// </summary>
+        public void StopAndSlowDownSpeedBoatSplashAnimation()
+        {
+            this.SplashAnimation.Stop();
+            this.SplashAnimation.AnimationInterval += SplashAnimationSlowDownIncrement;
             this.SplashAnimation.StartEndlessLoopKeepBaseFrame();
         }
 
