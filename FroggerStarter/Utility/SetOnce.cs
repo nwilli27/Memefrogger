@@ -31,16 +31,14 @@ namespace FroggerStarter.Utility
         /// </exception>
         public T Value
         {
-            get
-            {
-                if (!this.hasValue) throw new InvalidOperationException("Value not set");
-                return this.valueOrDefault;
-            }
+            get => this.valueOrDefault;
             set
             {
-                if (this.hasValue) throw new InvalidOperationException("Value already set");
-                this.valueOrDefault = value;
-                this.hasValue = true;
+                if (!this.hasValue)
+                {
+                    this.valueOrDefault = value;
+                    this.hasValue = true;
+                }
             }
         }
 
@@ -49,7 +47,7 @@ namespace FroggerStarter.Utility
         #region Methods
 
         /// <summary>
-        ///     Performs an implicit conversion from <see cref="SetOnce{T}"/> to <see cref="T"/>.
+        ///     Performs an implicit conversion from <see cref="SetOnce{T}" /> to <see cref="T" />.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
