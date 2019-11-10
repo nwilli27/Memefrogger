@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using FroggerStarter.Annotations;
 using FroggerStarter.Extensions;
 using FroggerStarter.Model.Score;
+using FroggerStarter.Serializer;
+using FroggerStarter.Utility;
 
 namespace FroggerStarter.ViewModel
 {
@@ -17,13 +19,29 @@ namespace FroggerStarter.ViewModel
     {
         #region Data members
 
-        private readonly IList<HighScore> highScoreList;
+        private readonly List<HighScore> highScoreList;
 
         private ObservableCollection<HighScore> highScores;
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        ///     Gets or sets the return command.
+        /// </summary>
+        /// <value>
+        ///     The return command.
+        /// </value>
+        public RelayCommand ReturnCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the clear scores command.
+        /// </summary>
+        /// <value>
+        ///     The clear scores command.
+        /// </value>
+        public RelayCommand ClearScoresCommand { get; set; }
 
         /// <summary>
         ///     Gets or sets the high scores.
@@ -38,6 +56,7 @@ namespace FroggerStarter.ViewModel
             {
                 this.highScores = value;
                 this.OnPropertyChanged();
+                this.ClearScoresCommand.OnCanExecuteChanged();
             }
         }
 
@@ -52,7 +71,10 @@ namespace FroggerStarter.ViewModel
         /// </summary>
         public HighScoreBoardViewModel()
         {
-            this.highScoreList = Serializer.Serializer<List<HighScore>>.ReadObjectFromFile("HighScoreBoard");
+            this.ReturnCommand = new RelayCommand(this.returnToStart, null);
+            this.ClearScoresCommand = new RelayCommand(this.clearScores, this.canClearScores);
+
+            this.highScoreList = Serializer<List<HighScore>>.ReadObjectFromFile("HighScoreBoard");
 
             this.HighScores = this.highScoreList.ToObservableCollection();
         }
@@ -64,8 +86,29 @@ namespace FroggerStarter.ViewModel
         /// <summary>
         ///     Occurs when a property value changes.
         /// </summary>
-        /// <returns>PropertyChangedEventHandler</returns>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        ///     Occurs when return selected.
+        /// </summary>
+        public event EventHandler ReturnSelected;
+
+        private void returnToStart(object obj)
+        {
+            this.ReturnSelected?.Invoke(null, EventArgs.Empty);
+        }
+
+        private void clearScores(object obj)
+        {
+            this.highScoreList.Clear();
+            this.HighScores = this.highScoreList.ToObservableCollection();
+            Serializer<List<HighScore>>.WriteObjectToFile("HighScoreBoard", new List<HighScore>());
+        }
+
+        private bool canClearScores(object obj)
+        {
+            return this.highScoreList != null && this.highScoreList?.Count != 0;
+        }
 
         /// <summary>
         ///     Called when [property changed].

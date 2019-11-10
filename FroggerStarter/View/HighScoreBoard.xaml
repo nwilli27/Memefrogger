@@ -15,24 +15,32 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView ItemsSource="{Binding HighScores, Mode=TwoWay}"
-            BorderBrush="Black" BorderThickness="2" Height="538" Width="843" Canvas.Left="328" Canvas.Top="231">
+            BorderBrush="Black" BorderThickness="2" Height="538" Width="850" Canvas.Left="328" Canvas.Top="231">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1">
+                    <Border BorderBrush="Black" BorderThickness="1" Width="100">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBlock HorizontalAlignment="Stretch" Grid.Row="0" 
-                                       Text="{Binding PlayerName}" />
-                            <TextBlock Grid.Row="1" Text="{Binding Score}" />
-                            <TextBlock Grid.Row="2" Text="{Binding Level}" />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Text="{Binding PlayerName}" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Score: "/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Level: "/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Score}" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Level}" />
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Button Command="{Binding ReturnCommand}" Margin="473,774,0,0" VerticalAlignment="Top" Height="31" Width="130" Content="Return to Start"/>
+        <Button Command="{Binding ClearScoresCommand}" Margin="898,774,0,0" VerticalAlignment="Top" Height="31" Width="130" Content="Clear High Scores"/>
     </Grid>
 </Page>

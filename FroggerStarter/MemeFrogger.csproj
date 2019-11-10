@@ -162,6 +162,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Serializer\Serializer.cs" />
     <Compile Include="Utility\Randomizer.cs" />
+    <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="Utility\SetOnce.cs" />
     <Compile Include="Factory\ObstacleFactory.cs" />
     <Compile Include="Model\Player\Frog.cs" />
