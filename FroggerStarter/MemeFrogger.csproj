@@ -126,6 +126,7 @@
     <Compile Include="Enums\AnimationType.cs" />
     <Compile Include="Enums\PowerUpType.cs" />
     <Compile Include="Enums\SoundEffectType.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Factory\AnimationFactory.cs" />
     <Compile Include="Factory\PowerUpFactory.cs" />
     <Compile Include="Factory\SoundEffectFactory.cs" />

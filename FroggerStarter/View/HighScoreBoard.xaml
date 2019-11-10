@@ -5,10 +5,34 @@
     xmlns:local="using:FroggerStarter.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:FroggerStarter.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Canvas>
+    <Page.DataContext>
+        <viewModel:HighScoreBoardViewModel/>
+    </Page.DataContext>
 
-    </Canvas>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView ItemsSource="{Binding HighScores, Mode=TwoWay}"
+            BorderBrush="Black" BorderThickness="2" Height="538" Width="843" Canvas.Left="328" Canvas.Top="231">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock HorizontalAlignment="Stretch" Grid.Row="0" 
+                                       Text="{Binding PlayerName}" />
+                            <TextBlock Grid.Row="1" Text="{Binding Score}" />
+                            <TextBlock Grid.Row="2" Text="{Binding Level}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </Page>
