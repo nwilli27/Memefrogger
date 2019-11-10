@@ -69,11 +69,19 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         ///     Precondition: none
         ///     Post-condition: SplashAnimation.AnimationInterval += SplashAnimationSlowDownIncrement
         /// </summary>
-        public void StopAndSlowDownSpeedBoatSplashAnimation()
+        public void SlowDownSpeedBoatSplashAnimation()
         {
-            this.SplashAnimation.Stop();
+            this.StopSpeedBoatAnimations();
             this.SplashAnimation.AnimationInterval += SplashAnimationSlowDownIncrement;
             this.SplashAnimation.StartEndlessLoopKeepBaseFrame();
+        }
+
+        /// <summary>
+        /// Stops the speed boat animations timer.
+        /// </summary>
+        public void StopSpeedBoatAnimations()
+        {
+            this.SplashAnimation.Stop();
         }
 
         /// <summary>

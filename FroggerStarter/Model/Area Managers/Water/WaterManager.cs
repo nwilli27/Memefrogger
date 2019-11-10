@@ -82,13 +82,23 @@ namespace FroggerStarter.Model.Area_Managers.Water
         }
 
         /// <summary>
+        ///     Stops the speed boat water animations.
+        ///     Precondition: none
+        ///     Post-condition: none
+        /// </summary>
+        public void StopSpeedBoatWaterAnimations()
+        {
+            this.ToList().ForEach(obstacle => (obstacle as SpeedBoat)?.StopSpeedBoatAnimations());
+        }
+
+        /// <summary>
         ///     Slows down speed boat water animations.
         ///     Precondition: none
         ///     Post-condition: none
         /// </summary>
         public void SlowDownSpeedBoatWaterAnimations()
         {
-            this.ToList().ForEach(obstacle => (obstacle as SpeedBoat)?.StopAndSlowDownSpeedBoatSplashAnimation());
+            this.ToList().ForEach(obstacle => (obstacle as SpeedBoat)?.SlowDownSpeedBoatSplashAnimation());
         }
 
         #endregion

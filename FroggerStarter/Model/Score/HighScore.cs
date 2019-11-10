@@ -94,12 +94,7 @@ namespace FroggerStarter.Model.Score
             }
 
             var playerNameComparison = string.Compare(this.PlayerName, other.PlayerName, StringComparison.Ordinal);
-            if (playerNameComparison != 0)
-            {
-                return playerNameComparison;
-            }
-
-            return this.Level.CompareTo(other.Level);
+            return playerNameComparison != 0 ? playerNameComparison : this.Level.CompareTo(other.Level);
         }
 
         #endregion
