@@ -8,6 +8,11 @@
         /// <summary>
         ///     The time increase
         /// </summary>
-        TimeIncrease
+        TimeIncrease,
+
+        /// <summary>
+        ///     The quick revive
+        /// </summary>
+        QuickRevive
     }
 }

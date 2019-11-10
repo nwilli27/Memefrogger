@@ -39,6 +39,14 @@ namespace FroggerStarter.Model.Animation
         /// </value>
         private bool IsAnimationFinished => this.animationFrames.All(frame => frame.HasBeenPlayed && !frame.IsVisible);
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether [animation has started].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [animation has started]; otherwise, <c>false</c>.
+        /// </value>
+        public bool AnimationHasStarted { get; set; }
+
         #endregion
 
         #region Events
@@ -108,6 +116,7 @@ namespace FroggerStarter.Model.Animation
             this.animateTimer.Interval = new TimeSpan(0, 0, 0, 0, this.AnimationInterval);
             
             this.makeFirstFrameVisible();
+            this.AnimationHasStarted = true;
             this.animateTimer.Start();
         }
 
@@ -117,6 +126,7 @@ namespace FroggerStarter.Model.Animation
         public void Stop()
         {
             this.animateTimer.Stop();
+            this.AnimationHasStarted = false;
         }
 
         /// <summary>
@@ -132,6 +142,7 @@ namespace FroggerStarter.Model.Animation
 
             this.makeFirstFrameVisible();
             this.animateTimer.Start();
+            this.AnimationHasStarted = true;
         }
 
         /// <summary>
@@ -236,6 +247,7 @@ namespace FroggerStarter.Model.Animation
             {
                 this.animationFrames.ToList().ForEach(frame => frame.ResetStatusAndVisibility());
                 this.animateTimer.Stop();
+                this.AnimationHasStarted = false;
                 this.invokeFinishedAnimationBasedOnType();
             }
         }

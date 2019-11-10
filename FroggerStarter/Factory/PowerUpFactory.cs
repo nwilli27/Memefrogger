@@ -27,6 +27,9 @@ namespace FroggerStarter.Factory
                 case PowerUpType.TimeIncrease:
                     return new TimePowerUp();
 
+                case PowerUpType.QuickRevive:
+                    return new QuickRevivePowerUp();
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(powerUpType), powerUpType, null);
             }

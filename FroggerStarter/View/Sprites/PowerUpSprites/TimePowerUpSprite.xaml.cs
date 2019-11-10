@@ -2,15 +2,12 @@
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
-using System.ComponentModel;
-using FroggerStarter.Model.Game_Objects.Power_Ups;
-
-namespace FroggerStarter.View.PowerUpSprites
+namespace FroggerStarter.View.Sprites.PowerUpSprites
 {
     /// <summary>
     ///     Home sprite class.
     /// </summary>
-    /// <seealso cref="FroggerStarter.View.Sprites.BaseSprite" />
+    /// <seealso cref="BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
     public sealed partial class TimePowerUpSprite
@@ -35,7 +32,7 @@ namespace FroggerStarter.View.PowerUpSprites
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TimePowerUpSprite"/> class.
+        ///     Initializes a new instance of the <see cref="Sprites.PowerUpSprites.TimePowerUpSprite"/> class.
         /// </summary>
         public TimePowerUpSprite()
         {

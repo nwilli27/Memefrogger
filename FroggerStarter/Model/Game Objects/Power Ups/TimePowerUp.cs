@@ -3,7 +3,7 @@ using FroggerStarter.Enums;
 using FroggerStarter.Model.Score;
 using FroggerStarter.Model.Sound;
 using FroggerStarter.Utility;
-using FroggerStarter.View.PowerUpSprites;
+using TimePowerUpSprite = FroggerStarter.View.Sprites.PowerUpSprites.TimePowerUpSprite;
 
 namespace FroggerStarter.Model.Game_Objects.Power_Ups
 {

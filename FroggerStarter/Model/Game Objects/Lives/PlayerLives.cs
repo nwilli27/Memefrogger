@@ -3,18 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FroggerStarter.Constants;
+using FroggerStarter.Model.Player;
 
 namespace FroggerStarter.Model.Game_Objects.Lives
 {
     /// <summary>
-    ///     Holds the collection of Player lives (LifeHearts)
+    ///     Holds the collection of Player hearts (LifeHearts)
     /// </summary>
     internal class PlayerLives : IEnumerable<LifeHeart>
     {
 
         #region Data Members
 
-        private readonly IList<LifeHeart> lives;
+        private readonly IList<LifeHeart> hearts;
         private int numberOfHearts;
 
         #endregion
@@ -29,16 +30,25 @@ namespace FroggerStarter.Model.Game_Objects.Lives
         /// </value>
         public int NumberOfHearts
         {
-            get => this.numberOfHearts;
+            get
+            {
+                if (PlayerAbilities.HasQuickRevive)
+                {
+                    return this.numberOfHearts + 1;
+                }
+                return this.numberOfHearts;
+            }
             set
             {
-                this.numberOfHearts = value;
-                if (value < GameSettings.TotalNumberOfLives)
+                if (value < GameSettings.TotalNumberOfLives || PlayerAbilities.HasQuickRevive)
                 {
                     this.makeRightMostHeartInvisible();
                 }
+                this.numberOfHearts = value;
             }
         }
+
+
 
         #endregion
 
@@ -54,11 +64,11 @@ namespace FroggerStarter.Model.Game_Objects.Lives
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlayerLives"/> class.
         ///     Precondition: none
-        ///     Post-condition: this.lives.Count() == 0
+        ///     Post-condition: this.hearts.Count() == 0
         /// </summary>
         public PlayerLives()
         {
-            this.lives = new List<LifeHeart>();
+            this.hearts = new List<LifeHeart>();
             this.createAndLoadLives();
         }
 
@@ -74,7 +84,7 @@ namespace FroggerStarter.Model.Game_Objects.Lives
         /// </returns>
         public IEnumerator<LifeHeart> GetEnumerator()
         {
-            return this.lives.GetEnumerator();
+            return this.hearts.GetEnumerator();
         }
 
         /// <summary>
@@ -85,7 +95,14 @@ namespace FroggerStarter.Model.Game_Objects.Lives
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.lives.GetEnumerator();
+            return this.hearts.GetEnumerator();
+        }
+
+        public void MoveQuickReviveHeart()
+        {
+            var quickReviveHeart = this.hearts.First(heart => heart is QuickReviveHeart);
+            var rightMostHeartXLocation = this.hearts.OrderByDescending(heart => heart.X).First(heart => heart is SingleLifeHeart).X;
+            quickReviveHeart.X = rightMostHeartXLocation + quickReviveHeart.Width + SpacingBetweenLifeHearts;
         }
 
         #endregion
@@ -98,22 +115,44 @@ namespace FroggerStarter.Model.Game_Objects.Lives
 
             for (var i = 0; i < GameSettings.TotalNumberOfLives; i++)
             {
-                var newLife = new LifeHeart() {
+                var newLife = new SingleLifeHeart() {
                     X = xLocation
                 };
                 xLocation += newLife.Width + SpacingBetweenLifeHearts;
                 newLife.SetCenteredYLocationOfArea(GameBoard.StatHudBottomYLocation, 0);
-                this.lives.Add(newLife);
+                this.hearts.Add(newLife);
             }
+
+            this.addQuickReviveHeartToEnd();
+        }
+
+        private void addQuickReviveHeartToEnd()
+        {
+            var quickReviveHeart = new QuickReviveHeart();
+            var rightMostHeartXLocation = this.hearts.OrderByDescending(heart => heart.X).First().X;
+            quickReviveHeart.X = rightMostHeartXLocation + quickReviveHeart.Width + SpacingBetweenLifeHearts;
+            quickReviveHeart.SetCenteredYLocationOfArea(GameBoard.StatHudBottomYLocation, 0);
+            quickReviveHeart.ChangeSpriteVisibility(false);
+            this.hearts.Add(quickReviveHeart);
         }
 
         private void makeRightMostHeartInvisible()
         {
-            var rightMostHeart = this.lives.OrderByDescending(heart => heart.X).First();
-            rightMostHeart.ChangeSpriteVisibility(false);
+            var rightMostHeart = this.hearts.OrderByDescending(heart => heart.X).First(heart => heart is SingleLifeHeart);
+
+            if (PlayerAbilities.HasQuickRevive)
+            {
+                rightMostHeart = this.hearts.First(heart => heart is QuickReviveHeart);
+                rightMostHeart.ChangeSpriteVisibility(false);
+            }
+            else
+            {
+                rightMostHeart.ChangeSpriteVisibility(false);
+                this.hearts.Remove(rightMostHeart);
+            }
+
             rightMostHeart.HeartLostAnimation.SetFrameLocations(rightMostHeart.X, rightMostHeart.Y);
             rightMostHeart.HeartLostAnimation.Start();
-            this.lives.Remove(rightMostHeart);
         }
 
         #endregion

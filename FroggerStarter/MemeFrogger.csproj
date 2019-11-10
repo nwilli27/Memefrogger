@@ -134,6 +134,8 @@
     <Compile Include="Model\Area Managers\Road\RoadManager.cs" />
     <Compile Include="Model\Area Managers\Water\WaterLane.cs" />
     <Compile Include="Model\Area Managers\Water\WaterManager.cs" />
+    <Compile Include="Model\Game Objects\Lives\SingleLifeHeart.cs" />
+    <Compile Include="Model\Game Objects\Lives\QuickReviveHeart.cs" />
     <Compile Include="Model\Game Objects\Lives\LifeHeart.cs" />
     <Compile Include="Model\Game Objects\Lives\PlayerLives.cs" />
     <Compile Include="Model\Game Objects\Moving Object\RoadObstacle\RoadObstacle.cs" />
@@ -150,7 +152,9 @@
     <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\WaterObstacle.cs" />
     <Compile Include="Model\Game Objects\Power Ups\PowerUp.cs" />
     <Compile Include="Model\Game Objects\Power Ups\PowerUpManager.cs" />
+    <Compile Include="Model\Game Objects\Power Ups\QuickRevivePowerUp.cs" />
     <Compile Include="Model\Game Objects\Power Ups\TimePowerUp.cs" />
+    <Compile Include="Model\Player\PlayerAbilities.cs" />
     <Compile Include="Model\Score\HighScore.cs" />
     <Compile Include="Model\Sound\SoundEffect.cs" />
     <Compile Include="Model\Sound\SoundEffectManager.cs" />
@@ -230,8 +234,14 @@
     <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameOne.xaml.cs">
       <DependentUpon>SplashBoatFrameOne.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\GameSprites\QuickReviveHeartSprite.xaml.cs">
+      <DependentUpon>QuickReviveHeartSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\GameSprites\LifeSprite.xaml.cs">
       <DependentUpon>LifeSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\PowerUpSprites\QuickRevivePowerUpSprite.xaml.cs">
+      <DependentUpon>QuickRevivePowerUpSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\PowerUpSprites\TimePowerUpSprite.xaml.cs">
       <DependentUpon>TimePowerUpSprite.xaml</DependentUpon>
@@ -307,7 +317,9 @@
     <Content Include="SoundEffects\NextLevel.mp3" />
     <Content Include="SoundEffects\Oof.mp3" />
     <Content Include="SoundEffects\MarioDrown.mp3" />
+    <Content Include="SoundEffects\QuickRevive.mp3" />
     <Content Include="SoundEffects\TimePowerUp.mp3" />
+    <Content Include="SoundEffects\BeRightBack.mp3" />
     <Content Include="SoundEffects\WilhelmScream.mp3" />
     <Content Include="SoundEffects\YodaDeath.mp3" />
   </ItemGroup>
@@ -392,7 +404,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Sprites\GameSprites\QuickReviveHeartSprite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Sprites\GameSprites\LifeSprite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\PowerUpSprites\QuickRevivePowerUpSprite.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

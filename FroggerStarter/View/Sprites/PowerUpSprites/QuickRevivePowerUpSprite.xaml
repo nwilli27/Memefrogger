@@ -1,0 +1,110 @@
+﻿<local:BaseSprite
+
+    x:Class="FroggerStarter.View.Sprites.PowerUpSprites.QuickRevivePowerUpSprite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FroggerStarter.View.Sprites"
+    xmlns:model="using:FroggerStarter.Model.Game_Objects.Power_Ups"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="50"
+    Width="50">
+
+    <Canvas>
+        <Viewbox Height="50" Width="50" Canvas.Left="12" Stretch="Fill" Canvas.Top="2">
+
+            <Grid Height="50" Width="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="49*"/>
+                </Grid.ColumnDefinitions>
+                <Ellipse Fill="DeepSkyBlue" Margin="1,14,28,10" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Grid.Column="1">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="10.354" TranslateX="-0.496" TranslateY="0"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="DeepSkyBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="12,9,22,7" Grid.Column="1">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="33.66" ScaleY="1.011" ScaleX="0.989" SkewX="-2.992" TranslateX="-0.681" TranslateY="1.286"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="DeepSkyBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-3,10,37,5" Grid.ColumnSpan="2">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-32.067" ScaleY="1.014" ScaleX="0.986" SkewX="2.554" TranslateX="-0.424" TranslateY="-1.092"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="DeepSkyBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-9,7,38,21" Grid.ColumnSpan="2">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="19.038" SkewX="3.29" TranslateX="1.182" TranslateY="-1.517" ScaleX="1" ScaleY="0.998" SkewY="0"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="DeepSkyBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="8,4,19,24" Grid.Column="1">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="50.818" ScaleY="1" ScaleX="0.998" SkewX="0" SkewY="3.635" TranslateX="1.251" TranslateY="1.516"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="White" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-7,11,48,35" Grid.ColumnSpan="2">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform Rotation="-35.042" ScaleY="1" ScaleX="1" SkewX="1.505" SkewY="0.176" TranslateX="1.907" TranslateY="-2.118"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Viewbox Grid.Column="1" Margin="10,17,22,13" Stretch="Fill">
+                    <Grid Height="25" Width="22">
+                        <Rectangle Fill="Tan" Margin="9,0,5,2" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                            <Rectangle.RenderTransform>
+                                <CompositeTransform Rotation="-143.676"/>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Ellipse Fill="Tan" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="0,21,14,0">
+                            <Ellipse.RenderTransform>
+                                <CompositeTransform Rotation="32.096" ScaleY="1" ScaleX="1" SkewX="1.505" SkewY="0.176" TranslateX="1.907" TranslateY="-2.118"/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Ellipse Fill="Tan" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="14,2,0,18">
+                            <Ellipse.RenderTransform>
+                                <CompositeTransform Rotation="27.847" ScaleY="1" ScaleX="1" SkewX="1.505" SkewY="0.176" TranslateX="1.907" TranslateY="-2.118"/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Rectangle Fill="SandyBrown" Margin="10,6,5,9" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                            <Rectangle.RenderTransform>
+                                <CompositeTransform Rotation="-143.676"/>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Rectangle Fill="SandyBrown" Margin="10,4,11,11" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                            <Rectangle.RenderTransform>
+                                <CompositeTransform Rotation="-143.676"/>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Rectangle Fill="SandyBrown" Margin="16,8,5,7" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                            <Rectangle.RenderTransform>
+                                <CompositeTransform Rotation="-143.676"/>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="4,19,17,5"/>
+                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="7,21,14,3"/>
+                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="7,18,14,6"/>
+                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="6,15,15,9"/>
+                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="10,17,11,7"/>
+                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="15,4,6,20"/>
+                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="18,6,3,18"/>
+                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="18,3,3,21"/>
+                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="17,1,4,23"/>
+                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="21,3,0,21"/>
+                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="9,11,12,13"/>
+                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="12,13,9,11"/>
+                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="15,12,6,12"/>
+                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="12,10,9,14"/>
+                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="13,7,8,17"/>
+                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="16,9,5,15"/>
+
+                    </Grid>
+                </Viewbox>
+
+            </Grid>
+
+        </Viewbox>
+
+    </Canvas>
+
+</local:BaseSprite>

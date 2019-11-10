@@ -64,7 +64,17 @@
         /// <summary>
         ///     The wilhelm scream sound.
         /// </summary>
-        WilhelmScream
+        WilhelmScream,
+
+        /// <summary>
+        ///     The quick revive sound.
+        /// </summary>
+        QuickRevive,
+
+        /// <summary>
+        ///     The be right back sound.
+        /// </summary>
+        BeRightBack
 
     }
 }

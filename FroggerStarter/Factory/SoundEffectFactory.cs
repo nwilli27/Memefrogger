@@ -99,6 +99,18 @@ namespace FroggerStarter.Factory
                         IsPlayerDeathSoundEffect = true
                     };
 
+                case SoundEffectType.QuickRevive:
+                    return new SoundEffect("QuickRevive.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.QuickRevive,
+                    };
+
+                case SoundEffectType.BeRightBack:
+                    return new SoundEffect("BeRightBack.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.BeRightBack,
+                    };
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(soundEffect), soundEffect, null);
             }
