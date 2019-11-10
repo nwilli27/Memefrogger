@@ -30,6 +30,17 @@ namespace FroggerStarter.Model.Sound
         /// </value>
         public bool IsPlayerDeathSoundEffect { get; set; }
 
+        /// <summary>
+        ///     Sets the volume.
+        /// </summary>
+        /// <value>
+        ///     The volume.
+        /// </value>
+        public double Volume
+        {
+            set => this.soundEffectElement.Volume = value;
+        }
+
         #endregion
 
         #region Data members

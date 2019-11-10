@@ -339,9 +339,11 @@ namespace FroggerStarter.Controller
         private void stopGamePlayAndShowGameOver()
         {
             this.player.StopMovement();
+            this.player.IsDead = true;
             this.timer.Stop();
             this.scoreTimer.Stop();
             this.powerUpManager.StopPowerUpSpawnTimer();
+            this.waterManager.StopSpeedBoatWaterAnimations();
             this.gameOver();
             SoundEffectManager.PlaySound(SoundEffectType.GameOver);
         }
@@ -354,7 +356,6 @@ namespace FroggerStarter.Controller
 
             hitHome.IsFilled = true;
         }
-
 
         private void checkGameStatusForGameOver()
         { 
@@ -426,7 +427,6 @@ namespace FroggerStarter.Controller
                 this.checkGameStatusForGameOver();
             }
 
-            checkIfPlayerHasQuickRevive();
         }
 
         //TODO can maybe move this to the powerUpManager class
@@ -476,7 +476,11 @@ namespace FroggerStarter.Controller
                 ScoreTimer.ResetScoreTick();
                 this.scoreTimer.Start();
 
-                this.powerUpManager.ResetPowerUpsAndSpawnTimer();
+                if (!PlayerAbilities.HasQuickRevive)
+                {
+                    this.powerUpManager.ResetPowerUpsAndSpawnTimer();
+                }
+                checkIfPlayerHasQuickRevive();
             }
         }
 

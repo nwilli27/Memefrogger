@@ -26,7 +26,8 @@ namespace FroggerStarter.Factory
             {
                 case SoundEffectType.TimePowerUp:
                     return new SoundEffect("TimePowerUp.mp3") {
-                        SoundEffectType = SoundEffectType.TimePowerUp
+                        SoundEffectType = SoundEffectType.TimePowerUp,
+                        Volume = .8
                     };
 
                 case SoundEffectType.GameOver:
@@ -103,12 +104,13 @@ namespace FroggerStarter.Factory
                     return new SoundEffect("QuickRevive.mp3")
                     {
                         SoundEffectType = SoundEffectType.QuickRevive,
+                        Volume = .6
                     };
 
                 case SoundEffectType.BeRightBack:
                     return new SoundEffect("BeRightBack.mp3")
                     {
-                        SoundEffectType = SoundEffectType.BeRightBack,
+                        SoundEffectType = SoundEffectType.BeRightBack
                     };
 
                 default:

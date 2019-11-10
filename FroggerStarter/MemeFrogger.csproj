@@ -316,6 +316,7 @@
     <Content Include="SoundEffects\MarioDeath.mp3" />
     <Content Include="SoundEffects\MarioStartToPlay.mp3" />
     <Content Include="SoundEffects\NextLevel.mp3" />
+    <Content Include="SoundEffects\NextRound.mp3" />
     <Content Include="SoundEffects\Oof.mp3" />
     <Content Include="SoundEffects\MarioDrown.mp3" />
     <Content Include="SoundEffects\QuickRevive.mp3" />
