@@ -14,8 +14,12 @@ namespace FroggerStarter.View
     /// </summary>
     public sealed partial class HighScoreBoard : Page
     {
-        private readonly double applicationHeight = (double)Application.Current.Resources["HighScoreBoardHeight"];
-        private readonly double applicationWidth = (double)Application.Current.Resources["HighScoreBoardWidth"];
+        #region Data members
+
+        private readonly double applicationHeight = (double) Application.Current.Resources["HighScoreBoardHeight"];
+        private readonly double applicationWidth = (double) Application.Current.Resources["HighScoreBoardWidth"];
+
+        #endregion
 
         #region Constructors
 
@@ -30,12 +34,16 @@ namespace FroggerStarter.View
                 new Size(Width = this.applicationWidth, Height = this.applicationHeight)
             );
 
-            ((HighScoreBoardViewModel) this.DataContext).ReturnSelected += this.returnToStart;
+            ((HighScoreBoardViewModel) DataContext).ReturnSelected += this.returnToStart;
         }
+
+        #endregion
+
+        #region Methods
 
         private void returnToStart(object sender, EventArgs e)
         {
-            this.Frame.Navigate(typeof(StartPage));
+            Frame.Navigate(typeof(StartPage));
         }
 
         #endregion

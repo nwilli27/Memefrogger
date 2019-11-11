@@ -109,7 +109,7 @@ namespace FroggerStarter.ViewModel
             }.ToObservableCollection();
 
             this.highScoreList = Serializer<List<HighScore>>.ReadObjectFromFile("HighScoreBoard");
-            this.highScoreList.Sort();
+            this.highScoreList?.Sort();
 
             this.HighScores = this.highScoreList.ToObservableCollection();
         }
