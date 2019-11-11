@@ -48,7 +48,7 @@ namespace FroggerStarter.Model.Area_Managers.Water
         /// <param name="laneSettings">The lane settings.</param>
         /// <exception cref="ArgumentOutOfRangeException">
         /// </exception>
-        public override void AddLaneOfObstacles(IList<object> laneSettings)
+        public void AddLaneOfObstacles(IList<object> laneSettings)
         {
             var direction = (Direction)laneSettings[0];
             var defaultSpeed = (double)laneSettings[1];

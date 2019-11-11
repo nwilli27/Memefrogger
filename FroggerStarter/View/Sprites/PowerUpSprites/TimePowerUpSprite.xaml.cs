@@ -5,7 +5,7 @@
 namespace FroggerStarter.View.Sprites.PowerUpSprites
 {
     /// <summary>
-    ///     Home sprite class.
+    ///     Time power up sprite class.
     /// </summary>
     /// <seealso cref="BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />

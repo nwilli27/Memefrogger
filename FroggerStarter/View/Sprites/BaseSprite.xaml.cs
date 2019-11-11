@@ -1,4 +1,6 @@
 ﻿
+using System;
+using FroggerStarter.View.Sprites.GameSprites;
 using Windows.UI.Xaml.Controls;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
@@ -25,8 +27,6 @@ namespace FroggerStarter.View.Sprites
 
         #region Methods
 
-        #endregion
-
         /// <summary>
         /// Renders user control at the specified (x,y) location in relation
         /// to the top, left part of the canvas.
@@ -38,5 +38,8 @@ namespace FroggerStarter.View.Sprites
             Canvas.SetLeft(this, x);
             Canvas.SetTop(this, y);
         }
+
+        #endregion
+
     }
 }

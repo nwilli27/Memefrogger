@@ -1,7 +1,7 @@
-﻿using FroggerStarter.Enums;
-using FroggerStarter.View.Sprites;
+﻿
+using FroggerStarter.View.Sprites.RoadSprites;
 
-namespace FroggerStarter.Model.Game_Objects.Moving_Object
+namespace FroggerStarter.Model.Game_Objects.Moving_Object.RoadObstacle
 {
     /// <summary>
     ///     A car object of type RoadObstacle.
@@ -16,11 +16,9 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         ///     Precondition: none
         ///     Post-condition: none
         /// </summary>
-        /// <param name="direction">The direction the vehicle is facing.</param>
-        public Car(Direction direction) : base(direction)
+        public Car()
         {
             Sprite = new CarSprite();
-            this.MoveToDefaultLocation();
         }
 
         #endregion

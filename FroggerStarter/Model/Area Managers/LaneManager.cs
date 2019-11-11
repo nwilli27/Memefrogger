@@ -2,9 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Windows.UI.Xaml;
 using FroggerStarter.Model.Game_Objects.Moving_Object;
-using FroggerStarter.Enums;
 
 namespace FroggerStarter.Model.Area_Managers
 {
@@ -66,21 +64,6 @@ namespace FroggerStarter.Model.Area_Managers
         {
             this.Lanes.ToList().ForEach(lane => lane.MoveObstacles());
         }
-
-        /// <summary>
-        ///     Adds a lane with a specified number of [obstacleType] obstacles to it and
-        ///     then readjusts the Y spacing of each lane.
-        ///     Precondition: defaultSpeed > 0
-        ///                   numberOfObstacles > 0
-        ///                   
-        ///     Post-condition: this.lanes.Count += 1
-        ///                     lane.obstacles.Count += numberOfObstacles
-        ///                     @each lane yLocation readjusts accordingly
-        /// </summary>
-        /// <param name="laneSettings">The lane settings.</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// </exception>
-        public abstract void AddLaneOfObstacles(IList<object> laneSettings);
 
         /// <summary>
         ///     Updates the y location of lanes.

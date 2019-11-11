@@ -1,22 +1,22 @@
-﻿using FroggerStarter.Enums;
-using FroggerStarter.View.Sprites;
+﻿
+using FroggerStarter.View.Sprites.WaterSprites;
 
 namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle.Logs
 {
+
     /// <summary>
-    ///     A Medium log that is of type Log
+    ///     A Medium log that is of type WaterObstacle
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle.Log" />
-    class MediumLog : Log
+    /// <seealso cref="WaterObstacle" />
+    internal sealed class MediumLog : WaterObstacle
     {
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="MediumLog"/> class.
         /// </summary>
-        /// <param name="direction">The direction.</param>
-        public MediumLog(Direction direction) : base(direction)
+        public MediumLog()
         {
-            Sprite = new MediumLogSprite();
+            this.Sprite = new MediumLogSprite();
         }
     }
 }

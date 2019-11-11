@@ -6,7 +6,6 @@ using Windows.UI.Xaml;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using FroggerStarter.Factory;
-using FroggerStarter.Model.Game_Objects.Lives;
 using FroggerStarter.Model.Player;
 using FroggerStarter.Utility;
 
@@ -95,18 +94,6 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
             return this.GetEnumerator();
         }
 
-        public void ActivateCollidedPowerUp(PowerUp collidedPowerUp, PlayerLives playerLives)
-        {
-            if (collidedPowerUp is QuickRevivePowerUp up)
-            {
-                up.Activate(playerLives);
-            }
-            else
-            {
-                collidedPowerUp.Activate();
-            }
-        }
-
         #endregion
 
         #region Private Helpers
@@ -126,20 +113,22 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
 
         private void onSpawnPowerUpTick(object sender, object e)
         {
-            var randomValueRangeOfListSize = Randomizer.GetRandomValueInRange(0, this.powerUps.Count);
-            var randomPowerUp = this.powerUps[randomValueRangeOfListSize];
+            var randomPowerUp = this.getRandomPowerUp();
 
-            if (randomPowerUp is QuickRevivePowerUp quickRevive && PlayerAbilities.HasQuickRevive)
+            if (PlayerAbilities.HasQuickRevive || randomPowerUp.HasBeenActivatedMaxNumberTimes)
             {
                 randomPowerUp = this.powerUps.First(powerUp => !(powerUp is QuickRevivePowerUp));
-            } 
-            //else if (randomPowerUp is QuickRevivePowerUp revive && !revive.HasQuickRevive)
-            //{
-            //    revive.HasQuickRevive = true;
-            //}
+            }
 
             randomPowerUp.SetLocationAndMakeVisible();
             this.powerUpSpawnTimer.Stop();
+        }
+
+        private PowerUp getRandomPowerUp()
+        {
+            var randomValueRangeOfListSize = Randomizer.GetRandomValueInRange(0, this.powerUps.Count);
+            var randomPowerUp = this.powerUps[randomValueRangeOfListSize];
+            return randomPowerUp;
         }
 
         private static int getRandomSpawnTimeInterval()

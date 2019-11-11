@@ -1,5 +1,5 @@
 ﻿using FroggerStarter.Constants;
-using FroggerStarter.View.Sprites;
+using FroggerStarter.View.Sprites.GameSprites;
 
 namespace FroggerStarter.Model.Game_Objects.Home
 {

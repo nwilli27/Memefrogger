@@ -7,7 +7,7 @@ using FroggerStarter.View.Sprites;
 namespace FroggerStarter.View.LifeHeartLostAnimation
 {
     /// <summary>
-    ///     Home sprite class.
+    ///     Life heart frame six class.
     /// </summary>
     /// <seealso cref="BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />

@@ -1,9 +1,8 @@
-﻿
+﻿using System;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
-using System;
 
-namespace FroggerStarter.Model.Game_Objects.Moving_Object
+namespace FroggerStarter.Model.Game_Objects.Moving_Object.RoadObstacle
 {
     /// <summary>
     ///     An obstacle that is a RoadObstacle
@@ -26,16 +25,6 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         #region Constants
 
         private const int SpawnLocationOffset = 5;
-
-        #endregion
-
-        #region Constructor 
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="RoadObstacle"/> class.
-        /// </summary>
-        /// <param name="direction">The direction the vehicle is facing.</param>
-        public RoadObstacle(Direction direction) : base(direction) {}
 
         #endregion
 
@@ -62,6 +51,30 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        /// <summary>
+        ///     Moves the obstacle to the right.
+        /// </summary>
+        protected override void moveObstacleToTheRight()
+        {
+            if (this.hasObstacleMovedOffRightSide())
+            {
+                this.X = -this.Width * 2;
+            }
+            this.MoveRight();
+        }
+
+        /// <summary>
+        ///     Moves the obstacle to the left.
+        /// </summary>
+        protected override void moveObstacleToTheLeft()
+        {
+            if (this.hasObstacleMovedOffLeftSide())
+            {
+                this.X = GameBoard.BackgroundWidth + this.Width;
+            }
+            this.MoveLeft();
         }
 
         #endregion

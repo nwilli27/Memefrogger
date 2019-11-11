@@ -1,5 +1,6 @@
 ﻿using System;
-using Windows.UI.Xaml;
+using System.Runtime.CompilerServices;
+using FroggerStarter.Constants;
 using FroggerStarter.Model.Game_Objects.Lives;
 
 namespace FroggerStarter.Model.Player
@@ -7,7 +8,7 @@ namespace FroggerStarter.Model.Player
     /// <summary>
     ///     Class to hold statistics for the Player.
     /// </summary>
-    internal class PlayerStats
+    internal static class PlayerStats
     {
         /// <summary>
         ///     Gets the score.
@@ -15,7 +16,7 @@ namespace FroggerStarter.Model.Player
         /// <value>
         ///     The score.
         /// </value>
-        public int Score { get; set; }
+        public static int Score { get; set; }
 
         /// <summary>
         ///     Gets or sets the lives.
@@ -23,7 +24,15 @@ namespace FroggerStarter.Model.Player
         /// <value>
         ///     The lives.
         /// </value>
-        public PlayerLives Lives { get; }
+        public static PlayerLives Lives { get; private set; }
+
+        /// <summary>
+        ///     Gets a value indicating whether the player has lives left.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has lives left; otherwise, <c>false</c>.
+        /// </value>
+        public static bool HasLivesLeft => TotalLives > 0;
 
         /// <summary>
         ///     Gets the total lives.
@@ -31,33 +40,20 @@ namespace FroggerStarter.Model.Player
         /// <value>
         ///     The total lives.
         /// </value>
-        public int TotalLives
+        public static int TotalLives
         {
-            get => this.Lives.NumberOfHearts;
-            set => this.Lives.NumberOfHearts = value;
+            get => Lives.NumberOfHearts;
+            set => Lives.NumberOfHearts = value;
         }
 
-        public PlayerStats()
-        {
-            this.Lives = new PlayerLives();
-        }
-
-    }
-
-    /// <summary>
-    ///     Holds the numbers of lives for the life update event.
-    /// </summary>
-    /// <seealso cref="System.EventArgs" />
-    public class LivesUpdatedEventArgs : EventArgs
-    {
         /// <summary>
-        ///     Gets or sets the lives.
+        ///     Setups the player stats.
         /// </summary>
-        /// <value>
-        ///     The lives.
-        /// </value>
-        public int Lives { get; set; }
-
+        public static void SetupPlayerStats()
+        {
+            Lives = new PlayerLives();
+            TotalLives = GameSettings.TotalNumberOfLives;
+        }
     }
 
     /// <summary>

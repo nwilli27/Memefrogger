@@ -33,8 +33,6 @@ namespace FroggerStarter.Controller
         private FrogHomes frogHomes;
         private PowerUpManager powerUpManager;
 
-        private PlayerStats playerStats;
-
         private DispatcherTimer timer;
         private DispatcherTimer scoreTimer;
         
@@ -56,6 +54,17 @@ namespace FroggerStarter.Controller
         ///     The score timer tick Event Args
         /// </summary>
         public EventHandler<ScoreTimerTickEventArgs> ScoreTimerTick;
+
+        #endregion
+
+        #region Properties
+
+        private bool IsPlayerInWaterArea     => this.player.Y < GameBoard.MiddleRoadYLocation;
+        private bool IsPlayerAboveMiddlePath => this.player.Y + this.player.Height < GameBoard.MiddleRoadYLocation + GameBoard.RoadShoulderOffset;
+        private bool IsGameOver              => PlayerStats.TotalLives == 0 || this.frogHomes.HasHomesBeenFilled;
+        private bool HasMovedPastTopBoundary => this.player.Y < GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
+
+        private static double WaterAreaTopLocation => GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
 
         #endregion
 
@@ -81,6 +90,7 @@ namespace FroggerStarter.Controller
         {
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
             SoundEffectManager.CreateAndLoadAllSoundEffects();
+            PlayerStats.SetupPlayerStats();
 
             this.createAndPlaceWaterObstaclesOnCanvas();
             this.createAndPlaceFrogHomes();
@@ -128,7 +138,7 @@ namespace FroggerStarter.Controller
                 this.updateBoardForReachingEmptyHome();
                 this.checkGameStatusForGameOver();
             }
-            else if (this.hasMovedPastTopBoundary())
+            else if (this.HasMovedPastTopBoundary)
             {
                 this.lifeLost();
             }
@@ -161,7 +171,7 @@ namespace FroggerStarter.Controller
             this.roadManager.MoveAllObstacles();
             this.waterManager.MoveAllObstacles();
 
-            if (this.player.Y < GameBoard.MiddleRoadYLocation)
+            if (IsPlayerInWaterArea)
             {
                 this.checkForPlayerToWaterObstacleCollision();
             }
@@ -184,6 +194,7 @@ namespace FroggerStarter.Controller
         private void scoreTimerOnTick(object sender, object e)
         {
             var scoreTick = new ScoreTimerTickEventArgs() {ScoreTick = ScoreTimer.ScoreTick -= ScoreTimeReduction};
+
             if (ScoreTimer.IsTimeUp && !this.player.DeathAnimation.AnimationHasStarted)
             {
                 this.lifeLost();
@@ -194,7 +205,7 @@ namespace FroggerStarter.Controller
 
         private void checkForPlayerToRoadObstacleCollision()
         {
-            if (this.roadManager.Any(obstacle => this.player.HasCollidedWith(obstacle) && this.playerStats.TotalLives > 0))
+            if (this.roadManager.Any(obstacle => this.player.HasCollidedWith(obstacle) && PlayerStats.HasLivesLeft))
             {
                 this.lifeLost();
             }
@@ -209,7 +220,7 @@ namespace FroggerStarter.Controller
             {
                 this.player.MovePlayerWithObstacle(firstCollided);
             }
-            else if (this.playerStats.TotalLives > 0)
+            else if (PlayerStats.HasLivesLeft)
             {
                 this.lifeLost();
             }
@@ -217,7 +228,7 @@ namespace FroggerStarter.Controller
 
         private void setPlayerToSpawnInClosestCheckpoint()
         {
-            if (this.player.Y + this.player.Height < GameBoard.MiddleRoadYLocation + GameBoard.RoadShoulderOffset)
+            if (this.IsPlayerAboveMiddlePath)
             {
                 this.setPlayerToCenterOfMiddleLane();
             }
@@ -239,7 +250,7 @@ namespace FroggerStarter.Controller
             var collidedPowerUp = this.powerUpManager.ToList().FirstOrDefault(powerUp => this.player.HasCollidedWith(powerUp));
             if (collidedPowerUp != null)
             {
-                this.powerUpManager.ActivateCollidedPowerUp(collidedPowerUp, this.playerStats.Lives);
+                collidedPowerUp.Activate();
                 this.powerUpManager.ResetPowerUpsAndSpawnTimer();
             }
         }
@@ -256,8 +267,8 @@ namespace FroggerStarter.Controller
 
         private void createAndPlacePlayerHearts()
         {
-            this.playerStats.Lives.ToList().ForEach(heart => this.gameCanvas.Children.Add(heart.Sprite));
-            this.playerStats.Lives.ToList().ForEach(heart => heart.HeartLostAnimation.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite)));
+            PlayerStats.Lives.ToList().ForEach(heart => this.gameCanvas.Children.Add(heart.Sprite));
+            PlayerStats.Lives.ToList().ForEach(heart => heart.HeartLostAnimation.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite)));
         }
 
         private void createAndPlacePowerUps()
@@ -296,7 +307,7 @@ namespace FroggerStarter.Controller
 
         private void createAndPlaceWaterObstaclesOnCanvas()
         {
-            this.waterManager = new WaterManager(GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset, GameBoard.MiddleRoadYLocation);
+            this.waterManager = new WaterManager(WaterAreaTopLocation, GameBoard.MiddleRoadYLocation);
 
             this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane5);
             this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane4);
@@ -340,10 +351,12 @@ namespace FroggerStarter.Controller
         {
             this.player.StopMovement();
             this.player.IsDead = true;
+
             this.timer.Stop();
             this.scoreTimer.Stop();
             this.powerUpManager.StopPowerUpSpawnTimer();
             this.waterManager.StopSpeedBoatWaterAnimations();
+
             this.gameOver();
             SoundEffectManager.PlaySound(SoundEffectType.GameOver);
         }
@@ -392,23 +405,13 @@ namespace FroggerStarter.Controller
             return collidedWithHomes.Any();
         }
 
-        private bool isGameOver()
-        {
-            return this.playerStats.TotalLives == 0 || this.frogHomes.HasHomesBeenFilled;
-        }
-
-        private bool hasMovedPastTopBoundary()
-        {
-            return this.player.Y < GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
-        }
-
         #endregion
 
         #region Events
 
         private void lifeLost()
         {
-            this.playerStats.TotalLives--;
+            PlayerStats.TotalLives--;
             this.checkWhatLifeLostSoundToPlay();
 
             if (PlayerAbilities.HasQuickRevive)
@@ -416,7 +419,7 @@ namespace FroggerStarter.Controller
                 this.player.PlayDeathAnimation();
                 this.setPlayerToSpawnInClosestCheckpoint();
             }
-            else if (this.playerStats.TotalLives == 0)
+            else if (PlayerStats.TotalLives == 0)
             {
                 this.stopGamePlayInSlowMotion();
             }
@@ -426,10 +429,8 @@ namespace FroggerStarter.Controller
                 this.player.PlayDeathAnimation();
                 this.checkGameStatusForGameOver();
             }
-
         }
 
-        //TODO can maybe move this to the powerUpManager class
         private static void checkIfPlayerHasQuickRevive()
         {
             if (PlayerAbilities.HasQuickRevive)
@@ -447,8 +448,8 @@ namespace FroggerStarter.Controller
 
         private void increaseScore()
         {
-            this.playerStats.Score += (int)ScoreTimer.ScoreTick;
-            var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
+            PlayerStats.Score += (int)ScoreTimer.ScoreTick;
+            var score = new ScoreUpdatedEventArgs() { Score = PlayerStats.Score };
             this.ScoreUpdated?.Invoke(this, score);
         }
 
@@ -460,15 +461,13 @@ namespace FroggerStarter.Controller
 
         private void setupPlayerStatsAndHud()
         {
-            this.playerStats = new PlayerStats {Score = 0, TotalLives = GameSettings.TotalNumberOfLives };
-
-            var score = new ScoreUpdatedEventArgs() { Score = this.playerStats.Score };
+            var score = new ScoreUpdatedEventArgs() { Score = PlayerStats.Score };
             this.ScoreUpdated?.Invoke(this, score);
         }
 
         private void onDeathAnimationDone(object sender, AnimationIsFinishedEventArgs e)
         {
-            if (e.PlayerDeathIsOver && !this.isGameOver())
+            if (e.PlayerDeathIsOver && !this.IsGameOver)
             {
                 this.player.ResetAfterDeath();
 
@@ -495,7 +494,7 @@ namespace FroggerStarter.Controller
 
         private void checkWhatLifeLostSoundToPlay()
         {
-            if (this.playerStats.TotalLives == 0)
+            if (PlayerStats.TotalLives == 0)
             {
                 SoundEffectManager.PlaySound(SoundEffectType.GtaDeath);
             }
@@ -503,7 +502,7 @@ namespace FroggerStarter.Controller
             {
                 SoundEffectManager.PlaySound(SoundEffectType.BeRightBack);
             }
-            else if (this.hasMovedPastTopBoundary())
+            else if (this.HasMovedPastTopBoundary)
             {
                 SoundEffectManager.PlaySound(SoundEffectType.AlmostHadIt);
             }

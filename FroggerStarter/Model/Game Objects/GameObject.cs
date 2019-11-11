@@ -155,7 +155,7 @@ namespace FroggerStarter.Model.Game_Objects
         ///     Post-condition: Sprite.Visibility == (Visible || Collapsed)
         /// </summary>
         /// <param name="conditionToChangeVisibility">if set to <c>true</c> [condition to change visibility].</param>
-        public void ChangeSpriteVisibility(bool conditionToChangeVisibility)
+        public virtual void ChangeSpriteVisibility(bool conditionToChangeVisibility)
         {
             this.Sprite.Visibility = conditionToChangeVisibility ? Visibility.Visible : Visibility.Collapsed;
         }

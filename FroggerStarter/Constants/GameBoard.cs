@@ -27,9 +27,9 @@ namespace FroggerStarter.Constants
         #region Constants
 
         /// <summary>
-        ///     The size of the player sprite
+        ///     The individual grid size of a location on a board
         /// </summary>
-        public const int PlayerJumpRange = 50;
+        public const int IndividualGridSize = 50;
 
         #endregion
 

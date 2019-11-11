@@ -22,13 +22,13 @@ namespace FroggerStarter.Model.Sound
         #region Methods
 
         /// <summary>
-        ///     Plays the sound.
+        ///     Plays the correlating sound type.
         ///     Precondition: none
         ///     Post-condition: none
         /// </summary>
         /// <param name="soundEffectType">Type of the sound effect.</param>
         /// <exception cref="ArgumentOutOfRangeException">soundEffectType - null</exception>
-        public static void PlaySound(Enums.SoundEffectType soundEffectType)
+        public static void PlaySound(SoundEffectType soundEffectType)
         {
             allSounds.ToList().First(sound => sound.SoundEffectType == soundEffectType).PlaySound();
         }

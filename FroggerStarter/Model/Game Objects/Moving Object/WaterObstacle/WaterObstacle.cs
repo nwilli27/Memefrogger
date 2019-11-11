@@ -1,5 +1,4 @@
 ﻿using FroggerStarter.Constants;
-using FroggerStarter.Enums;
 
 namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
 {
@@ -9,24 +8,6 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
     /// <seealso cref="WaterObstacle" />
     public class WaterObstacle : Obstacle
     {
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WaterObstacle"/> class.
-        /// </summary>
-        /// <param name="direction">The direction.</param>
-        public WaterObstacle(Direction direction) : base(direction) { }
-
-        /// <summary>
-        ///     Gets the type of the obstacle.
-        /// </summary>
-        /// <value>
-        ///     The type of the obstacle.
-        /// </value>
-        public ObstacleType ObstacleType { get; set; }
-
-        #endregion
 
         #region Methods
 

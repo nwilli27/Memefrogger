@@ -144,7 +144,6 @@
     <Compile Include="Model\Animation\Frame.cs" />
     <Compile Include="Model\Game Objects\Home\FrogHomes.cs" />
     <Compile Include="Model\Game Objects\Moving Object\RoadObstacle\SemiTruck.cs" />
-    <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\Log.cs" />
     <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\LargeLog.cs" />
     <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\MediumLog.cs" />
     <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\SmallLog.cs" />
@@ -226,11 +225,11 @@
     <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFive.xaml.cs">
       <DependentUpon>PlayerDeathFrameFive.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameThree.xaml.cs">
-      <DependentUpon>SplashBoatFrameThree.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameTwo.xaml.cs">
       <DependentUpon>SplashBoatFrameTwo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameThree.xaml.cs">
+      <DependentUpon>SplashBoatFrameThree.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameOne.xaml.cs">
       <DependentUpon>SplashBoatFrameOne.xaml</DependentUpon>
@@ -394,11 +393,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameThree.xaml">
+    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameTwo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameTwo.xaml">
+    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameThree.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -221,6 +221,7 @@ namespace FroggerStarter.Model.Animation
             }
         }
 
+        //TODO maybe use this somewhere, endless loop thru all frames
         private void showNextFrameEndlessLoop(object sender, object e)
         {
             var firstVisibleFrame = this.animationFrames.FirstOrDefault(frame => frame.IsVisible);
@@ -267,9 +268,7 @@ namespace FroggerStarter.Model.Animation
                     break;
 
                 case AnimationType.LifeHeartLost:
-                    break;
-
-                case AnimationType.SpeedBoatSplash:
+                    animationDone.LifeHeartLostIsOver = true;
                     break;
 
                 default:
@@ -288,6 +287,7 @@ namespace FroggerStarter.Model.Animation
     /// <seealso cref="System.EventArgs" />
     public class AnimationIsFinishedEventArgs : EventArgs
     {
+
         /// <summary>
         ///     Gets or sets a value indicating whether [animation is over].
         /// </summary>
@@ -303,5 +303,14 @@ namespace FroggerStarter.Model.Animation
         ///   <c>true</c> if [animation is over]; otherwise, <c>false</c>.
         /// </value>
         public bool FrogLeapIsOver { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether [life heart lost is over].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [life heart lost is over]; otherwise, <c>false</c>.
+        /// </value>
+        public bool LifeHeartLostIsOver { get; set; }
+
     }
 }

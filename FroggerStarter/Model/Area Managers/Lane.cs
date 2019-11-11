@@ -2,10 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using FroggerStarter.Factory;
-using FroggerStarter.Model.Game_Objects;
 using FroggerStarter.Model.Game_Objects.Moving_Object;
 
 namespace FroggerStarter.Model.Area_Managers
@@ -21,9 +19,9 @@ namespace FroggerStarter.Model.Area_Managers
         #region Data Members
 
         /// <summary>
-        /// The obstacles
+        ///     The obstacles
         /// </summary>
-        protected IList<Obstacle> obstacles;
+        protected IList<Obstacle> Obstacles;
 
         private readonly Direction direction;
         private readonly double defaultSpeed;
@@ -41,9 +39,9 @@ namespace FroggerStarter.Model.Area_Managers
         /// </summary> 
         /// <param name="direction">The direction the obstacles are moving in the lane</param>
         /// <param name="defaultSpeed">The default speed of all obstacles</param>
-        public Lane(double defaultSpeed, Direction direction)
+        protected Lane(double defaultSpeed, Direction direction)
         {
-            this.obstacles = new List<Obstacle>();
+            this.Obstacles = new List<Obstacle>();
             this.direction = direction;
             this.defaultSpeed = defaultSpeed;
         }
@@ -65,8 +63,9 @@ namespace FroggerStarter.Model.Area_Managers
         {
             for (var i = 0; i < maxNumberObstacles; i++)
             {
-                this.add(ObstacleFactory.CreateObstacle(obstacleType, this.direction));
+                this.add(ObstacleFactory.CreateObstacle(obstacleType));
             }
+            this.Obstacles.ToList().ForEach(obstacle => obstacle.Direction = this.direction);
         }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace FroggerStarter.Model.Area_Managers
         /// <param name="heightOfLane">The height of lane.</param>
         public void SetObstaclesToLaneYLocation(double yLocation, double heightOfLane)
         {
-            this.obstacles.ToList().ForEach(obstacle =>
+            this.Obstacles.ToList().ForEach(obstacle =>
                 obstacle.SetCenteredYLocationOfArea(heightOfLane, yLocation));
         }
 
@@ -103,7 +102,7 @@ namespace FroggerStarter.Model.Area_Managers
         /// </returns>
         public IEnumerator GetEnumerator()
         {
-            return this.obstacles.GetEnumerator();
+            return this.Obstacles.GetEnumerator();
         }
 
         /// <summary>
@@ -116,7 +115,7 @@ namespace FroggerStarter.Model.Area_Managers
         /// </returns>
         IEnumerator<Obstacle> IEnumerable<Obstacle>.GetEnumerator()
         {
-            return this.obstacles.GetEnumerator();
+            return this.Obstacles.GetEnumerator();
         }
 
         #endregion
@@ -126,7 +125,7 @@ namespace FroggerStarter.Model.Area_Managers
         private void add(Obstacle obstacle)
         {
             obstacle.SpeedX = this.defaultSpeed;
-            this.obstacles.Add(obstacle);
+            this.Obstacles.Add(obstacle);
         }
 
         #endregion

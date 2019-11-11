@@ -8,6 +8,8 @@ namespace FroggerStarter.Constants
     /// </summary>
     public class GameSettings
     {
+        #region Constants
+
         /// <summary>
         ///     The total number of lives
         /// </summary>
@@ -17,6 +19,10 @@ namespace FroggerStarter.Constants
         ///     The total score time
         /// </summary>
         public const double ScoreTime = 20.0;
+
+        #endregion
+
+        #region Lane Settings
 
         /// <summary>
         ///     The 5th Lane settings
@@ -117,5 +123,8 @@ namespace FroggerStarter.Constants
             ObstacleType.SmallLog,
             4
         };
+
+        #endregion
+
     }
 }

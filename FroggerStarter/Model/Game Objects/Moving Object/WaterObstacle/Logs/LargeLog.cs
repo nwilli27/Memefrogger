@@ -1,22 +1,21 @@
-﻿using FroggerStarter.Enums;
-using FroggerStarter.View.Sprites;
+﻿
+using FroggerStarter.View.Sprites.WaterSprites;
 
 namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle.Logs
 {
     /// <summary>
-    ///     A large log that is of type Log
+    ///     A large log that is of type WaterObstacle
     /// </summary>
-    /// <seealso cref="Log" />
-    class LargeLog : Log
+    /// <seealso cref="WaterObstacle" />
+    internal sealed class LargeLog : WaterObstacle
     {
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="LargeLog"/> class.
         /// </summary>
-        /// <param name="direction">The direction.</param>
-        public LargeLog(Direction direction) : base(direction)
+        public LargeLog()
         {
-            Sprite = new LargeLogSprite();
+            this.Sprite = new LargeLogSprite();
         }
     }
 }

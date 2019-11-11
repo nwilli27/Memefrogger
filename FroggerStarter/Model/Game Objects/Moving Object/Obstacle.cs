@@ -1,9 +1,8 @@
 ﻿using System;
+using Windows.Foundation;
 using Windows.UI.Xaml.Media;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
-using FroggerStarter.View.Sprites;
-using Point = Windows.Foundation.Point;
 
 namespace FroggerStarter.Model.Game_Objects.Moving_Object
 {
@@ -16,43 +15,28 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
     {
         #region Data Members
 
-        private BaseSprite sprite;
+        private Direction direction;
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        ///     Gets or sets the sprite associated with the game object.
-        ///     Precondition: none
-        ///     Post-condition: Flips sprite based on direction.
+        ///     Gets or sets the direction.
+        ///     Flips the obstacle sprite according
+        ///     to the direction.
         /// </summary>
         /// <value>
-        ///     The sprite.
+        ///     The direction.
         /// </value>
-        public override BaseSprite Sprite
+        public override Direction Direction
         {
-            get => this.sprite;
-            protected set
+            get => this.direction;
+            set
             {
-                this.sprite = value;
+                this.direction = value;
                 this.checkDirectionToFlipHorizontally();
             }
-        }
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="WaterObstacle"/> class.
-        ///     Precondition: none
-        ///     Post-condition: none
-        /// </summary>
-        /// <param name="direction">The direction the vehicle is facing.</param>
-        protected Obstacle(Direction direction)
-        {
-            this.Direction = direction;
         }
 
         #endregion
@@ -155,26 +139,12 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         /// <summary>
         ///     Moves the obstacle to the right.
         /// </summary>
-        protected virtual void moveObstacleToTheRight()
-        {
-            if (this.hasObstacleMovedOffRightSide())
-            {
-                this.X = -this.Width * 2;
-            }
-            this.MoveRight();
-        }
+        protected abstract void moveObstacleToTheRight();
 
         /// <summary>
         ///     Moves the obstacle to the left.
         /// </summary>
-        protected virtual void moveObstacleToTheLeft()
-        {
-            if (this.hasObstacleMovedOffLeftSide())
-            {
-                this.X = GameBoard.BackgroundWidth + this.Width;
-            }
-            this.MoveLeft();
-        }
+        protected abstract void moveObstacleToTheLeft();
 
         /// <summary>
         ///     Determines whether [has obstacle moved off right side].

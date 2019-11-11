@@ -3,6 +3,7 @@ using FroggerStarter.Enums;
 using FroggerStarter.Model.Game_Objects.Moving_Object;
 using System.Collections.Generic;
 using System.Linq;
+using FroggerStarter.Model.Game_Objects.Moving_Object.RoadObstacle;
 
 namespace FroggerStarter.Model.Area_Managers.Road
 {
@@ -42,6 +43,7 @@ namespace FroggerStarter.Model.Area_Managers.Road
         {
             base.AddObstacles(obstacleType, maxNumberObstacles);
 
+            this.Obstacles.ToList().ForEach(obstacle => (obstacle as RoadObstacle)?.MoveToDefaultLocation());
             this.MakeObstacleActive();
             this.moveFirstObstacleStartLocationForward();
         }
@@ -53,10 +55,10 @@ namespace FroggerStarter.Model.Area_Managers.Road
         /// </summary>
         public void MakeObstacleActive()
         {
-            var nextObstacle = this.obstacles.FirstOrDefault(obstacle => !(obstacle as RoadObstacle).IsActive);
+            var nextObstacle = this.Obstacles.FirstOrDefault(obstacle => !((RoadObstacle) obstacle).IsActive);
             if (nextObstacle != null)
             {
-                (nextObstacle as RoadObstacle).IsActive = true;
+                ((RoadObstacle) nextObstacle).IsActive = true;
             }
         }
 
@@ -69,12 +71,12 @@ namespace FroggerStarter.Model.Area_Managers.Road
         /// </summary>
         public override void MoveObstacles()
         {
-            var activeObstacles = this.obstacles.Where(obstacle => (obstacle as RoadObstacle).IsActive).ToList();
+            var activeObstacles = this.Obstacles.Where(obstacle => ((RoadObstacle) obstacle).IsActive).ToList();
             var collidedList = new List<Obstacle>();
 
             foreach (var obstacle in activeObstacles)
             {
-                var firstCollision = this.obstacles.FirstOrDefault(currentObstacle => obstacle.HasCollidedWith(currentObstacle) && !currentObstacle.Equals(obstacle));
+                var firstCollision = this.Obstacles.FirstOrDefault(currentObstacle => obstacle.HasCollidedWith(currentObstacle) && !currentObstacle.Equals(obstacle));
                 if (firstCollision != null)
                 {
                     collidedList.Add(firstCollision);
@@ -95,9 +97,10 @@ namespace FroggerStarter.Model.Area_Managers.Road
         public void ResetLaneToOneObstacle()
         {
             var firstActiveObstacle = this.getFirstActiveObstacle();
-            var allButOneObstacle = this.obstacles.ToList().Where(obstacle => !obstacle.Equals(firstActiveObstacle));
-            foreach (RoadObstacle obstacle in allButOneObstacle)
+            var allButOneObstacle = this.Obstacles.ToList().Where(obstacle => !obstacle.Equals(firstActiveObstacle));
+            foreach (var obstacle1 in allButOneObstacle)
             {
+                var obstacle = (RoadObstacle) obstacle1;
                 obstacle.MoveToDefaultLocation();
                 obstacle.IsActive = false;
             }
@@ -109,12 +112,12 @@ namespace FroggerStarter.Model.Area_Managers.Road
 
         private void moveFirstObstacleStartLocationForward()
         {
-            this.getFirstActiveObstacle().ShiftXForward(GameBoard.BackgroundWidth / this.obstacles.Count);
+            this.getFirstActiveObstacle().ShiftXForward(GameBoard.BackgroundWidth / this.Obstacles.Count);
         }
 
         private Obstacle getFirstActiveObstacle()
         {
-            return this.obstacles.First(obstacle => (obstacle as RoadObstacle).IsActive);
+            return this.Obstacles.First(obstacle => ((RoadObstacle) obstacle).IsActive);
         }
 
         #endregion

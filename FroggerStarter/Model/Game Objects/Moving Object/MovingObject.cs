@@ -1,6 +1,4 @@
 ﻿using FroggerStarter.Enums;
-using System;
-using System.Drawing;
 
 namespace FroggerStarter.Model.Game_Objects.Moving_Object
 {
@@ -10,7 +8,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
     /// <seealso cref="GameObject" />
     public abstract class MovingObject : GameObject
     {
-
+        
         #region Properties
 
         /// <summary>
@@ -35,7 +33,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         /// <value>
         ///     The direction.
         /// </value>
-        public Direction Direction { get; set; }
+        public virtual Direction Direction { get; set; }
 
         #endregion
 
@@ -96,5 +94,6 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         }
 
         #endregion
+
     }
 }

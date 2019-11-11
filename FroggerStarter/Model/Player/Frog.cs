@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using FroggerStarter.Enums;
 using FroggerStarter.Model.Animation;
 using FroggerStarter.Model.Game_Objects;
@@ -27,6 +28,11 @@ namespace FroggerStarter.Model.Player
         private const int SpeedXDirection = 50;
         private const int SpeedYDirection = 50;
 
+        private static readonly double TopBoundary = GameBoard.HighRoadYLocation;
+        private static readonly double BottomBoundary = GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset;
+        private static readonly double RightBoundary = GameBoard.BackgroundWidth;
+        private const double LeftBoundary = 0;
+
         #endregion
 
         #region Properties
@@ -37,7 +43,7 @@ namespace FroggerStarter.Model.Player
         /// <value>
         ///     The death animation.
         /// </value>
-        public Animation.Animation DeathAnimation { get; }
+        public Animation.Animation DeathAnimation { get; private set; }
 
         /// <summary>
         ///     Gets the frog leap animation.
@@ -45,7 +51,7 @@ namespace FroggerStarter.Model.Player
         /// <value>
         ///     The frog leap animation.
         /// </value>
-        public Animation.Animation FrogLeapAnimation { get; }
+        public Animation.Animation FrogLeapAnimation { get; private set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance has collided.
@@ -81,13 +87,7 @@ namespace FroggerStarter.Model.Player
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
 
-            this.DeathAnimation = new Animation.Animation(AnimationType.PlayerDeath) {
-                AnimationInterval = 500
-            };
-            this.FrogLeapAnimation = new Animation.Animation(AnimationType.FrogLeap) {
-                AnimationInterval = 100
-            };
-            this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
+            this.setupAnimations();
             this.Direction = Direction.Up;
         }
 
@@ -102,9 +102,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveLeftWithBoundaryCheck()
         {
-            var leftBoundary = 0;
-
-            if (this.X - this.SpeedX >= leftBoundary && this.canMove)
+            if (this.X - this.SpeedX >= LeftBoundary && this.canMove)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveLeft();
@@ -120,9 +118,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveRightWithBoundaryCheck()
         {
-            var rightBoundary = GameBoard.BackgroundWidth;
-
-            if (this.X + this.SpeedX < rightBoundary && this.canMove)
+            if (this.X + this.SpeedX < RightBoundary && this.canMove)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveRight();
@@ -138,9 +134,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveUpWithBoundaryCheck()
         {
-            var topBoundary = GameBoard.HighRoadYLocation;
-
-            if (this.Y - this.SpeedY >= topBoundary && this.canMove)
+            if (this.Y - this.SpeedY >= TopBoundary && this.canMove)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveUp();
@@ -156,9 +150,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveDownWithBoundaryCheck()
         {
-            var bottomBoundary = GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset;
-
-            if (this.Y + this.SpeedY < bottomBoundary && this.canMove)
+            if (this.Y + this.SpeedY < BottomBoundary && this.canMove)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveDown();
@@ -231,15 +223,28 @@ namespace FroggerStarter.Model.Player
                 case Direction.Right:
                     this.moveRightPreventBoundary();
                     break;
-
+                
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
         #endregion
 
         #region Private Helpers
+
+        private void setupAnimations()
+        {
+            this.DeathAnimation = new Animation.Animation(AnimationType.PlayerDeath)
+            {
+                AnimationInterval = 500
+            };
+            this.FrogLeapAnimation = new Animation.Animation(AnimationType.FrogLeap)
+            {
+                AnimationInterval = 100
+            };
+            this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
+        }
 
         private void startMovement()
         {
@@ -269,9 +274,7 @@ namespace FroggerStarter.Model.Player
 
         private void moveLeftPreventBoundary()
         {
-            var leftBoundary = 0;
-
-            if (this.X - this.SpeedX >= leftBoundary)
+            if (this.X - this.SpeedX >= LeftBoundary)
             {
                 this.MoveLeft();
             }
@@ -279,9 +282,7 @@ namespace FroggerStarter.Model.Player
 
         private void moveRightPreventBoundary()
         {
-            var rightBoundary = GameBoard.BackgroundWidth;
-
-            if (this.X + this.Width + this.SpeedX < rightBoundary)
+            if (this.X + this.Width + this.SpeedX < RightBoundary)
             {
                 this.MoveRight();
             }

@@ -1,6 +1,6 @@
 ﻿
 using FroggerStarter.Enums;
-using FroggerStarter.View.Sprites;
+using LifeSprite = FroggerStarter.View.Sprites.GameSprites.LifeSprite;
 
 namespace FroggerStarter.Model.Game_Objects.Lives
 {
