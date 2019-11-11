@@ -124,6 +124,7 @@
     <Compile Include="Constants\GameBoard.cs" />
     <Compile Include="Constants\GameSettings.cs" />
     <Compile Include="Enums\AnimationType.cs" />
+    <Compile Include="Enums\HighScoreSortType.cs" />
     <Compile Include="Enums\PowerUpType.cs" />
     <Compile Include="Enums\SoundEffectType.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />

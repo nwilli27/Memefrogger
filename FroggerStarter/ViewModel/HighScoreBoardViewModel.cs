@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using FroggerStarter.Annotations;
+using FroggerStarter.Enums;
 using FroggerStarter.Extensions;
 using FroggerStarter.Model.Score;
 using FroggerStarter.Serializer;
@@ -22,6 +24,8 @@ namespace FroggerStarter.ViewModel
         private readonly List<HighScore> highScoreList;
 
         private ObservableCollection<HighScore> highScores;
+
+        private HighScoreSortType selectedHighScoreSortType;
 
         #endregion
 
@@ -60,6 +64,30 @@ namespace FroggerStarter.ViewModel
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the sort types.
+        /// </summary>
+        /// <value>
+        ///     The sort types.
+        /// </value>
+        public ObservableCollection<HighScoreSortType> SortTypes { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the type of the selected high score sort.
+        /// </summary>
+        /// <value>
+        ///     The type of the selected high score sort.
+        /// </value>
+        public HighScoreSortType SelectedHighScoreSortType
+        {
+            get => this.selectedHighScoreSortType;
+            set
+            {
+                this.selectedHighScoreSortType = value;
+                this.sortHighScores(this.selectedHighScoreSortType);
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -74,7 +102,14 @@ namespace FroggerStarter.ViewModel
             this.ReturnCommand = new RelayCommand(this.returnToStart, null);
             this.ClearScoresCommand = new RelayCommand(this.clearScores, this.canClearScores);
 
+            this.SortTypes = new List<HighScoreSortType> {
+                HighScoreSortType.ScoreNameLevel,
+                HighScoreSortType.NameScoreLevel,
+                HighScoreSortType.LevelScoreName
+            }.ToObservableCollection();
+
             this.highScoreList = Serializer<List<HighScore>>.ReadObjectFromFile("HighScoreBoard");
+            this.highScoreList.Sort();
 
             this.HighScores = this.highScoreList.ToObservableCollection();
         }
@@ -108,6 +143,19 @@ namespace FroggerStarter.ViewModel
         private bool canClearScores(object obj)
         {
             return this.highScoreList != null && this.highScoreList?.Count != 0;
+        }
+
+        private void sortHighScores(HighScoreSortType sortType)
+        {
+            if (sortType == HighScoreSortType.ScoreNameLevel)
+            {
+                this.highScoreList.Sort();
+                this.HighScores = this.highScoreList.ToObservableCollection();
+            }
+            else if (sortType == HighScoreSortType.NameScoreLevel)
+            {
+                this.highScoreList.Sort();
+            }
         }
 
         /// <summary>

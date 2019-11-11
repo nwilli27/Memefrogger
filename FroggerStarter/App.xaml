@@ -17,6 +17,9 @@
 
             <x:Double x:Key="StartWindowWidth">500</x:Double>
             <x:Double x:Key="StartWindowHeight">300</x:Double>
+
+            <x:Double x:Key="HighScoreBoardWidth">700</x:Double>
+            <x:Double x:Key="HighScoreBoardHeight">650</x:Double>
         </ResourceDictionary>
     </Application.Resources>
 

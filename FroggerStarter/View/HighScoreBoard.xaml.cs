@@ -1,4 +1,7 @@
 ﻿using System;
+using Windows.Foundation;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.ViewModel;
 
@@ -11,6 +14,9 @@ namespace FroggerStarter.View
     /// </summary>
     public sealed partial class HighScoreBoard : Page
     {
+        private readonly double applicationHeight = (double)Application.Current.Resources["HighScoreBoardHeight"];
+        private readonly double applicationWidth = (double)Application.Current.Resources["HighScoreBoardWidth"];
+
         #region Constructors
 
         /// <summary>
@@ -19,6 +25,10 @@ namespace FroggerStarter.View
         public HighScoreBoard()
         {
             this.InitializeComponent();
+
+            ApplicationView.GetForCurrentView().TryResizeView(
+                new Size(Width = this.applicationWidth, Height = this.applicationHeight)
+            );
 
             ((HighScoreBoardViewModel) this.DataContext).ReturnSelected += this.returnToStart;
         }

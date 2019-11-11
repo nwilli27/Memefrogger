@@ -2,45 +2,62 @@
     x:Class="FroggerStarter.View.HighScoreBoard"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FroggerStarter.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="using:FroggerStarter.ViewModel"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Height="{StaticResource HighScoreBoardHeight}"
+    Width="{StaticResource HighScoreBoardWidth}">
 
     <Page.DataContext>
-        <viewModel:HighScoreBoardViewModel/>
+        <viewModel:HighScoreBoardViewModel />
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Canvas Width="Auto" Background="Black">
         <ListView ItemsSource="{Binding HighScores, Mode=TwoWay}"
-            BorderBrush="Black" BorderThickness="2" Height="538" Width="850" Canvas.Left="328" Canvas.Top="231">
+                  BorderBrush="White" BorderThickness="2" Height="465" Width="650" Canvas.Left="25" Canvas.Top="65">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1" Width="100">
+                    <Border BorderBrush="White" BorderThickness="1" Width="620">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition Height="43" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="215" />
+                                <ColumnDefinition Width="215" />
+                                <ColumnDefinition Width="215" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Text="{Binding PlayerName}" />
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Score: "/>
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Level: "/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Score}" />
-                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Level}" />
+                            <TextBlock HorizontalAlignment="Center" Grid.Column="0" Text="{Binding PlayerName}"
+                                       FontFamily="Berlin Sans FB" Foreground="White" VerticalAlignment="Center"
+                                       FontSize="25" />
+                            <TextBlock Grid.Column="1" Text="{Binding Score}" FontFamily="Berlin Sans FB"
+                                       Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       FontSize="25" />
+                            <TextBlock Grid.Column="2" Text="{Binding Level}" FontFamily="Berlin Sans FB"
+                                       Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       FontSize="25" />
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Command="{Binding ReturnCommand}" Margin="473,774,0,0" VerticalAlignment="Top" Height="31" Width="130" Content="Return to Start"/>
-        <Button Command="{Binding ClearScoresCommand}" Margin="898,774,0,0" VerticalAlignment="Top" Height="31" Width="130" Content="Clear High Scores"/>
-    </Grid>
+        <TextBlock Text="High Scores" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
+                   Canvas.Left="255" Canvas.Top="13" />
+
+        <Button Command="{Binding ReturnCommand}" Height="58" Width="200" Canvas.ZIndex="1" Content="Return to Start"
+                Canvas.Left="100" Canvas.Top="550" FontFamily="Berlin Sans FB" FontSize="25" Background="#FF20E800"
+                BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" Foreground="Black"
+                FocusVisualSecondaryBrush="#99FFFFFF" />
+        <Button Command="{Binding ClearScoresCommand}" Height="58" Width="200" Canvas.ZIndex="1"
+                Content="Clear High Scores" Canvas.Left="412.5" Canvas.Top="550" FontFamily="Berlin Sans FB"
+                FontSize="25" Background="#FF20E800" BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8"
+                Foreground="Black" FocusVisualSecondaryBrush="#99FFFFFF" />
+        <Rectangle Height="58" Width="200" Fill="Green" Canvas.Left="412.5" Canvas.Top="550" />
+        <Rectangle Height="58" Width="200" Fill="Green" Canvas.Left="100" Canvas.Top="550" />
+
+        <ComboBox ItemsSource="{Binding SortTypes}" SelectedItem="{Binding SelectedHighScoreSortType}" Canvas.Left="471" Canvas.Top="18" Width="204" Background="#FF20E800" BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" PlaceholderText="Sort By..."/>
+    </Canvas>
 </Page>

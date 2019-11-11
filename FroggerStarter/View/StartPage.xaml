@@ -10,7 +10,7 @@
     Height="{StaticResource StartWindowHeight}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Canvas x:Name="startCanvas" Width="{StaticResource StartWindowWidth}" Background="Black">
+    <Canvas Width="{StaticResource StartWindowWidth}" Background="Black">
         <Rectangle Width="142" Height="51" Fill="Green" Canvas.Left="54" Canvas.Top="166"/>
         <Rectangle Width="369" Height="5" Fill="White" Canvas.Left="66" Canvas.Top="90"/>
         <TextBlock Text="MemeFrogger" Foreground="LimeGreen" FontSize="50" FontFamily="Showcard Gothic" Canvas.Left="68" Canvas.Top="26" Height="57" Width="368"/>

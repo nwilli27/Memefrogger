@@ -87,14 +87,14 @@ namespace FroggerStarter.Model.Score
                 return 1;
             }
 
-            var scoreComparison = this.Score.CompareTo(other.Score);
+            var scoreComparison = other.Score.CompareTo(this.Score);
             if (scoreComparison != 0)
             {
                 return scoreComparison;
             }
 
             var playerNameComparison = string.Compare(this.PlayerName, other.PlayerName, StringComparison.Ordinal);
-            return playerNameComparison != 0 ? playerNameComparison : this.Level.CompareTo(other.Level);
+            return playerNameComparison != 0 ? playerNameComparison : other.Level.CompareTo(this.Level);
         }
 
         #endregion

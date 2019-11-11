@@ -24,7 +24,7 @@ namespace FroggerStarter.Serializer
         /// <exception cref="ArgumentNullException">fileName</exception>
         /// <exception cref="ArgumentException">fileName</exception>
         /// <exception cref="NullReferenceException">fileName</exception>
-        public static async void WriteObjectToFile(string fileName, T serializeObject)
+        public static void WriteObjectToFile(string fileName, T serializeObject)
         {
             if (fileName == null)
             {
@@ -41,9 +41,9 @@ namespace FroggerStarter.Serializer
                 throw new ArgumentNullException(nameof(serializeObject));
             }
 
-            var folder = ApplicationData.Current.LocalFolder;
-            var file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-            var outStream = await file.OpenStreamForWriteAsync();
+            
+            var outStream = Task.Run(async () =>
+                await getOutStream(fileName)).Result;
 
             var writer = new XmlSerializer(typeof(T));
             using (outStream)
@@ -52,6 +52,15 @@ namespace FroggerStarter.Serializer
             }
 
             outStream.Dispose();
+        }
+
+        private static async Task<Stream> getOutStream(string fileName)
+        {
+            var folder = ApplicationData.Current.LocalFolder;
+            var file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+            var outStream = await file.OpenStreamForWriteAsync();
+
+            return outStream;
         }
 
         /// <summary>
