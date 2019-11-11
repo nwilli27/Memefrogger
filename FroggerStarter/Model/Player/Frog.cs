@@ -167,18 +167,6 @@ namespace FroggerStarter.Model.Player
         }
 
         /// <summary>
-        ///     Stops the movement of the game object by setting its speed to 0.
-        ///     Precondition: none
-        ///     Post-condition: SpeedX == 0
-        ///                     SpeedY == 0
-        /// </summary>
-        public void StopMovement()
-        {
-            this.SpeedX = 0;
-            this.SpeedY = 0;
-        }
-
-        /// <summary>
         ///     Plays the death animation.
         ///     Precondition: none
         ///     Post-condition: this.SpeedX = 0
@@ -189,7 +177,7 @@ namespace FroggerStarter.Model.Player
         public void PlayDeathAnimation()
         {
             this.ChangeSpriteVisibility(false);
-            this.StopMovement();
+            this.CanMove = false;
             this.IsDead = true;
 
             this.DeathAnimation.RotateFrames(this.Direction);
@@ -204,10 +192,10 @@ namespace FroggerStarter.Model.Player
         ///                     Direction = Up
         ///                     this.IsDead = false
         /// </summary>
-        public void ResetAfterDeath()
+        public void ResetVisibilityAndMovement()
         {
             this.ChangeSpriteVisibility(true);
-            this.StartMovement();
+            this.CanMove = true;
             this.Direction = Direction.Up;
             this.IsDead = false;
         }
@@ -236,15 +224,6 @@ namespace FroggerStarter.Model.Player
             }
         }
 
-        /// <summary>
-        /// Starts the movement.
-        /// </summary>
-        public void StartMovement()
-        {
-            this.SpeedX = SpeedXDirection;
-            this.SpeedY = SpeedYDirection;
-        }
-
         #endregion
 
         #region Private Helpers
@@ -265,8 +244,8 @@ namespace FroggerStarter.Model.Player
         private void playLeapAnimation()
         {
             this.Sprite.Visibility = Visibility.Collapsed;
-            this.StopMovement();
             this.CanMove = false;
+           
             this.FrogLeapAnimation.RotateFrames(this.Direction);
             this.FrogLeapAnimation.SetFrameLocations(this.X, this.Y);
             this.FrogLeapAnimation.Start();
@@ -276,9 +255,8 @@ namespace FroggerStarter.Model.Player
         {
             if (e.FrogLeapIsOver && !this.IsDead)
             {
-                this.CanMove = true;
                 this.ChangeSpriteVisibility(true);
-                this.StartMovement();
+                this.CanMove = true;
             }
         }
 

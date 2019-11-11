@@ -4,23 +4,23 @@
 
 using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.View.LifeHeartLostAnimation
+namespace FroggerStarter.View.ReviveHeartLostAnimation
 {
     /// <summary>
-    ///     Life heart frame four class.
+    ///     Revive Life heart frame one class.
     /// </summary>
     /// <seealso cref="BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
-    public sealed partial class LifeHeartLostFrameFour
+    public sealed partial class ReviveHeartLostFrameOne : BaseSprite
     {
 
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ReviveHeartLostAnimation.LifeHeartLostFrameFour"/> class.
+        ///     Initializes a new instance of the <see cref="ReviveHeartLostFrameOne"/> class.
         /// </summary>
-        public LifeHeartLostFrameFour()
+        public ReviveHeartLostFrameOne()
         {
             this.InitializeComponent();
         }

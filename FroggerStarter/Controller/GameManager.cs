@@ -32,8 +32,7 @@ namespace FroggerStarter.Controller
         private WaterManager waterManager;
         private FrogHomes frogHomes;
         private PowerUpManager powerUpManager;
-        private LevelManager levelManager;
-
+        
         private DispatcherTimer timer;
         private DispatcherTimer scoreTimer;
 
@@ -72,7 +71,7 @@ namespace FroggerStarter.Controller
 
         private bool IsPlayerInWaterArea     => this.player.Y < GameBoard.MiddleRoadYLocation;
         private bool IsPlayerAboveMiddlePath => this.player.Y + this.player.Height < GameBoard.MiddleRoadYLocation + GameBoard.RoadShoulderOffset;
-        private bool IsGameOver              => PlayerStats.TotalLives == 0 || this.frogHomes.HasHomesBeenFilled;
+        private bool IsGameOver              => !PlayerStats.HasLivesLeft || this.frogHomes.HasHomesBeenFilled;
         private bool HasMovedPastTopBoundary => this.player.Y < GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
 
         private static double WaterAreaTopLocation => GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
@@ -100,11 +99,9 @@ namespace FroggerStarter.Controller
         public void InitializeGame(Canvas gamePage)
         {
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
-            SoundEffectManager.CreateAndLoadAllSoundEffects();
             PlayerStats.SetupPlayerStats();
+            LevelManager.CreateLevels();
 
-            //TODO extract this
-            this.levelManager = new LevelManager();
             this.createAndPlaceEverythingOnGameBoard();
 
             this.setupGameTimer();
@@ -317,11 +314,11 @@ namespace FroggerStarter.Controller
         {
             this.roadManager = new RoadManager(getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
 
-            this.roadManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().RoadLane5);
-            this.roadManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().RoadLane4);
-            this.roadManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().RoadLane3);
-            this.roadManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().RoadLane2);
-            this.roadManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().RoadLane1);
+            this.roadManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().RoadLane5);
+            this.roadManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().RoadLane4);
+            this.roadManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().RoadLane3);
+            this.roadManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().RoadLane2);
+            this.roadManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().RoadLane1);
 
             this.roadManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
         }
@@ -330,11 +327,11 @@ namespace FroggerStarter.Controller
         {
             this.waterManager = new WaterManager(WaterAreaTopLocation, GameBoard.MiddleRoadYLocation);
 
-            this.waterManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().WaterLane5);
-            this.waterManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().WaterLane4);
-            this.waterManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().WaterLane3);
-            this.waterManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().WaterLane2);
-            this.waterManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().WaterLane1);
+            this.waterManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().WaterLane5);
+            this.waterManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().WaterLane4);
+            this.waterManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().WaterLane3);
+            this.waterManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().WaterLane2);
+            this.waterManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().WaterLane1);
 
             this.waterManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
             this.waterManager.SpeedBoatAnimationFrames.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
@@ -370,7 +367,7 @@ namespace FroggerStarter.Controller
 
         private void stopGamePlayAndShowGameOver()
         {
-            this.player.StopMovement();
+            this.player.CanMove = false;
             this.player.IsDead = true;
 
             this.timer.Stop();
@@ -393,7 +390,7 @@ namespace FroggerStarter.Controller
 
         private void checkGameStatusForGameOver()
         { 
-            if (this.frogHomes.HasHomesBeenFilled && this.levelManager.IsAtMaxLevel)
+            if (this.frogHomes.HasHomesBeenFilled && LevelManager.IsAtMaxLevel)
             {
                 this.stopGamePlayAndShowGameOver();
             } 
@@ -412,7 +409,7 @@ namespace FroggerStarter.Controller
 
         private void resetBoardForNextLevel()
         {
-            this.levelManager.CurrentLevel++;
+            LevelManager.CurrentLevel++;
             GameSettings.PauseGame = true;
             this.resetCanvas();
             SoundEffectManager.PlaySound(SoundEffectType.NextLevel);
@@ -420,7 +417,7 @@ namespace FroggerStarter.Controller
 
         private void showNextLevelScreenForFiveSeconds()
         {
-            var nextLevel = new NextLevelEventArgs() {NextLevel = this.levelManager.CurrentLevel};
+            var nextLevel = new NextLevelEventArgs() {NextLevel = LevelManager.CurrentLevel};
             this.NextLevel?.Invoke(this, nextLevel);
             GameSettings.PauseTimer.Tick += this.onNextLevelPause;
             GameSettings.PauseTimer.Start();
@@ -445,7 +442,6 @@ namespace FroggerStarter.Controller
             this.setCanvasToNextLevel();
             this.resetAllTimers();
             this.player.CanMove = true;
-            this.player.StartMovement();
         }
 
         private void stopPauseScreenForNextLevel()
@@ -530,14 +526,6 @@ namespace FroggerStarter.Controller
             }
         }
 
-        private static void checkIfPlayerHasQuickRevive()
-        {
-            if (PlayerAbilities.HasQuickRevive)
-            {
-                PlayerAbilities.HasQuickRevive = false;
-            }
-        }
-
         private void resetScoreTimerBar()
         {
             ScoreTimer.ResetScoreTick();
@@ -568,17 +556,28 @@ namespace FroggerStarter.Controller
         {
             if (e.PlayerDeathIsOver && !this.IsGameOver)
             {
-                this.player.ResetAfterDeath();
-
-                this.roadManager.ResetLanesToOneObstacle();
+                this.player.ResetVisibilityAndMovement();
                 ScoreTimer.ResetScoreTick();
                 this.scoreTimer.Start();
+                this.resetBoardForNoQuickRevive();
+                checkToRemoveQuickReviveAbility();
+            }
+        }
 
-                if (!PlayerAbilities.HasQuickRevive)
-                {
-                    this.powerUpManager.ResetPowerUpsAndSpawnTimer();
-                }
-                checkIfPlayerHasQuickRevive();
+        private void resetBoardForNoQuickRevive()
+        {
+            if (!PlayerAbilities.HasQuickRevive)
+            {
+                this.powerUpManager.ResetPowerUpsAndSpawnTimer();
+                this.roadManager.ResetLanesToOneObstacle();
+            }
+        }
+
+        private static void checkToRemoveQuickReviveAbility()
+        {
+            if (PlayerAbilities.HasQuickRevive)
+            {
+                PlayerAbilities.HasQuickRevive = false;
             }
         }
 

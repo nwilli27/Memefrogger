@@ -25,7 +25,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         /// <value>
         ///     The speed y.
         /// </value>
-        public double SpeedY { get; set; }
+        public double SpeedY { get; protected set; }
 
         /// <summary>
         ///     Gets or sets the direction.

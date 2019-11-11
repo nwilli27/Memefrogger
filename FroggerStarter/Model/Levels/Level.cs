@@ -9,7 +9,6 @@ namespace FroggerStarter.Model.Levels
     /// </summary>
     internal abstract class Level : ILevelRequirements
     {
-
         public abstract IList<object> RoadLane1 { get; }
         public abstract IList<object> RoadLane2 { get; }
         public abstract IList<object> RoadLane3 { get; }

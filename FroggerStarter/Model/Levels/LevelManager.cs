@@ -1,11 +1,5 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
-using FroggerStarter.Model.Animation;
 using FroggerStarter.Model.Levels.Levels;
 
 namespace FroggerStarter.Model.Levels
@@ -13,12 +7,11 @@ namespace FroggerStarter.Model.Levels
     /// <summary>
     ///     Class responsible for managing multiple levels
     /// </summary>
-    internal class LevelManager
+    internal static class LevelManager
     {
         #region Data Members
 
-        //TODO could maybe use indexer here
-        private readonly IList<Level> levels;
+        private static IList<Level> levels;
 
         #endregion
 
@@ -30,7 +23,7 @@ namespace FroggerStarter.Model.Levels
         /// <value>
         ///     The current level.
         /// </value>
-        public int CurrentLevel { get; set; } = 1;
+        public static int CurrentLevel { get; set; } = 1;
 
         /// <summary>
         ///     Gets a value indicating whether this instance is at maximum level.
@@ -38,29 +31,25 @@ namespace FroggerStarter.Model.Levels
         /// <value>
         ///   <c>true</c> if this instance is at maximum level; otherwise, <c>false</c>.
         /// </value>
-        public bool IsAtMaxLevel => this.CurrentLevel == this.levels.Count;
+        public static bool IsAtMaxLevel => CurrentLevel == levels.Count;
 
         #endregion
 
-        #region
+        #region Methods
 
-        private const int NextLevelTimerInterval = 5;
-
-        #endregion
-
-        #region Constructors
-
-        public LevelManager()
+        /// <summary>
+        ///     Creates the list of levels
+        ///     Precondition: none
+        ///     Post-condition: levels.Count == 3
+        /// </summary>
+        public static void CreateLevels()
         {
-            this.levels = new List<Level>() {
+            levels = new List<Level>() {
                 new LevelOne(),
                 new LevelTwo(),
                 new LevelThree()
             };
-
         }
-
-        #endregion
 
         /// <summary>
         ///     Gets the current level.
@@ -68,9 +57,11 @@ namespace FroggerStarter.Model.Levels
         ///     Post-condition: none
         /// </summary>
         /// <returns></returns>
-        public Level GetCurrentLevel()
+        public static Level GetCurrentLevel()
         {
-            return this.levels[this.CurrentLevel - 1];
+            return levels[CurrentLevel - 1];
         }
+
+        #endregion
     }
 }

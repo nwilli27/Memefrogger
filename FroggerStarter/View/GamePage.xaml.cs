@@ -106,15 +106,17 @@ namespace FroggerStarter.View
 
         private void onNextLevel(object sender, NextLevelEventArgs e)
         {
+            this.nextLevel.Text = e.NextLevel.ToString();
             this.blackOverlay.Visibility = Visibility.Visible;
+            this.level.Visibility = Visibility.Visible;
             this.nextLevel.Visibility = Visibility.Visible;
-            this.nextLevel.Text = "LEVEL " + e.NextLevel;
         }
 
         private void onPauseFinished(object sender, PauseIsFinishedEventArgs e)
         {
             this.blackOverlay.Visibility = Visibility.Collapsed;
             this.nextLevel.Visibility = Visibility.Collapsed;
+            this.level.Visibility = Visibility.Collapsed;
         }
         
         private void onScoreUpdated(object sender, ScoreUpdatedEventArgs e)

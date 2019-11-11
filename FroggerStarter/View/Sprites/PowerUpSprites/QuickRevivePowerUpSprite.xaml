@@ -29,12 +29,12 @@
                         <CompositeTransform Rotation="33.66" ScaleY="1.011" ScaleX="0.989" SkewX="-2.992" TranslateX="-0.681" TranslateY="1.286"/>
                     </Ellipse.RenderTransform>
                 </Ellipse>
-                <Ellipse Fill="DeepSkyBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-3,10,37,5" Grid.ColumnSpan="2">
+                <Ellipse Fill="DeepSkyBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-4,10,38,5" Grid.ColumnSpan="2">
                     <Ellipse.RenderTransform>
                         <CompositeTransform Rotation="-32.067" ScaleY="1.014" ScaleX="0.986" SkewX="2.554" TranslateX="-0.424" TranslateY="-1.092"/>
                     </Ellipse.RenderTransform>
                 </Ellipse>
-                <Ellipse Fill="DeepSkyBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-9,7,38,21" Grid.ColumnSpan="2">
+                <Ellipse Fill="DeepSkyBlue" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-10,7,38,21" Grid.ColumnSpan="2">
                     <Ellipse.RenderTransform>
                         <CompositeTransform Rotation="19.038" SkewX="3.29" TranslateX="1.182" TranslateY="-1.517" ScaleX="1" ScaleY="0.998" SkewY="0"/>
                     </Ellipse.RenderTransform>
@@ -44,66 +44,24 @@
                         <CompositeTransform Rotation="50.818" ScaleY="1" ScaleX="0.998" SkewX="0" SkewY="3.635" TranslateX="1.251" TranslateY="1.516"/>
                     </Ellipse.RenderTransform>
                 </Ellipse>
-                <Ellipse Fill="White" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-7,11,48,35" Grid.ColumnSpan="2">
+                <Ellipse Fill="White" RenderTransformOrigin="0.5,0.5" Opacity=".9" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-9,10,49,36" Grid.ColumnSpan="2">
                     <Ellipse.RenderTransform>
                         <CompositeTransform Rotation="-35.042" ScaleY="1" ScaleX="1" SkewX="1.505" SkewY="0.176" TranslateX="1.907" TranslateY="-2.118"/>
                     </Ellipse.RenderTransform>
                 </Ellipse>
-                <Viewbox Grid.Column="1" Margin="10,17,22,13" Stretch="Fill">
-                    <Grid Height="25" Width="22">
-                        <Rectangle Fill="Tan" Margin="9,0,5,2" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                            <Rectangle.RenderTransform>
-                                <CompositeTransform Rotation="-143.676"/>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <Ellipse Fill="Tan" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="0,21,14,0">
-                            <Ellipse.RenderTransform>
-                                <CompositeTransform Rotation="32.096" ScaleY="1" ScaleX="1" SkewX="1.505" SkewY="0.176" TranslateX="1.907" TranslateY="-2.118"/>
-                            </Ellipse.RenderTransform>
-                        </Ellipse>
-                        <Ellipse Fill="Tan" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="14,2,0,18">
-                            <Ellipse.RenderTransform>
-                                <CompositeTransform Rotation="27.847" ScaleY="1" ScaleX="1" SkewX="1.505" SkewY="0.176" TranslateX="1.907" TranslateY="-2.118"/>
-                            </Ellipse.RenderTransform>
-                        </Ellipse>
-                        <Rectangle Fill="SandyBrown" Margin="10,6,5,9" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                            <Rectangle.RenderTransform>
-                                <CompositeTransform Rotation="-143.676"/>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <Rectangle Fill="SandyBrown" Margin="10,4,11,11" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                            <Rectangle.RenderTransform>
-                                <CompositeTransform Rotation="-143.676"/>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <Rectangle Fill="SandyBrown" Margin="16,8,5,7" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                            <Rectangle.RenderTransform>
-                                <CompositeTransform Rotation="-143.676"/>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="4,19,17,5"/>
-                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="7,21,14,3"/>
-                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="7,18,14,6"/>
-                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="6,15,15,9"/>
-                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="10,17,11,7"/>
-                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="15,4,6,20"/>
-                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="18,6,3,18"/>
-                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="18,3,3,21"/>
-                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="17,1,4,23"/>
-                        <Ellipse Height="1" Width="1" Fill="SandyBrown" Margin="21,3,0,21"/>
-                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="9,11,12,13"/>
-                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="12,13,9,11"/>
-                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="15,12,6,12"/>
-                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="12,10,9,14"/>
-                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="13,7,8,17"/>
-                        <Ellipse Height="1" Width="1" Fill="Tan" Margin="16,9,5,15"/>
-
-                    </Grid>
-                </Viewbox>
-
             </Grid>
 
         </Viewbox>
+        <TextBlock Text="Quick" Foreground="White" FontSize="11" FontFamily="Harlow Solid" Canvas.Left="8.39" Canvas.Top="13.212" Height="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Width="29">
+            <TextBlock.RenderTransform>
+                <CompositeTransform Rotation="0.19" TranslateX="0.01" TranslateY="0.007"/>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Text="Revive" Foreground="White" FontSize="11" FontFamily="Harlow Solid" Canvas.Left="9.645" Canvas.Top="20.666" Height="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Width="33">
+            <TextBlock.RenderTransform>
+                <CompositeTransform Rotation="-0.944" TranslateX="-0.01" TranslateY="-0.002"/>
+            </TextBlock.RenderTransform>
+        </TextBlock>
 
     </Canvas>
 

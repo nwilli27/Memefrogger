@@ -51,8 +51,6 @@ namespace FroggerStarter.Constants
             }
         }
 
-
-
         #endregion
     }
 }

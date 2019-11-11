@@ -271,6 +271,10 @@ namespace FroggerStarter.Model.Animation
                     animationDone.LifeHeartLostIsOver = true;
                     break;
 
+                case AnimationType.QuickReviveHeartLost:
+                    animationDone.QuickReviveHeartLostIsOver = true;
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -312,5 +316,13 @@ namespace FroggerStarter.Model.Animation
         /// </value>
         public bool LifeHeartLostIsOver { get; set; }
 
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether [quick revive heart lost is over].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [quick revive heart lost is over]; otherwise, <c>false</c>.
+        /// </value>
+        public bool QuickReviveHeartLostIsOver { get; set; }
     }
 }

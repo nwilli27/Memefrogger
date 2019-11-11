@@ -4,6 +4,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model.Score;
+using FroggerStarter.Model.Sound;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,6 +29,8 @@ namespace FroggerStarter.View
         /// </summary>
         public StartPage()
         {
+            SoundEffectManager.CreateAndLoadAllSoundEffects();
+
             this.InitializeComponent();
 
             ApplicationView.PreferredLaunchViewSize = new Size

@@ -18,7 +18,7 @@ namespace FroggerStarter.Model.Game_Objects.Lives
         public QuickReviveHeart()
         {
             this.Sprite = new QuickReviveHeartSprite();
-            this.HeartLostAnimation = new Animation.Animation(AnimationType.LifeHeartLost)
+            this.HeartLostAnimation = new Animation.Animation(AnimationType.QuickReviveHeartLost)
             {
                 AnimationInterval = 175
             };

@@ -192,6 +192,21 @@
     <Compile Include="View\HighScoreBoard.xaml.cs">
       <DependentUpon>HighScoreBoard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ReviveHeartLostAnimation\ReviveHeartLostFrameOne.xaml.cs">
+      <DependentUpon>ReviveHeartLostFrameOne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReviveHeartLostAnimation\ReviveHeartLostFrameFive.xaml.cs">
+      <DependentUpon>ReviveHeartLostFrameFive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReviveHeartLostAnimation\ReviveHeartLostFrameFour.xaml.cs">
+      <DependentUpon>ReviveHeartLostFrameFour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReviveHeartLostAnimation\ReviveHeartLostFrameThree.xaml.cs">
+      <DependentUpon>ReviveHeartLostFrameThree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReviveHeartLostAnimation\ReviveHeartLostFrameTwo.xaml.cs">
+      <DependentUpon>ReviveHeartLostFrameTwo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameEight.xaml.cs">
       <DependentUpon>LifeHeartLostFrameEight.xaml</DependentUpon>
     </Compile>
@@ -346,6 +361,26 @@
     <Page Include="View\HighScoreBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReviveHeartLostAnimation\ReviveHeartLostFrameOne.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReviveHeartLostAnimation\ReviveHeartLostFrameFive.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReviveHeartLostAnimation\ReviveHeartLostFrameFour.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReviveHeartLostAnimation\ReviveHeartLostFrameThree.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReviveHeartLostAnimation\ReviveHeartLostFrameTwo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameEight.xaml">
       <Generator>MSBuild:Compile</Generator>

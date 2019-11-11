@@ -5,8 +5,10 @@ using FroggerStarter.Enums;
 using FroggerStarter.View.FrogLeapAnimation;
 using FroggerStarter.View.LifeHeartLostAnimation;
 using FroggerStarter.View.PlayerDeathAnimation;
+using FroggerStarter.View.ReviveHeartLostAnimation;
 using FroggerStarter.View.SpeedBoatSplashAnimation;
 using FroggerStarter.View.Sprites;
+using LifeHeartLostFrameFour = FroggerStarter.View.LifeHeartLostAnimation.LifeHeartLostFrameFour;
 
 namespace FroggerStarter.Factory
 {
@@ -64,6 +66,21 @@ namespace FroggerStarter.Factory
                     };
 
                     return heartLostAnimation;
+
+                case AnimationType.QuickReviveHeartLost:
+                    var reviveHeartLost = new List<BaseSprite>
+                    {
+                        new ReviveHeartLostFrameOne(),
+                        new ReviveHeartLostFrameTwo(),
+                        new ReviveHeartLostFrameThree(),
+                        new ReviveHeartLostFrameFour(),
+                        new ReviveHeartLostFrameFive(),
+                        new LifeHeartLostFrameSix(),
+                        new LifeHeartLostFrameSeven(),
+                        new LifeHeartLostFrameEight()
+                    };
+
+                    return reviveHeartLost;
 
                 case AnimationType.SpeedBoatSplash:
                     var speedBoatSplashAnimation = new List<BaseSprite>
