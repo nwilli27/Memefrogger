@@ -234,9 +234,6 @@
     <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameOne.xaml.cs">
       <DependentUpon>LifeHeartLostFrameOne.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PlayAgainPage.xaml.cs">
-      <DependentUpon>PlayAgainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFour.xaml.cs">
       <DependentUpon>PlayerDeathFrameFour.xaml</DependentUpon>
     </Compile>
@@ -423,10 +420,6 @@
     <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameOne.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\PlayAgainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameFour.xaml">
       <Generator>MSBuild:Compile</Generator>

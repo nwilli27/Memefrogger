@@ -23,7 +23,7 @@ namespace FroggerStarter.Model.Levels
         /// <value>
         ///     The current level.
         /// </value>
-        public static int CurrentLevel { get; set; } = 1;
+        public static int CurrentLevel { get; set; }
 
         /// <summary>
         ///     Gets a value indicating whether this instance is at maximum level.
@@ -49,6 +49,7 @@ namespace FroggerStarter.Model.Levels
                 new LevelTwo(),
                 new LevelThree()
             };
+            CurrentLevel = 1;
         }
 
         /// <summary>

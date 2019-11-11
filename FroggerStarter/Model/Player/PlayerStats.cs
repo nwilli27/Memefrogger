@@ -53,6 +53,7 @@ namespace FroggerStarter.Model.Player
         {
             Lives = new PlayerLives();
             TotalLives = GameSettings.TotalNumberOfLives;
+            Score = 0;
         }
     }
 
