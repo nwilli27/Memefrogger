@@ -115,7 +115,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerLeft()
         {
-            this.player.MoveLeftWithBoundaryCheck();
+            this.player.Move(Direction.Left);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerRight()
         {
-            this.player.MoveRightWithBoundaryCheck();
+            this.player.Move(Direction.Right);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerUp()
         {
-            this.player.MoveUpWithBoundaryCheck();
+            this.player.Move(Direction.Up);
 
             if (this.hasReachedAnEmptyHome())
             {
@@ -155,7 +155,17 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerDown()
         {
-            this.player.MoveDownWithBoundaryCheck();
+            this.player.Move(Direction.Down);
+        }
+
+        /// <summary>
+        ///     Breakdowns the game by resetting the timers and stopping them.
+        /// </summary>
+        public void ResetGame()
+        {
+            PlayerAbilities.HasQuickRevive = false;
+            this.resetAllTimers();
+            this.stopAllTimers();
         }
 
         #endregion
@@ -177,11 +187,11 @@ namespace FroggerStarter.Controller
 
             if (this.IsPlayerInWaterArea)
             {
-                //this.checkForPlayerToWaterObstacleCollision();
+                this.checkForPlayerToWaterObstacleCollision();
             }
             else
             {
-                //this.checkForPlayerToRoadObstacleCollision();
+                this.checkForPlayerToRoadObstacleCollision();
             }
 
             this.checkForPlayerToPowerUpCollision();
@@ -474,10 +484,11 @@ namespace FroggerStarter.Controller
 
         private void stopGamePlayInSlowMotion()
         {
+            //TODO make these constants
             this.timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             this.scoreTimer.Stop();
-            this.player.DeathAnimation.AnimationInterval = 1500;
             this.waterManager.SlowDownSpeedBoatWaterAnimations();
+            this.player.DeathAnimation.AnimationInterval = 1000;
             this.player.PlayDeathAnimation();
             this.gameOver();
         }

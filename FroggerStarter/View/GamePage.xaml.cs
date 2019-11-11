@@ -145,7 +145,7 @@ namespace FroggerStarter.View
             {
                 this.endGameTimer.Stop();
 
-                this.gameManager = null;
+                this.gameManager.ResetGame();
                 Window.Current.CoreWindow.KeyDown -= this.coreWindowOnKeyDown;
 
                 this.Frame.Navigate(typeof(AddHighScorePage));

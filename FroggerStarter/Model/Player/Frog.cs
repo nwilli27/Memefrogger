@@ -103,66 +103,70 @@ namespace FroggerStarter.Model.Player
         #region Methods
 
         /// <summary>
-        ///     Move to the left with boundary check of left side
+        ///     Moves the frog in the specified direction.
         ///     Precondition: none
-        ///     Post-condition: this.X =- this.SpeedX
+        ///     Post-condition: this.Direction = direction
+        ///                     this.SpeedX = SpeedXDirection
+        ///                     
         /// </summary>
-        public void MoveLeftWithBoundaryCheck()
+        /// <param name="direction">The direction.</param>
+        public void Move(Direction direction)
         {
-            if (this.X - this.SpeedX >= LeftBoundary && this.CanMove && !GameSettings.PauseGame)
+            this.Direction = direction;
+            this.Rotate(direction);
+            this.SpeedX = SpeedXDirection;
+
+            if (this.CanMove && !GameSettings.PauseGame)
             {
-                this.SpeedX = SpeedXDirection;
-                this.MoveLeft();
-                this.Rotate(this.Direction = Direction.Left);
+                this.moveInDirection(direction);
                 this.playLeapAnimation();
             }
         }
 
         /// <summary>
-        ///     Moves to the right with boundary check of right side
-        ///     Precondition: none
-        ///     Post-condition: this.X += this.SpeedX
+        ///     Moves the game object right.
+        ///     Precondition: None
+        ///     Post-condition: X == X@prev + SpeedX
         /// </summary>
-        public void MoveRightWithBoundaryCheck()
+        public override void MoveRight()
         {
-            if (this.X + this.SpeedX < RightBoundary && this.CanMove && !GameSettings.PauseGame)
+            if (this.X + this.Width + this.SpeedX > RightBoundary)
             {
-                this.SpeedX = SpeedXDirection;
-                this.MoveRight();
-                this.Rotate(this.Direction = Direction.Right);
-                this.playLeapAnimation();
+                this.X = GameBoard.BackgroundWidth - this.Width;
+            }
+            else
+            {
+                base.MoveRight();
             }
         }
 
         /// <summary>
-        ///     Moves up with boundary check of top side
-        ///     Precondition: none
-        ///     Post-condition: this.Y =- this.SpeedY
+        ///     Moves the game object left.
+        ///     Precondition: None
+        ///     Post-condition: X == X@prev + SpeedX
         /// </summary>
-        public void MoveUpWithBoundaryCheck()
+        public override void MoveLeft()
         {
-            if (this.Y - this.SpeedY >= TopBoundary && this.CanMove && !GameSettings.PauseGame)
+            if (this.X - this.SpeedX < LeftBoundary)
             {
-                this.SpeedX = SpeedXDirection;
-                this.MoveUp();
-                this.Rotate(this.Direction = Direction.Up);
-                this.playLeapAnimation();
+                this.X = LeftBoundary;
+            }
+            else
+            {
+                base.MoveLeft();
             }
         }
 
         /// <summary>
-        ///     Moves down with boundary check of bottom side
-        ///     Precondition: none
-        ///     Post-condition: this.Y += this.SpeedY
+        ///     Moves the game object down.
+        ///     Precondition: None
+        ///     Post-condition: Y == Y@prev + SpeedY
         /// </summary>
-        public void MoveDownWithBoundaryCheck()
+        public override void MoveDown()
         {
-            if (this.Y + this.SpeedY < BottomBoundary && this.CanMove && !GameSettings.PauseGame)
+            if (this.Y + this.SpeedY < BottomBoundary)
             {
-                this.SpeedX = SpeedXDirection;
-                this.MoveDown();
-                this.Rotate(this.Direction = Direction.Down);
-                this.playLeapAnimation();
+                base.MoveDown();
             }
         }
 
@@ -211,11 +215,11 @@ namespace FroggerStarter.Model.Player
             switch (obstacle.Direction)
             {
                 case Direction.Left:
-                    this.moveLeftPreventBoundary();
+                    this.MoveLeft();
                     break;
 
                 case Direction.Right:
-                    this.moveRightPreventBoundary();
+                    this.MoveRight();
                     break;
                 
                 default:
@@ -226,6 +230,31 @@ namespace FroggerStarter.Model.Player
         #endregion
 
         #region Private Helpers
+
+        private void moveInDirection(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Right:
+                    this.MoveRight();
+                    break;
+
+                case Direction.Left:
+                    this.MoveLeft();
+                    break;
+
+                case Direction.Up:
+                    this.MoveUp();
+                    break;
+
+                case Direction.Down:
+                    this.MoveDown();
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+            }
+        }
 
         private void setupAnimations()
         {
@@ -256,22 +285,6 @@ namespace FroggerStarter.Model.Player
             {
                 this.ChangeSpriteVisibility(true);
                 this.CanMove = true;
-            }
-        }
-
-        private void moveLeftPreventBoundary()
-        {
-            if (this.X - this.SpeedX >= LeftBoundary)
-            {
-                this.MoveLeft();
-            }
-        }
-
-        private void moveRightPreventBoundary()
-        {
-            if (this.X + this.Width + this.SpeedX < RightBoundary)
-            {
-                this.MoveRight();
             }
         }
 

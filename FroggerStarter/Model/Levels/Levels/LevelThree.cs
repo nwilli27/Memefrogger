@@ -87,9 +87,9 @@ namespace FroggerStarter.Model.Levels.Levels
         public override IList<object> WaterLane5 =>
             new List<object>() {
                 Direction.Right,
-                4.0,
+                4.25,
                 ObstacleType.SpeedBoat,
-                2
+                3
             };
     }
 }
