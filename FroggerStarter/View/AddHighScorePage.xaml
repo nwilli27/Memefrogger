@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="FroggerStarter.View.AddHighScorePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FroggerStarter.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Width="{StaticResource HighScoreAddWidth}"
+    Height="{StaticResource HighScoreAddHeight}">
+
+    <Canvas Width="auto" Background="Black">
+        <TextBlock Text="Add a New High Score!" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
+                   Canvas.Left="74" Canvas.Top="10" />
+        <Rectangle Width="352" Height="5" Fill="White" Canvas.Left="74" Canvas.Top="46" />
+
+        <TextBlock Text="Name: " Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
+                   Canvas.Left="25" Canvas.Top="83" />
+        <TextBox x:Name="nameTextBox" Canvas.Left="120" Canvas.Top="83" Text="Enter Name..." TextWrapping="Wrap" Height="37" Width="311"
+                 FontFamily="Berlin Sans FB" FontSize="22"
+                 BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" FocusVisualSecondaryBrush="#99FFFFFF"
+                 Foreground="White" Background="Transparent" />
+
+        <TextBlock Text="Score: " Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
+                   Canvas.Left="13" Canvas.Top="150" />
+        <TextBlock Text="Level: " Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
+            Canvas.Left="19" Canvas.Top="213" />
+
+        <TextBlock x:Name="scoreTextBlock" Text="0" Foreground="White" FontSize="30" FontFamily="Berlin Sans FB"
+            Canvas.Left="122" Canvas.Top="152" />
+        <TextBlock x:Name="levelTextBox" Text="1" Foreground="White" FontSize="30" FontFamily="Berlin Sans FB"
+            Canvas.Left="122" Canvas.Top="217" />
+
+        <Button Height="52" Width="183" Canvas.ZIndex="1" Content="Add High Score"
+                Canvas.Left="271" Canvas.Top="200" FontFamily="Berlin Sans FB" FontSize="25" Background="#FF20E800"
+                BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" Foreground="Black"
+                FocusVisualSecondaryBrush="#99FFFFFF" Click="Button_Click" />
+    </Canvas>
+</Page>

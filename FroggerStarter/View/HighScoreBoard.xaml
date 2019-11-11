@@ -11,12 +11,12 @@
     Width="{StaticResource HighScoreBoardWidth}">
 
     <Page.DataContext>
-        <viewModel:HighScoreBoardViewModel/>
+        <viewModel:HighScoreBoardViewModel />
     </Page.DataContext>
 
     <Canvas Width="Auto" Background="Black">
         <ListView ItemsSource="{Binding HighScores, Mode=TwoWay}"
-                  BorderBrush="White" BorderThickness="2" Height="465" Width="650" Canvas.Left="25" Canvas.Top="65">
+                  BorderBrush="White" BorderThickness="2" Height="465" Width="650" Canvas.Left="25" Canvas.Top="100">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="White" BorderThickness="1" Width="620">
@@ -45,22 +45,30 @@
         </ListView>
 
         <TextBlock Text="High Scores" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
-                   Canvas.Left="255" Canvas.Top="13" />
+                   Canvas.Left="255" Canvas.Top="9" />
+        <Rectangle Width="190" Height="5" Fill="White" Canvas.Left="255" Canvas.Top="47"/>
 
         <Button Command="{Binding ReturnCommand}" Height="58" Width="200" Canvas.ZIndex="1" Content="Return to Start"
-                Canvas.Left="100" Canvas.Top="550" FontFamily="Berlin Sans FB" FontSize="25" Background="#FF20E800"
+                Canvas.Left="100" Canvas.Top="585" FontFamily="Berlin Sans FB" FontSize="25" Background="#FF20E800"
                 BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" Foreground="Black"
                 FocusVisualSecondaryBrush="#99FFFFFF" />
         <Button Command="{Binding ClearScoresCommand}" Height="58" Width="200" Canvas.ZIndex="1"
-                Content="Clear High Scores" Canvas.Left="412.5" Canvas.Top="550" FontFamily="Berlin Sans FB"
+                Content="Clear High Scores" Canvas.Left="413" Canvas.Top="585" FontFamily="Berlin Sans FB"
                 FontSize="25" Background="#FF20E800" BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8"
                 Foreground="Black" FocusVisualSecondaryBrush="#99FFFFFF" />
-        <Rectangle Height="58" Width="200" Fill="Green" Canvas.Left="412.5" Canvas.Top="550" />
-        <Rectangle Height="58" Width="200" Fill="Green" Canvas.Left="100" Canvas.Top="550" />
+        <Rectangle Height="58" Width="200" Fill="Green" Canvas.Left="413" Canvas.Top="585" />
+        <Rectangle Height="58" Width="200" Fill="Green" Canvas.Left="100" Canvas.Top="585" />
 
         <ComboBox ItemsSource="{Binding SortTypes, Mode=OneWay}"
                   SelectedItem="{Binding SelectedHighScoreSortType, Mode=TwoWay}" Canvas.Left="471" Canvas.Top="18"
                   Width="204" Background="#FF20E800" BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8"
                   PlaceholderText="Sort By..." FontFamily="Berlin Sans FB" SelectedIndex="-1" />
+
+        <TextBlock Text="Name" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
+                   Canvas.Left="110" Canvas.Top="58" />
+        <TextBlock Text="Score" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
+                   Canvas.Left="314" Canvas.Top="58" />
+        <TextBlock Text="Level" Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
+                   Canvas.Left="531" Canvas.Top="58" />
     </Canvas>
 </Page>

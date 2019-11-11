@@ -51,18 +51,6 @@ namespace FroggerStarter.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(GamePage));
-            Serializer.Serializer<List<HighScore>>.WriteObjectToFile("HighScoreBoard", new List<HighScore>() {
-                new HighScore(85, "test", 3),
-                new HighScore(85, "test", 3),
-                new HighScore(85, "test", 3),
-                new HighScore(85, "test", 3),
-                new HighScore(85, "test", 3),
-                new HighScore(85, "test", 3),
-                new HighScore(85, "test", 3),
-                new HighScore(85, "test", 3),
-                new HighScore(85, "test", 3),
-                new HighScore(85, "test", 3)
-            });
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
