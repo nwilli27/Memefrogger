@@ -18,7 +18,6 @@ namespace FroggerStarter.Model.Player
     {
         #region Data Members
 
-        private bool canMove = true;
         private bool isDead;
 
         #endregion
@@ -64,10 +63,18 @@ namespace FroggerStarter.Model.Player
             get => this.isDead;
             set
             {
-                this.canMove = !value;
+                this.CanMove = !value;
                 this.isDead = value;
             }
         }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance can move.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance can move; otherwise, <c>false</c>.
+        /// </value>
+        public bool CanMove { get; set; } = true;
 
         #endregion
 
@@ -102,7 +109,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveLeftWithBoundaryCheck()
         {
-            if (this.X - this.SpeedX >= LeftBoundary && this.canMove)
+            if (this.X - this.SpeedX >= LeftBoundary && this.CanMove && !GameSettings.PauseGame)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveLeft();
@@ -118,7 +125,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveRightWithBoundaryCheck()
         {
-            if (this.X + this.SpeedX < RightBoundary && this.canMove)
+            if (this.X + this.SpeedX < RightBoundary && this.CanMove && !GameSettings.PauseGame)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveRight();
@@ -134,7 +141,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveUpWithBoundaryCheck()
         {
-            if (this.Y - this.SpeedY >= TopBoundary && this.canMove)
+            if (this.Y - this.SpeedY >= TopBoundary && this.CanMove && !GameSettings.PauseGame)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveUp();
@@ -150,7 +157,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveDownWithBoundaryCheck()
         {
-            if (this.Y + this.SpeedY < BottomBoundary && this.canMove)
+            if (this.Y + this.SpeedY < BottomBoundary && this.CanMove && !GameSettings.PauseGame)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveDown();
@@ -200,7 +207,7 @@ namespace FroggerStarter.Model.Player
         public void ResetAfterDeath()
         {
             this.ChangeSpriteVisibility(true);
-            this.startMovement();
+            this.StartMovement();
             this.Direction = Direction.Up;
             this.IsDead = false;
         }
@@ -229,6 +236,15 @@ namespace FroggerStarter.Model.Player
             }
         }
 
+        /// <summary>
+        /// Starts the movement.
+        /// </summary>
+        public void StartMovement()
+        {
+            this.SpeedX = SpeedXDirection;
+            this.SpeedY = SpeedYDirection;
+        }
+
         #endregion
 
         #region Private Helpers
@@ -246,17 +262,11 @@ namespace FroggerStarter.Model.Player
             this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
         }
 
-        private void startMovement()
-        {
-            this.SpeedX = SpeedXDirection;
-            this.SpeedY = SpeedYDirection;
-        }
-
         private void playLeapAnimation()
         {
             this.Sprite.Visibility = Visibility.Collapsed;
             this.StopMovement();
-            this.canMove = false;
+            this.CanMove = false;
             this.FrogLeapAnimation.RotateFrames(this.Direction);
             this.FrogLeapAnimation.SetFrameLocations(this.X, this.Y);
             this.FrogLeapAnimation.Start();
@@ -266,9 +276,9 @@ namespace FroggerStarter.Model.Player
         {
             if (e.FrogLeapIsOver && !this.IsDead)
             {
-                this.canMove = true;
+                this.CanMove = true;
                 this.ChangeSpriteVisibility(true);
-                this.startMovement();
+                this.StartMovement();
             }
         }
 

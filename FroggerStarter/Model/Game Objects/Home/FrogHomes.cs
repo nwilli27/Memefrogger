@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FroggerStarter.Constants;
@@ -52,6 +53,11 @@ namespace FroggerStarter.Model.Game_Objects.Home
         #endregion
 
         #region Methods
+
+        public void ResetHomes()
+        {
+            this.frogHomes.ToList().ForEach(home => home.IsFilled = false);
+        }
 
         /// <summary>
         ///     Returns an enumerator that iterates through the collection.

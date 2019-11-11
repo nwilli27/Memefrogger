@@ -60,6 +60,7 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         {
             this.resetRandomTickSpeedAndStart();
             this.powerUps.ToList().ForEach(powerUp => powerUp.MoveOffBoardAndMakeInvisible());
+            this.powerUpSpawnTimer.Start();
         }
 
         /// <summary>

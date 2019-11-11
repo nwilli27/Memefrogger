@@ -113,6 +113,12 @@ namespace FroggerStarter.Factory
                         SoundEffectType = SoundEffectType.BeRightBack
                     };
 
+                case SoundEffectType.NextLevel:
+                    return new SoundEffect("NextRound.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.NextLevel
+                    };
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(soundEffect), soundEffect, null);
             }

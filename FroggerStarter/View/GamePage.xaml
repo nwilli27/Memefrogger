@@ -105,6 +105,13 @@
         <Rectangle Canvas.Top="525" Fill="White" Width="24" Height="2" Canvas.Left="560" />
         <Rectangle Canvas.Top="525" Fill="White" Width="24" Height="2" Canvas.Left="410" />
         <Rectangle Canvas.Top="525" Fill="White" Width="24" Height="2" Canvas.Left="460" />
+
+        <TextBlock x:Name="nextLevel" Text="" Canvas.ZIndex="5" Visibility="Collapsed" Foreground="White" FontSize="120" FontFamily="Berlin Sans FB" Canvas.Left="169.947" Canvas.Top="327.5" Height="156" Width="504" RenderTransformOrigin="0.494,0.44" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+            <TextBlock.RenderTransform>
+                <CompositeTransform SkewX="-0.993" TranslateX="-1.305"/>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+
         <Rectangle x:Name="blackOverlay" Canvas.Top="0" Fill="Black" Canvas.ZIndex="3" Opacity="0.6" Visibility="Collapsed" Width="{StaticResource AppWidth}" Height="780" />
 
     </Canvas>

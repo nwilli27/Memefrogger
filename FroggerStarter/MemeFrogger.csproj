@@ -130,6 +130,10 @@
     <Compile Include="Factory\AnimationFactory.cs" />
     <Compile Include="Factory\PowerUpFactory.cs" />
     <Compile Include="Factory\SoundEffectFactory.cs" />
+    <Compile Include="Model\Levels\Levels\LevelThree.cs" />
+    <Compile Include="Model\Levels\Levels\LevelTwo.cs" />
+    <Compile Include="Model\Levels\Levels\LevelOne.cs" />
+    <Compile Include="Interfaces\ILevelRequirements.cs" />
     <Compile Include="Model\Animation\Animation.cs" />
     <Compile Include="Model\Area Managers\Road\RoadLane.cs" />
     <Compile Include="Model\Area Managers\Road\RoadManager.cs" />
@@ -154,6 +158,8 @@
     <Compile Include="Model\Game Objects\Power Ups\PowerUpManager.cs" />
     <Compile Include="Model\Game Objects\Power Ups\QuickRevivePowerUp.cs" />
     <Compile Include="Model\Game Objects\Power Ups\TimePowerUp.cs" />
+    <Compile Include="Model\Levels\Level.cs" />
+    <Compile Include="Model\Levels\LevelManager.cs" />
     <Compile Include="Model\Player\PlayerAbilities.cs" />
     <Compile Include="Model\Score\HighScore.cs" />
     <Compile Include="Model\Sound\SoundEffect.cs" />

@@ -1,7 +1,6 @@
 ﻿using System;
 
 using System.Linq;
-
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Constants;
@@ -14,6 +13,7 @@ using FroggerStarter.Model.Player;
 using FroggerStarter.Model.Score;
 using FroggerStarter.Model.Sound;
 using FroggerStarter.Model.Area_Managers.Water;
+using FroggerStarter.Model.Levels;
 
 namespace FroggerStarter.Controller
 {
@@ -32,10 +32,11 @@ namespace FroggerStarter.Controller
         private WaterManager waterManager;
         private FrogHomes frogHomes;
         private PowerUpManager powerUpManager;
+        private LevelManager levelManager;
 
         private DispatcherTimer timer;
         private DispatcherTimer scoreTimer;
-        
+
         #endregion
 
         #region Events
@@ -54,6 +55,16 @@ namespace FroggerStarter.Controller
         ///     The score timer tick Event Args
         /// </summary>
         public EventHandler<ScoreTimerTickEventArgs> ScoreTimerTick;
+
+        /// <summary>
+        ///     The next level Event args
+        /// </summary>
+        public EventHandler<NextLevelEventArgs> NextLevel;
+
+        /// <summary>
+        ///     The pause finished event args
+        /// </summary>
+        public EventHandler<PauseIsFinishedEventArgs> PauseFinished;
 
         #endregion
 
@@ -92,13 +103,9 @@ namespace FroggerStarter.Controller
             SoundEffectManager.CreateAndLoadAllSoundEffects();
             PlayerStats.SetupPlayerStats();
 
-            this.createAndPlaceWaterObstaclesOnCanvas();
-            this.createAndPlaceFrogHomes();
-            this.createAndPlacePlayer();
-            this.createAndPlaceRoadObstaclesOnCanvas();
-            this.createAndPlacePowerUps();
-            this.setupPlayerStatsAndHud();
-            this.createAndPlacePlayerHearts();
+            //TODO extract this
+            this.levelManager = new LevelManager();
+            this.createAndPlaceEverythingOnGameBoard();
 
             this.setupGameTimer();
             this.setupScoreTimer();
@@ -131,7 +138,10 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerUp()
         {
-            this.player.MoveUpWithBoundaryCheck();
+            if (!GameSettings.PauseGame)
+            {
+                this.player.MoveUpWithBoundaryCheck();
+            }
 
             if (this.hasReachedAnEmptyHome())
             {
@@ -171,7 +181,7 @@ namespace FroggerStarter.Controller
             this.roadManager.MoveAllObstacles();
             this.waterManager.MoveAllObstacles();
 
-            if (IsPlayerInWaterArea)
+            if (this.IsPlayerInWaterArea)
             {
                 this.checkForPlayerToWaterObstacleCollision();
             }
@@ -259,6 +269,17 @@ namespace FroggerStarter.Controller
 
         #region SetupAbility Methods
 
+        private void createAndPlaceEverythingOnGameBoard()
+        {
+            this.createAndPlaceWaterObstaclesOnCanvas();
+            this.createAndPlaceFrogHomes();
+            this.createAndPlacePlayer();
+            this.createAndPlaceRoadObstaclesOnCanvas();
+            this.createAndPlacePowerUps();
+            this.setupPlayerStatsAndHud();
+            this.createAndPlacePlayerHearts();
+        }
+
         private void createAndPlaceFrogHomes()
         {
             this.frogHomes = new FrogHomes();
@@ -296,11 +317,11 @@ namespace FroggerStarter.Controller
         {
             this.roadManager = new RoadManager(getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
 
-            this.roadManager.AddLaneOfObstacles(GameSettings.RoadLane5);
-            this.roadManager.AddLaneOfObstacles(GameSettings.RoadLane4);
-            this.roadManager.AddLaneOfObstacles(GameSettings.RoadLane3);
-            this.roadManager.AddLaneOfObstacles(GameSettings.RoadLane2);
-            this.roadManager.AddLaneOfObstacles(GameSettings.RoadLane1);
+            this.roadManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().RoadLane5);
+            this.roadManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().RoadLane4);
+            this.roadManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().RoadLane3);
+            this.roadManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().RoadLane2);
+            this.roadManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().RoadLane1);
 
             this.roadManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
         }
@@ -309,11 +330,11 @@ namespace FroggerStarter.Controller
         {
             this.waterManager = new WaterManager(WaterAreaTopLocation, GameBoard.MiddleRoadYLocation);
 
-            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane5);
-            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane4);
-            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane3);
-            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane2);
-            this.waterManager.AddLaneOfObstacles(GameSettings.WaterLane1);
+            this.waterManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().WaterLane5);
+            this.waterManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().WaterLane4);
+            this.waterManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().WaterLane3);
+            this.waterManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().WaterLane2);
+            this.waterManager.AddLaneOfObstacles(this.levelManager.GetCurrentLevel().WaterLane1);
 
             this.waterManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Add(obstacle.Sprite));
             this.waterManager.SpeedBoatAnimationFrames.ToList().ForEach(frame => this.gameCanvas.Children.Add(frame.Sprite));
@@ -372,15 +393,93 @@ namespace FroggerStarter.Controller
 
         private void checkGameStatusForGameOver()
         { 
-            if (this.frogHomes.HasHomesBeenFilled)
+            if (this.frogHomes.HasHomesBeenFilled && this.levelManager.IsAtMaxLevel)
             {
                 this.stopGamePlayAndShowGameOver();
+            } 
+            else if (this.frogHomes.HasHomesBeenFilled)
+            {
+                this.resetBoardForNextLevel();
+                this.stopAllTimers();
+                this.showNextLevelScreenForFiveSeconds();
             }
             else
             {
                 this.setPlayerToCenterOfBottomLane();
                 this.resetScoreTimerBar();
             }
+        }
+
+        private void resetBoardForNextLevel()
+        {
+            this.levelManager.CurrentLevel++;
+            GameSettings.PauseGame = true;
+            this.resetCanvas();
+            SoundEffectManager.PlaySound(SoundEffectType.NextLevel);
+        }
+
+        private void showNextLevelScreenForFiveSeconds()
+        {
+            var nextLevel = new NextLevelEventArgs() {NextLevel = this.levelManager.CurrentLevel};
+            this.NextLevel?.Invoke(this, nextLevel);
+            GameSettings.PauseTimer.Tick += this.onNextLevelPause;
+            GameSettings.PauseTimer.Start();
+        }
+
+        private void stopAllTimers()
+        {
+            this.timer.Stop();
+            this.scoreTimer.Stop();
+            this.powerUpManager.StopPowerUpSpawnTimer();
+        }
+
+        private void onNextLevelPause(object sender, object e)
+        {
+            this.updateBoardForNextLevel();
+            this.stopPauseScreenForNextLevel();
+        }
+
+        private void updateBoardForNextLevel()
+        {
+            GameSettings.PauseGame = false;
+            this.setCanvasToNextLevel();
+            this.resetAllTimers();
+            this.player.CanMove = true;
+            this.player.StartMovement();
+        }
+
+        private void stopPauseScreenForNextLevel()
+        {
+            var pauseFinished = new PauseIsFinishedEventArgs() {PauseIsFinished = true};
+            this.PauseFinished?.Invoke(this, pauseFinished);
+            GameSettings.PauseTimer.Stop();
+        }
+
+        private void resetCanvas()
+        {
+            this.waterManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Remove(obstacle.Sprite));
+            this.roadManager.ToList().ForEach(obstacle => this.gameCanvas.Children.Remove(obstacle.Sprite));
+            this.powerUpManager.ToList().ForEach(powerUp => this.gameCanvas.Children.Remove(powerUp.Sprite));
+            this.frogHomes.ToList().ForEach(home => this.gameCanvas.Children.Remove(home.Sprite));
+            this.gameCanvas.Children.Remove(this.player.Sprite);
+            this.waterManager.SpeedBoatAnimationFrames.ToList().ForEach(frame => this.gameCanvas.Children.Remove(frame.Sprite));
+        }
+
+        private void setCanvasToNextLevel()
+        {
+            this.createAndPlaceFrogHomes();
+            this.createAndPlaceWaterObstaclesOnCanvas();
+            this.createAndPlacePlayer();
+            this.createAndPlacePowerUps();
+            this.createAndPlaceRoadObstaclesOnCanvas();
+        }
+
+        private void resetAllTimers()
+        {
+            this.powerUpManager.ResetPowerUpsAndSpawnTimer();
+            this.resetScoreTimerBar();
+            this.scoreTimer.Start();
+            this.timer.Start();
         }
 
         private void stopGamePlayInSlowMotion()
@@ -532,6 +631,38 @@ namespace FroggerStarter.Controller
         ///   <c>true</c> if [game over]; otherwise, <c>false</c>.
         /// </value>
         public bool GameOver { get; set; }
+    }
+
+    /// <summary>
+    ///     Holds the event for the next level
+    /// </summary>
+    /// <seealso cref="System.EventArgs" />
+    public class NextLevelEventArgs : EventArgs
+    {
+
+        /// <summary>
+        ///     Gets or sets the next level.
+        /// </summary>
+        /// <value>
+        ///     The next level.
+        /// </value>
+        public int NextLevel { get; set; }
+    }
+
+    /// <summary>
+    ///     Holds the event for a pause finishing
+    /// </summary>
+    /// <seealso cref="System.EventArgs" />
+    public class PauseIsFinishedEventArgs : EventArgs
+    {
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether [pause is finished].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [pause is finished]; otherwise, <c>false</c>.
+        /// </value>
+        public bool PauseIsFinished { get; set; }
     }
 
 }

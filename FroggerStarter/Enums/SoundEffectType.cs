@@ -74,7 +74,12 @@
         /// <summary>
         ///     The be right back sound.
         /// </summary>
-        BeRightBack
+        BeRightBack,
+
+        /// <summary>
+        ///     The next level sound.
+        /// </summary>
+        NextLevel
 
     }
 }
