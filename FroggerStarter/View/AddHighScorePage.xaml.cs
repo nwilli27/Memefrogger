@@ -3,6 +3,7 @@ using Windows.Foundation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using FroggerStarter.Model.Levels;
 using FroggerStarter.Model.Player;
 using FroggerStarter.Model.Score;
 
@@ -36,6 +37,7 @@ namespace FroggerStarter.View
             );
 
             this.scoreTextBlock.Text = PlayerStats.Score.ToString();
+            this.levelTextBox.Text = LevelManager.CurrentLevel.ToString();
         }
 
         #endregion

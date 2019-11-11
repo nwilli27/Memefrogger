@@ -25,6 +25,7 @@ namespace FroggerStarter.View
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
  
         private readonly GameManager gameManager;
+        private readonly DispatcherTimer endGameTimer;
 
         #endregion
 
@@ -53,6 +54,7 @@ namespace FroggerStarter.View
             this.gameManager.PauseFinished += this.onPauseFinished;
 
             this.gameManager.InitializeGame(this.canvas);
+            this.endGameTimer = new DispatcherTimer();
         }
 
         private void initializeGameBoardConstants()
@@ -129,6 +131,20 @@ namespace FroggerStarter.View
             {
                 this.gameOver.Visibility = Visibility.Visible;
                 this.blackOverlay.Visibility = Visibility.Visible;
+            }
+
+            this.endGameTimer.Tick += this.endGameTimerOnTick;            
+            this.endGameTimer.Interval = new TimeSpan(0, 0, 0, 5);
+            this.endGameTimer.Start();
+        }
+
+        private void endGameTimerOnTick(object sender, object e)
+        {
+            if (this.endGameTimer.IsEnabled)
+            {
+                this.endGameTimer.Stop();
+
+                this.Frame.Navigate(typeof(AddHighScorePage));
             }
         }
 
