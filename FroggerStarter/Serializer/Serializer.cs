@@ -12,6 +12,15 @@ namespace FroggerStarter.Serializer
     /// <typeparam name="T">Type of object to serialize or deserialize</typeparam>
     public static class Serializer<T>
     {
+        #region Data members
+
+        /// <summary>
+        ///     The high score board file name
+        /// </summary>
+        public const string HighScoreBoardFileName = "HighScoreBoard";
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -41,7 +50,6 @@ namespace FroggerStarter.Serializer
                 throw new ArgumentNullException(nameof(serializeObject));
             }
 
-            
             var outStream = Task.Run(async () =>
                 await getOutStream(fileName)).Result;
 
@@ -96,7 +104,7 @@ namespace FroggerStarter.Serializer
             var deserializer = new XmlSerializer(typeof(T));
             using (inStream)
             {
-                readObject = (T)deserializer.Deserialize(inStream);
+                readObject = (T) deserializer.Deserialize(inStream);
             }
 
             inStream.Dispose();

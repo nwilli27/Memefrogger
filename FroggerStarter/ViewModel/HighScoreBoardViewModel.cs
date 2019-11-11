@@ -108,7 +108,7 @@ namespace FroggerStarter.ViewModel
                 HighScoreSortType.LevelScoreName
             }.ToObservableCollection();
 
-            this.highScoreList = Serializer<List<HighScore>>.ReadObjectFromFile("HighScoreBoard");
+            this.highScoreList = Serializer<List<HighScore>>.ReadObjectFromFile(Serializer.Serializer<HighScore>.HighScoreBoardFileName);
             this.highScoreList?.Sort();
 
             this.HighScores = this.highScoreList.ToObservableCollection();
@@ -137,7 +137,7 @@ namespace FroggerStarter.ViewModel
         {
             this.highScoreList.Clear();
             this.HighScores = this.highScoreList.ToObservableCollection();
-            Serializer<List<HighScore>>.WriteObjectToFile("HighScoreBoard", new List<HighScore>());
+            Serializer<List<HighScore>>.WriteObjectToFile(Serializer.Serializer<HighScore>.HighScoreBoardFileName, new List<HighScore>());
         }
 
         private bool canClearScores(object obj)
