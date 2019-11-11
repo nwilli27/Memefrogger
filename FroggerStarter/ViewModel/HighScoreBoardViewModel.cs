@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using FroggerStarter.Annotations;
+using FroggerStarter.Comparers;
 using FroggerStarter.Enums;
 using FroggerStarter.Extensions;
 using FroggerStarter.Model.Score;
@@ -25,7 +25,7 @@ namespace FroggerStarter.ViewModel
 
         private ObservableCollection<HighScore> highScores;
 
-        private HighScoreSortType selectedHighScoreSortType;
+        private HighScoreSortType? selectedHighScoreSortType;
 
         #endregion
 
@@ -78,7 +78,7 @@ namespace FroggerStarter.ViewModel
         /// <value>
         ///     The type of the selected high score sort.
         /// </value>
-        public HighScoreSortType SelectedHighScoreSortType
+        public HighScoreSortType? SelectedHighScoreSortType
         {
             get => this.selectedHighScoreSortType;
             set
@@ -145,16 +145,26 @@ namespace FroggerStarter.ViewModel
             return this.highScoreList != null && this.highScoreList?.Count != 0;
         }
 
-        private void sortHighScores(HighScoreSortType sortType)
+        private void sortHighScores(HighScoreSortType? sortType)
         {
-            if (sortType == HighScoreSortType.ScoreNameLevel)
+            switch (sortType)
             {
-                this.highScoreList.Sort();
-                this.HighScores = this.highScoreList.ToObservableCollection();
-            }
-            else if (sortType == HighScoreSortType.NameScoreLevel)
-            {
-                this.highScoreList.Sort();
+                case HighScoreSortType.ScoreNameLevel:
+                    this.highScoreList.Sort();
+                    this.HighScores = this.highScoreList.ToObservableCollection();
+                    break;
+                case HighScoreSortType.NameScoreLevel:
+                    this.highScoreList.Sort(new HighScoreNameScoreLevelComparer());
+                    this.HighScores = this.highScoreList.ToObservableCollection();
+                    break;
+                case HighScoreSortType.LevelScoreName:
+                    this.highScoreList.Sort(new HighScoreLevelScoreNameComparer());
+                    this.HighScores = this.highScoreList.ToObservableCollection();
+                    break;
+                case null:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(sortType), sortType, null);
             }
         }
 

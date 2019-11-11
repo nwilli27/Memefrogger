@@ -20,7 +20,6 @@ namespace FroggerStarter.Factory
         ///     Post-condition: none
         /// </summary>
         /// <param name="obstacleType">Type of the Obstacle.</param>
-        /// <param name="direction">The direction of the Obstacle.</param>
         /// <returns>
         ///     Returns the Obstacle of the correlating [obstacleType]
         /// </returns>

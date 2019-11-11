@@ -121,6 +121,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Comparers\HighScoreLevelScoreNameComparer.cs" />
+    <Compile Include="Comparers\HighScoreNameScoreLevelComparer.cs" />
     <Compile Include="Constants\GameBoard.cs" />
     <Compile Include="Constants\GameSettings.cs" />
     <Compile Include="Enums\AnimationType.cs" />

@@ -11,7 +11,7 @@
     Width="{StaticResource HighScoreBoardWidth}">
 
     <Page.DataContext>
-        <viewModel:HighScoreBoardViewModel />
+        <viewModel:HighScoreBoardViewModel/>
     </Page.DataContext>
 
     <Canvas Width="Auto" Background="Black">
@@ -58,6 +58,9 @@
         <Rectangle Height="58" Width="200" Fill="Green" Canvas.Left="412.5" Canvas.Top="550" />
         <Rectangle Height="58" Width="200" Fill="Green" Canvas.Left="100" Canvas.Top="550" />
 
-        <ComboBox ItemsSource="{Binding SortTypes}" SelectedItem="{Binding SelectedHighScoreSortType}" Canvas.Left="471" Canvas.Top="18" Width="204" Background="#FF20E800" BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" PlaceholderText="Sort By..."/>
+        <ComboBox ItemsSource="{Binding SortTypes, Mode=OneWay}"
+                  SelectedItem="{Binding SelectedHighScoreSortType, Mode=TwoWay}" Canvas.Left="471" Canvas.Top="18"
+                  Width="204" Background="#FF20E800" BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8"
+                  PlaceholderText="Sort By..." FontFamily="Berlin Sans FB" SelectedIndex="-1" />
     </Canvas>
 </Page>
