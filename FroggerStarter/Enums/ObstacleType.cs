@@ -13,6 +13,11 @@ namespace FroggerStarter.Enums
         Car,
 
         /// <summary>
+        ///     The turbo car sprite type
+        /// </summary>
+        TurboCar,
+
+        /// <summary>
         ///     The semi truck sprite type
         /// </summary>
         SemiTruck,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FroggerStarter.Enums;
 using Windows.UI.Xaml;
+using FroggerStarter.Model.Levels;
 
 namespace FroggerStarter.Model.Area_Managers.Road
 {
@@ -16,12 +17,6 @@ namespace FroggerStarter.Model.Area_Managers.Road
         #region Data Members
 
         private DispatcherTimer obstacleSpawnTimer;
-
-        #endregion
-
-        #region Constants
-
-        private const int SpawnTimeInterval = 4;
 
         #endregion
 
@@ -96,7 +91,7 @@ namespace FroggerStarter.Model.Area_Managers.Road
         {
             this.obstacleSpawnTimer = new DispatcherTimer();
             this.obstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;
-            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, SpawnTimeInterval, 0);
+            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, LevelManager.GetCurrentLevel().RoadObstacleSpawnTime, 0);
             this.obstacleSpawnTimer.Start();
         }
 

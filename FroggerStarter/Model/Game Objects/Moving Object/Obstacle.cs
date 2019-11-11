@@ -1,6 +1,4 @@
 ﻿using System;
-using Windows.Foundation;
-using Windows.UI.Xaml.Media;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 

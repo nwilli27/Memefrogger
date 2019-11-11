@@ -9,6 +9,8 @@ namespace FroggerStarter.Model.Levels.Levels
     internal class LevelOne : Level
     {
 
+        public override int RoadObstacleSpawnTime => 5;
+
         public override IList<object> RoadLane1 =>
             new List<object>() {
                 Direction.Left,
@@ -61,8 +63,8 @@ namespace FroggerStarter.Model.Levels.Levels
             new List<object>() {
                 Direction.Left,
                 2.0,
-                ObstacleType.SpeedBoat,
-                3
+                ObstacleType.SmallLog,
+                4
             };
 
         public override IList<object> WaterLane3 =>

@@ -6,7 +6,15 @@ namespace FroggerStarter.Interfaces
     ///     Interface responsible for level requirements
     /// </summary>
     public interface ILevelRequirements
-    { 
+    {
+
+        /// <summary>
+        /// Gets the road obstacle spawn time.
+        /// </summary>
+        /// <value>
+        /// The road obstacle spawn time.
+        /// </value>
+        int RoadObstacleSpawnTime { get; }
 
         /// <summary>
         /// Gets the road lane1.

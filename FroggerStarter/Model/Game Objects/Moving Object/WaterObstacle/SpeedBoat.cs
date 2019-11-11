@@ -77,7 +77,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         public override void MoveForward()
         {
             base.MoveForward();
-            this.checkDirectionForSplashAnimation();
+            this.setLocationForSplashAnimation();
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
 
         #region Private Helpers
 
-        private void checkDirectionForSplashAnimation()
+        private void setLocationForSplashAnimation()
         {
             switch (this.Direction)
             {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using FroggerStarter.Constants;
 using FroggerStarter.Model.Game_Objects.Lives;
 

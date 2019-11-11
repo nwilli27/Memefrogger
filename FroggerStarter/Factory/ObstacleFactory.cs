@@ -31,6 +31,9 @@ namespace FroggerStarter.Factory
                 case ObstacleType.Car:
                     return new Car();
 
+                case ObstacleType.TurboCar:
+                    return new TurboCar();
+
                 case ObstacleType.SemiTruck:
                     return new SemiTruck();
 

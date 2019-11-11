@@ -177,7 +177,6 @@ namespace FroggerStarter.Model.Player
         public void PlayDeathAnimation()
         {
             this.ChangeSpriteVisibility(false);
-            this.CanMove = false;
             this.IsDead = true;
 
             this.DeathAnimation.RotateFrames(this.Direction);

@@ -8,45 +8,46 @@ namespace FroggerStarter.Model.Levels.Levels
     /// </summary>
     internal class LevelTwo : Level
     {
+        public override int RoadObstacleSpawnTime => 5;
 
         public override IList<object> RoadLane1 =>
             new List<object>() {
                 Direction.Left,
                 1.0,
-                ObstacleType.Car,
+                ObstacleType.ToadTruck,
                 3
             };
 
         public override IList<object> RoadLane2 =>
             new List<object>() {
                 Direction.Right,
-                1.25,
-                ObstacleType.Car,
+                3.5,
+                ObstacleType.TurboCar,
                 2
             };
 
         public override IList<object> RoadLane3 =>
             new List<object>() {
                 Direction.Left,
-                1.5,
-                ObstacleType.Car,
-                4
+                1.75,
+                ObstacleType.SemiTruck,
+                3
             };
 
         public override IList<object> RoadLane4 =>
             new List<object>() {
                 Direction.Left,
-                1.75,
+                2.0,
                 ObstacleType.Car,
-                3
+                4
             };
 
         public override IList<object> RoadLane5 =>
             new List<object>() {
                 Direction.Right,
                 2.0,
-                ObstacleType.Car,
-                5
+                ObstacleType.SemiTruck,
+                3
             };
 
         public override IList<object> WaterLane1 =>
@@ -60,7 +61,7 @@ namespace FroggerStarter.Model.Levels.Levels
         public override IList<object> WaterLane2 =>
             new List<object>() {
                 Direction.Right,
-                2.0,
+                2.5,
                 ObstacleType.SpeedBoat,
                 3
             };
@@ -70,13 +71,13 @@ namespace FroggerStarter.Model.Levels.Levels
                 Direction.Left,
                 1.75,
                 ObstacleType.MediumLog,
-                3
+                2
             };
 
         public override IList<object> WaterLane4 =>
             new List<object>() {
                 Direction.Right,
-                3.5,
+                4.0,
                 ObstacleType.SpeedBoat,
                 3
             };

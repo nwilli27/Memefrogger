@@ -135,17 +135,14 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerUp()
         {
-            if (!GameSettings.PauseGame)
-            {
-                this.player.MoveUpWithBoundaryCheck();
-            }
+            this.player.MoveUpWithBoundaryCheck();
 
             if (this.hasReachedAnEmptyHome())
             {
                 this.updateBoardForReachingEmptyHome();
                 this.checkGameStatusForGameOver();
             }
-            else if (this.HasMovedPastTopBoundary)
+            else if (this.HasMovedPastTopBoundary && !this.IsGameOver)
             {
                 this.lifeLost();
             }
@@ -180,11 +177,11 @@ namespace FroggerStarter.Controller
 
             if (this.IsPlayerInWaterArea)
             {
-                this.checkForPlayerToWaterObstacleCollision();
+                //this.checkForPlayerToWaterObstacleCollision();
             }
             else
             {
-                this.checkForPlayerToRoadObstacleCollision();
+                //this.checkForPlayerToRoadObstacleCollision();
             }
 
             this.checkForPlayerToPowerUpCollision();
@@ -367,8 +364,8 @@ namespace FroggerStarter.Controller
 
         private void stopGamePlayAndShowGameOver()
         {
-            this.player.CanMove = false;
             this.player.IsDead = true;
+            this.player.CanMove = false;
 
             this.stopAllTimers();
 

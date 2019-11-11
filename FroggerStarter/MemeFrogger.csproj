@@ -133,6 +133,7 @@
     <Compile Include="Factory\AnimationFactory.cs" />
     <Compile Include="Factory\PowerUpFactory.cs" />
     <Compile Include="Factory\SoundEffectFactory.cs" />
+    <Compile Include="Model\Game Objects\Moving Object\RoadObstacle\TurboCar.cs" />
     <Compile Include="Model\Levels\Levels\LevelThree.cs" />
     <Compile Include="Model\Levels\Levels\LevelTwo.cs" />
     <Compile Include="Model\Levels\Levels\LevelOne.cs" />
