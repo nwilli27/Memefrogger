@@ -6,7 +6,7 @@ using System.Linq;
 namespace FroggerStarter.Model.Area_Managers.Water
 {
     /// <summary>
-    ///     A Waterlane that is of type Lanea
+    ///     A WaterLane that is of type Lane
     /// </summary>
     /// <seealso cref="Lane" />
     internal class WaterLane : Lane
@@ -49,7 +49,7 @@ namespace FroggerStarter.Model.Area_Managers.Water
         /// </summary>
         public override void MoveObstacles()
         {
-            this.obstacles.ToList().ForEach(obstacle => obstacle.MoveForward());
+            this.Obstacles.ToList().ForEach(obstacle => obstacle.MoveForward());
         }
 
         #endregion
@@ -60,7 +60,7 @@ namespace FroggerStarter.Model.Area_Managers.Water
         {
             var obstacleXLocation = 0.0;
 
-            foreach (var currentObstacle in this.obstacles)
+            foreach (var currentObstacle in this.Obstacles)
             {
                 currentObstacle.X = obstacleXLocation;
                 obstacleXLocation += this.getSpacingBetweenVehicles();
@@ -69,12 +69,12 @@ namespace FroggerStarter.Model.Area_Managers.Water
 
         private double getSpacingBetweenVehicles()
         {
-            return (GameBoard.BackgroundWidth / this.obstacles.Count) + (this.getAverageWidth() / 2);
+            return (GameBoard.BackgroundWidth / this.Obstacles.Count) + (this.getAverageWidth() / 2);
         }
 
         private double getAverageWidth()
         {
-            return this.obstacles.Average(obstacle => obstacle.Width);
+            return this.Obstacles.Average(obstacle => obstacle.Width);
         }
 
         #endregion

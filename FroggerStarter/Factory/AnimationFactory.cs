@@ -5,6 +5,7 @@ using FroggerStarter.Enums;
 using FroggerStarter.View.FrogLeapAnimation;
 using FroggerStarter.View.LifeHeartLostAnimation;
 using FroggerStarter.View.PlayerDeathAnimation;
+using FroggerStarter.View.SpeedBoatSplashAnimation;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Factory
@@ -32,40 +33,45 @@ namespace FroggerStarter.Factory
             switch (animationType)
             {
                 case AnimationType.PlayerDeath:
-                    var deathAnimation = new List<BaseSprite>();
-
-                    deathAnimation.Add(new PlayerDeathFrameOne());
-                    deathAnimation.Add(new PlayerDeathFrameTwo());
-                    deathAnimation.Add(new PlayerDeathFrameThree());
-                    deathAnimation.Add(new PlayerDeathFrameFour());
+                    var deathAnimation = new List<BaseSprite>
+                    {
+                        new PlayerDeathFrameOne(),
+                        new PlayerDeathFrameTwo(),
+                        new PlayerDeathFrameThree(),
+                        new PlayerDeathFrameFour()
+                    };
 
                     return deathAnimation;
 
                 case AnimationType.FrogLeap:
-                    var frogLeapAnimation = new List<BaseSprite>();
-                    frogLeapAnimation.Add(new FrogLeapFrameOne());
+                    var frogLeapAnimation = new List<BaseSprite>
+                    {
+                        new FrogLeapFrameOne()
+                    };
                     return frogLeapAnimation;
 
                 case AnimationType.LifeHeartLost:
-                    var heartLostAnimation = new List<BaseSprite>();
-
-                    heartLostAnimation.Add(new LifeHeartLostFrameOne());
-                    heartLostAnimation.Add(new LifeHeartLostFrameTwo());
-                    heartLostAnimation.Add(new LifeHeartLostFrameThree());
-                    heartLostAnimation.Add(new LifeHeartLostFrameFour());
-                    heartLostAnimation.Add(new LifeHeartLostFrameFive());
-                    heartLostAnimation.Add(new LifeHeartLostFrameSix());
-                    heartLostAnimation.Add(new LifeHeartLostFrameSeven());
-                    heartLostAnimation.Add(new LifeHeartLostFrameEight());
+                    var heartLostAnimation = new List<BaseSprite>
+                    {
+                        new LifeHeartLostFrameOne(),
+                        new LifeHeartLostFrameTwo(),
+                        new LifeHeartLostFrameThree(),
+                        new LifeHeartLostFrameFour(),
+                        new LifeHeartLostFrameFive(),
+                        new LifeHeartLostFrameSix(),
+                        new LifeHeartLostFrameSeven(),
+                        new LifeHeartLostFrameEight()
+                    };
 
                     return heartLostAnimation;
 
                 case AnimationType.SpeedBoatSplash:
-                    var speedBoatSplashAnimation = new List<BaseSprite>();
-
-                    speedBoatSplashAnimation.Add(new SplashBoatFrameOne());
-                    speedBoatSplashAnimation.Add(new SplashBoatFrameTwo());
-                    speedBoatSplashAnimation.Add(new SplashBoatFrameThree());
+                    var speedBoatSplashAnimation = new List<BaseSprite>
+                    {
+                        new SplashBoatFrameOne(),
+                        new SplashBoatFrameTwo(),
+                        new SplashBoatFrameThree()
+                    };
 
                     return speedBoatSplashAnimation;
 

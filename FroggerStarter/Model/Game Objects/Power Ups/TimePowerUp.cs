@@ -38,6 +38,7 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         {
             this.timeSprite = new TimePowerUpSprite();
             this.Sprite = this.timeSprite;
+            this.Type = PowerUpType.TimeIncrease;
         }
 
         #endregion
@@ -52,25 +53,33 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         /// </summary>
         public override void Activate()
         {
+            base.Activate();
             ScoreTimer.ScoreTick += this.timeExtension;
             SoundEffectManager.PlaySound(SoundEffectType.TimePowerUp);
         }
 
         /// <summary>
-        ///     Setups the the power up by assigning a random time extension
-        ///     and binding the TimeExtension property to the Sprite text block.
-        ///     Precondition: none
-        ///     Post-condition: this.TimeExtension = random [3-9]
+        ///     Changes the sprite visibility based on the bool condition passed in.
+        ///     Also setups the sprites ability
+        /// Precondition: none
+        /// Post-condition: Sprite.Visibility == (Visible || Collapsed)
         /// </summary>
-        public override void SetupAbility()
+        /// <param name="conditionToChangeVisibility">if set to <c>true</c> [condition to change visibility].</param>
+        public override void ChangeSpriteVisibility(bool conditionToChangeVisibility)
         {
-            this.timeExtension = getRandomTimeExtension();
-            this.timeSprite.TimeExtension = this.timeExtension.ToString();
+            this.setupAbility();
+            base.ChangeSpriteVisibility(conditionToChangeVisibility);
         }
 
         #endregion
 
         #region Private Helpers
+
+        private void setupAbility()
+        {
+            this.timeExtension = getRandomTimeExtension();
+            this.timeSprite.TimeExtension = this.timeExtension.ToString();
+        }
 
         private static int getRandomTimeExtension()
         {

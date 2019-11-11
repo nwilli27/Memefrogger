@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Windows.UI.Xaml;
 using FroggerStarter.Enums;
 
 namespace FroggerStarter.Constants
@@ -8,6 +11,10 @@ namespace FroggerStarter.Constants
     /// </summary>
     public class GameSettings
     {
+        private static bool pauseGame;
+
+        #region Constants
+
         /// <summary>
         ///     The total number of lives
         /// </summary>
@@ -19,103 +26,33 @@ namespace FroggerStarter.Constants
         public const double ScoreTime = 20.0;
 
         /// <summary>
-        ///     The 5th Lane settings
+        ///     The pause timer
         /// </summary>
-        public static IList<object> RoadLane5 = new List<object> {
-            Direction.Right,
-            2.0,
-            ObstacleType.Car,
-            5
-        };
+        public static DispatcherTimer PauseTimer;
 
         /// <summary>
-        ///     The 4th Lane settings
+        ///     Gets or sets a value indicating whether [pause game].
         /// </summary>
-        public static IList<object> RoadLane4 = new List<object> {
-            Direction.Left,
-            1.75,
-            ObstacleType.SemiTruck,
-            3
-        };
+        /// <value>
+        ///   <c>true</c> if [pause game]; otherwise, <c>false</c>.
+        /// </value>
+        public static bool PauseGame {
+            get => pauseGame;
+            set
+            {
+                if (value)
+                {
+                    PauseTimer = new DispatcherTimer
+                    {
+                        Interval = new TimeSpan(0, 0, 0, 5, 0)
+                    };
+                }
+                pauseGame = value;
+            }
+        }
 
-        /// <summary>
-        ///     The 3rd Lane settings
-        /// </summary>
-        public static IList<object> RoadLane3 = new List<object> {
-            Direction.Left,
-            1.5,
-            ObstacleType.Car,
-            4
-        };
 
-        /// <summary>
-        ///     The 2nd Lane settings
-        /// </summary>
-        public static IList<object> RoadLane2 = new List<object> {
-            Direction.Right,
-            1.25,
-            ObstacleType.SemiTruck,
-            2
-        };
 
-        /// <summary>
-        ///     The 1st Lane settings
-        /// </summary>
-        public static IList<object> RoadLane1 = new List<object> {
-            Direction.Left,
-            1.0,
-            ObstacleType.ToadTruck,
-            3
-        };
-
-        /// <summary>
-        ///     The 1st water Lane settings
-        /// </summary>
-        public static IList<object> WaterLane1 = new List<object> {
-            Direction.Left,
-            1.5,
-            ObstacleType.LargeLog,
-            2
-        };
-
-        /// <summary>
-        ///     The 2nd water Lane settings
-        /// </summary>
-        public static IList<object> WaterLane2 = new List<object> {
-            Direction.Right,
-            2.0,
-            ObstacleType.SpeedBoat,
-            3
-        };
-
-        /// <summary>
-        ///     The 1st water Lane settings
-        /// </summary>
-        public static IList<object> WaterLane3 = new List<object> {
-            Direction.Left,
-            1.75,
-            ObstacleType.MediumLog,
-            3
-        };
-
-        /// <summary>
-        ///     The 1st water Lane settings
-        /// </summary>
-        public static IList<object> WaterLane4 = new List<object> {
-            Direction.Right,
-            3.5,
-            ObstacleType.SpeedBoat,
-            3
-        };
-
-        /// <summary>
-        ///     The 1st water Lane settings
-        /// </summary>
-        public static IList<object> WaterLane5 = new List<object> {
-            Direction.Left,
-            2.0,
-            ObstacleType.SmallLog,
-            4
-        };
+        #endregion
     }
 }

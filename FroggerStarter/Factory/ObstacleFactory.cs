@@ -1,6 +1,7 @@
 ﻿using System;
 using FroggerStarter.Enums;
 using FroggerStarter.Model.Game_Objects.Moving_Object;
+using FroggerStarter.Model.Game_Objects.Moving_Object.RoadObstacle;
 using FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle;
 using FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle.Logs;
 
@@ -24,30 +25,30 @@ namespace FroggerStarter.Factory
         ///     Returns the Obstacle of the correlating [obstacleType]
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">obstacleType - null</exception>
-        public static Obstacle CreateObstacle(ObstacleType obstacleType, Direction direction)
+        public static Obstacle CreateObstacle(ObstacleType obstacleType)
         {
             switch (obstacleType)
             {
                 case ObstacleType.Car:
-                    return new Car(direction);
+                    return new Car();
 
                 case ObstacleType.SemiTruck:
-                    return new SemiTruck(direction);
+                    return new SemiTruck();
 
                 case ObstacleType.ToadTruck:
-                    return new ToadTruck(direction);
+                    return new ToadTruck();
 
                 case ObstacleType.SpeedBoat:
-                    return new SpeedBoat(direction);
+                    return new SpeedBoat();
 
                 case ObstacleType.SmallLog:
-                    return new SmallLog(direction);
+                    return new SmallLog();
 
                 case ObstacleType.MediumLog:
-                    return new MediumLog(direction);
+                    return new MediumLog();
 
                 case ObstacleType.LargeLog:
-                    return new LargeLog(direction);
+                    return new LargeLog();
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(obstacleType), obstacleType, null);

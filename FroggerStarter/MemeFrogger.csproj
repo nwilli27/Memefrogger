@@ -131,6 +131,10 @@
     <Compile Include="Factory\AnimationFactory.cs" />
     <Compile Include="Factory\PowerUpFactory.cs" />
     <Compile Include="Factory\SoundEffectFactory.cs" />
+    <Compile Include="Model\Levels\Levels\LevelThree.cs" />
+    <Compile Include="Model\Levels\Levels\LevelTwo.cs" />
+    <Compile Include="Model\Levels\Levels\LevelOne.cs" />
+    <Compile Include="Interfaces\ILevelRequirements.cs" />
     <Compile Include="Model\Animation\Animation.cs" />
     <Compile Include="Model\Area Managers\Road\RoadLane.cs" />
     <Compile Include="Model\Area Managers\Road\RoadManager.cs" />
@@ -145,7 +149,6 @@
     <Compile Include="Model\Animation\Frame.cs" />
     <Compile Include="Model\Game Objects\Home\FrogHomes.cs" />
     <Compile Include="Model\Game Objects\Moving Object\RoadObstacle\SemiTruck.cs" />
-    <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\Log.cs" />
     <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\LargeLog.cs" />
     <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\MediumLog.cs" />
     <Compile Include="Model\Game Objects\Moving Object\WaterObstacle\Logs\SmallLog.cs" />
@@ -156,6 +159,8 @@
     <Compile Include="Model\Game Objects\Power Ups\PowerUpManager.cs" />
     <Compile Include="Model\Game Objects\Power Ups\QuickRevivePowerUp.cs" />
     <Compile Include="Model\Game Objects\Power Ups\TimePowerUp.cs" />
+    <Compile Include="Model\Levels\Level.cs" />
+    <Compile Include="Model\Levels\LevelManager.cs" />
     <Compile Include="Model\Player\PlayerAbilities.cs" />
     <Compile Include="Model\Score\HighScore.cs" />
     <Compile Include="Model\Sound\SoundEffect.cs" />
@@ -228,11 +233,11 @@
     <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFive.xaml.cs">
       <DependentUpon>PlayerDeathFrameFive.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameThree.xaml.cs">
-      <DependentUpon>SplashBoatFrameThree.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameTwo.xaml.cs">
       <DependentUpon>SplashBoatFrameTwo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameThree.xaml.cs">
+      <DependentUpon>SplashBoatFrameThree.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SpeedBoatSplashAnimation\SplashBoatFrameOne.xaml.cs">
       <DependentUpon>SplashBoatFrameOne.xaml</DependentUpon>
@@ -396,11 +401,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameThree.xaml">
+    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameTwo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameTwo.xaml">
+    <Page Include="View\SpeedBoatSplashAnimation\SplashBoatFrameThree.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using FroggerStarter.Enums;
 using FroggerStarter.Model.Animation;
 using FroggerStarter.Model.Game_Objects;
@@ -17,7 +18,6 @@ namespace FroggerStarter.Model.Player
     {
         #region Data Members
 
-        private bool canMove = true;
         private bool isDead;
 
         #endregion
@@ -26,6 +26,11 @@ namespace FroggerStarter.Model.Player
 
         private const int SpeedXDirection = 50;
         private const int SpeedYDirection = 50;
+
+        private static readonly double TopBoundary = GameBoard.HighRoadYLocation;
+        private static readonly double BottomBoundary = GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset;
+        private static readonly double RightBoundary = GameBoard.BackgroundWidth;
+        private const double LeftBoundary = 0;
 
         #endregion
 
@@ -37,7 +42,7 @@ namespace FroggerStarter.Model.Player
         /// <value>
         ///     The death animation.
         /// </value>
-        public Animation.Animation DeathAnimation { get; }
+        public Animation.Animation DeathAnimation { get; private set; }
 
         /// <summary>
         ///     Gets the frog leap animation.
@@ -45,7 +50,7 @@ namespace FroggerStarter.Model.Player
         /// <value>
         ///     The frog leap animation.
         /// </value>
-        public Animation.Animation FrogLeapAnimation { get; }
+        public Animation.Animation FrogLeapAnimation { get; private set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance has collided.
@@ -58,10 +63,18 @@ namespace FroggerStarter.Model.Player
             get => this.isDead;
             set
             {
-                this.canMove = !value;
+                this.CanMove = !value;
                 this.isDead = value;
             }
         }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance can move.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance can move; otherwise, <c>false</c>.
+        /// </value>
+        public bool CanMove { get; set; } = true;
 
         #endregion
 
@@ -81,13 +94,7 @@ namespace FroggerStarter.Model.Player
             this.SpeedX = SpeedXDirection;
             this.SpeedY = SpeedYDirection;
 
-            this.DeathAnimation = new Animation.Animation(AnimationType.PlayerDeath) {
-                AnimationInterval = 500
-            };
-            this.FrogLeapAnimation = new Animation.Animation(AnimationType.FrogLeap) {
-                AnimationInterval = 100
-            };
-            this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
+            this.setupAnimations();
             this.Direction = Direction.Up;
         }
 
@@ -102,9 +109,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveLeftWithBoundaryCheck()
         {
-            var leftBoundary = 0;
-
-            if (this.X - this.SpeedX >= leftBoundary && this.canMove)
+            if (this.X - this.SpeedX >= LeftBoundary && this.CanMove && !GameSettings.PauseGame)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveLeft();
@@ -120,9 +125,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveRightWithBoundaryCheck()
         {
-            var rightBoundary = GameBoard.BackgroundWidth;
-
-            if (this.X + this.SpeedX < rightBoundary && this.canMove)
+            if (this.X + this.SpeedX < RightBoundary && this.CanMove && !GameSettings.PauseGame)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveRight();
@@ -138,9 +141,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveUpWithBoundaryCheck()
         {
-            var topBoundary = GameBoard.HighRoadYLocation;
-
-            if (this.Y - this.SpeedY >= topBoundary && this.canMove)
+            if (this.Y - this.SpeedY >= TopBoundary && this.CanMove && !GameSettings.PauseGame)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveUp();
@@ -156,9 +157,7 @@ namespace FroggerStarter.Model.Player
         /// </summary>
         public void MoveDownWithBoundaryCheck()
         {
-            var bottomBoundary = GameBoard.BottomRoadYLocation + GameBoard.RoadShoulderOffset;
-
-            if (this.Y + this.SpeedY < bottomBoundary && this.canMove)
+            if (this.Y + this.SpeedY < BottomBoundary && this.CanMove && !GameSettings.PauseGame)
             {
                 this.SpeedX = SpeedXDirection;
                 this.MoveDown();
@@ -208,7 +207,7 @@ namespace FroggerStarter.Model.Player
         public void ResetAfterDeath()
         {
             this.ChangeSpriteVisibility(true);
-            this.startMovement();
+            this.StartMovement();
             this.Direction = Direction.Up;
             this.IsDead = false;
         }
@@ -231,27 +230,43 @@ namespace FroggerStarter.Model.Player
                 case Direction.Right:
                     this.moveRightPreventBoundary();
                     break;
-
+                
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException();
             }
+        }
+
+        /// <summary>
+        /// Starts the movement.
+        /// </summary>
+        public void StartMovement()
+        {
+            this.SpeedX = SpeedXDirection;
+            this.SpeedY = SpeedYDirection;
         }
 
         #endregion
 
         #region Private Helpers
 
-        private void startMovement()
+        private void setupAnimations()
         {
-            this.SpeedX = SpeedXDirection;
-            this.SpeedY = SpeedYDirection;
+            this.DeathAnimation = new Animation.Animation(AnimationType.PlayerDeath)
+            {
+                AnimationInterval = 500
+            };
+            this.FrogLeapAnimation = new Animation.Animation(AnimationType.FrogLeap)
+            {
+                AnimationInterval = 100
+            };
+            this.FrogLeapAnimation.AnimationFinished += this.onLeapFinished;
         }
 
         private void playLeapAnimation()
         {
             this.Sprite.Visibility = Visibility.Collapsed;
             this.StopMovement();
-            this.canMove = false;
+            this.CanMove = false;
             this.FrogLeapAnimation.RotateFrames(this.Direction);
             this.FrogLeapAnimation.SetFrameLocations(this.X, this.Y);
             this.FrogLeapAnimation.Start();
@@ -261,17 +276,15 @@ namespace FroggerStarter.Model.Player
         {
             if (e.FrogLeapIsOver && !this.IsDead)
             {
-                this.canMove = true;
+                this.CanMove = true;
                 this.ChangeSpriteVisibility(true);
-                this.startMovement();
+                this.StartMovement();
             }
         }
 
         private void moveLeftPreventBoundary()
         {
-            var leftBoundary = 0;
-
-            if (this.X - this.SpeedX >= leftBoundary)
+            if (this.X - this.SpeedX >= LeftBoundary)
             {
                 this.MoveLeft();
             }
@@ -279,9 +292,7 @@ namespace FroggerStarter.Model.Player
 
         private void moveRightPreventBoundary()
         {
-            var rightBoundary = GameBoard.BackgroundWidth;
-
-            if (this.X + this.Width + this.SpeedX < rightBoundary)
+            if (this.X + this.Width + this.SpeedX < RightBoundary)
             {
                 this.MoveRight();
             }

@@ -1,7 +1,7 @@
-﻿using FroggerStarter.Enums;
+﻿
 using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model.Game_Objects.Moving_Object
+namespace FroggerStarter.Model.Game_Objects.Moving_Object.RoadObstacle
 {
     /// <summary>
     ///     A semi truck object of type RoadObstacle.
@@ -16,11 +16,9 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         ///     Precondition: none
         ///     Post-condition: none
         /// </summary>
-        /// <param name="direction">The direction the vehicle is facing.</param>
-        public SemiTruck(Direction direction) : base(direction)
+        public SemiTruck()
         {
             Sprite = new SemiTruckSprite();
-            this.MoveToDefaultLocation();
         }
 
         #endregion

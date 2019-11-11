@@ -1,7 +1,7 @@
 ﻿
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
-using FroggerStarter.View.Sprites;
+using FroggerStarter.View.Sprites.WaterSprites;
 
 namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
 {
@@ -11,12 +11,15 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
     /// <seealso cref="WaterObstacle" />
     internal sealed class SpeedBoat : WaterObstacle
     {
-        #region MyRegion
+        #region Properties
 
         /// <summary>
-        ///     The splash animation
+        ///     Gets or sets the splash animation.
         /// </summary>
-        public Animation.Animation SplashAnimation { get; set; }
+        /// <value>
+        ///     The splash animation.
+        /// </value>
+        public Animation.Animation SplashAnimation { get; }
 
         #endregion
 
@@ -34,16 +37,15 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         ///     Precondition: none
         ///     Post-condition: none
         /// </summary>
-        /// <param name="direction">The direction the boat is facing.</param>
-        public SpeedBoat(Direction direction) : base(direction)
+        public SpeedBoat()
         {
             this.Sprite = new SpeedBoatSprite();
             this.SplashAnimation = new Animation.Animation(AnimationType.SpeedBoatSplash);
-            this.ObstacleType = ObstacleType.SpeedBoat;
         }
 
         /// <summary>
         ///     Moves the obstacle forward depending on the given direction.
+        ///     Sets the animation for the splash animation each move forward.
         ///     Precondition: none
         ///     Post-condition: @prev this.X +/- this.SpeedX
         /// </summary>
@@ -54,7 +56,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         }
 
         /// <summary>
-        ///     Starts the speed boat water animation.
+        ///     Starts the speed boat water animation on endless loop.
         ///     Precondition: none
         ///     Post-condition: SplashAnimation.Interval = 300 / SpeedX
         /// </summary>

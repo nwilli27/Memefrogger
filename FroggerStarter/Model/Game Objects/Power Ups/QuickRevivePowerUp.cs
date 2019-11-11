@@ -1,7 +1,5 @@
 ﻿
-using System.Linq;
 using FroggerStarter.Enums;
-using FroggerStarter.Model.Game_Objects.Lives;
 using FroggerStarter.Model.Player;
 using FroggerStarter.Model.Sound;
 using FroggerStarter.View.Sprites.PowerUpSprites;
@@ -15,6 +13,24 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
     internal sealed class QuickRevivePowerUp : PowerUp
     {
 
+        #region Properties
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance has been activated maximum number times.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has been activated maximum number times; otherwise, <c>false</c>.
+        /// </value>
+        public override bool HasBeenActivatedMaxNumberTimes => this.NumberOfTimesActivated == MaxNumberOfActivates;
+
+        #endregion
+
+        #region Constants
+
+        private const int MaxNumberOfActivates = 3;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -25,35 +41,27 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
         public QuickRevivePowerUp()
         {
             this.Sprite = new QuickRevivePowerUpSprite();
+            this.Type = PowerUpType.QuickRevive;
         }
 
         #endregion
 
         #region Methods
 
-        public void Activate(PlayerLives playerLives)
-        {
-            playerLives.MoveQuickReviveHeart();
-            PlayerAbilities.HasQuickRevive = true;
-            playerLives.First(heart => heart is QuickReviveHeart).ChangeSpriteVisibility(true);
-            SoundEffectManager.PlaySound(SoundEffectType.QuickRevive);
-        }
-
-        public override void SetupAbility()
-        {
-            
-        }
-
+        /// <summary>
+        ///     Adds quick revive heart to lives.
+        ///     Plays quick revive sound.
+        ///     Precondition: none
+        ///     Post-condition: QuickReviveHeart.Sprite = Visible
+        ///                     PlayerAbilities.HasQuickRevive = true
+        /// </summary>
         public override void Activate()
         {
-            throw new System.NotImplementedException();
+            base.Activate();
+            PlayerStats.Lives.MoveQuickReviveHeart();
+            PlayerAbilities.HasQuickRevive = true;
+            SoundEffectManager.PlaySound(SoundEffectType.QuickRevive);
         }
-
-        #endregion
-
-        #region Private Helpers
-
-
 
         #endregion
     }

@@ -2,10 +2,10 @@
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace FroggerStarter.View.Sprites
+namespace FroggerStarter.View.SpeedBoatSplashAnimation
 {
     /// <summary>
-    ///     Home sprite class.
+    ///     Splash boat frame two animation class.
     /// </summary>
     /// <seealso cref="FroggerStarter.View.Sprites.BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />

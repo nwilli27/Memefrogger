@@ -9,6 +9,7 @@ using FroggerStarter.Model.Player;
 using FroggerStarter.Model.Score;
 using Color = Windows.UI.Color;
 using Size = Windows.Foundation.Size;
+using System;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -49,6 +50,8 @@ namespace FroggerStarter.View
             this.gameManager.ScoreUpdated += this.onScoreUpdated;
             this.gameManager.GameOver += this.onGameOver;
             this.gameManager.ScoreTimerTick += this.onScoreTimerTick;
+            this.gameManager.NextLevel += this.onNextLevel;
+            this.gameManager.PauseFinished += this.onPauseFinished;
 
             this.gameManager.InitializeGame(this.canvas);
         }
@@ -101,6 +104,19 @@ namespace FroggerStarter.View
             }
         }
 
+        private void onNextLevel(object sender, NextLevelEventArgs e)
+        {
+            this.blackOverlay.Visibility = Visibility.Visible;
+            this.nextLevel.Visibility = Visibility.Visible;
+            this.nextLevel.Text = "LEVEL " + e.NextLevel;
+        }
+
+        private void onPauseFinished(object sender, PauseIsFinishedEventArgs e)
+        {
+            this.blackOverlay.Visibility = Visibility.Collapsed;
+            this.nextLevel.Visibility = Visibility.Collapsed;
+        }
+        
         private void onScoreUpdated(object sender, ScoreUpdatedEventArgs e)
         {
             this.scoreValue.Text = e.Score.ToString();

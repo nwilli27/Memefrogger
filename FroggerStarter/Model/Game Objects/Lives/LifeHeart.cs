@@ -1,6 +1,4 @@
 ﻿
-using FroggerStarter.Enums;
-using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model.Game_Objects.Lives
 {
@@ -9,11 +7,17 @@ namespace FroggerStarter.Model.Game_Objects.Lives
     /// </summary>
     internal abstract class LifeHeart : GameObject
     {
+        #region Properties
 
         /// <summary>
-        ///     The heart lost animation
+        ///     Gets or sets the heart lost animation.
         /// </summary>
-        public Animation.Animation HeartLostAnimation { get; set; }
+        /// <value>
+        ///     The heart lost animation.
+        /// </value>
+        public Animation.Animation HeartLostAnimation { get; protected set; }
+
+        #endregion
 
     }
 }

@@ -57,9 +57,7 @@ namespace FroggerStarter.Model.Score
         ///     Precondition: none
         ///     Post-condition: Score == 0; PlayerName == ""; Level == 0
         /// </summary>
-        public HighScore() : this(0, "", 0)
-        {
-        }
+        public HighScore() : this(0, "", 0) {}
 
         #endregion
 

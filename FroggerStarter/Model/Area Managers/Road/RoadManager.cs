@@ -9,13 +9,13 @@ namespace FroggerStarter.Model.Area_Managers.Road
     /// <summary>
     ///     Defines the object for a RoadManager based on the LaneManager.
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.Area_Managers.LaneManager" />
+    /// <seealso cref="LaneManager" />
     public class RoadManager : LaneManager
     {
 
         #region Data Members
 
-        private DispatcherTimer ObstacleSpawnTimer;
+        private DispatcherTimer obstacleSpawnTimer;
 
         #endregion
 
@@ -53,7 +53,7 @@ namespace FroggerStarter.Model.Area_Managers.Road
         /// <param name="laneSettings">The lane settings.</param>
         /// <exception cref="ArgumentOutOfRangeException">
         /// </exception>
-        public override void AddLaneOfObstacles(IList<object> laneSettings)
+        public void AddLaneOfObstacles(IList<object> laneSettings)
         {
             var direction = (Direction)laneSettings[0];
             var defaultSpeed = (double)laneSettings[1];
@@ -84,7 +84,7 @@ namespace FroggerStarter.Model.Area_Managers.Road
         /// </summary>
         public void ResetLanesToOneObstacle()
         {
-            this.Lanes.ToList().ForEach(lane => (lane as RoadLane).ResetLaneToOneObstacle());
+            this.Lanes.ToList().ForEach(lane => (lane as RoadLane)?.ResetLaneToOneObstacle());
             this.resetSpawnTimer();
         }
 
@@ -94,21 +94,21 @@ namespace FroggerStarter.Model.Area_Managers.Road
 
         private void setupObstacleSpawnTimer()
         {
-            this.ObstacleSpawnTimer = new DispatcherTimer();
-            this.ObstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;
-            this.ObstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, SpawnTimeInterval, 0);
-            this.ObstacleSpawnTimer.Start();
+            this.obstacleSpawnTimer = new DispatcherTimer();
+            this.obstacleSpawnTimer.Tick += this.obstacleSpawnTimerOnTick;
+            this.obstacleSpawnTimer.Interval = new TimeSpan(0, 0, 0, SpawnTimeInterval, 0);
+            this.obstacleSpawnTimer.Start();
         }
 
         private void obstacleSpawnTimerOnTick(object sender, object e)
         {
-            this.Lanes.ToList().ForEach(lane => (lane as RoadLane).MakeObstacleActive());
+            this.Lanes.ToList().ForEach(lane => (lane as RoadLane)?.MakeObstacleActive());
         }
 
         private void resetSpawnTimer()
         {
-            this.ObstacleSpawnTimer.Stop();
-            this.ObstacleSpawnTimer.Start();
+            this.obstacleSpawnTimer.Stop();
+            this.obstacleSpawnTimer.Start();
         }
 
         #endregion
