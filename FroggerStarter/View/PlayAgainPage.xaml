@@ -15,10 +15,12 @@
                 Canvas.Left="154" Canvas.Top="49" FontFamily="Berlin Sans FB" FontSize="25" Background="#FF20E800"
                 BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" Foreground="Black"
                 FocusVisualSecondaryBrush="#99FFFFFF" Click="Button_Click" />
+        <Rectangle Height="52" Width="192" Canvas.Left="154" Canvas.Top="49" Fill="Green"/>
 
         <Button Height="52" Width="192" Canvas.ZIndex="1" Content="View HighScores"
                 Canvas.Left="154" Canvas.Top="199" FontFamily="Berlin Sans FB" FontSize="25" Background="#FF20E800"
                 BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" Foreground="Black"
                 FocusVisualSecondaryBrush="#99FFFFFF" Click="Button_Click_1" />
+        <Rectangle Height="52" Width="192" Canvas.Left="154" Canvas.Top="199" Fill="Green"/>
     </Canvas>
 </Page>

@@ -17,7 +17,8 @@
 
         <TextBlock Text="Name: " Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
                    Canvas.Left="25" Canvas.Top="83" />
-        <TextBox x:Name="nameTextBox" Canvas.Left="120" Canvas.Top="83" Text="Enter Name..." TextWrapping="Wrap" Height="37" Width="311"
+        <TextBox x:Name="nameTextBox" Canvas.Left="120" Canvas.Top="83" Text="Enter Name..." TextWrapping="Wrap"
+                 Height="37" Width="311"
                  FontFamily="Berlin Sans FB" FontSize="22"
                  BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" FocusVisualSecondaryBrush="#99FFFFFF"
                  Foreground="White" Background="Transparent" />
@@ -25,16 +26,17 @@
         <TextBlock Text="Score: " Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
                    Canvas.Left="13" Canvas.Top="150" />
         <TextBlock Text="Level: " Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
-            Canvas.Left="19" Canvas.Top="213" />
+                   Canvas.Left="19" Canvas.Top="213" />
 
         <TextBlock x:Name="scoreTextBlock" Text="0" Foreground="White" FontSize="30" FontFamily="Berlin Sans FB"
-            Canvas.Left="122" Canvas.Top="152" />
+                   Canvas.Left="122" Canvas.Top="152" />
         <TextBlock x:Name="levelTextBox" Text="1" Foreground="White" FontSize="30" FontFamily="Berlin Sans FB"
-            Canvas.Left="122" Canvas.Top="217" />
+                   Canvas.Left="122" Canvas.Top="217" />
 
         <Button Height="52" Width="183" Canvas.ZIndex="1" Content="Add High Score"
                 Canvas.Left="271" Canvas.Top="200" FontFamily="Berlin Sans FB" FontSize="25" Background="#FF20E800"
                 BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" Foreground="Black"
                 FocusVisualSecondaryBrush="#99FFFFFF" Click="Button_Click" />
+        <Rectangle Height="52" Width="183" Canvas.Left="271" Canvas.Top="200" Fill="Green" />
     </Canvas>
 </Page>
