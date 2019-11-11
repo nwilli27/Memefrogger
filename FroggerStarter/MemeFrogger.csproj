@@ -186,6 +186,9 @@
     <Compile Include="Model\Player\PlayerStats.cs" />
     <Compile Include="Model\Score\ScoreTimer.cs" />
     <Compile Include="ViewModel\HighScoreBoardViewModel.cs" />
+    <Compile Include="View\AddHighScorePage.xaml.cs">
+      <DependentUpon>AddHighScorePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FrogLeapAnimation\FrogLeapFrameOne.xaml.cs">
       <DependentUpon>FrogLeapFrameOne.xaml</DependentUpon>
     </Compile>
@@ -215,6 +218,9 @@
     </Compile>
     <Compile Include="View\LifeHeartLostAnimation\LifeHeartLostFrameOne.xaml.cs">
       <DependentUpon>LifeHeartLostFrameOne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PlayAgainPage.xaml.cs">
+      <DependentUpon>PlayAgainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PlayerDeathAnimation\PlayerDeathFrameFour.xaml.cs">
       <DependentUpon>PlayerDeathFrameFour.xaml</DependentUpon>
@@ -339,6 +345,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\AddHighScorePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FrogLeapAnimation\FrogLeapFrameOne.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -378,6 +388,10 @@
     <Page Include="View\LifeHeartLostAnimation\LifeHeartLostFrameOne.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PlayAgainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PlayerDeathAnimation\PlayerDeathFrameFour.xaml">
       <Generator>MSBuild:Compile</Generator>

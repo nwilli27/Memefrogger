@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using Windows.Foundation;
+﻿using Windows.Foundation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using FroggerStarter.Model.Score;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -12,29 +10,23 @@ namespace FroggerStarter.View
     /// <summary>
     ///     An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class StartPage : Page
+    public sealed partial class PlayAgainPage : Page
     {
         #region Data members
 
-        private readonly double applicationHeight = (double) Application.Current.Resources["StartWindowHeight"];
-        private readonly double applicationWidth = (double) Application.Current.Resources["StartWindowWidth"];
+        private readonly double applicationHeight = (double) Application.Current.Resources["PlayAgainHeight"];
+        private readonly double applicationWidth = (double) Application.Current.Resources["PlayAgainWidth"];
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="StartPage" /> class.
+        ///     Initializes a new instance of the <see cref="PlayAgainPage" /> class.
         /// </summary>
-        public StartPage()
+        public PlayAgainPage()
         {
             this.InitializeComponent();
-
-            ApplicationView.PreferredLaunchViewSize = new Size
-                {Width = this.applicationWidth, Height = this.applicationHeight};
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            ApplicationView.GetForCurrentView()
-                           .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
 
             ApplicationView.GetForCurrentView().TryResizeView(
                 new Size(Width = this.applicationWidth, Height = this.applicationHeight)
@@ -47,7 +39,7 @@ namespace FroggerStarter.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(GamePage));
+            Frame.Navigate(typeof(StartPage));
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
