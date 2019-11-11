@@ -54,7 +54,7 @@ namespace FroggerStarter.View
             highScores.Add(new HighScore(int.Parse(this.scoreTextBlock.Text), this.nameTextBox.Text, int.Parse(this.levelTextBox.Text)));
             Serializer.Serializer<List<HighScore>>.WriteObjectToFile(Serializer.Serializer<HighScore>.HighScoreBoardFileName, highScores);
 
-            Frame.Navigate(typeof(PlayAgainPage));
+            Frame.Navigate(typeof(HighScoreBoard));
         }
 
         #endregion

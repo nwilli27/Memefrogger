@@ -17,11 +17,11 @@
 
         <TextBlock Text="Name: " Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
                    Canvas.Left="25" Canvas.Top="83" />
-        <TextBox x:Name="nameTextBox" Canvas.Left="120" Canvas.Top="83" Text="Enter Name..." TextWrapping="Wrap"
+        <TextBox x:Name="nameTextBox" Canvas.Left="120" Canvas.Top="83" Text="" TextWrapping="Wrap"
                  Height="37" Width="311"
                  FontFamily="Berlin Sans FB" FontSize="22"
                  BorderBrush="White" FocusVisualPrimaryBrush="#FFE6BAB8" FocusVisualSecondaryBrush="#99FFFFFF"
-                 Foreground="White" Background="Transparent" />
+                 Foreground="White" Background="Transparent" PlaceholderText="Enter Name..." PlaceholderForeground="White" />
 
         <TextBlock Text="Score: " Foreground="LimeGreen" FontSize="30" FontFamily="Showcard Gothic"
                    Canvas.Left="13" Canvas.Top="150" />

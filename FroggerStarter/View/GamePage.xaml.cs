@@ -25,7 +25,7 @@ namespace FroggerStarter.View
         private readonly double applicationHeight = (double) Application.Current.Resources["AppHeight"];
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
  
-        private readonly GameManager gameManager;
+        private GameManager gameManager;
         private readonly DispatcherTimer endGameTimer;
 
         #endregion
@@ -144,6 +144,9 @@ namespace FroggerStarter.View
             if (this.endGameTimer.IsEnabled)
             {
                 this.endGameTimer.Stop();
+
+                this.gameManager = null;
+                Window.Current.CoreWindow.KeyDown -= this.coreWindowOnKeyDown;
 
                 this.Frame.Navigate(typeof(AddHighScorePage));
             }
