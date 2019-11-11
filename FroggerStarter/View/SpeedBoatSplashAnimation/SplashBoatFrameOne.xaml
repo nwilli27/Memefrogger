@@ -12,49 +12,49 @@
 
     <Canvas>
 
-        <Ellipse Fill="White" Width="10" Height="28" Opacity=".5" Canvas.Top="0.507" Canvas.Left="36.105" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Fill="White" Width="10" Height="28" Opacity=".5" Canvas.Top="0.345" Canvas.Left="5.17" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-48.398" ScaleX="-1.002" ScaleY="0.998" SkewX="2.076" SkewY="0" TranslateX="0.112" TranslateY="-0.092"/>
+                <CompositeTransform Rotation="50.474" ScaleX="1.001" ScaleY="0.999" SkewX="0" SkewY="-2.076" TranslateX="0.112" TranslateY="-0.092"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <Ellipse Fill="White" Width="9" Height="32" Opacity=".7" Canvas.Top="1.985" Canvas.Left="25.523" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Fill="White" Width="9" Height="32" Opacity=".7" Canvas.Top="1.806" Canvas.Left="16.588" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-75.563" ScaleX="-1.002" ScaleY="0.998" SkewX="2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
+                <CompositeTransform Rotation="77.98" ScaleX="1.001" ScaleY="0.999" SkewX="0" SkewY="-2.417" TranslateX="0.128" TranslateY="-0.031"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <Ellipse Fill="White" Width="9" Height="35" Opacity=".7" Canvas.Top="5.515" Canvas.Left="17.411" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Fill="White" Width="9" Height="35" Opacity=".7" Canvas.Top="5.296" Canvas.Left="24.608" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-84.551" ScaleX="-1.002" ScaleY="0.998" SkewX="2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
+                <CompositeTransform Rotation="86.968" ScaleX="1.001" ScaleY="0.999" SkewX="0" SkewY="-2.417" TranslateX="0.128" TranslateY="-0.031"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <Ellipse Fill="White" Width="9" Height="32" Opacity=".9" Canvas.Top="14.492" Canvas.Left="12.336" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Fill="White" Width="9" Height="32" Opacity=".9" Canvas.Top="14.171" Canvas.Left="29.625" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-93.613" ScaleX="-1.002" ScaleY="0.998" SkewX="2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
+                <CompositeTransform Rotation="-86.387" ScaleX="-1.002" ScaleY="-0.998" SkewX="-2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <Ellipse Fill="White" Width="9" Height="28" Opacity=".7" Canvas.Top="21" Canvas.Left="27.613" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Fill="White" Width="9" Height="28" Opacity=".7" Canvas.Top="20.605" Canvas.Left="14.522" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-88.006" ScaleX="-1.002" ScaleY="0.998" SkewX="2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
+                <CompositeTransform Rotation="90.423" ScaleX="1.001" ScaleY="0.999" SkewX="0" SkewY="-2.417" TranslateX="0.128" TranslateY="-0.031"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <Ellipse Fill="White" Width="9" Height="28" Opacity=".5" Canvas.Top="13.891" Canvas.Left="35.66" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Fill="White" Width="9" Height="28" Opacity=".5" Canvas.Top="13.576" Canvas.Left="6.567" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-119.206" ScaleX="-1.002" ScaleY="0.998" SkewX="2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
+                <CompositeTransform Rotation="-60.794" ScaleX="-1.002" ScaleY="-0.998" SkewX="-2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <Ellipse Fill="White" Width="9" Height="28" Opacity=".4" Canvas.Top="19.659" Canvas.Left="36.063" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Fill="White" Width="9" Height="28" Opacity=".4" Canvas.Top="19.279" Canvas.Left="6.168" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-71.089" ScaleX="-1.002" ScaleY="0.998" SkewX="2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
+                <CompositeTransform Rotation="73.506" ScaleX="1.001" ScaleY="0.999" SkewX="0" SkewY="-2.417" TranslateX="0.128" TranslateY="-0.031"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <Ellipse Fill="White" Width="9" Height="28" Opacity=".4" Canvas.Top="14.429" Canvas.Left="36.733" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Fill="White" Width="9" Height="28" Opacity=".4" Canvas.Top="14.108" Canvas.Left="5.506" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-93.613" ScaleX="-1.002" ScaleY="0.998" SkewX="2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
+                <CompositeTransform Rotation="-86.387" ScaleX="-1.002" ScaleY="-0.998" SkewX="-2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <Ellipse Fill="White" Width="10" Height="28" Opacity=".4" Canvas.Top="17.128" Canvas.Left="34.249" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Fill="White" Width="10" Height="28" Opacity=".4" Canvas.Top="16.777" Canvas.Left="6.973" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="-86.113" ScaleX="-1.002" ScaleY="0.998" SkewX="2.417" SkewY="0" TranslateX="0.128" TranslateY="-0.031"/>
+                <CompositeTransform Rotation="88.53" ScaleX="1.001" ScaleY="0.999" SkewX="0" SkewY="-2.417" TranslateX="0.128" TranslateY="-0.031"/>
             </Ellipse.RenderTransform>
         </Ellipse>
 

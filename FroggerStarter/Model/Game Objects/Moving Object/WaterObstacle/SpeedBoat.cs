@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Linq;
 using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using FroggerStarter.View.Sprites.WaterSprites;
@@ -11,6 +13,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
     /// <seealso cref="WaterObstacle" />
     internal sealed class SpeedBoat : WaterObstacle
     {
+
         #region Properties
 
         /// <summary>
@@ -20,6 +23,28 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         ///     The splash animation.
         /// </value>
         public Animation.Animation SplashAnimation { get; }
+
+        /// <summary>
+        ///     Gets or sets the direction.
+        ///     Flips the obstacle sprite according
+        ///     to the direction. As well as the all
+        ///     the splash animation frames.
+        /// </summary>
+        /// <value>
+        ///     The direction.
+        /// </value>
+        public override Direction Direction
+        {
+            get => base.Direction;
+            set
+            {
+                if (value.Equals(Direction.Right))
+                {
+                    this.SplashAnimation.ToList().ForEach(frame => frame.FlipSpriteHorizontally());
+                }
+                base.Direction = value;
+            }
+        }
 
         #endregion
 
@@ -52,7 +77,7 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         public override void MoveForward()
         {
             base.MoveForward();
-            this.SplashAnimation.SetFrameLocations(this.X - (this.Width / 2), this.Y);
+            this.checkDirectionForSplashAnimation();
         }
 
         /// <summary>
@@ -106,6 +131,27 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object.WaterObstacle
         protected override bool hasObstacleMovedOffLeftSide()
         {
             return this.X + this.SpeedX < -this.Width - this.Width / 2;
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        private void checkDirectionForSplashAnimation()
+        {
+            switch (this.Direction)
+            {
+                case Direction.Left:
+                    this.SplashAnimation.SetFrameLocations(this.X + this.Width, this.Y);
+                    break;
+
+                case Direction.Right:
+                    this.SplashAnimation.SetFrameLocations(this.X - (this.Width / 2), this.Y);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         #endregion

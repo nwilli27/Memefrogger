@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
-using FroggerStarter.Enums;
 
 namespace FroggerStarter.Constants
 {
@@ -11,9 +8,16 @@ namespace FroggerStarter.Constants
     /// </summary>
     public class GameSettings
     {
+
+        #region Data Members
+
         private static bool pauseGame;
 
+        #endregion
+
         #region Constants
+
+        private const int PauseTimeInterval = 5;
 
         /// <summary>
         ///     The total number of lives
@@ -25,10 +29,14 @@ namespace FroggerStarter.Constants
         /// </summary>
         public const double ScoreTime = 20.0;
 
+        #endregion
+
+        #region Properties
+
         /// <summary>
         ///     The pause timer
         /// </summary>
-        public static DispatcherTimer PauseTimer;
+        public static DispatcherTimer PauseTimer { get; private set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether [pause game].
@@ -36,7 +44,8 @@ namespace FroggerStarter.Constants
         /// <value>
         ///   <c>true</c> if [pause game]; otherwise, <c>false</c>.
         /// </value>
-        public static bool PauseGame {
+        public static bool PauseGame
+        {
             get => pauseGame;
             set
             {
@@ -44,13 +53,33 @@ namespace FroggerStarter.Constants
                 {
                     PauseTimer = new DispatcherTimer
                     {
-                        Interval = new TimeSpan(0, 0, 0, 5, 0)
+                        Interval = new TimeSpan(0, 0, 0, PauseTimeInterval, 0)
                     };
+                }
+                else
+                {
+                    PauseTimer.Stop();
                 }
                 pauseGame = value;
             }
         }
 
         #endregion
+    }
+
+    /// <summary>
+    ///     Holds the event for a pause finishing
+    /// </summary>
+    /// <seealso cref="System.EventArgs" />
+    public class PauseIsFinishedEventArgs : EventArgs
+    {
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether [pause is finished].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [pause is finished]; otherwise, <c>false</c>.
+        /// </value>
+        public bool PauseIsFinished { get; set; }
     }
 }

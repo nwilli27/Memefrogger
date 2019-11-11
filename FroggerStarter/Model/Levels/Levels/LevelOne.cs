@@ -30,7 +30,7 @@ namespace FroggerStarter.Model.Levels.Levels
                 Direction.Left,
                 1.5,
                 ObstacleType.Car,
-                4
+                3
             };
 
         public override IList<object> RoadLane4 =>
@@ -38,7 +38,7 @@ namespace FroggerStarter.Model.Levels.Levels
                 Direction.Left,
                 1.75,
                 ObstacleType.SemiTruck,
-                3
+                2
             };
 
         public override IList<object> RoadLane5 =>
@@ -46,20 +46,20 @@ namespace FroggerStarter.Model.Levels.Levels
                 Direction.Right,
                 2.0,
                 ObstacleType.Car,
-                5
+                4
             };
 
         public override IList<object> WaterLane1 =>
             new List<object>() {
                 Direction.Left,
-                1.5,
+                1.0,
                 ObstacleType.LargeLog,
                 2
             };
 
         public override IList<object> WaterLane2 =>
             new List<object>() {
-                Direction.Right,
+                Direction.Left,
                 2.0,
                 ObstacleType.SpeedBoat,
                 3
@@ -68,7 +68,7 @@ namespace FroggerStarter.Model.Levels.Levels
         public override IList<object> WaterLane3 =>
             new List<object>() {
                 Direction.Left,
-                1.75,
+                1.5,
                 ObstacleType.MediumLog,
                 3
             };
@@ -76,7 +76,7 @@ namespace FroggerStarter.Model.Levels.Levels
         public override IList<object> WaterLane4 =>
             new List<object>() {
                 Direction.Right,
-                3.5,
+                3.0,
                 ObstacleType.SpeedBoat,
                 3
             };
@@ -84,7 +84,7 @@ namespace FroggerStarter.Model.Levels.Levels
         public override IList<object> WaterLane5 =>
             new List<object>() {
                 Direction.Left,
-                2.0,
+                2.25,
                 ObstacleType.SmallLog,
                 4
             };

@@ -35,13 +35,24 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
             set
             {
                 this.direction = value;
-                this.checkDirectionToFlipHorizontally();
+                this.FlipSpriteHorizontally();
             }
         }
 
         #endregion
 
         #region Methods
+
+        /// <summary>
+        ///     Flips the sprite horizontally.
+        /// </summary>
+        public override void FlipSpriteHorizontally()
+        {
+            if (this.Direction.Equals(Direction.Right))
+            {
+                base.FlipSpriteHorizontally();
+            }
+        }
 
         /// <summary>
         ///     Moves the obstacle forward depending on the given direction.
@@ -166,19 +177,6 @@ namespace FroggerStarter.Model.Game_Objects.Moving_Object
         protected virtual bool hasObstacleMovedOffLeftSide()
         {
             return this.X + this.SpeedX < -this.Width;
-        }
-
-        #endregion
-
-        #region Private Helpers
-
-        private void checkDirectionToFlipHorizontally()
-        {
-            if (this.Direction.Equals(Direction.Right))
-            {
-                this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-                this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
-            }
         }
 
         #endregion

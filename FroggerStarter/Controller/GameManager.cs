@@ -370,10 +370,7 @@ namespace FroggerStarter.Controller
             this.player.CanMove = false;
             this.player.IsDead = true;
 
-            this.timer.Stop();
-            this.scoreTimer.Stop();
-            this.powerUpManager.StopPowerUpSpawnTimer();
-            this.waterManager.StopSpeedBoatWaterAnimations();
+            this.stopAllTimers();
 
             this.gameOver();
             SoundEffectManager.PlaySound(SoundEffectType.GameOver);
@@ -428,6 +425,7 @@ namespace FroggerStarter.Controller
             this.timer.Stop();
             this.scoreTimer.Stop();
             this.powerUpManager.StopPowerUpSpawnTimer();
+            this.waterManager.StopSpeedBoatWaterAnimations();
         }
 
         private void onNextLevelPause(object sender, object e)
@@ -448,7 +446,6 @@ namespace FroggerStarter.Controller
         {
             var pauseFinished = new PauseIsFinishedEventArgs() {PauseIsFinished = true};
             this.PauseFinished?.Invoke(this, pauseFinished);
-            GameSettings.PauseTimer.Stop();
         }
 
         private void resetCanvas()
@@ -514,7 +511,7 @@ namespace FroggerStarter.Controller
                 this.player.PlayDeathAnimation();
                 this.setPlayerToSpawnInClosestCheckpoint();
             }
-            else if (PlayerStats.TotalLives == 0)
+            else if (!PlayerStats.HasLivesLeft)
             {
                 this.stopGamePlayInSlowMotion();
             }
@@ -646,22 +643,6 @@ namespace FroggerStarter.Controller
         ///     The next level.
         /// </value>
         public int NextLevel { get; set; }
-    }
-
-    /// <summary>
-    ///     Holds the event for a pause finishing
-    /// </summary>
-    /// <seealso cref="System.EventArgs" />
-    public class PauseIsFinishedEventArgs : EventArgs
-    {
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether [pause is finished].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [pause is finished]; otherwise, <c>false</c>.
-        /// </value>
-        public bool PauseIsFinished { get; set; }
     }
 
 }

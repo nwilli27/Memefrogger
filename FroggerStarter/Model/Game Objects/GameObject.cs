@@ -213,6 +213,15 @@ namespace FroggerStarter.Model.Game_Objects
             this.Y = ((areaHeight - this.Height) / 2) + yLocation;
         }
 
+        /// <summary>
+        ///     Flips the sprite horizontally
+        /// </summary>
+        public virtual void FlipSpriteHorizontally()
+        {
+            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.Sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
+        }
+
         #endregion
 
         #region Private Helpers

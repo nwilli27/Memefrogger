@@ -9,7 +9,6 @@ using FroggerStarter.Model.Player;
 using FroggerStarter.Model.Score;
 using Color = Windows.UI.Color;
 using Size = Windows.Foundation.Size;
-using System;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
