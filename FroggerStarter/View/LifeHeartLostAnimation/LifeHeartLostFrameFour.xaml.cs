@@ -1,6 +1,4 @@
-﻿
-
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
+﻿// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 using FroggerStarter.View.Sprites;
 
@@ -14,11 +12,10 @@ namespace FroggerStarter.View.LifeHeartLostAnimation
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
     public sealed partial class LifeHeartLostFrameFour
     {
-
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ReviveHeartLostAnimation.LifeHeartLostFrameFour"/> class.
+        ///     Initializes a new instance of the <see cref="LifeHeartLostFrameFour" /> class.
         /// </summary>
         public LifeHeartLostFrameFour()
         {

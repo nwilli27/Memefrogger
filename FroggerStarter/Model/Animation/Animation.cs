@@ -222,7 +222,7 @@ namespace FroggerStarter.Model.Animation
         }
 
         //TODO maybe use this somewhere, endless loop thru all frames
-        private void showNextFrameEndlessLoop(object sender, object e)
+        private void showNextFrameEndlessLoop()
         {
             var firstVisibleFrame = this.animationFrames.FirstOrDefault(frame => frame.IsVisible);
             if (firstVisibleFrame != null)

@@ -1,5 +1,4 @@
-﻿
-using FroggerStarter.View.Sprites;
+﻿using FroggerStarter.View.Sprites.RoadSprites;
 
 namespace FroggerStarter.Model.Game_Objects.Moving_Object.RoadObstacle
 {

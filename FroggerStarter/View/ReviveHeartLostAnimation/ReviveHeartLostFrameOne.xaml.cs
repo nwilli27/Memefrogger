@@ -12,7 +12,7 @@ namespace FroggerStarter.View.ReviveHeartLostAnimation
     /// <seealso cref="BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
-    public sealed partial class ReviveHeartLostFrameOne : BaseSprite
+    public sealed partial class ReviveHeartLostFrameOne
     {
 
         #region Constructors

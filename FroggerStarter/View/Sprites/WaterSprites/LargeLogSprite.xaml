@@ -13,14 +13,14 @@
 
     <Canvas>
         <logPieces:FrontLogSprite Canvas.Left="1"/>
-        <local:MiddleLogSprite Canvas.Left="50"/>
+        <logPieces:MiddleLogSprite Canvas.Left="50"/>
         <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="48" Canvas.Top="1"/>
         <logPieces:BackLogSprite Canvas.Left="249"/>
-        <local:MiddleLogSprite Canvas.Left="100"/>
+        <logPieces:MiddleLogSprite Canvas.Left="100"/>
         <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="98" Canvas.Top="1"/>
         <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="148" Canvas.Top="1"/>
-        <local:MiddleLogSprite Canvas.Left="200"/>
-        <local:MiddleLogSprite Canvas.Left="152"/>
+        <logPieces:MiddleLogSprite Canvas.Left="200"/>
+        <logPieces:MiddleLogSprite Canvas.Left="152"/>
         <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="200" Canvas.Top="1"/>
         <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="249" Canvas.Top="1"/>
         <Rectangle Height="43" Width="4" Fill="SaddleBrown" Canvas.Left="150" Canvas.Top="1"/>

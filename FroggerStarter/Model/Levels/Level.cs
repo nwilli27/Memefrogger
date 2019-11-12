@@ -1,14 +1,14 @@
-﻿
-using System.Collections.Generic;
-using FroggerStarter.Interfaces;
+﻿using System.Collections.Generic;
 
 namespace FroggerStarter.Model.Levels
 {
     /// <summary>
     ///     Class responsible for a single level
     /// </summary>
-    internal abstract class Level : ILevelRequirements
+    internal abstract class Level
     {
+        #region Properties
+
         public abstract int RoadObstacleSpawnTime { get; }
 
         public abstract IList<object> RoadLane1 { get; }
@@ -22,5 +22,7 @@ namespace FroggerStarter.Model.Levels
         public abstract IList<object> WaterLane3 { get; }
         public abstract IList<object> WaterLane4 { get; }
         public abstract IList<object> WaterLane5 { get; }
+
+        #endregion
     }
 }

@@ -2,7 +2,6 @@
 using Windows.Foundation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model.Levels;
 using FroggerStarter.Model.Player;
 using FroggerStarter.Model.Score;
@@ -14,7 +13,7 @@ namespace FroggerStarter.View
     /// <summary>
     ///     An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AddHighScorePage : Page
+    public sealed partial class AddHighScorePage
     {
         #region Data members
 

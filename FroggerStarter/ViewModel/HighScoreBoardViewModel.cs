@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using FroggerStarter.Annotations;
 using FroggerStarter.Comparers;
 using FroggerStarter.Enums;
 using FroggerStarter.Extensions;
 using FroggerStarter.Model.Score;
+using FroggerStarter.Properties;
 using FroggerStarter.Serializer;
 using FroggerStarter.Utility;
 
@@ -108,7 +108,7 @@ namespace FroggerStarter.ViewModel
                 HighScoreSortType.LevelScoreName
             }.ToObservableCollection();
 
-            this.highScoreList = Serializer<List<HighScore>>.ReadObjectFromFile(Serializer.Serializer<HighScore>.HighScoreBoardFileName);
+            this.highScoreList = Serializer<List<HighScore>>.ReadObjectFromFile(Serializer<HighScore>.HighScoreBoardFileName);
             this.highScoreList?.Sort();
 
             this.HighScores = this.highScoreList.ToObservableCollection();
@@ -137,7 +137,7 @@ namespace FroggerStarter.ViewModel
         {
             this.highScoreList.Clear();
             this.HighScores = this.highScoreList.ToObservableCollection();
-            Serializer<List<HighScore>>.WriteObjectToFile(Serializer.Serializer<HighScore>.HighScoreBoardFileName, new List<HighScore>());
+            Serializer<List<HighScore>>.WriteObjectToFile(Serializer<HighScore>.HighScoreBoardFileName, new List<HighScore>());
         }
 
         private bool canClearScores(object obj)

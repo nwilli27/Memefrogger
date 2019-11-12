@@ -54,11 +54,6 @@ namespace FroggerStarter.Model.Game_Objects.Home
 
         #region Methods
 
-        public void ResetHomes()
-        {
-            this.frogHomes.ToList().ForEach(home => home.IsFilled = false);
-        }
-
         /// <summary>
         ///     Returns an enumerator that iterates through the collection.
         /// </summary>
