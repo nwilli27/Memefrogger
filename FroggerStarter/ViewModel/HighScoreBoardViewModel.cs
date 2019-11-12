@@ -37,7 +37,7 @@ namespace FroggerStarter.ViewModel
         /// <value>
         ///     The return command.
         /// </value>
-        public RelayCommand ReturnCommand { get; set; }
+        public RelayCommand ReturnCommand { get; }
 
         /// <summary>
         ///     Gets or sets the clear scores command.
@@ -45,7 +45,7 @@ namespace FroggerStarter.ViewModel
         /// <value>
         ///     The clear scores command.
         /// </value>
-        public RelayCommand ClearScoresCommand { get; set; }
+        public RelayCommand ClearScoresCommand { get; }
 
         /// <summary>
         ///     Gets or sets the high scores.
@@ -70,7 +70,7 @@ namespace FroggerStarter.ViewModel
         /// <value>
         ///     The sort types.
         /// </value>
-        public ObservableCollection<HighScoreSortType> SortTypes { get; set; }
+        public ObservableCollection<HighScoreSortType> SortTypes { get; }
 
         /// <summary>
         ///     Gets or sets the type of the selected high score sort.
@@ -109,7 +109,7 @@ namespace FroggerStarter.ViewModel
             }.ToObservableCollection();
 
             this.highScoreList = Serializer<List<HighScore>>.ReadObjectFromFile(Serializer<HighScore>.HighScoreBoardFileName);
-            this.highScoreList?.Sort();
+            this.highScoreList.Sort();
 
             this.HighScores = this.highScoreList.ToObservableCollection();
         }

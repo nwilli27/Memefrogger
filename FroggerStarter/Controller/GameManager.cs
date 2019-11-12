@@ -1,5 +1,4 @@
 ﻿using System;
-
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -74,6 +73,7 @@ namespace FroggerStarter.Controller
         private bool IsGameOver              => !PlayerStats.HasLivesLeft || this.frogHomes.HasHomesBeenFilled;
         private bool HasMovedPastTopBoundary => this.player.Y < GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
 
+        private static double RoadStartingYLocation => GameBoard.MiddleRoadYLocation + GameBoard.RoadShoulderOffset;
         private static double WaterAreaTopLocation => GameBoard.HighRoadYLocation + GameBoard.RoadShoulderOffset;
 
         #endregion
@@ -83,6 +83,9 @@ namespace FroggerStarter.Controller
         private const double ScoreTimeReduction = 0.02;
         private const int GameTimerInterval = 15;
         private const int ScoreTimerInterval = 10;
+
+        private const int SlowDownTimerInterval = 200;
+        private const int SlowDownDeathAnimationInterval = 1000;
 
         #endregion
 
@@ -160,6 +163,8 @@ namespace FroggerStarter.Controller
 
         /// <summary>
         ///     Breakdowns the game by resetting the timers and stopping them.
+        ///     Precondition: none
+        ///     Post-condition: PlayerAbilities.HasQuickRevive = false
         /// </summary>
         public void ResetGame()
         {
@@ -319,7 +324,7 @@ namespace FroggerStarter.Controller
 
         private void createAndPlaceRoadObstaclesOnCanvas()
         {
-            this.roadManager = new RoadManager(getRoadStartingYLocation(), GameBoard.BottomRoadYLocation);
+            this.roadManager = new RoadManager(RoadStartingYLocation, GameBoard.BottomRoadYLocation);
 
             this.roadManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().RoadLane5);
             this.roadManager.AddLaneOfObstacles(LevelManager.GetCurrentLevel().RoadLane4);
@@ -485,11 +490,10 @@ namespace FroggerStarter.Controller
 
         private void stopGamePlayInSlowMotion()
         {
-            //TODO make these constants
-            this.timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+            this.timer.Interval = new TimeSpan(0, 0, 0, 0, SlowDownTimerInterval);
             this.scoreTimer.Stop();
             this.waterManager.SlowDownSpeedBoatWaterAnimations();
-            this.player.DeathAnimation.AnimationInterval = 1000;
+            this.player.DeathAnimation.AnimationInterval = SlowDownDeathAnimationInterval;
             this.player.PlayDeathAnimation();
             this.gameOver();
         }
@@ -591,11 +595,6 @@ namespace FroggerStarter.Controller
 
         #region Private Helpers
 
-        private static double getRoadStartingYLocation()
-        {
-            return GameBoard.MiddleRoadYLocation + GameBoard.RoadShoulderOffset;
-        }
-
         private void checkWhatLifeLostSoundToPlay()
         {
             if (PlayerStats.TotalLives == 0)
@@ -610,7 +609,7 @@ namespace FroggerStarter.Controller
             {
                 SoundEffectManager.PlaySound(SoundEffectType.AlmostHadIt);
             }
-            else if (this.player.Y < GameBoard.MiddleRoadYLocation)
+            else if (this.IsPlayerInWaterArea)
             {
                 SoundEffectManager.PlaySound(SoundEffectType.MarioDrown);
             }

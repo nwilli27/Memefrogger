@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
-using FroggerStarter.Constants;
 using FroggerStarter.Enums;
 using FroggerStarter.Factory;
 using FroggerStarter.Model.Player;
@@ -26,7 +25,7 @@ namespace FroggerStarter.Model.Game_Objects.Power_Ups
 
         #region Constants
 
-        private const int EndingSpawnTimeRange = (int) GameSettings.ScoreTime - 10;
+        private const int EndingSpawnTimeRange = 10;
         private const int StartingSpawnTimeRange = 3;
 
         #endregion

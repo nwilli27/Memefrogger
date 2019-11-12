@@ -45,7 +45,7 @@ namespace FroggerStarter.Model.Animation
         /// <value>
         ///   <c>true</c> if [animation has started]; otherwise, <c>false</c>.
         /// </value>
-        public bool AnimationHasStarted { get; set; }
+        public bool AnimationHasStarted { get; private set; }
 
         #endregion
 
@@ -216,27 +216,6 @@ namespace FroggerStarter.Model.Animation
                 firstInvisibleFrame.IsVisible = true;
             }
             else
-            {
-                this.animationFrames.ToList().ForEach(frame => frame.ResetStatusAndVisibility());
-            }
-        }
-
-        //TODO maybe use this somewhere, endless loop thru all frames
-        private void showNextFrameEndlessLoop()
-        {
-            var firstVisibleFrame = this.animationFrames.FirstOrDefault(frame => frame.IsVisible);
-            if (firstVisibleFrame != null)
-            {
-                firstVisibleFrame.IsVisible = false;
-            }
-
-            var firstInvisibleFrame = this.animationFrames.FirstOrDefault(frame => !frame.IsVisible && !frame.HasBeenPlayed);
-            if (firstInvisibleFrame != null)
-            {
-                firstInvisibleFrame.IsVisible = true;
-            }
-
-            if (this.IsAnimationFinished)
             {
                 this.animationFrames.ToList().ForEach(frame => frame.ResetStatusAndVisibility());
             }

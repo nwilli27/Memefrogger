@@ -85,6 +85,7 @@ namespace FroggerStarter.Model.Player
         ///     Precondition: none
         ///     Post-condition: frog.SpeedX = SpeedXDirection
         ///                     frog.SpeedY = SpeedYDirection
+        ///                     Direction = Direction.Up
         ///                     
         /// </summary>
         public Frog()

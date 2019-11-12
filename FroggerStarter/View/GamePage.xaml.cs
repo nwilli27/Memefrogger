@@ -30,6 +30,12 @@ namespace FroggerStarter.View
 
         #endregion
 
+        #region Constants
+
+        private const int EndGameTimeInterval = 5;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -142,7 +148,7 @@ namespace FroggerStarter.View
             }
 
             this.endGameTimer.Tick += this.endGameTimerOnTick;            
-            this.endGameTimer.Interval = new TimeSpan(0, 0, 0, 5);
+            this.endGameTimer.Interval = new TimeSpan(0, 0, 0, EndGameTimeInterval);
             this.endGameTimer.Start();
         }
 
