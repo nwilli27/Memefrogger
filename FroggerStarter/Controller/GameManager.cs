@@ -376,6 +376,7 @@ namespace FroggerStarter.Controller
         {
             this.player.IsDead = true;
             this.player.CanMove = false;
+            ScoreCalculator.MultiplyPointsByHeartsRemaining();
 
             this.stopAllTimers();
 
@@ -540,7 +541,7 @@ namespace FroggerStarter.Controller
 
         private void increaseScore()
         {
-            PlayerStats.Score += (int)ScoreTimer.ScoreTick;
+            PlayerStats.Score += ScoreCalculator.CalculateScore();
             var score = new ScoreUpdatedEventArgs() { Score = PlayerStats.Score };
             this.ScoreUpdated?.Invoke(this, score);
         }
@@ -612,6 +613,10 @@ namespace FroggerStarter.Controller
             else if (this.player.Y < GameBoard.MiddleRoadYLocation)
             {
                 SoundEffectManager.PlaySound(SoundEffectType.MarioDrown);
+            }
+            else if (ScoreTimer.IsTimeUp)
+            {
+                SoundEffectManager.PlaySound(SoundEffectType.SadViolin);
             }
             else
             {

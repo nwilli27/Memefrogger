@@ -119,6 +119,12 @@ namespace FroggerStarter.Factory
                         SoundEffectType = SoundEffectType.NextLevel
                     };
 
+                case SoundEffectType.SadViolin:
+                    return new SoundEffect("SadViolin.mp3")
+                    {
+                        SoundEffectType = SoundEffectType.SadViolin
+                    };
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(soundEffect), soundEffect, null);
             }

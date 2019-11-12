@@ -15,7 +15,7 @@ namespace FroggerStarter.Model.Levels.Levels
         public override IList<object> RoadLane1 =>
             new List<object>() {
                 Direction.Right,
-                3.5,
+                4.0,
                 ObstacleType.TurboCar,
                 3
             };
@@ -31,9 +31,9 @@ namespace FroggerStarter.Model.Levels.Levels
         public override IList<object> RoadLane3 =>
             new List<object>() {
                 Direction.Left,
-                2.5,
+                3.25,
                 ObstacleType.TurboCar,
-                3
+                4
             };
 
         public override IList<object> RoadLane4 =>

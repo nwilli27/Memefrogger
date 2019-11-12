@@ -79,7 +79,12 @@
         /// <summary>
         ///     The next level sound.
         /// </summary>
-        NextLevel
+        NextLevel,
+
+        /// <summary>
+        ///     The sad violin sound.
+        /// </summary>
+        SadViolin
 
     }
 }

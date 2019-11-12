@@ -96,9 +96,16 @@ namespace FroggerStarter.View
 
         private void onScoreTimerTick(object sender, ScoreTimerTickEventArgs e)
         {
-            this.timeProgressBar.Foreground = e.ScoreTick > GameSettings.ScoreTime
-                ? new SolidColorBrush(Color.FromArgb(255, 218, 165, 32))
-                : new SolidColorBrush(Color.FromArgb(255, 50, 205, 50));
+            if (e.ScoreTick > GameSettings.ScoreTime)
+            {
+                this.timeProgressBar.Foreground = new SolidColorBrush(Color.FromArgb(255, 218, 165, 32));
+                this.timeTwoValue.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.timeProgressBar.Foreground = new SolidColorBrush(Color.FromArgb(255, 50, 205, 50));
+                this.timeTwoValue.Visibility = Visibility.Collapsed;
+            }
 
             if (this.timeProgressBar.Value >= this.timeProgressBar.Minimum)
             {

@@ -166,6 +166,7 @@
     <Compile Include="Model\Levels\LevelManager.cs" />
     <Compile Include="Model\Player\PlayerAbilities.cs" />
     <Compile Include="Model\Score\HighScore.cs" />
+    <Compile Include="Model\Score\ScoreCalculator.cs" />
     <Compile Include="Model\Sound\SoundEffect.cs" />
     <Compile Include="Model\Sound\SoundEffectManager.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -348,6 +349,7 @@
     <Content Include="SoundEffects\Oof.mp3" />
     <Content Include="SoundEffects\MarioDrown.mp3" />
     <Content Include="SoundEffects\QuickRevive.mp3" />
+    <Content Include="SoundEffects\SadViolin.mp3" />
     <Content Include="SoundEffects\TimePowerUp.mp3" />
     <Content Include="SoundEffects\BeRightBack.mp3" />
     <Content Include="SoundEffects\WilhelmScream.mp3" />

@@ -16,6 +16,8 @@
         <TextBlock x:Name="scoreLabel" Text="Score:" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="636" Canvas.Top="17"/>
         <TextBlock x:Name="scoreValue" Text="0" Foreground="White" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="702" Canvas.Top="17"/>
 
+        <TextBlock x:Name="timeTwoValue" Text="2x" Visibility="Collapsed" Foreground="Goldenrod" FontSize="25" FontFamily="Berlin Sans FB" Canvas.Left="606" Canvas.Top="16"/>
+
         <Rectangle Canvas.Top="{StaticResource HighRoadYLocation}" Fill="Blue" Width="{StaticResource AppWidth}" Height="{StaticResource RoadShoulderOffset}" />
 
         <Rectangle Canvas.Top="119" Fill="Blue" Width="{StaticResource AppWidth}" Height="256" />
