@@ -32,7 +32,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="FroggerStarter.App">
       <uap:VisualElements
-        DisplayName="MemeFrogger by Nolan Williams, Thomas Morgenstern"
+        DisplayName="MemeFrogger by Williams &amp; Morgenstern"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="FroggerStarter"
