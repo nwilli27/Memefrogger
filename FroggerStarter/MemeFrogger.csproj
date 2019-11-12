@@ -137,7 +137,6 @@
     <Compile Include="Model\Levels\Levels\LevelThree.cs" />
     <Compile Include="Model\Levels\Levels\LevelTwo.cs" />
     <Compile Include="Model\Levels\Levels\LevelOne.cs" />
-    <Compile Include="Interfaces\ILevelRequirements.cs" />
     <Compile Include="Model\Animation\Animation.cs" />
     <Compile Include="Model\Area Managers\Road\RoadLane.cs" />
     <Compile Include="Model\Area Managers\Road\RoadManager.cs" />

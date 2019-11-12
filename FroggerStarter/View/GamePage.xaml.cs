@@ -25,7 +25,7 @@ namespace FroggerStarter.View
         private readonly double applicationHeight = (double) Application.Current.Resources["AppHeight"];
         private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
  
-        private GameManager gameManager;
+        private readonly GameManager gameManager;
         private readonly DispatcherTimer endGameTimer;
 
         #endregion

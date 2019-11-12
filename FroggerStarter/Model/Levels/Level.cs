@@ -1,13 +1,12 @@
 ﻿
 using System.Collections.Generic;
-using FroggerStarter.Interfaces;
 
 namespace FroggerStarter.Model.Levels
 {
     /// <summary>
     ///     Class responsible for a single level
     /// </summary>
-    internal abstract class Level : ILevelRequirements
+    internal abstract class Level
     {
         public abstract int RoadObstacleSpawnTime { get; }
 

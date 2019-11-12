@@ -75,7 +75,7 @@ namespace FroggerStarter.Model.Game_Objects
         /// <value>
         ///     The sprite.
         /// </value>
-        public virtual BaseSprite Sprite { get; protected set; }
+        public BaseSprite Sprite { get; protected set; }
 
         #endregion
 

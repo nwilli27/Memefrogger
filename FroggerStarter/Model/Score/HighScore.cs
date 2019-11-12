@@ -52,13 +52,6 @@ namespace FroggerStarter.Model.Score
             this.Level = level;
         }
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="HighScore" /> class.
-        ///     Precondition: none
-        ///     Post-condition: Score == 0; PlayerName == ""; Level == 0
-        /// </summary>
-        public HighScore() : this(0, "", 0) {}
-
         #endregion
 
         #region Methods
